@@ -2,6 +2,13 @@
 
 This folder is the whole site. No build step, no dependencies to install.
 
+## Auto-deploy is live
+
+This repo (`github.com/NavrenNathan/mekitchen`) is connected to the Netlify
+project. **Every `git push` to `master` deploys automatically** — no CLI
+command needed. Anyone with push access to the repo can ship a change just
+by pushing.
+
 ```
 deploy/
 ├── index.html      the site
