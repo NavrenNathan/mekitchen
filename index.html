@@ -63,15 +63,18 @@ h1 u{text-decoration:none;-webkit-text-stroke:.75px var(--paper);color:transpare
 .done{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:1.4rem;font-size:1.1rem}
 
 /* ---------- notify list ---------- */
-.notify{width:100%;max-width:430px;display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.notify{
+  width:100%;max-width:470px;margin-top:1rem;
+  display:flex;flex-direction:column;align-items:center;gap:1.4rem;
+}
 .notify h2{
   font-family:var(--display);font-weight:700;text-transform:uppercase;
   font-size:clamp(1.05rem,2.8vw,1.35rem);letter-spacing:-.01em;margin:0;
 }
-.notify form{display:flex;gap:.4rem;width:100%;flex-wrap:wrap}
+.notify form{display:flex;gap:.55rem;width:100%;flex-wrap:wrap}
 .notify input[type=email]{
-  flex:1 1 180px;min-width:0;background:transparent;border:1px solid var(--line);
-  color:var(--paper);border-radius:var(--rb);padding:.85rem 1rem;font:inherit;font-size:.9375rem;
+  flex:1 1 200px;min-width:0;background:transparent;border:1px solid var(--line);
+  color:var(--paper);border-radius:var(--rb);padding:1.05rem 1.2rem;font:inherit;font-size:.9375rem;
   transition:border-color .25s;
 }
 .notify input[type=email]::placeholder{color:#7d8f78}
@@ -80,7 +83,7 @@ h1 u{text-decoration:none;-webkit-text-stroke:.75px var(--paper);color:transpare
 .notify button{
   position:relative;isolation:isolate;overflow:hidden;flex:0 0 auto;
   font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.08em;
-  text-transform:uppercase;padding:.85rem 1.5rem;border-radius:var(--rb);
+  text-transform:uppercase;padding:1.05rem 1.7rem;border-radius:var(--rb);
   background:transparent;color:var(--paper);border:1px solid var(--paper);
   cursor:pointer;transition:color .3s;
 }
@@ -164,7 +167,7 @@ footer{width:100%;max-width:900px;display:flex;flex-direction:column;align-items
       <input type="hidden" name="form-name" value="notify">
       <p class="hide"><label>Skip this field: <input name="bot-field"></label></p>
       <label class="sr" for="email">Email address</label>
-      <input type="email" id="email" name="email" placeholder="you@uw.edu" required autocomplete="email">
+      <input type="email" id="email" name="email" placeholder="your@email.com" required autocomplete="email">
       <button type="submit" id="notifyBtn">I'm in</button>
     </form>
 
