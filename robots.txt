@@ -1,0 +1,13 @@
+# PREVIEW ONLY — REMOVE THE DISALLOW BEFORE PUBLIC LAUNCH
+# While the menu, prices, address and hours are placeholders, this
+# keeps the site out of Google. Indexing wrong information is easy
+# to do and slow to undo.
+#
+# ON LAUNCH DAY: delete the "Disallow: /" line below, delete the
+# <meta name="robots" content="noindex, nofollow"> tag in index.html,
+# and uncomment the Sitemap line once a sitemap exists.
+
+User-agent: *
+Disallow: /
+
+# Sitemap: https://YOUR-DOMAIN/sitemap.xml
