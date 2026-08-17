@@ -47,3 +47,39 @@ Sampled from the logo and used across all three mockups:
 | Line on cream | `#dfd8c8` | Hairline borders |
 | Line on green | `#33502f` | Hairline borders in dark sections |
 | Sage | `#93a68d` | Muted secondary text on green |
+
+## logo-mark.png — the mark in use
+
+`logo-nav.png` cropped to the wordmark alone, with the `pho • banh mi • rice`
+tagline removed. Cropped above the tagline, trimmed to the artwork
+exactly, then padded 10px evenly on all four sides so the wordmark is centred
+in its own box. 908x200, aspect 4.54:1.
+
+Even padding matters here: an earlier version had 8px above the wordmark and
+14px below, which looked fine in the nav but read as visibly lopsided on the
+intro curtain, where the mark is centred between two lines of text.
+
+Used for the nav and footer on both pages and on the holding page. The
+intro curtain uses the stacked `logo-main.png` instead. Dark green on transparent, so it keeps the
+`brightness(0) invert(1)` filter over dark grounds.
+
+Because the tagline is gone, the wordmark reads larger at a given height than
+`logo-nav.png` did, so the display heights came down to match: nav 44px,
+footer 50px.
+
+## Files not in use
+
+- `logo-nav.png` — the original wide lockup, wordmark plus tagline. Kept as
+  the source `logo-mark.png` is cropped from.
+- `LOGO MAIN.png` — the supplied stacked lockup, 1254x1254 and roughly
+  four-fifths transparent padding. Source for `logo-main.png`.
+
+## logo-main.png — intro curtain only
+
+`LOGO MAIN.png` trimmed to its bounding box, 635x472, aspect 1.35:1. The
+stacked "Mê / kitchen" form. Used on the intro curtain, where there is
+vertical room for it and it makes a stronger centrepiece than the wide mark.
+
+Not used in the nav: at 1.35:1 it can only be about 56px tall in the 72px bar,
+which shrinks "kitchen" to roughly 8px. The wide `logo-mark.png` is used there
+instead.

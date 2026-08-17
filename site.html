@@ -64,13 +64,49 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 }
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
+/* ---------- intro curtain ---------- */
+/* Two lines meet at the centre, then part to make room for the logo between
+   them. Hidden unless JS turns it on, so no-JS visitors never see a curtain
+   stuck over the page. --sep is measured from the logo at runtime. */
+.intro{
+  display:none;position:fixed;inset:0;z-index:999;background:var(--paper);
+  place-items:center;opacity:1;transition:opacity .6s ease;
+}
+.intro.on{display:grid}
+.intro.out{opacity:0}
+/* the row is scaled down as a whole if the parted layout would not fit,
+   so the composition stays on one line at every width */
+.intro-row{position:relative;display:grid;place-items:center;width:100%;transform-origin:center}
+.intro-txt{
+  position:absolute;top:50%;white-space:nowrap;opacity:0;
+  font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(.5rem,1.5vw,.875rem);letter-spacing:clamp(.07em,.3vw,.18em);
+  color:var(--ink);
+  transition:opacity .55s ease,transform 1s cubic-bezier(.65,0,.35,1);
+}
+.intro-txt.l{right:50%;transform:translateY(-50%)}
+.intro-txt.r{left:50%;transform:translateY(-50%)}
+.intro.in .intro-txt{opacity:1}
+.intro.go .intro-txt.l{transform:translateY(-50%) translateX(calc(-1 * var(--sep,150px)))}
+.intro.go .intro-txt.r{transform:translateY(-50%) translateX(var(--sep,150px))}
+.intro-logo{
+  /* stacked lockup here, so it needs more height than the wide mark */
+  /* on cream now, so the mark shows in its own green — no invert filter */
+  height:clamp(46px,6vw,80px);width:auto;
+  opacity:0;transform:scale(.94);
+  transition:opacity .7s ease .35s,transform .9s cubic-bezier(.2,.8,.2,1) .35s;
+}
+.intro.go .intro-logo{opacity:1;transform:none}
+
 /* ---------- nav ---------- */
 .nav{position:fixed;inset:0 0 auto;z-index:100;transition:background .35s,box-shadow .35s}
 .nav.solid{background:rgba(250,247,239,.92);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
 .nav.on-dark:not(.solid){color:var(--paper)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:72px;gap:1.5rem}
 .brand{display:block;flex:none}
-.brand img{height:52px;width:auto;transition:filter .35s}
+/* wordmark only — no tagline underneath, so it reads bigger than the old
+   mark did at the same height and needs slightly less of it */
+.brand img{height:44px;width:auto;transition:filter .35s}
 /* nav sits over the dark hero until it goes solid */
 .nav.on-dark:not(.solid) .brand img{filter:brightness(0) invert(1)}
 .nav-links{display:none;align-items:center;gap:2rem}
@@ -331,7 +367,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 .foot a:hover::after{transform:scaleX(1)}
 /* brand block */
 .foot-brand{display:flex;flex-direction:column;align-items:flex-start;gap:1.15rem}
-.foot-brand img{height:54px;width:auto;filter:brightness(0) invert(1)}
+.foot-brand img{height:50px;width:auto;filter:brightness(0) invert(1)}
 .foot-brand p{color:#d8e0d2;max-width:30ch;font-size:.9375rem;margin:0}
 /* oversized outlined wordmark anchoring the base of the page — same hollow
    treatment as the underlined word in the hero headline */
@@ -420,6 +456,14 @@ a.bar-field:hover .val{opacity:.7}
 </head>
 <body>
 
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-row">
+    <span class="intro-txt l">Phở · Bánh mì · Rice</span>
+    <img class="intro-logo" src="assets/logo-main.png" alt="">
+    <span class="intro-txt r">Located in U District</span>
+  </div>
+</div>
+
 <svg class="sr" aria-hidden="true">
   <symbol id="bowl" viewBox="0 0 100 100">
     <circle cx="50" cy="56" r="40" fill="none" stroke="currentColor" stroke-width="2"/>
@@ -432,7 +476,7 @@ a.bar-field:hover .val{opacity:.7}
 <header class="nav on-dark" id="nav">
   <div class="wrap nav-in">
     <a href="#" class="brand" aria-label="Mê Kitchen — home">
-      <img src="assets/logo-nav.png" alt="Mê Kitchen">
+      <img src="assets/logo-mark.png" alt="Mê Kitchen">
     </a>
     <nav class="nav-links">
       <a href="#menu">Menu</a>
@@ -700,7 +744,7 @@ a.bar-field:hover .val{opacity:.7}
   <div class="wrap">
     <div class="foot">
       <div class="foot-brand">
-        <img src="assets/logo-nav.png" alt="Mê Kitchen">
+        <img src="assets/logo-mark.png" alt="Mê Kitchen">
         <p>Phở, bánh mì, and rice bowls in Seattle's University District.</p>
       </div>
       <div class="foot-col"><h5>Eat</h5><a href="#menu">Menu</a><a href="#made">Made to order</a><a href="{{SQUARE_ORDER_URL}}">Order online</a></div>
@@ -734,6 +778,56 @@ a.bar-field:hover .val{opacity:.7}
 <script>
 (function(){
   'use strict';
+
+  /* intro curtain — first visit of the session only. Skipped entirely for
+     reduced-motion, and never shown if JS is off since .on is added here. */
+  (function(){
+    var intro = document.getElementById('intro');
+    if(!intro) return;
+
+    var seen = false;
+    try { seen = !!sessionStorage.getItem('mk_intro'); } catch(e){}
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    if(seen || reduce) return;
+    try { sessionStorage.setItem('mk_intro','1'); } catch(e){}
+
+    var logo = intro.querySelector('.intro-logo');
+    var prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    intro.classList.add('on');
+
+    /* Part exactly far enough to clear the logo, then, if the parted line
+       would be wider than the screen, scale the whole row down to fit. That
+       keeps it on one line on a phone instead of colliding or wrapping. */
+    var row = intro.querySelector('.intro-row'),
+        lTxt = intro.querySelector('.intro-txt.l'),
+        rTxt = intro.querySelector('.intro-txt.r');
+
+    function measure(){
+      row.style.transform = '';                      /* measure unscaled */
+      var g = logo.getBoundingClientRect();
+      if(!g.width) return;
+      var gap = Math.max(18, g.width * 0.34);   /* breathing room either side */
+      var sep = g.width / 2 + gap;
+      intro.style.setProperty('--sep', sep + 'px');
+
+      var needed = 2 * sep + lTxt.getBoundingClientRect().width
+                           + rTxt.getBoundingClientRect().width;
+      var avail  = window.innerWidth - 24;           /* small safety margin */
+      var k = Math.min(1, avail / needed);
+      if(k < 1) row.style.transform = 'scale(' + k.toFixed(4) + ')';
+    }
+    if(logo.complete) measure(); else logo.addEventListener('load', measure);
+    window.addEventListener('resize', measure);
+
+    requestAnimationFrame(function(){ intro.classList.add('in'); });
+    setTimeout(function(){ measure(); intro.classList.add('go'); }, 700);
+    setTimeout(function(){ intro.classList.add('out'); }, 2500);
+    setTimeout(function(){
+      intro.classList.remove('on');
+      document.body.style.overflow = prevOverflow;
+    }, 3150);
+  })();
   var nav=document.getElementById('nav'),burger=document.getElementById('burger'),bar=document.getElementById('bar');
   var hero=document.querySelector('.hero');
 

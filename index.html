@@ -15,10 +15,12 @@
 <style>
 *,*::before,*::after{box-sizing:border-box}
 :root{
-  --ink:#22391f;               /* deep green ground */
-  --paper:#faf7ef;             /* cream */
-  --muted:#93a68d;
-  --line:#33502f;
+  --ink:#22391f;               /* deep green — now the text colour */
+  --paper:#faf7ef;             /* cream — now the ground */
+  --muted:#5e6e58;             /* mid green, readable on cream */
+  --dim:#5e6e58;
+  --line:#dfd8c8;              /* hairline on cream */
+  --bad:#9c3f33;               /* error red, dark enough for cream */
   --display:'Space Grotesk',Inter,-apple-system,sans-serif;
   --body:'Geist',Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
   --rb:10px;
@@ -26,7 +28,7 @@
 }
 html,body{margin:0;padding:0}
 body{
-  min-height:100dvh;background:var(--ink);color:var(--paper);
+  min-height:100dvh;background:var(--paper);color:var(--ink);
   font-family:var(--body);font-weight:300;
   display:flex;flex-direction:column;align-items:center;
   padding:clamp(2rem,5vw,3.5rem) var(--pad) 1.25rem;
@@ -36,7 +38,7 @@ body{
 
 /* ---------- centre stack ---------- */
 main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;width:100%;max-width:900px;text-align:center}
-.logo{height:clamp(56px,9vw,86px);width:auto;filter:brightness(0) invert(1)}
+.logo{height:clamp(48px,7.5vw,72px);width:auto}
 .tag{
   display:inline-block;font-family:var(--display);font-size:.6875rem;font-weight:600;
   letter-spacing:.16em;text-transform:uppercase;padding:.4rem .85rem;
@@ -46,19 +48,19 @@ h1{
   font-family:var(--display);font-weight:700;text-transform:uppercase;
   font-size:clamp(2.1rem,7vw,4.25rem);line-height:.94;letter-spacing:-.035em;margin:0;
 }
-h1 u{text-decoration:none;-webkit-text-stroke:.75px var(--paper);color:transparent}
-.lede{font-size:clamp(.95rem,1.6vw,1.125rem);color:#d8e0d2;max-width:42ch;margin:0;line-height:1.55}
+h1 u{text-decoration:none;-webkit-text-stroke:.75px var(--ink);color:transparent}
+.lede{font-size:clamp(.95rem,1.6vw,1.125rem);color:var(--dim);max-width:42ch;margin:0;line-height:1.55}
 
 /* ---------- countdown ---------- */
 /* Segmented like the site's sticky order island: hairline rules, small
    letter-spaced labels under big tabular figures. */
 .count{
   display:flex;align-items:stretch;width:100%;max-width:430px;
-  border:1px solid rgba(250,247,239,.16);border-radius:14px;
-  background:rgba(250,247,239,.03);padding:.3rem;
+  border:1px solid rgba(34,57,31,.16);border-radius:14px;
+  background:rgba(34,57,31,.025);padding:.3rem;
 }
 .unit{flex:1;min-width:0;padding:.85rem .25rem;display:flex;flex-direction:column;gap:.35rem;justify-content:center}
-.unit+.unit{border-left:1px solid rgba(250,247,239,.16)}
+.unit+.unit{border-left:1px solid rgba(34,57,31,.16)}
 .num{
   font-family:var(--display);font-weight:700;font-variant-numeric:tabular-nums;
   font-size:clamp(1.75rem,6vw,3rem);line-height:1;letter-spacing:-.03em;
@@ -78,37 +80,37 @@ h1 u{text-decoration:none;-webkit-text-stroke:.75px var(--paper);color:transpare
 .notify form{display:flex;gap:.55rem;width:100%;flex-wrap:wrap}
 .notify input[type=email]{
   flex:1 1 200px;min-width:0;background:transparent;border:1px solid var(--line);
-  color:var(--paper);border-radius:var(--rb);padding:1.05rem 1.2rem;font:inherit;font-size:.9375rem;
+  color:var(--ink);border-radius:var(--rb);padding:1.05rem 1.2rem;font:inherit;font-size:.9375rem;
   transition:border-color .25s;
 }
-.notify input[type=email]::placeholder{color:#7d8f78}
-.notify input[type=email]:focus{outline:none;border-color:var(--paper)}
+.notify input[type=email]::placeholder{color:#9aa694}
+.notify input[type=email]:focus{outline:none;border-color:var(--ink)}
 /* same centre-out fill the site's buttons use */
 .notify button{
   position:relative;isolation:isolate;overflow:hidden;flex:0 0 auto;
   font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.08em;
   text-transform:uppercase;padding:1.05rem 1.7rem;border-radius:var(--rb);
-  background:transparent;color:var(--paper);border:1px solid var(--paper);
+  background:transparent;color:var(--ink);border:1px solid var(--ink);
   cursor:pointer;transition:color .3s;
 }
 .notify button::before{
-  content:"";position:absolute;inset:0;z-index:-1;background:var(--paper);
+  content:"";position:absolute;inset:0;z-index:-1;background:var(--ink);
   transform:scaleX(0);transform-origin:center;
   transition:transform .55s cubic-bezier(.2,.8,.2,1);
 }
 .notify button:hover::before,.notify button:focus-visible::before{transform:scaleX(1)}
-.notify button:hover,.notify button:focus-visible{color:var(--ink)}
+.notify button:hover,.notify button:focus-visible{color:var(--paper)}
 .notify button[disabled]{opacity:.55;cursor:default}
 .notify button[disabled]::before{transform:scaleX(0)}
 .hide{position:absolute;left:-9999px}
 .note{font-size:.75rem;color:var(--muted);margin:0;min-height:1em}
-.note.bad{color:#e0a99b}
+.note.bad{color:var(--bad)}
 /* success swaps the form out entirely */
 .ok{display:none;flex-direction:column;align-items:center;gap:.4rem;animation:rise .4s ease both}
 .notify.done form{display:none}
 .notify.done .ok{display:flex}
 .ok strong{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:1rem}
-.ok span{font-size:.8125rem;color:#d8e0d2}
+.ok span{font-size:.8125rem;color:var(--dim)}
 
 /* ---------- footer + concealed unlock ---------- */
 footer{width:100%;max-width:900px;display:flex;flex-direction:column;align-items:center;gap:1rem;padding-top:2rem}
@@ -119,7 +121,7 @@ footer{width:100%;max-width:900px;display:flex;flex-direction:column;align-items
   line-height:0;opacity:.22;transition:opacity .3s;
 }
 .dot:hover,.dot:focus-visible{opacity:.6}
-.dot span{display:block;width:7px;height:7px;border-radius:50%;background:var(--paper)}
+.dot span{display:block;width:7px;height:7px;border-radius:50%;background:var(--ink)}
 .gate{
   display:none;gap:.4rem;align-items:center;justify-content:center;flex-wrap:wrap;
   animation:rise .35s ease both;
@@ -127,22 +129,24 @@ footer{width:100%;max-width:900px;display:flex;flex-direction:column;align-items
 .gate.on{display:flex}
 @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .gate input{
-  background:transparent;border:1px solid var(--line);color:var(--paper);
+  background:transparent;border:1px solid var(--line);color:var(--ink);
   border-radius:var(--rb);padding:.7rem .9rem;font:inherit;font-size:.875rem;
   width:min(230px,60vw);
 }
-.gate input::placeholder{color:#7d8f78}
-.gate input:focus{outline:none;border-color:var(--paper)}
+.gate input::placeholder{color:#9aa694}
+.gate input:focus{outline:none;border-color:var(--ink)}
 .gate button{
   font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.1em;
   text-transform:uppercase;padding:.75rem 1.15rem;border-radius:var(--rb);
-  background:var(--paper);color:var(--ink);border:1px solid var(--paper);cursor:pointer;
+  background:var(--ink);color:var(--paper);border:1px solid var(--ink);cursor:pointer;
 }
 .social{display:flex;gap:1.1rem;align-items:center}
 .social a{color:var(--muted);opacity:.8;line-height:0;transition:opacity .25s,color .25s}
-.social a:hover,.social a:focus-visible{opacity:1;color:var(--paper)}
+/* the page is cream now, so hover goes to the deep green — hovering to
+   --paper would fade the icons into the background */
+.social a:hover,.social a:focus-visible{opacity:1;color:var(--ink)}
 .social svg{width:18px;height:18px;display:block}
-.msg{font-size:.75rem;color:#e0a99b;min-height:1em;margin:0}
+.msg{font-size:.75rem;color:var(--bad);min-height:1em;margin:0}
 .shake{animation:shake .32s}
 @keyframes shake{
   0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)}
@@ -156,7 +160,7 @@ footer{width:100%;max-width:900px;display:flex;flex-direction:column;align-items
 <body>
 
 <main>
-  <img class="logo" src="assets/logo-nav.png" alt="Mê Kitchen">
+  <img class="logo" src="assets/logo-mark.png" alt="Mê Kitchen">
   <span class="tag">U District · Seattle</span>
   <h1>Phở.<br>Bánh mì.<br><u>Rice bowls.</u></h1>
   <p class="lede">Order on your phone, walk in, walk out. We are firing up the broth — doors open soon.</p>
@@ -294,7 +298,7 @@ footer{width:100%;max-width:900px;display:flex;flex-direction:column;align-items
   gate.addEventListener('submit', function(e){
     e.preventDefault();
     if(pw.value === PASS){
-      msg.style.color = '#a8dd93';
+      msg.style.color = '#2f6b2a';
       msg.textContent = 'Unlocked — loading the site…';
       try { sessionStorage.setItem('mk_preview','1'); } catch(err){}
       setTimeout(function(){ window.location.href = 'site.html'; }, 500);
