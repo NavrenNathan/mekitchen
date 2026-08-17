@@ -11,12 +11,18 @@ by pushing.
 
 ```
 deploy/
-├── index.html      the site
+├── index.html      the main site — served at the domain root
+├── story.html      the Our story page
+├── soon.html       coming-soon holding page with the countdown
 ├── 404.html        not-found page (Netlify picks this up automatically)
 ├── robots.txt      currently blocking search engines — see below
-├── netlify.toml    security headers + caching
-└── assets/         logo files go here
+├── netlify.toml    security headers, caching, redirects
+└── assets/         logos and favicons
 ```
+
+The main site is `index.html` so it is served at `me-kitchen.com` with no path.
+It was briefly at `/site.html`; a 301 in `netlify.toml` keeps that old path
+working for any link already shared.
 
 ---
 

@@ -25,3 +25,12 @@
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# --- Redirects ---------------------------------------------------------
+# The main site used to live at /site.html. Anything already shared with
+# that path lands on the root instead of a 404.
+[[redirects]]
+  from = "/site.html"
+  to = "/"
+  status = 301
+  force = true
