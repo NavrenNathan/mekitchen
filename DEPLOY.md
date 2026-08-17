@@ -11,18 +11,22 @@ by pushing.
 
 ```
 deploy/
-├── index.html      the main site — served at the domain root
+├── index.html      coming-soon holding page — what me-kitchen.com serves
+├── home.html       the main site, behind the holding page's preview gate
 ├── story.html      the Our story page
-├── soon.html       coming-soon holding page with the countdown
 ├── 404.html        not-found page (Netlify picks this up automatically)
 ├── robots.txt      currently blocking search engines — see below
 ├── netlify.toml    security headers, caching, redirects
 └── assets/         logos and favicons
 ```
 
-The main site is `index.html` so it is served at `me-kitchen.com` with no path.
-It was briefly at `/site.html`; a 301 in `netlify.toml` keeps that old path
-working for any link already shared.
+`me-kitchen.com` serves the holding page. The full site sits at `/home.html`,
+reached through the concealed password gate at the bottom of the holding page.
+Netlify's pretty URLs also serve it as `/home`. A 301 in `netlify.toml` keeps
+the old `/site.html` path working.
+
+**The noindex tag that must go on launch day is in both `index.html` and
+`home.html`.**
 
 ---
 

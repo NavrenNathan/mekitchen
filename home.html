@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mê Kitchen | Vietnamese Restaurant — Phở &amp; Bánh Mì, Seattle</title>
+<meta name="description" content="Mê Kitchen is a Vietnamese restaurant in Seattle's University District, a short walk from the UW campus. Phở, bánh mì, and rice bowls, cooked when you order.">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<!-- ============================================================
+     PREVIEW ONLY — REMOVE BEFORE PUBLIC LAUNCH
+     This blocks Google from indexing the site. The menu, prices,
+     address and hours are still placeholders; indexing them now
+     would put wrong information into search results and is hard
+     to undo. Delete this tag AND the Disallow line in robots.txt
+     on the day you go live. See DEPLOY.md.
+     ============================================================ -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DIRECTION 03 — "KINETIC"
+   Hard black/white blocks, pill controls, marquee, sticky order
+   bar, tabbed menu. Built mobile-first around ordering.
+   ============================================================ */
+:root{
+  /* Mê Kitchen — deep green on cream. --ink doubles as the dark-section ground. */
+  --ink:#22391f;               /* deep green: text, and background of .section.dark */
+  --paper:#faf7ef;             /* cream ground */
+  --dim:#5e6e58;
+  --line:#dfd8c8;
+  --line-strong:#c3bba8;
+  --wash:#f1ece0;
+  --brand:#2d4a2d;             /* logo green */
+  --display:'Space Grotesk',Inter,-apple-system,sans-serif;
+  --body:'Geist',Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --pad:clamp(1.25rem,4vw,3.5rem);
+  --maxw:1400px;
+  --r:14px;
+  --rb:10px;                   /* buttons & controls: square with soft corners */
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:16px;line-height:1.55;font-weight:400;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:0;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+.display{font-family:var(--display);font-weight:700;text-transform:uppercase;line-height:.92;letter-spacing:-.035em;margin:0}
+.tag{
+  display:inline-block;font-size:.6875rem;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;padding:.4rem .8rem;border-radius:999px;
+  border:1px solid currentColor;margin:0 0 1.5rem;
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---------- intro curtain ---------- */
+/* Two lines meet at the centre, then part to make room for the logo between
+   them. Hidden unless JS turns it on, so no-JS visitors never see a curtain
+   stuck over the page. --sep is measured from the logo at runtime. */
+.intro{
+  display:none;position:fixed;inset:0;z-index:999;background:var(--ink);
+  place-items:center;opacity:1;transition:opacity .6s ease;
+}
+.intro.on{display:grid}
+.intro.out{opacity:0}
+/* the row is scaled down as a whole if the parted layout would not fit,
+   so the composition stays on one line at every width */
+.intro-row{position:relative;display:grid;place-items:center;width:100%;transform-origin:center}
+.intro-txt{
+  position:absolute;top:50%;white-space:nowrap;opacity:0;
+  font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(.5rem,1.5vw,.875rem);letter-spacing:clamp(.07em,.3vw,.18em);
+  color:var(--paper);
+  transition:opacity .55s ease,transform 1s cubic-bezier(.65,0,.35,1);
+}
+.intro-txt.l{right:50%;transform:translateY(-50%)}
+.intro-txt.r{left:50%;transform:translateY(-50%)}
+.intro.in .intro-txt{opacity:1}
+.intro.go .intro-txt.l{transform:translateY(-50%) translateX(calc(-1 * var(--sep,150px)))}
+.intro.go .intro-txt.r{transform:translateY(-50%) translateX(var(--sep,150px))}
+.intro-logo{
+  /* stacked lockup here, so it needs more height than the wide mark */
+  /* dark green ground, so the mark is forced to cream like the nav logo */
+  height:clamp(46px,6vw,80px);width:auto;filter:brightness(0) invert(1);
+  opacity:0;transform:scale(.94);
+  transition:opacity .7s ease .35s,transform .9s cubic-bezier(.2,.8,.2,1) .35s;
+}
+.intro.go .intro-logo{opacity:1;transform:none}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:0 0 auto;z-index:100;transition:background .35s,box-shadow .35s}
+.nav.solid{background:rgba(250,247,239,.92);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.nav.on-dark:not(.solid){color:var(--paper)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:72px;gap:1.5rem}
+.brand{display:block;flex:none}
+/* wordmark only — no tagline underneath, so it reads bigger than the old
+   mark did at the same height and needs slightly less of it */
+.brand img{height:38px;width:auto;transition:filter .35s}
+/* nav sits over the dark hero until it goes solid */
+.nav.on-dark:not(.solid) .brand img{filter:brightness(0) invert(1)}
+.nav-links{display:none;align-items:center;gap:2rem}
+.nav-links a{font-size:.8125rem;font-weight:500;letter-spacing:.04em}
+.nav-links a:not(.btn){opacity:.72;transition:opacity .2s}
+.nav-links a:not(.btn):hover{opacity:1}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  font-family:var(--display);font-weight:700;font-size:.8125rem;letter-spacing:.06em;
+  text-transform:uppercase;padding:1rem 1.75rem;border-radius:var(--rb);
+  background:var(--ink);color:var(--paper);border:2px solid var(--ink);
+  transition:transform .18s cubic-bezier(.2,.8,.2,1),background .2s,color .2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn-out{background:transparent;color:currentColor;border-color:currentColor}
+.btn-out:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn-inv{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.btn-sm{padding:.68rem 1.2rem;font-size:.75rem}
+/* nav order button: thin outline at rest, fill grows from the centre out to both
+   edges on hover. --fill tracks the nav's own text colour so it works over the
+   dark hero and the solid cream nav alike. */
+.btn-fill{
+  --fill:var(--ink); --fill-text:var(--paper);
+  position:relative; isolation:isolate; overflow:hidden;
+  background:transparent; color:currentColor;
+  border-width:1px; border-color:var(--fill);
+}
+.nav.on-dark:not(.solid) .btn-fill,.hero .btn-fill,.section.dark .btn-fill{
+  --fill:var(--paper); --fill-text:var(--ink);
+}
+.btn-fill::before{
+  content:""; position:absolute; inset:0; z-index:-1; background:var(--fill);
+  transform:scaleX(0); transform-origin:center;
+  transition:transform .55s cubic-bezier(.2,.8,.2,1);
+}
+.btn-fill:hover::before,.btn-fill:focus-visible::before{transform:scaleX(1)}
+.btn-fill:hover,.btn-fill:focus-visible{color:var(--fill-text)}
+/* no lift on this one — the fill is the whole effect */
+.btn-fill:hover,.btn-fill:active{transform:none}
+.burger{display:flex;flex-direction:column;gap:5px;padding:.5rem;margin-right:-.5rem}
+.burger span{display:block;width:24px;height:2px;background:currentColor;border-radius:2px;transition:transform .3s,opacity .2s}
+.nav.open .burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav.open .burger span:nth-child(2){opacity:0}
+.nav.open .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.drawer{
+  position:fixed;inset:72px 0 auto;z-index:99;background:var(--ink);color:var(--paper);
+  display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s ease;
+}
+.nav.open + .drawer{grid-template-rows:1fr}
+.drawer-in{overflow:hidden}
+/* items ease in one after another instead of arriving all at once with the
+   panel. Uses `translate` rather than `transform` so the button keeps its own
+   hover transform. Delays apply only while opening, so closing stays snappy. */
+.drawer-in>*{
+  opacity:0;translate:0 12px;
+  transition:opacity .5s ease,translate .5s cubic-bezier(.2,.8,.2,1);
+}
+.nav.open + .drawer .drawer-in>*{opacity:1;translate:none}
+.nav.open + .drawer .drawer-in>*:nth-child(1){transition-delay:.14s}
+.nav.open + .drawer .drawer-in>*:nth-child(2){transition-delay:.22s}
+.nav.open + .drawer .drawer-in>*:nth-child(3){transition-delay:.30s}
+.nav.open + .drawer .drawer-in>*:nth-child(4){transition-delay:.38s}
+.nav.open + .drawer .drawer-in>*:nth-child(5){transition-delay:.46s}
+.nav.open + .drawer .drawer-in>*:nth-child(6){transition-delay:.54s}
+.drawer a{
+  display:block;font-family:var(--display);font-weight:700;font-size:1.75rem;
+  text-transform:uppercase;letter-spacing:-.02em;padding:.6rem var(--pad);
+}
+.drawer .btn{margin:1.25rem var(--pad) 2rem;width:calc(100% - var(--pad)*2)}
+
+/* ---------- hero ---------- */
+.hero{background:var(--ink);color:var(--paper);padding:calc(72px + 4rem) 0 0;position:relative;overflow:hidden}
+/* the hero headline is huge — the shared 1.5rem tag gap reads tight against it */
+.hero .tag{margin-bottom:2.75rem}
+.hero h1{font-size:calc(clamp(3rem,11vw,9rem) - 5px);margin-bottom:1.75rem}
+/* thin on mobile to match the holding page; the stroke thickens with the type */
+.hero h1 u{text-decoration:none;-webkit-text-stroke:.75px var(--paper);color:transparent}
+.hero-lede{font-size:calc(clamp(1.0625rem,2vw,1.375rem) - 4px);color:#d8e0d2;max-width:34ch;margin:0 0 2.25rem;font-weight:300}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:3rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 3rem;padding:0;list-style:none}
+.chips li{
+  font-size:.6875rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  padding:.5rem .9rem;border:1px solid #3f5a42;border-radius:999px;color:#d8e0d2;
+  position:relative;transition:color .3s;
+}
+/* hover: the lit line draws itself around the chip in one continuous stroke,
+   opening and closing at top centre. This is an SVG stroke rather than a conic
+   gradient because a gradient advances by angle, which on a wide pill crawls
+   across the long edges and snaps around the caps. A stroke advances by
+   distance, so the line moves at one steady speed the whole way round. */
+.chips li .ring{position:absolute;inset:0;overflow:visible;pointer-events:none;opacity:0;transition:opacity .25s}
+.chips li .ring path{
+  fill:none;stroke:#93b881;stroke-width:1;stroke-linecap:round;
+  stroke-dasharray:100;stroke-dashoffset:100;
+  filter:drop-shadow(0 0 1px rgba(168,221,147,.16)) drop-shadow(0 0 3px rgba(159,209,143,.06));
+  transition:stroke-dashoffset .8s ease-in-out;
+}
+.chips li:hover{color:var(--paper)}
+.chips li:hover .ring{opacity:1}
+.chips li:hover .ring path{stroke-dashoffset:0}
+.hero-art{display:grid;gap:2px;grid-template-columns:1fr;background:#33502f}
+
+/* ---------- photo placeholders ---------- */
+.ph{position:relative;background:var(--wash);display:grid;place-items:center;color:var(--line-strong);overflow:hidden}
+.ph.dark{background:#1e3323;color:#3f5a42}
+.ph::before{
+  content:'';position:absolute;inset:0;opacity:.6;
+  background-image:linear-gradient(currentColor 1px,transparent 1px),linear-gradient(90deg,currentColor 1px,transparent 1px);
+  background-size:26px 26px;
+}
+.ph svg{position:relative;width:34%;max-width:140px;height:auto}
+.ph-tag{
+  position:absolute;left:.75rem;bottom:.75rem;font-family:var(--display);font-weight:500;
+  font-size:.625rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:.35rem .65rem;border-radius:999px;background:var(--ink);color:var(--paper);
+}
+.ph.dark .ph-tag{background:var(--paper);color:var(--ink)}
+.r-1-1{aspect-ratio:1}.r-4-5{aspect-ratio:4/5}.r-3-2{aspect-ratio:3/2}.r-16-9{aspect-ratio:16/9}
+
+/* ---------- marquee ---------- */
+.marquee{background:var(--ink);color:var(--paper);padding:1.1rem 0;overflow:hidden;border-block:2px solid var(--ink)}
+.marquee.inv{background:var(--paper);color:var(--ink)}
+.mq-track{display:flex;width:max-content;animation:slide 30s linear infinite}
+.mq-track span{
+  font-family:var(--display);font-weight:700;font-size:clamp(1.125rem,3vw,2rem);
+  text-transform:uppercase;letter-spacing:-.02em;white-space:nowrap;
+  display:flex;align-items:center;gap:2rem;padding-right:2rem;
+}
+.mq-track span::after{content:'';width:8px;height:8px;border-radius:50%;background:currentColor;flex:none}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ---------- sections ---------- */
+.section{padding:clamp(4rem,9vw,7.5rem) 0}
+.section.dark{background:var(--ink);color:var(--paper)}
+.head{margin-bottom:clamp(2rem,4vw,3.5rem)}
+.head h2{font-size:clamp(2.25rem,7vw,5rem)}
+.head-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1.5rem}
+.head p.sub{color:var(--dim);max-width:44ch;margin:1.25rem 0 0}
+.section.dark .head p.sub{color:#b6c4b0}
+
+/* ---------- tabbed menu (the interactive centrepiece) ---------- */
+.tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.25rem}
+.tab{
+  font-family:var(--display);font-weight:700;font-size:.8125rem;letter-spacing:.06em;
+  text-transform:uppercase;padding:.8rem 1.4rem;border-radius:var(--rb);
+  border:2px solid var(--line-strong);color:var(--dim);
+  transition:background .2s,color .2s,border-color .2s,transform .18s;
+}
+.tab:hover{transform:translateY(-2px);border-color:var(--ink);color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.panel[hidden]{display:none}
+.dishes{display:grid;gap:1.25rem;grid-template-columns:1fr}
+.dish{
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  display:flex;flex-direction:column;transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s;
+}
+.dish:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(24,43,26,.14)}
+.dish-body{padding:1.15rem 1.25rem 1.4rem;display:flex;flex-direction:column;gap:.4rem;flex:1}
+.dish h3{font-family:var(--display);font-weight:700;font-size:1.125rem;text-transform:uppercase;letter-spacing:-.01em;margin:0}
+.dish p{margin:0;font-size:.875rem;color:var(--dim);line-height:1.5;flex:1}
+.dish-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.6rem}
+.dish-price{font-family:var(--display);font-weight:700;font-size:1.0625rem}
+.add{
+  font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.1em;
+  text-transform:uppercase;padding:.55rem 1rem;border-radius:var(--rb);
+  border:2px solid var(--ink);transition:background .2s,color .2s;
+}
+.add:hover{background:var(--ink);color:var(--paper)}
+.vflag{
+  align-self:flex-start;font-size:.5625rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;padding:.25rem .55rem;border-radius:999px;background:var(--wash);color:var(--dim);
+}
+
+/* ---------- how it works: giant digits ---------- */
+.steps{display:grid;gap:2px;grid-template-columns:1fr;background:#33502f}
+.step{background:var(--ink);padding:clamp(1.75rem,4vw,2.75rem);display:flex;flex-direction:column;gap:.75rem}
+.step b{font-family:var(--display);font-weight:700;font-size:clamp(3rem,9vw,5.5rem);line-height:.85;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1.5px #4f6b4c}
+.step h3{font-family:var(--display);font-weight:700;font-size:1.125rem;text-transform:uppercase;margin:0}
+.step p{margin:0;color:#b6c4b0;font-size:.9375rem}
+
+/* ---------- split ---------- */
+.split{display:grid;gap:clamp(2rem,5vw,4rem);grid-template-columns:1fr;align-items:center}
+/* grid children default to min-width:auto, which lets wide content blow out
+   the track and push the document sideways. Let them shrink instead. */
+.split > *,.dishes > *,.count,.count li,.vcards > *,.steps > *{min-width:0}
+.split h2{font-size:clamp(2rem,5.5vw,4rem);margin-bottom:1.5rem}
+.split p{color:var(--dim);margin:0 0 1.75rem;max-width:44ch}
+.section.dark .split p{color:#b6c4b0}
+.picks{list-style:none;padding:0;margin:0 0 2rem;display:grid;gap:.6rem}
+.picks li{display:flex;align-items:baseline;gap:1rem;font-size:.9375rem;padding:.75rem 0;border-bottom:1px solid var(--line)}
+.section.dark .picks li{border-color:#33502f}
+.picks b{font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;min-width:5.5rem}
+.picks span{color:var(--dim)}
+.section.dark .picks span{color:#b6c4b0}
+
+/* ---------- countdown / signup (replaces reviews) ---------- */
+.count{display:grid;gap:2px;grid-template-columns:repeat(2,1fr);background:#33502f;margin:0 0 2.5rem;padding:0;list-style:none}
+.count li{background:var(--ink);padding:1.5rem 1.25rem;text-align:center}
+.count b{display:block;font-family:var(--display);font-weight:700;font-size:clamp(2rem,7vw,3.25rem);line-height:1;letter-spacing:-.03em}
+.count small{font-size:.625rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#93a68d}
+.form{display:flex;flex-wrap:wrap;gap:.6rem;max-width:460px}
+.form input{
+  flex:1 1 200px;background:transparent;border:2px solid #3f5a42;color:var(--paper);
+  padding:.95rem 1.15rem;font:inherit;font-size:.9375rem;border-radius:var(--rb);
+}
+.form input::placeholder{color:#7d8f78}
+.form input:focus{outline:none;border-color:var(--paper)}
+.note{font-size:.75rem;color:#93a68d;margin:1rem 0 0}
+
+/* ---------- faq ---------- */
+.faq{max-width:860px}
+.q{border:1px solid var(--line);border-radius:var(--r);margin-bottom:.75rem;overflow:hidden;transition:border-color .2s}
+.q[open]{border-color:var(--ink)}
+.q summary{
+  list-style:none;cursor:pointer;padding:1.25rem 3.25rem 1.25rem 1.35rem;position:relative;
+  font-family:var(--display);font-weight:700;font-size:1rem;text-transform:uppercase;letter-spacing:-.005em;
+}
+.q summary::-webkit-details-marker{display:none}
+.q summary::after{
+  content:'';position:absolute;right:1.35rem;top:50%;transform:translateY(-50%);
+  width:12px;height:12px;
+  background:linear-gradient(currentColor,currentColor) center/12px 2px no-repeat,
+             linear-gradient(currentColor,currentColor) center/2px 12px no-repeat;
+  transition:transform .3s;
+}
+.q[open] summary::after{transform:translateY(-50%) rotate(90deg);background-size:12px 2px,2px 0}
+.q p{margin:0 1.35rem 1.35rem;color:var(--dim);font-size:.9375rem;max-width:60ch}
+
+/* ---------- visit ---------- */
+.visit{display:grid;gap:clamp(2rem,5vw,3.5rem);grid-template-columns:1fr}
+.vcards{display:grid;gap:1rem;grid-template-columns:1fr}
+.vcard{border:1px solid var(--line);border-radius:var(--r);padding:1.35rem}
+.vcard h4{font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:0 0 .6rem}
+.vcard p{margin:0;font-size:1rem;line-height:1.5;color:var(--ink)}
+/* dark-section overrides, kept in case Visit is flipped back to green */
+.section.dark .vcard{border-color:#33502f}
+.section.dark .vcard h4{color:#93a68d}
+.section.dark .vcard p{color:var(--paper)}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0 2rem;overflow:hidden}
+.foot{display:grid;gap:2rem;grid-template-columns:1fr;border-top:1px solid #33502f;padding-top:2.5rem}
+.foot h5{font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.18em;text-transform:uppercase;color:#93a68d;margin:0 0 1rem}
+/* columns stack as flex so each link is only as wide as its text — the hover
+   rule underneath needs that to size correctly */
+.foot-col{display:flex;flex-direction:column;align-items:flex-start}
+.foot a{
+  position:relative;display:inline-block;font-size:.9375rem;padding:.3rem 0;
+  color:#d8e0d2;transition:color .25s;
+}
+.foot a::after{
+  content:'';position:absolute;left:0;right:0;bottom:.18rem;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1);
+}
+.foot a:hover{color:var(--paper)}
+.foot a:hover::after{transform:scaleX(1)}
+.foot-social{display:flex;gap:.9rem;align-items:center;padding:.3rem 0 .7rem}
+.foot-social a{color:#d8e0d2;opacity:.85;line-height:0;transition:opacity .25s,color .25s}
+.foot-social a:hover,.foot-social a:focus-visible{opacity:1;color:var(--paper)}
+.foot-social svg{width:19px;height:19px;display:block}
+/* brand block */
+.foot-brand{display:flex;flex-direction:column;align-items:flex-start;gap:1.15rem}
+.foot-brand img{height:50px;width:auto;filter:brightness(0) invert(1)}
+.foot-brand p{color:#d8e0d2;max-width:30ch;font-size:.9375rem;margin:0}
+/* oversized outlined wordmark anchoring the base of the page — same hollow
+   treatment as the underlined word in the hero headline */
+.foot-type{
+  font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(2rem,14vw,15rem);line-height:.8;letter-spacing:-.06em;
+  margin:clamp(2.5rem,7vw,4.5rem) 0 0;white-space:nowrap;color:#2c4728;
+  text-align:center;user-select:none;
+}
+@supports((-webkit-text-stroke:1px #000)){
+  .foot-type{color:transparent;-webkit-text-stroke:1px #3f5a42}
+}
+.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid #33502f;font-size:.75rem;color:#93a68d}
+
+/* ---------- sticky order bar ---------- */
+/* Floating island: segmented info on the left, one solid CTA flush right. */
+.bar{
+  position:fixed;inset:auto 0 0;z-index:98;display:flex;gap:.5rem;align-items:stretch;
+  width:min(calc(100% - 1.25rem),var(--maxw));margin:0 auto .625rem;
+  padding:.4rem;border-radius:14px;
+  background:rgba(24,43,26,.96);backdrop-filter:blur(14px);
+  border:1px solid rgba(250,247,239,.14);
+  box-shadow:0 12px 32px rgba(0,0,0,.28);
+  transform:translateY(160%);transition:transform .35s cubic-bezier(.2,.8,.2,1);
+}
+.bar.show{transform:none}
+/* segments — small dim label stacked over the value, hairline rule between */
+.bar-fields{display:none;flex:1;align-items:stretch;min-width:0}
+.bar-field{
+  display:flex;flex-direction:column;justify-content:center;gap:.2rem;
+  flex:1;min-width:0;padding:.3rem 2rem;
+}
+.bar-field+.bar-field{border-left:1px solid rgba(250,247,239,.16)}
+.bar-field .lbl{
+  font-family:var(--display);font-size:.625rem;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;color:#93a68d;
+}
+.bar-field .val{
+  font-size:.9375rem;color:var(--paper);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+a.bar-field .val{transition:opacity .2s}
+a.bar-field:hover .val{opacity:.7}
+.bar .btn{flex:1;align-self:stretch;border-radius:var(--rb)}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+
+/* ---------- responsive ---------- */
+@media(min-width:640px){
+  .dishes{grid-template-columns:1fr 1fr}
+  .count{grid-template-columns:repeat(4,1fr)}
+  .vcards{grid-template-columns:1fr 1fr}
+}
+@media(min-width:768px){
+  .brand img{height:40px}
+  .hero h1 u{-webkit-text-stroke:1.5px var(--paper)}
+  .hero-art{grid-template-columns:1.6fr 1fr}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:2fr 1fr 1fr 1fr}
+  /* shrink to content rather than spanning the full width */
+  .bar{width:fit-content}
+  .bar-fields{display:flex;flex:0 0 auto}
+  .bar-field{flex:0 0 auto}
+  .bar-call{display:none}
+  .bar .btn{flex:0 0 auto;padding-left:2.25rem;padding-right:2.25rem}
+}
+@media(min-width:1024px){
+  .nav-links{display:flex}
+  .burger{display:none}
+  .split{grid-template-columns:1fr 1fr}
+  .dishes{grid-template-columns:repeat(3,1fr)}
+  .steps{grid-template-columns:repeat(4,1fr)}
+  .visit{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+  /* skip the draw-on — land straight on the fully lit ring */
+  .chips li:hover .ring path{stroke-dashoffset:0}
+  /* no staggered wait for the drawer items */
+  .nav.open + .drawer .drawer-in>*{transition-delay:0s!important}
+}
+</style>
+</head>
+<body>
+
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-row">
+    <span class="intro-txt l">Phở · Bánh mì · Rice</span>
+    <img class="intro-logo" src="assets/logo-main.png" alt="">
+    <span class="intro-txt r">Located in U District</span>
+  </div>
+</div>
+
+<svg class="sr" aria-hidden="true">
+  <symbol id="bowl" viewBox="0 0 100 100">
+    <circle cx="50" cy="56" r="40" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="50" cy="56" r="28" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <circle cx="50" cy="56" r="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M38 18c0-6 6-6 6-12M50 14c0-6 6-6 6-12M62 18c0-6 6-6 6-12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<header class="nav on-dark" id="nav">
+  <div class="wrap nav-in">
+    <a href="#" class="brand" aria-label="Mê Kitchen — home">
+      <img src="assets/logo-mark.png" alt="Mê Kitchen">
+    </a>
+    <nav class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#how">How it works</a>
+      <a href="#made">Made to order</a>
+      <a href="story.html">Our story</a>
+      <a href="#visit">Visit</a>
+      <a href="{{SQUARE_ORDER_URL}}" class="btn btn-sm btn-fill">Order</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="drawer">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="drawer" id="drawer">
+  <div class="drawer-in">
+    <a href="#menu">Menu</a>
+    <a href="#how">How it works</a>
+    <a href="#made">Made to order</a>
+    <a href="story.html">Our story</a>
+    <a href="#visit">Visit</a>
+    <a href="{{SQUARE_ORDER_URL}}" class="btn btn-inv">Order on Square</a>
+  </div>
+</div>
+
+<main>
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap">
+      <span class="tag">Located in U District</span>
+      <h1 class="display">Phở.<br>Bánh mì.<br><u>Rice bowls.</u></h1>
+      <p class="hero-lede">Order on your phone, walk in, walk out. Twenty-four hour broth, twenty-minute lunch.</p>
+      <div class="hero-cta">
+        <a href="{{SQUARE_ORDER_URL}}" class="btn btn-inv">Order on Square</a>
+        <a href="#menu" class="btn btn-fill">See the menu</a>
+      </div>
+      <ul class="chips">
+        <li>Order ahead<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li><li>Ready when you arrive<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li><li>Veg options<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li><li>Open late<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li>
+      </ul>
+    </div>
+    <div class="wrap">
+      <div class="hero-art">
+        <div class="ph dark r-16-9"><svg><use href="#bowl"/></svg><span class="ph-tag">Hero — signature bowl</span></div>
+        <div class="ph dark r-16-9"><svg><use href="#bowl"/></svg><span class="ph-tag">Counter energy</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee inv" aria-hidden="true">
+    <div class="mq-track">
+      <span>24-hour broth</span><span>Order ahead</span><span>Ready when you arrive</span><span>Cooked to order</span><span>Open late</span>
+      <span>24-hour broth</span><span>Order ahead</span><span>Ready when you arrive</span><span>Cooked to order</span><span>Open late</span>
+    </div>
+  </div>
+
+  <!-- ============ TABBED MENU ============ -->
+  <section class="section" id="menu">
+    <div class="wrap">
+      <div class="head head-row">
+        <div>
+          <span class="tag">The menu</span>
+          <h2 class="display">Pick a lane</h2>
+        </div>
+        <a href="{{SQUARE_ORDER_URL}}" class="btn btn-fill">Order online</a>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Menu categories">
+        <button class="tab" role="tab" id="tab-pho" aria-controls="p-pho" aria-selected="true">Phở</button>
+        <button class="tab" role="tab" id="tab-banh" aria-controls="p-banh" aria-selected="false">Bánh Mì</button>
+        <button class="tab" role="tab" id="tab-rice" aria-controls="p-rice" aria-selected="false">Rice Bowls</button>
+        <button class="tab" role="tab" id="tab-sides" aria-controls="p-sides" aria-selected="false">Sides &amp; Drinks</button>
+      </div>
+
+      <div class="panel" id="p-pho" role="tabpanel" aria-labelledby="tab-pho">
+        <div class="dishes">
+          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Phở tái</span></div>
+            <div class="dish-body"><h3>Phở Tái</h3><p>Rare beef sliced thin, cooked by the broth as it hits the bowl.</p>
+              <div class="dish-foot"><span class="dish-price">$16</span><a href="{{SQUARE_ORDER_URL}}" class="add">Add</a></div></div></article>
+          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Đặc biệt</span></div>
+            <div class="dish-body"><h3>Phở Đặc Biệt</h3><p>Brisket, steak, meatball, rare beef. Everything in one bowl.</p>
+              <div class="dish-foot"><span class="dish-price">$17</span><a href="{{SQUARE_ORDER_URL}}" class="add">Add</a></div></div></article>
+          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Phở gà</span></div>
+            <div class="dish-body"><h3>Phở Gà</h3><p>Poached chicken in a clear, separate chicken broth.</p>
+              <div class="dish-foot"><span class="dish-price">$15</span><a href="{{SQUARE_ORDER_URL}}" class="add">Add</a></div></div></article>
+          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Phở chay</span></div>
+            <div class="dish-body"><span class="vflag">Vegetarian</span><h3>Phở Chay</h3><p>Vegetable broth made on its own. Tofu, mushroom, bok choy.</p>
+              <div class="dish-foot"><span class="dish-price">$15</span><a href="{{SQUARE_ORDER_URL}}" class="add">Add</a></div></div></article>
+        </div>
+      </div>
+
+      <div class="panel" id="p-banh" role="tabpanel" aria-labelledby="tab-banh" hidden>
+        <div class="dishes">
+          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Thịt nướng</span></div>
+            <div class="dish-body"><h3>Thịt Nướng</h3><p>Grilled pork shoulder, pâté, pickled daikon and carrot.</p>
+              <div class="dish-foot"><span class="dish-price">$12</span><a href="{{SQUARE_ORDER_URL}}" class="add">Add</a></div></div></article>
+          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Đặc biệt</span></div>
+            <div class="dish-body"><h3>Bánh Mì Đặc Biệt</h3><p>Cold cuts and pâté. The traditional one, unchanged.</p>
+              <div class="dish-foot"><span class="dish-price">$12</span><a href="{{SQUARE_ORDER_URL}}" class="add">Add</a></div></div></article>
+          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Gà nướng</span></div>
+            <div class="dish-body"><h3>Gà Nướng</h3><p>Lemongrass chicken, herbs, chili mayo, cucumber.</p>
+              <div class="dish-foot"><span class="dish-price">$12</span><a href="{{SQUARE_ORDER_URL}}" class="add">Add</a></div></div></article>
+          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Đậu hũ</span></div>
+            <div class="dish-body"><span class="vflag">Vegetarian</span><h3>Đậu Hũ</h3><p>Crisp tofu, pickles, cucumber, cilantro, jalapeño.</p>
+              <div class="dish-foot"><span class="dish-price">$11</span><a href="{{SQUARE_ORDER_URL}}" class="add">Add</a></div></div></article>
+        </div>
+      </div>
+
+      <div class="panel" id="p-rice" role="tabpanel" aria-labelledby="tab-rice" hidden>
+        <div class="dishes">
+          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Grilled pork</span></div>
+            <div class="dish-body"><h3>Grilled Pork</h3><p>Broken rice, pickles, scallion oil, cucumber.</p>
+              <div class="dish-foot"><span class="dish-price">$15</span><a href="{{SQUARE_ORDER_URL}}" class="add">Add</a></div></div></article>
+          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Lemongrass chicken</span></div>
+            <div class="dish-body"><h3>Lemongrass Chicken</h3><p>Jasmine rice, greens, fried egg on request.</p>
+              <div class="dish-foot"><span class="dish-price">$15</span><a href="{{SQUARE_ORDER_URL}}" class="add">Add</a></div></div></article>
+          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Short rib</span></div>
+            <div class="dish-body"><h3>Beef Short Rib</h3><p>Marinated overnight, charred hard on the grill.</p>
+              <div class="dish-foot"><span class="dish-price">$18</span><a href="{{SQUARE_ORDER_URL}}" class="add">Add</a></div></div></article>
+          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Tofu</span></div>
+            <div class="dish-body"><span class="vflag">Vegetarian</span><h3>Tofu &amp; Mushroom</h3><p>Soy-glazed, sesame, pickled carrot, herbs.</p>
+              <div class="dish-foot"><span class="dish-price">$14</span><a href="{{SQUARE_ORDER_URL}}" class="add">Add</a></div></div></article>
+        </div>
+      </div>
+
+      <div class="panel" id="p-sides" role="tabpanel" aria-labelledby="tab-sides" hidden>
+        <div class="dishes">
+          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Spring rolls</span></div>
+            <div class="dish-body"><h3>Fresh Spring Rolls</h3><p>Shrimp or tofu, herbs, peanut sauce. Two per order.</p>
+              <div class="dish-foot"><span class="dish-price">$7</span><a href="{{SQUARE_ORDER_URL}}" class="add">Add</a></div></div></article>
+          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Egg rolls</span></div>
+            <div class="dish-body"><h3>Fried Egg Rolls</h3><p>Pork and wood-ear mushroom. Three per order.</p>
+              <div class="dish-foot"><span class="dish-price">$7</span><a href="{{SQUARE_ORDER_URL}}" class="add">Add</a></div></div></article>
+          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Cà phê</span></div>
+            <div class="dish-body"><h3>Cà Phê Sữa Đá</h3><p>Iced coffee with condensed milk. Strong.</p>
+              <div class="dish-foot"><span class="dish-price">$5</span><a href="{{SQUARE_ORDER_URL}}" class="add">Add</a></div></div></article>
+          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Chanh muối</span></div>
+            <div class="dish-body"><h3>Salted Lemonade</h3><p>Chanh muối. Sweet, sour, and a little saline.</p>
+              <div class="dish-foot"><span class="dish-price">$4</span><a href="{{SQUARE_ORDER_URL}}" class="add">Add</a></div></div></article>
+        </div>
+      </div>
+
+      <p style="font-size:.75rem;color:var(--dim);margin-top:2rem">Menu items and prices shown are placeholders for layout purposes.</p>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="section dark" id="how">
+    <div class="wrap">
+      <div class="head">
+        <span class="tag">How it works</span>
+        <h2 class="display">Four steps,<br>no waiting</h2>
+      </div>
+      <div class="steps">
+        <div class="step rv"><b>01</b><h3>Order on your phone</h3><p>Square handles it. Pay before you leave the library.</p></div>
+        <div class="step rv"><b>02</b><h3>We start the bowl</h3><p>Broth is already hot. Nothing gets made in advance.</p></div>
+        <div class="step rv"><b>03</b><h3>Pick it up</h3><p>Pickup shelf is by the door. Your name is on it.</p></div>
+        <div class="step rv"><b>04</b><h3>Eat</h3><p>Herbs on the side. Chili is your business, not ours.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BUILD A BOWL ============ -->
+  <section class="section" id="made">
+    <div class="wrap split">
+      <div class="rv">
+        <span class="tag">Made to order</span>
+        <h2 class="display">Cooked when<br>you order it</h2>
+        <p>Nothing is portioned out in advance and left waiting. That costs a few minutes, and it is the whole point.</p>
+        <ul class="picks">
+          <li><b>Broth</b><span>Twenty-four hours, started before open</span></li>
+          <li><b>Bread</b><span>Delivered every morning</span></li>
+          <li><b>Herbs</b><span>Cut when the order comes in</span></li>
+          <li><b>Wait</b><span>A few minutes, on purpose</span></li>
+        </ul>
+        <a href="{{SQUARE_ORDER_URL}}" class="btn">Order on Square</a>
+      </div>
+      <div class="ph r-4-5 rv"><svg><use href="#bowl"/></svg><span class="ph-tag">Kitchen — broth or grill in action</span></div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="mq-track">
+      <span>Opening {{OPENING_MONTH}}</span><span>University District</span><span>Seattle</span><span>Phở · Bánh mì · Rice bowls</span>
+      <span>Opening {{OPENING_MONTH}}</span><span>University District</span><span>Seattle</span><span>Phở · Bánh mì · Rice bowls</span>
+    </div>
+  </div>
+
+  <!-- ============ OPENING (replaces reviews) ============ -->
+  <section class="section dark">
+    <div class="wrap split">
+      <div class="rv">
+        <span class="tag">Not open yet</span>
+        <h2 class="display">Doors open<br>{{OPENING_MONTH}}</h2>
+        <p>Leave an email and we send exactly one message — the day we open, with a free side attached to it.</p>
+        <form class="form" id="signup">
+          <input type="email" name="email" placeholder="you@uw.edu" required aria-label="Email address">
+          <button type="submit" class="btn btn-fill">Notify me</button>
+        </form>
+        <p class="note" id="signupNote">One email. No list, no newsletter.</p>
+      </div>
+      <div class="rv">
+        <ul class="count">
+          <li><b>24</b><small>Hour broth</small></li>
+          <li><b>3</b><small>Categories</small></li>
+          <li><b>20</b><small>Min lunch</small></li>
+          <li><b>{{SEATS}}</b><small>Seats</small></li>
+        </ul>
+        <div class="ph dark r-16-9"><svg><use href="#bowl"/></svg><span class="ph-tag">Space under build-out</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <span class="tag">Questions</span>
+        <h2 class="display">Good to know</h2>
+      </div>
+      <div class="faq">
+        <details class="q"><summary>Is there anything vegetarian?</summary>
+          <p>Yes. The vegetable broth is built separately rather than thinned from the beef pot, and tofu is available in every category on the menu.</p></details>
+        <details class="q"><summary>Can I order ahead?</summary>
+          <p>Yes — ordering runs through Square. Pay on your phone, skip the line, grab it off the pickup shelf.</p></details>
+        <details class="q"><summary>Is the phở gluten-free?</summary>
+          <p>The rice noodles and broth are made without gluten-containing ingredients. It is one shared kitchen, so we cannot promise zero cross-contact.</p></details>
+        <details class="q"><summary>Do you deliver?</summary>
+          <p>{{DELIVERY_ANSWER}} — confirm which platforms, if any, go live on opening day.</p></details>
+        <details class="q"><summary>Is there a student discount?</summary>
+          <p>{{STUDENT_DISCOUNT_ANSWER}} — worth settling early; it is the single most common question a U District restaurant gets asked.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VISIT ============ -->
+  <section class="section" id="visit">
+    <div class="wrap">
+      <div class="head">
+        <span class="tag">Visit</span>
+        <h2 class="display">University<br>District</h2>
+      </div>
+      <div class="visit">
+        <div>
+          <div class="vcards">
+            <div class="vcard"><h4>Address</h4><p>4213 University Wy NE<br>Seattle, WA 98105</p></div>
+            <div class="vcard"><h4>Hours</h4><p>{{HOURS}}</p></div>
+            <div class="vcard"><h4>Phone</h4><p>{{PHONE}}</p></div>
+            <div class="vcard"><h4>Email</h4><p><a href="mailto:mekitchen.wa@gmail.com">mekitchen.wa@gmail.com</a></p></div>
+          </div>
+          <div class="hero-cta" style="margin:1.75rem 0 0">
+            <a href="{{GOOGLE_MAPS_URL}}" class="btn btn-fill">Get directions</a>
+            <a href="{{SQUARE_ORDER_URL}}" class="btn">Order on Square</a>
+          </div>
+        </div>
+        <div class="ph r-1-1"><svg><use href="#bowl"/></svg><span class="ph-tag">Map or storefront</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot-brand">
+        <img src="assets/logo-mark.png" alt="Mê Kitchen">
+        <p>Phở, bánh mì, and rice bowls in Seattle's University District.</p>
+      </div>
+      <div class="foot-col"><h5>Eat</h5><a href="#menu">Menu</a><a href="#made">Made to order</a><a href="{{SQUARE_ORDER_URL}}">Order online</a></div>
+      <div class="foot-col"><h5>About</h5><a href="#how">How it works</a><a href="#visit">Visit</a><a href="{{CAREERS_URL}}">Work here</a></div>
+      <div class="foot-col">
+        <h5>Follow</h5>
+        <div class="foot-social">
+          <a href="https://www.instagram.com/mekitchen.wa/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4.2"/>
+              <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a href="https://www.tiktok.com/@mekitchen.wa" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M16.6 5.82c-.9-.86-1.46-2-1.6-3.32h-3.02v13.2c0 1.5-1.22 2.72-2.72 2.72a2.72 2.72 0 0 1 0-5.44c.28 0 .56.04.82.12V9.9a5.75 5.75 0 0 0-.82-.06 5.75 5.75 0 1 0 5.75 5.75V8.9a8.6 8.6 0 0 0 4.6 1.34V7.2a5.6 5.6 0 0 1-3.01-1.38z"/>
+            </svg>
+          </a>
+        </div>
+        <a href="{{GOOGLE_MAPS_URL}}">Google</a>
+      </div>
+    </div>
+    <div class="foot-type" aria-hidden="true">Mê Kitchen</div>
+    <div class="legal">
+      <span>© <span id="yr"></span> Me. All rights reserved.</span>
+      <span>Seattle, WA</span>
+    </div>
+  </div>
+</footer>
+
+<div class="bar" id="bar">
+  <div class="bar-fields">
+    <!-- Daily update: replace {{HOURS}} below with today's pickup hours. -->
+    <div class="bar-field">
+      <span class="lbl">Pickup hours today</span>
+      <span class="val">{{HOURS}}</span>
+    </div>
+    <a class="bar-field" href="tel:{{PHONE}}">
+      <span class="lbl">Call</span>
+      <span class="val">{{PHONE}}</span>
+    </a>
+  </div>
+  <a href="tel:{{PHONE}}" class="btn btn-out bar-call" style="color:#faf7ef">Call</a>
+  <a href="{{SQUARE_ORDER_URL}}" class="btn btn-inv">Order on Square</a>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* intro curtain — first visit of the session only. Skipped entirely for
+     reduced-motion, and never shown if JS is off since .on is added here. */
+  (function(){
+    var intro = document.getElementById('intro');
+    if(!intro) return;
+
+    var seen = false;
+    try { seen = !!sessionStorage.getItem('mk_intro'); } catch(e){}
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    if(seen || reduce) return;
+    try { sessionStorage.setItem('mk_intro','1'); } catch(e){}
+
+    var logo = intro.querySelector('.intro-logo');
+    var prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    intro.classList.add('on');
+
+    /* Part exactly far enough to clear the logo, then, if the parted line
+       would be wider than the screen, scale the whole row down to fit. That
+       keeps it on one line on a phone instead of colliding or wrapping. */
+    var row = intro.querySelector('.intro-row'),
+        lTxt = intro.querySelector('.intro-txt.l'),
+        rTxt = intro.querySelector('.intro-txt.r');
+
+    function measure(){
+      row.style.transform = '';                      /* measure unscaled */
+      var g = logo.getBoundingClientRect();
+      if(!g.width) return;
+      var gap = Math.max(18, g.width * 0.34);   /* breathing room either side */
+      var sep = g.width / 2 + gap;
+      intro.style.setProperty('--sep', sep + 'px');
+
+      var needed = 2 * sep + lTxt.getBoundingClientRect().width
+                           + rTxt.getBoundingClientRect().width;
+      var avail  = window.innerWidth - 24;           /* small safety margin */
+      var k = Math.min(1, avail / needed);
+      if(k < 1) row.style.transform = 'scale(' + k.toFixed(4) + ')';
+    }
+    if(logo.complete) measure(); else logo.addEventListener('load', measure);
+    window.addEventListener('resize', measure);
+
+    requestAnimationFrame(function(){ intro.classList.add('in'); });
+    setTimeout(function(){ measure(); intro.classList.add('go'); }, 700);
+    setTimeout(function(){ intro.classList.add('out'); }, 2500);
+    setTimeout(function(){
+      intro.classList.remove('on');
+      document.body.style.overflow = prevOverflow;
+    }, 3150);
+  })();
+  var nav=document.getElementById('nav'),burger=document.getElementById('burger'),bar=document.getElementById('bar');
+  var hero=document.querySelector('.hero');
+
+  burger.addEventListener('click',function(){
+    var open=nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded',open?'true':'false');
+  });
+  document.querySelectorAll('#drawer a').forEach(function(a){
+    a.addEventListener('click',function(){nav.classList.remove('open');burger.setAttribute('aria-expanded','false');});
+  });
+
+  /* nav goes solid past hero; keeps white text while over the dark hero */
+  function onScroll(){
+    var y=window.scrollY;
+    nav.classList.toggle('solid',y>40);
+    nav.classList.toggle('on-dark',y < hero.offsetHeight - 80);
+    bar.classList.toggle('show',y>560);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  /* tabbed menu — click + full arrow-key support */
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function select(tab){
+    tabs.forEach(function(t){
+      var on = t===tab;
+      t.setAttribute('aria-selected',on?'true':'false');
+      document.getElementById(t.getAttribute('aria-controls')).hidden=!on;
+    });
+    tab.focus();
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){select(t);});
+    t.addEventListener('keydown',function(e){
+      var d = e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;
+      if(!d) return;
+      e.preventDefault();
+      select(tabs[(i+d+tabs.length)%tabs.length]);
+    });
+  });
+
+  /* reveal */
+  var rv=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+    },{rootMargin:'0px 0px -10% 0px'});
+    rv.forEach(function(el){io.observe(el);});
+  } else { rv.forEach(function(el){el.classList.add('in');}); }
+
+  /* accordion */
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(d){
+    d.addEventListener('toggle',function(){
+      if(d.open) qs.forEach(function(o){if(o!==d) o.open=false;});
+    });
+  });
+
+  /* signup */
+  var form=document.getElementById('signup'),note=document.getElementById('signupNote');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    note.textContent='Thanks — you are on the list. (Mockup: not wired to a backend yet.)';
+    form.reset();
+  });
+
+  /* chip hover ring — trace a stadium starting at top centre, going clockwise,
+     so the stroke opens and closes at the same point. Redrawn on resize since
+     the chips are text-width. */
+  document.querySelectorAll('.chips li').forEach(function(li){
+    var svg=li.querySelector('.ring'),p=svg&&svg.querySelector('path');
+    if(!p) return;
+    function draw(){
+      var w=li.clientWidth,h=li.clientHeight,r=h/2;
+      if(!w||!h) return;
+      svg.setAttribute('viewBox','0 0 '+w+' '+h);
+      p.setAttribute('d','M'+(w/2)+' 0H'+(w-r)+'A'+r+' '+r+' 0 0 1 '+(w-r)+' '+h+
+                        'H'+r+'A'+r+' '+r+' 0 0 1 '+r+' 0Z');
+    }
+    draw();
+    if(window.ResizeObserver) new ResizeObserver(draw).observe(li);
+  });
+
+  document.getElementById('yr').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
