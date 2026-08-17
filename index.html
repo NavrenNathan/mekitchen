@@ -68,7 +68,6 @@ h1 u{text-decoration:none;-webkit-text-stroke:.75px var(--paper);color:transpare
   font-family:var(--display);font-weight:700;text-transform:uppercase;
   font-size:clamp(1.05rem,2.8vw,1.35rem);letter-spacing:-.01em;margin:0;
 }
-.notify .sub{font-size:.875rem;color:#d8e0d2;margin:0 0 .35rem;line-height:1.5;max-width:34ch}
 .notify form{display:flex;gap:.4rem;width:100%;flex-wrap:wrap}
 .notify input[type=email]{
   flex:1 1 180px;min-width:0;background:transparent;border:1px solid var(--line);
@@ -99,7 +98,7 @@ h1 u{text-decoration:none;-webkit-text-stroke:.75px var(--paper);color:transpare
 .note.bad{color:#e0a99b}
 /* success swaps the form out entirely */
 .ok{display:none;flex-direction:column;align-items:center;gap:.4rem;animation:rise .4s ease both}
-.notify.done form,.notify.done .sub{display:none}
+.notify.done form{display:none}
 .notify.done .ok{display:flex}
 .ok strong{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:1rem}
 .ok span{font-size:.8125rem;color:#d8e0d2}
@@ -159,8 +158,7 @@ footer{width:100%;max-width:900px;display:flex;flex-direction:column;align-items
   </div>
 
   <section class="notify" id="notify">
-    <h2>Be first through the door</h2>
-    <p class="sub">One email, the day we open — with a free side attached to it. That's the whole list.</p>
+    <h2>Be first through the door!</h2>
 
     <form name="notify" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="notifyForm">
       <input type="hidden" name="form-name" value="notify">
