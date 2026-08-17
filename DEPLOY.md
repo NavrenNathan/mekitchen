@@ -88,9 +88,9 @@ These render literally as `{{LIKE_THIS}}` on the page, so they are obvious.
 | `{{OPENING_MONTH}}` | 3 | Opening month — the scrolling marquee (×2) and the "Doors open" heading |
 | `{{PHONE}}` | 2 | Phone — also used in the `tel:` link |
 | `{{GOOGLE_MAPS_URL}}` | 2 | Maps / Business Profile link |
-| `{{STREET_ADDRESS}}` `{{ZIP}}` | 1 each | Address |
+| ~~`{{STREET_ADDRESS}}` `{{ZIP}}`~~ | 0 | **Done** — 4213 University Wy NE, Seattle, WA 98105 |
 | `{{HOURS}}` | 1 | Opening hours |
-| `{{EMAIL}}` | 1 | Contact email |
+| ~~`{{EMAIL}}`~~ | 0 | **Done** — mekitchen.wa@gmail.com, wired as a `mailto:` link |
 | `{{SEATS}}` | 1 | Seat count (shown as a stat) |
 | `{{INSTAGRAM_URL}}` `{{TIKTOK_URL}}` | 1 each | Socials |
 | `{{CAREERS_URL}}` | 1 | Hiring page, or delete the link |

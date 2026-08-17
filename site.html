@@ -69,7 +69,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
    them. Hidden unless JS turns it on, so no-JS visitors never see a curtain
    stuck over the page. --sep is measured from the logo at runtime. */
 .intro{
-  display:none;position:fixed;inset:0;z-index:999;background:var(--paper);
+  display:none;position:fixed;inset:0;z-index:999;background:var(--ink);
   place-items:center;opacity:1;transition:opacity .6s ease;
 }
 .intro.on{display:grid}
@@ -81,7 +81,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   position:absolute;top:50%;white-space:nowrap;opacity:0;
   font-family:var(--display);font-weight:700;text-transform:uppercase;
   font-size:clamp(.5rem,1.5vw,.875rem);letter-spacing:clamp(.07em,.3vw,.18em);
-  color:var(--ink);
+  color:var(--paper);
   transition:opacity .55s ease,transform 1s cubic-bezier(.65,0,.35,1);
 }
 .intro-txt.l{right:50%;transform:translateY(-50%)}
@@ -91,8 +91,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .intro.go .intro-txt.r{transform:translateY(-50%) translateX(var(--sep,150px))}
 .intro-logo{
   /* stacked lockup here, so it needs more height than the wide mark */
-  /* on cream now, so the mark shows in its own green — no invert filter */
-  height:clamp(46px,6vw,80px);width:auto;
+  /* dark green ground, so the mark is forced to cream like the nav logo */
+  height:clamp(46px,6vw,80px);width:auto;filter:brightness(0) invert(1);
   opacity:0;transform:scale(.94);
   transition:opacity .7s ease .35s,transform .9s cubic-bezier(.2,.8,.2,1) .35s;
 }
@@ -724,10 +724,10 @@ a.bar-field:hover .val{opacity:.7}
       <div class="visit">
         <div>
           <div class="vcards">
-            <div class="vcard"><h4>Address</h4><p>{{STREET_ADDRESS}}<br>Seattle, WA {{ZIP}}</p></div>
+            <div class="vcard"><h4>Address</h4><p>4213 University Wy NE<br>Seattle, WA 98105</p></div>
             <div class="vcard"><h4>Hours</h4><p>{{HOURS}}</p></div>
             <div class="vcard"><h4>Phone</h4><p>{{PHONE}}</p></div>
-            <div class="vcard"><h4>Email</h4><p>{{EMAIL}}</p></div>
+            <div class="vcard"><h4>Email</h4><p><a href="mailto:mekitchen.wa@gmail.com">mekitchen.wa@gmail.com</a></p></div>
           </div>
           <div class="hero-cta" style="margin:1.75rem 0 0">
             <a href="{{GOOGLE_MAPS_URL}}" class="btn btn-fill">Get directions</a>
