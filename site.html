@@ -131,6 +131,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .nav.open + .drawer .drawer-in>*:nth-child(3){transition-delay:.30s}
 .nav.open + .drawer .drawer-in>*:nth-child(4){transition-delay:.38s}
 .nav.open + .drawer .drawer-in>*:nth-child(5){transition-delay:.46s}
+.nav.open + .drawer .drawer-in>*:nth-child(6){transition-delay:.54s}
 .drawer a{
   display:block;font-family:var(--display);font-weight:700;font-size:1.75rem;
   text-transform:uppercase;letter-spacing:-.02em;padding:.6rem var(--pad);
@@ -142,7 +143,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* the hero headline is huge — the shared 1.5rem tag gap reads tight against it */
 .hero .tag{margin-bottom:2.75rem}
 .hero h1{font-size:calc(clamp(3rem,11vw,9rem) - 5px);margin-bottom:1.75rem}
-.hero h1 u{text-decoration:none;-webkit-text-stroke:1.5px var(--paper);color:transparent}
+/* thin on mobile to match the holding page; the stroke thickens with the type */
+.hero h1 u{text-decoration:none;-webkit-text-stroke:.75px var(--paper);color:transparent}
 .hero-lede{font-size:calc(clamp(1.0625rem,2vw,1.375rem) - 4px);color:#d8e0d2;max-width:34ch;margin:0 0 2.25rem;font-weight:300}
 .hero-cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:3rem}
 .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 3rem;padding:0;list-style:none}
@@ -382,6 +384,7 @@ a.bar-field:hover .val{opacity:.7}
   .vcards{grid-template-columns:1fr 1fr}
 }
 @media(min-width:768px){
+  .hero h1 u{-webkit-text-stroke:1.5px var(--paper)}
   .hero-art{grid-template-columns:1.6fr 1fr}
   .steps{grid-template-columns:repeat(2,1fr)}
   .foot{grid-template-columns:2fr 1fr 1fr 1fr}
@@ -431,6 +434,7 @@ a.bar-field:hover .val{opacity:.7}
       <a href="#menu">Menu</a>
       <a href="#how">How it works</a>
       <a href="#made">Made to order</a>
+      <a href="story.html">Our story</a>
       <a href="#visit">Visit</a>
       <a href="{{SQUARE_ORDER_URL}}" class="btn btn-sm btn-fill">Order</a>
     </nav>
@@ -445,6 +449,7 @@ a.bar-field:hover .val{opacity:.7}
     <a href="#menu">Menu</a>
     <a href="#how">How it works</a>
     <a href="#made">Made to order</a>
+    <a href="story.html">Our story</a>
     <a href="#visit">Visit</a>
     <a href="{{SQUARE_ORDER_URL}}" class="btn btn-inv">Order on Square</a>
   </div>
@@ -454,7 +459,7 @@ a.bar-field:hover .val{opacity:.7}
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="wrap">
-      <span class="tag">U District · Opening {{OPENING_MONTH}}</span>
+      <span class="tag">Located in U District</span>
       <h1 class="display">Phở.<br>Bánh mì.<br><u>Rice bowls.</u></h1>
       <p class="hero-lede">Order on your phone, walk in, walk out. Twenty-four hour broth, twenty-minute lunch.</p>
       <div class="hero-cta">

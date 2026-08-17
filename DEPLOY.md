@@ -85,7 +85,7 @@ These render literally as `{{LIKE_THIS}}` on the page, so they are obvious.
 | Token | Uses | Needs |
 |---|---|---|
 | `{{SQUARE_ORDER_URL}}` | 24 | **The Square ordering link.** Every order button and every dish's Add button. Nothing converts until this is real. |
-| `{{OPENING_MONTH}}` | 4 | Opening month |
+| `{{OPENING_MONTH}}` | 3 | Opening month — the scrolling marquee (×2) and the "Doors open" heading |
 | `{{PHONE}}` | 2 | Phone — also used in the `tel:` link |
 | `{{GOOGLE_MAPS_URL}}` | 2 | Maps / Business Profile link |
 | `{{STREET_ADDRESS}}` `{{ZIP}}` | 1 each | Address |
@@ -94,6 +94,7 @@ These render literally as `{{LIKE_THIS}}` on the page, so they are obvious.
 | `{{SEATS}}` | 1 | Seat count (shown as a stat) |
 | `{{INSTAGRAM_URL}}` `{{TIKTOK_URL}}` | 1 each | Socials |
 | `{{CAREERS_URL}}` | 1 | Hiring page, or delete the link |
+| `{{STORY_*}}` (in `story.html`) | 5 | **The Our story page.** `STORY_STANDFIRST` (opening line), `STORY_INTRO` and `STORY_DETAIL` (two paragraphs), plus `STORY_FOUNDED` and `STORY_KITCHEN` for the facts list. Needs the owners' real account, not invented copy. The name meaning is already in, from the owner. |
 | `{{DELIVERY_ANSWER}}` | 1 | FAQ: delivery platforms at launch |
 | `{{STUDENT_DISCOUNT_ANSWER}}` | 1 | FAQ: student discount, yes or no |
 
