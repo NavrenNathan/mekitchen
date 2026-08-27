@@ -326,15 +326,27 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   font-family:var(--display);font-weight:700;font-size:1rem;text-transform:uppercase;letter-spacing:-.005em;
 }
 .q summary::-webkit-details-marker{display:none}
-.q summary::after{
-  content:'';position:absolute;right:1.35rem;top:50%;transform:translateY(-50%);
-  width:12px;height:12px;
-  background:linear-gradient(currentColor,currentColor) center/12px 2px no-repeat,
-             linear-gradient(currentColor,currentColor) center/2px 12px no-repeat;
-  transition:transform .3s;
+/* plus -> minus in one move: two bars share a centre, and only the upright
+   one turns. It lands flat on top of the other, so the + becomes a - with a
+   single quarter turn rather than a rotate plus a separate resize. */
+.q summary::before,.q summary::after{
+  content:'';position:absolute;right:1.35rem;top:50%;
+  width:13px;height:2px;border-radius:2px;background:currentColor;
 }
-.q[open] summary::after{transform:translateY(-50%) rotate(90deg);background-size:12px 2px,2px 0}
+.q summary::before{transform:translateY(-50%)}
+.q summary::after{
+  transform:translateY(-50%) rotate(90deg);
+  transition:transform .3s cubic-bezier(.2,.8,.2,1);
+}
+.q[open] summary::after{transform:translateY(-50%) rotate(0deg)}
 .q p{margin:0 1.35rem 1.35rem;color:var(--dim);font-size:.9375rem;max-width:60ch}
+/* The answer is wrapped at runtime in .q-body so it can be height-animated.
+   0fr -> 1fr on a grid row animates cleanly to the content's natural height,
+   which max-height cannot do without guessing a number. */
+.q-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s cubic-bezier(.2,.8,.2,1)}
+.q[open] .q-body{grid-template-rows:1fr}
+.q-body>div{overflow:hidden;min-height:0;opacity:0;transition:opacity .4s ease .12s}
+.q[open] .q-body>div{opacity:1}
 
 /* ---------- visit ---------- */
 .visit{display:grid;gap:clamp(2rem,5vw,3.5rem);grid-template-columns:1fr}
@@ -899,13 +911,67 @@ a.bar-field:hover .val{opacity:.7}
     rv.forEach(function(el){io.observe(el);});
   } else { rv.forEach(function(el){el.classList.add('in');}); }
 
-  /* accordion */
+  /* accordion — <details> snaps open natively, so the toggle is intercepted
+     and the answer is eased to its own height instead. Real open/closed state
+     is preserved, so collapsed answers stay hidden from assistive tech. */
   var qs=document.querySelectorAll('.q');
+
   qs.forEach(function(d){
-    d.addEventListener('toggle',function(){
-      if(d.open) qs.forEach(function(o){if(o!==d) o.open=false;});
+    var sum=d.querySelector('summary');
+    if(!sum) return;
+
+    /* wrap everything after the summary so it has something to animate */
+    var body=document.createElement('div'); body.className='q-body';
+    var inner=document.createElement('div'); body.appendChild(inner);
+    var n=sum.nextSibling;
+    while(n){ var next=n.nextSibling; inner.appendChild(n); n=next; }
+    d.appendChild(body);
+
+    sum.addEventListener('click',function(e){
+      e.preventDefault();
+      if(d.dataset.busy) return;                 /* ignore clicks mid-animation */
+      if(d.open){ collapse(d); }
+      else {
+        qs.forEach(function(o){ if(o!==d && o.open) collapse(o); });
+        expand(d);
+      }
     });
   });
+
+  function rows(d,v){ var b=d.querySelector('.q-body'); if(b) b.style.gridTemplateRows=v; }
+
+  /* run fn once the row transition ends, with a timer as a safety net so a
+     missed transitionend can never leave a panel stuck */
+  function afterRows(d,fn){
+    var b=d.querySelector('.q-body'), done=false;
+    function fire(e){
+      if(e && e.propertyName!=='grid-template-rows') return;
+      if(done) return; done=true;
+      b.removeEventListener('transitionend',fire);
+      fn();
+    }
+    b.addEventListener('transitionend',fire);
+    setTimeout(fire,800);
+  }
+
+  function expand(d){
+    d.dataset.busy='1';
+    d.open=true;                                  /* render before measuring */
+    rows(d,'0fr');
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ rows(d,'1fr'); });
+    });
+    afterRows(d,function(){ rows(d,''); delete d.dataset.busy; });
+  }
+
+  function collapse(d){
+    d.dataset.busy='1';
+    rows(d,'1fr');
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ rows(d,'0fr'); });
+    });
+    afterRows(d,function(){ d.open=false; rows(d,''); delete d.dataset.busy; });
+  }
 
   /* signup */
   var form=document.getElementById('signup'),note=document.getElementById('signupNote');
