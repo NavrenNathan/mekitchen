@@ -135,7 +135,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   background:transparent; color:currentColor;
   border-width:1px; border-color:var(--fill);
 }
-.nav.on-dark:not(.solid) .btn-fill,.hero .btn-fill,.section.dark .btn-fill{
+.nav.on-dark:not(.solid) .btn-fill,.hero .btn-fill,.section.dark .btn-fill,.bar .btn-fill{
   --fill:var(--paper); --fill-text:var(--ink);
 }
 .btn-fill::before{
@@ -805,7 +805,7 @@ a.bar-field:hover .val{opacity:.7}
       <span class="val">{{PHONE}}</span>
     </a>
   </div>
-  <a href="tel:{{PHONE}}" class="btn btn-out bar-call" style="color:#faf7ef">Call</a>
+  <a href="tel:{{PHONE}}" class="btn btn-fill bar-call">Call</a>
   <a href="{{SQUARE_ORDER_URL}}" class="btn btn-inv">Order on Square</a>
 </div>
 
