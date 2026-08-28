@@ -138,13 +138,19 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .nav.on-dark:not(.solid) .btn-fill,.hero .btn-fill,.section.dark .btn-fill,.bar .btn-fill{
   --fill:var(--paper); --fill-text:var(--ink);
 }
+/* resting text on the bar was inheriting currentColor up to body's dark
+   green, invisible on the bar's own dark green ground — made explicit */
+.bar .btn-fill{color:var(--paper)}
 .btn-fill::before{
   content:""; position:absolute; inset:0; z-index:-1; background:var(--fill);
   transform:scaleX(0); transform-origin:center;
   transition:transform .55s cubic-bezier(.2,.8,.2,1);
 }
-.btn-fill:hover::before,.btn-fill:focus-visible::before{transform:scaleX(1)}
-.btn-fill:hover,.btn-fill:focus-visible{color:var(--fill-text)}
+/* :active is included alongside :hover — on a touch device the tap fires
+   :active reliably, while :hover can be inconsistent or stick, which is what
+   made the fill and its text colour unreliable on the mobile order island. */
+.btn-fill:hover::before,.btn-fill:focus-visible::before,.btn-fill:active::before{transform:scaleX(1)}
+.btn-fill:hover,.btn-fill:focus-visible,.btn-fill:active{color:var(--fill-text)}
 /* no lift on this one — the fill is the whole effect */
 .btn-fill:hover,.btn-fill:active{transform:none}
 .burger{display:flex;flex-direction:column;gap:5px;padding:.5rem;margin-right:-.5rem}
