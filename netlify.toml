@@ -31,6 +31,12 @@
 # already shared with the old path still lands on the right page.
 [[redirects]]
   from = "/site.html"
-  to = "/home.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/home.html"
+  to = "/"
   status = 301
   force = true
