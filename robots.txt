@@ -8,14 +8,15 @@
 # index.html/home.html/story.html, and uncomment the Sitemap line once
 # a sitemap exists.
 
-# Semrush's Site Audit bot is allowed through deliberately — a technical
-# crawl (broken links, missing tags, headers) is useful pre-launch and is
-# not the same as being indexed by a search engine. This does not affect
-# the noindex meta tags, which stay in place regardless.
-User-agent: SiteAuditBot
-Allow: /
-
 User-agent: *
 Disallow: /
 
 # Sitemap: https://YOUR-DOMAIN/sitemap.xml
+
+# Semrush's Site Audit bot is allowed through deliberately — a technical
+# crawl (broken links, missing tags, headers) is useful pre-launch and is
+# not the same as being indexed by a search engine. This does not affect
+# the noindex meta tags, which stay in place regardless. Semrush's own
+# setup instructions specify this record at the end of the file.
+User-agent: SiteAuditBot
+Allow: /
