@@ -101,13 +101,13 @@ These render literally as `{{LIKE_THIS}}` on the page, so they are obvious.
 | ~~`{{SQUARE_ORDER_URL}}`~~ | 0 | **Done** — https://me-kitchen.square.site/, on every order button and every dish's Add button |
 | `{{OPENING_MONTH}}` | 3 | Opening month — the scrolling marquee (×2) and the "Doors open" heading |
 | `{{PHONE}}` | 2 | Phone — also used in the `tel:` link |
-| `{{GOOGLE_MAPS_URL}}` | 2 | Maps / Business Profile link |
+| ~~`{{GOOGLE_MAPS_URL}}`~~ | 0 | **Done** — a Google Maps search link built from the real address, no Place ID needed |
 | ~~`{{STREET_ADDRESS}}` `{{ZIP}}`~~ | 0 | **Done** — 4213 University Wy NE, Seattle, WA 98105 |
 | `{{HOURS}}` | 1 | Opening hours |
 | ~~`{{EMAIL}}`~~ | 0 | **Done** — mekitchen.wa@gmail.com, wired as a `mailto:` link |
 | `{{SEATS}}` | 1 | Seat count (shown as a stat) |
 | `{{INSTAGRAM_URL}}` `{{TIKTOK_URL}}` | 1 each | Socials |
-| `{{CAREERS_URL}}` | 1 | Hiring page, or delete the link |
+| ~~`{{CAREERS_URL}}`~~ | 0 | **Partially done** — points at `careers.html`, a new page. Its content is Lorem Ipsum placeholder text (marked `noindex` and flagged with an HTML comment). Needs real copy and real open positions, or a decision to delete the page and the link, before launch. |
 | `{{STORY_*}}` (in `story.html`) | 5 | **The Our story page.** `STORY_STANDFIRST` (opening line), `STORY_INTRO` and `STORY_DETAIL` (two paragraphs), plus `STORY_FOUNDED` and `STORY_KITCHEN` for the facts list. Needs the owners' real account, not invented copy. The name meaning is already in, from the owner. |
 | `{{DELIVERY_ANSWER}}` | 1 | FAQ: delivery platforms at launch |
 | `{{STUDENT_DISCOUNT_ANSWER}}` | 1 | FAQ: student discount, yes or no |
