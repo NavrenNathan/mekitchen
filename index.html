@@ -1102,7 +1102,7 @@ a.bar-field:hover .val{opacity:.7}
   /* today's pickup hours — 11am-9pm Mon-Sat, closed Sunday */
   var todayHours=document.getElementById('todayHours');
   if(todayHours){
-    todayHours.textContent = new Date().getDay()===0 ? 'Closed today' : '11am\u20139pm';
+    todayHours.textContent = new Date().getDay()===0 ? 'Closed' : '11am\u20139pm';
   }
 
   document.getElementById('yr').textContent=new Date().getFullYear();
