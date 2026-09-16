@@ -109,7 +109,13 @@
      ============================================================ -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Loaded non-render-blocking: the stylesheet is fetched as print (which
+     does not block paint) then promoted to all once ready. The URL already
+     carries display=swap, so text paints in the fallback and swaps in place.
+     Saves ~1.5s of render-blocking time measured at baseline. -->
+<link rel="stylesheet" media="print" onload="this.media='all';this.onload=null"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Geist:wght@300;400;500;600&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Geist:wght@300;400;500;600&display=swap"></noscript>
 <style>
 /* ============================================================
    DIRECTION 03 — "KINETIC"
@@ -570,7 +576,7 @@ a.bar-field:hover .val{opacity:.7}
 <div class="intro" id="intro" aria-hidden="true">
   <div class="intro-row">
     <span class="intro-txt l">Phở · Bánh mì · Rice</span>
-    <img class="intro-logo" src="assets/logo-main.png" alt="">
+    <img class="intro-logo" src="assets/logo-main.png" alt="" width="323" height="240">
     <span class="intro-txt r">Located in U District</span>
   </div>
 </div>
@@ -587,7 +593,7 @@ a.bar-field:hover .val{opacity:.7}
 <header class="nav on-dark" id="nav">
   <div class="wrap nav-in">
     <a href="#" class="brand" aria-label="Mê Kitchen — home">
-      <img src="assets/logo-mark.png" alt="Mê Kitchen">
+      <img src="assets/logo-mark.png" alt="Mê Kitchen" width="908" height="200">
     </a>
     <nav class="nav-links">
       <a href="menu.html">Menu</a>
@@ -856,7 +862,7 @@ a.bar-field:hover .val{opacity:.7}
   <div class="wrap">
     <div class="foot">
       <div class="foot-brand">
-        <img src="assets/logo-mark.png" alt="Mê Kitchen">
+        <img src="assets/logo-mark.png" alt="Mê Kitchen" width="908" height="200">
         <p>Phở, bánh mì, and rice bowls in Seattle's University District.</p>
       </div>
       <div class="foot-col"><h5>Eat</h5><a href="menu.html">Menu</a><a href="#made">Made to order</a><a href="https://me-kitchen.square.site/">Order online</a></div>

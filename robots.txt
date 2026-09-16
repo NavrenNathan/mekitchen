@@ -3,15 +3,18 @@
 # placeholders, this keeps the site out of Google. Indexing wrong
 # information is easy to do and slow to undo.
 #
-# ON LAUNCH DAY: delete the "Disallow: /" line under User-agent: *,
-# delete the <meta name="robots" content="noindex, nofollow"> tag in
-# index.html/home.html/story.html, and uncomment the Sitemap line once
-# a sitemap exists.
+# ON LAUNCH DAY: delete the "Disallow: /" line under User-agent: *.
+# That is the only remaining step — the noindex meta tags are already off
+# the four indexable pages, and the sitemap is declared below.
+#
+# scripts/check-seo.mjs enforces this: while LAUNCHED=false it accepts the
+# Disallow as intentional; set LAUNCHED=true and it fails CI if anything
+# ever blocks Googlebot again.
 
 User-agent: *
 Disallow: /
 
-# Sitemap: https://YOUR-DOMAIN/sitemap.xml
+Sitemap: https://me-kitchen.com/sitemap.xml
 
 # Semrush's Site Audit bot is allowed through deliberately — a technical
 # crawl (broken links, missing tags, headers) is useful pre-launch and is
