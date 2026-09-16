@@ -80,8 +80,12 @@ ends up in search results, and removing it afterwards is slow and unreliable.
 
 ### On launch day, remove both
 
-- [ ] Delete the `<meta name="robots" content="noindex, nofollow">` tag from `index.html`
-- [ ] Delete the `Disallow: /` line from `robots.txt`
+- [x] Delete the `<meta name="robots" content="noindex, nofollow">` tag from `index.html`
+      and `story.html` — done early, to satisfy a Semrush technical audit.
+      **This alone does not expose the site to Google** — see the next step.
+- [ ] Delete the `Disallow: /` line from `robots.txt` — **still outstanding, and
+      this is the line actually keeping Google out.** Do this only once the
+      phone, hours, maps link and other placeholders below are real.
 - [ ] Redeploy
 
 Do this only once the real content is in.

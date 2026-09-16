@@ -11,14 +11,16 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
 <!-- ============================================================
-     PREVIEW ONLY — REMOVE BEFORE PUBLIC LAUNCH
-     This blocks Google from indexing the site. The menu, prices,
-     address and hours are still placeholders; indexing them now
-     would put wrong information into search results and is hard
-     to undo. Delete this tag AND the Disallow line in robots.txt
-     on the day you go live. See DEPLOY.md.
+     The noindex meta tag was removed from this page (and story.html)
+     to satisfy a Semrush technical audit — it was flagging the tag as
+     a "possible issue," and having it fetch/analyse the page does not
+     require exposing the site to Google. It has NOT been removed from
+     robots.txt: "Disallow: /" is still in force for every crawler
+     except Semrush's SiteAuditBot, so Google still cannot reach any
+     page here. That Disallow line is the actual protection while the
+     phone, hours, maps link and a few other fields are still
+     placeholders. See DEPLOY.md.
      ============================================================ -->
-<meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
