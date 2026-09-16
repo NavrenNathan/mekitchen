@@ -46,11 +46,46 @@
     "longitude": -122.3133633
   },
   "image": "https://me-kitchen.com/assets/og-image.png",
-  "hasMenu": "https://me-kitchen.com/#menu",
+  "hasMenu": "https://me-kitchen.com/menu",
   "sameAs": [
     "https://www.instagram.com/mekitchen.wa/",
     "https://www.tiktok.com/@mekitchen.wa",
     "https://www.facebook.com/people/Me-Kitchen/61593475710473/"
+  ]
+}
+</script>
+<!-- FAQPage covers only the three answerable questions on this page. The
+     delivery and student-discount answers are still {{TOKEN}} placeholders
+     and are deliberately left out of schema until they are real. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there anything vegetarian?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The vegetable broth is built separately rather than thinned from the beef pot, and tofu is available in every category on the menu."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I order ahead?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — ordering runs through Square. Pay on your phone, skip the line, grab it off the pickup shelf."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the phở gluten-free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The rice noodles and broth are made without gluten-containing ingredients. It is one shared kitchen, so we cannot promise zero cross-contact."
+      }
+    }
   ]
 }
 </script>
@@ -549,11 +584,11 @@ a.bar-field:hover .val{opacity:.7}
       <img src="assets/logo-mark.png" alt="Mê Kitchen">
     </a>
     <nav class="nav-links">
-      <a href="#menu">Menu</a>
+      <a href="menu.html">Menu</a>
       <a href="#how">How it works</a>
       <a href="#made">Made to order</a>
       <a href="story.html">Our story</a>
-      <a href="#visit">Visit</a>
+      <a href="location.html">Visit</a>
       <a href="https://me-kitchen.square.site/" class="btn btn-sm btn-fill">Order</a>
     </nav>
     <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="drawer">
@@ -564,11 +599,11 @@ a.bar-field:hover .val{opacity:.7}
 
 <div class="drawer" id="drawer">
   <div class="drawer-in">
-    <a href="#menu">Menu</a>
+    <a href="menu.html">Menu</a>
     <a href="#how">How it works</a>
     <a href="#made">Made to order</a>
     <a href="story.html">Our story</a>
-    <a href="#visit">Visit</a>
+    <a href="location.html">Visit</a>
     <a href="https://me-kitchen.square.site/" class="btn btn-inv">Order on Square</a>
   </div>
 </div>
@@ -582,7 +617,7 @@ a.bar-field:hover .val{opacity:.7}
       <p class="hero-lede">Order on your phone, walk in, walk out. Twenty-four hour broth, twenty-minute lunch.</p>
       <div class="hero-cta">
         <a href="https://me-kitchen.square.site/" class="btn btn-inv">Order on Square</a>
-        <a href="#menu" class="btn btn-fill">See the menu</a>
+        <a href="menu.html" class="btn btn-fill">See the menu</a>
       </div>
       <ul class="chips">
         <li>Order ahead<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li><li>Ready when you arrive<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li><li>Veg options<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li><li>Open late<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li>
@@ -611,6 +646,7 @@ a.bar-field:hover .val{opacity:.7}
         <div>
           <span class="tag">The menu</span>
           <h2 class="display">Pick a lane</h2>
+          <p style="color:var(--dim);margin:1rem 0 0;max-width:46ch">Four bowls of phở, four bánh mì, four rice bowls, and something to drink. <a href="menu.html" style="text-decoration:underline">See every dish and price on the menu page</a>.</p>
         </div>
         <a href="https://me-kitchen.square.site/" class="btn btn-fill">Order online</a>
       </div>
@@ -817,8 +853,8 @@ a.bar-field:hover .val{opacity:.7}
         <img src="assets/logo-mark.png" alt="Mê Kitchen">
         <p>Phở, bánh mì, and rice bowls in Seattle's University District.</p>
       </div>
-      <div class="foot-col"><h5>Eat</h5><a href="#menu">Menu</a><a href="#made">Made to order</a><a href="https://me-kitchen.square.site/">Order online</a></div>
-      <div class="foot-col"><h5>About</h5><a href="#how">How it works</a><a href="#visit">Visit</a><a href="careers.html">Work here</a></div>
+      <div class="foot-col"><h5>Eat</h5><a href="menu.html">Menu</a><a href="#made">Made to order</a><a href="https://me-kitchen.square.site/">Order online</a></div>
+      <div class="foot-col"><h5>About</h5><a href="#how">How it works</a><a href="location.html">Visit</a><a href="careers.html">Work here</a></div>
       <div class="foot-col">
         <h5>Follow</h5>
         <div class="foot-social">

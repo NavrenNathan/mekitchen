@@ -3,56 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Our Story | Authentic Vietnamese Restaurant in Seattle</title>
-<meta name="description" content="The story behind Mê Kitchen, an authentic Vietnamese restaurant in Seattle's University District.">
+<title>Visit | Vietnamese Food in the U-District, Seattle</title>
+<meta name="description" content="Find us on University Way in the U-District, a short walk from UW. Phở, bánh mì and rice bowls to order ahead and pick up.">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
-<link rel="canonical" href="https://me-kitchen.com/story">
+<!-- Hours and phone below are still {{HOURS}} / {{PHONE}} placeholders and
+     render literally. They are deliberately left out of this page's JSON-LD
+     rather than filled with fake values, since structured data is read as
+     fact by search engines. See DEPLOY.md. -->
+
+<link rel="canonical" href="https://me-kitchen.com/location">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Mê Kitchen">
 <meta property="og:locale" content="en_US">
-<meta property="og:url" content="https://me-kitchen.com/story">
-<meta property="og:title" content="Our Story | Authentic Vietnamese Restaurant in Seattle">
-<meta property="og:description" content="The story behind Mê Kitchen, an authentic Vietnamese restaurant in Seattle's University District.">
+<meta property="og:url" content="https://me-kitchen.com/location">
+<meta property="og:title" content="Visit | Vietnamese Food in the U-District, Seattle">
+<meta property="og:description" content="Find us on University Way in the U-District, a short walk from UW. Phở, bánh mì and rice bowls to order ahead and pick up.">
 <meta property="og:image" content="https://me-kitchen.com/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Our Story | Authentic Vietnamese Restaurant in Seattle">
-<meta name="twitter:description" content="The story behind Mê Kitchen, an authentic Vietnamese restaurant in Seattle's University District.">
+<meta name="twitter:title" content="Visit | Vietnamese Food in the U-District, Seattle">
+<meta name="twitter:description" content="Find us on University Way in the U-District, a short walk from UW. Phở, bánh mì and rice bowls to order ahead and pick up.">
 <meta name="twitter:image" content="https://me-kitchen.com/assets/og-image.png">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Restaurant",
-  "name": "Mê Kitchen",
-  "url": "https://me-kitchen.com/",
-  "description": "The story behind Mê Kitchen, an authentic Vietnamese restaurant in Seattle's University District.",
-  "servesCuisine": "Vietnamese",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "4213 University Wy NE",
-    "addressLocality": "Seattle",
-    "addressRegion": "WA",
-    "postalCode": "98105",
-    "addressCountry": "US"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 47.658756,
-    "longitude": -122.3133633
-  },
-  "image": "https://me-kitchen.com/assets/og-image.png",
-  "sameAs": [
-    "https://www.instagram.com/mekitchen.wa/",
-    "https://www.tiktok.com/@mekitchen.wa",
-    "https://www.facebook.com/people/Me-Kitchen/61593475710473/"
-  ]
-}
-</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -100,7 +76,6 @@ a{color:inherit;text-decoration:none}
 .btn:hover{transform:translateY(-2px)}
 .btn-inv{background:var(--paper);color:var(--ink);border-color:var(--paper)}
 .btn-sm{padding:.68rem 1.2rem;font-size:.75rem}
-/* thin outline that fills from the centre outwards, as on the main site */
 .btn-fill{
   --fill:var(--ink); --fill-text:var(--paper);
   position:relative; isolation:isolate; overflow:hidden;
@@ -112,12 +87,11 @@ a{color:inherit;text-decoration:none}
   transform:scaleX(0); transform-origin:center;
   transition:transform .55s cubic-bezier(.2,.8,.2,1);
 }
-.btn-fill:hover::before,.btn-fill:focus-visible::before{transform:scaleX(1)}
-.btn-fill:hover,.btn-fill:focus-visible{color:var(--fill-text)}
+.btn-fill:hover::before,.btn-fill:focus-visible::before,.btn-fill:active::before{transform:scaleX(1)}
+.btn-fill:hover,.btn-fill:focus-visible,.btn-fill:active{color:var(--fill-text)}
 .btn-fill:hover,.btn-fill:active{transform:none}
 
 /* ---------- nav ---------- */
-/* No dark hero on this page, so the bar is solid from the top. */
 .nav{
   position:fixed;inset:0 0 auto;z-index:100;
   background:rgba(250,247,239,.92);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line);
@@ -161,43 +135,21 @@ a{color:inherit;text-decoration:none}
 
 /* ---------- page head ---------- */
 .head-band{padding:calc(72px + clamp(3rem,8vw,6rem)) 0 clamp(2rem,5vw,3.5rem)}
-.head-band h1{font-size:clamp(2.75rem,9vw,7rem)}
+.head-band h1{font-size:clamp(2.5rem,8vw,6rem)}
 .head-band p.stand{
   font-size:clamp(1.0625rem,2vw,1.375rem);color:var(--dim);
-  max-width:46ch;margin:1.75rem 0 0;font-weight:300;
+  max-width:48ch;margin:1.75rem 0 0;font-weight:300;
 }
 
-/* ---------- name meaning ---------- */
-.meaning{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(2.5rem,6vw,4.5rem) 0;text-align:center}
-.meaning .word{
-  font-family:var(--display);font-weight:700;line-height:1;margin:0;
-  font-size:clamp(4.5rem,17vw,11rem);letter-spacing:-.05em;
-}
-.meaning .pron{
-  display:block;font-family:var(--display);font-size:.6875rem;font-weight:500;
-  letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-top:1.25rem;
-}
-.meaning .def{
-  font-size:clamp(1.125rem,2.6vw,1.75rem);font-weight:300;line-height:1.4;
-  max-width:32ch;margin:1.5rem auto 0;
-}
-
-/* ---------- story body ---------- */
+/* ---------- detail cards ---------- */
 .section{padding:clamp(3rem,7vw,5.5rem) 0}
-.split{display:grid;gap:clamp(2rem,5vw,4rem);grid-template-columns:1fr;align-items:center}
-.split > *{min-width:0}
-.prose p{color:var(--dim);margin:0 0 1.5rem;max-width:48ch;font-size:1.0625rem}
-.prose p:last-of-type{margin-bottom:2rem}
-.picks{list-style:none;padding:0;margin:0 0 2rem;display:grid;gap:.6rem}
-.picks li{display:flex;align-items:baseline;gap:1rem;font-size:.9375rem;padding:.75rem 0;border-bottom:1px solid var(--line)}
-.picks b{font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;min-width:5.5rem}
-.picks span{color:var(--dim)}
-
-/* photo placeholders */
-.ph{position:relative;background:var(--wash);display:grid;place-items:center;color:var(--line-strong);overflow:hidden;border-radius:var(--r)}
-.ph.r-4-5{aspect-ratio:4/5}
-.ph.r-3-2{aspect-ratio:3/2}
-.ph svg{position:relative;width:34%;max-width:140px;height:auto}
+.vcards{display:grid;gap:1rem;grid-template-columns:1fr;margin-bottom:2rem}
+.vcard{border:1px solid var(--line);border-radius:var(--r);padding:1.35rem}
+.vcard h2{font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:0 0 .6rem}
+.vcard p{margin:0;font-size:1.0625rem}
+.prose p{color:var(--dim);margin:0 0 1.5rem;max-width:52ch;font-size:1.0625rem}
+.ph{position:relative;background:var(--wash);display:grid;place-items:center;color:var(--line-strong);overflow:hidden;border-radius:var(--r);aspect-ratio:3/2}
+.ph svg{position:relative;width:24%;max-width:120px;height:auto}
 .ph-tag{
   position:absolute;left:.75rem;bottom:.75rem;font-family:var(--display);font-weight:500;
   font-size:.625rem;letter-spacing:.14em;text-transform:uppercase;
@@ -223,6 +175,10 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 }
 .foot a:hover{color:var(--paper)}
 .foot a:hover::after{transform:scaleX(1)}
+.foot-social{display:flex;gap:.9rem;align-items:center;padding:.3rem 0 .7rem}
+.foot-social a{color:#d8e0d2;opacity:.85;line-height:0;transition:opacity .25s,color .25s}
+.foot-social a:hover,.foot-social a:focus-visible{opacity:1;color:var(--paper)}
+.foot-social svg{width:19px;height:19px;display:block}
 .foot-brand{display:flex;flex-direction:column;align-items:flex-start;gap:1.15rem}
 .foot-brand img{height:50px;width:auto;filter:brightness(0) invert(1)}
 .foot-brand p{color:#d8e0d2;max-width:30ch;font-size:.9375rem;margin:0}
@@ -244,7 +200,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 /* ---------- responsive ---------- */
 @media(min-width:768px){
   .brand img{height:40px}
-  .split{grid-template-columns:1.1fr .9fr}
+  .vcards{grid-template-columns:1fr 1fr}
   .foot{grid-template-columns:2fr 1fr 1fr 1fr}
 }
 @media(min-width:1024px){
@@ -277,8 +233,8 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
       <a href="menu.html">Menu</a>
       <a href="/#how">How it works</a>
       <a href="/#made">Made to order</a>
-      <a href="story.html" aria-current="page">Our story</a>
-      <a href="location.html">Visit</a>
+      <a href="story.html">Our story</a>
+      <a href="location.html" aria-current="page">Visit</a>
       <a href="https://me-kitchen.square.site/" class="btn btn-sm btn-fill">Order</a>
     </nav>
     <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="drawer">
@@ -301,45 +257,38 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 <main>
   <section class="head-band">
     <div class="wrap">
-      <span class="tag">Our story</span>
-      <h1 class="display">How this<br>started</h1>
-      <p class="stand">{{STORY_STANDFIRST}}</p>
-    </div>
-  </section>
-
-  <section class="meaning">
-    <div class="wrap rv">
-      <p class="word">Mê</p>
-      <span class="pron">The name</span>
-      <p class="def">&ldquo;Mê&rdquo; can refer to a strong craving or attachment to something, like an addiction or obsession.</p>
+      <span class="tag">Visit</span>
+      <h1 class="display">Find us in<br>the U-District</h1>
+      <p class="stand">We are on University Way — the Ave — a short walk from the UW campus. Order ahead, and it will be on the pickup shelf with your name on it.</p>
     </div>
   </section>
 
   <section class="section">
-    <div class="wrap split">
-      <div class="prose rv">
-        <p>{{STORY_INTRO}}</p>
-        <p>{{STORY_DETAIL}}</p>
-        <ul class="picks">
-          <li><b>Started</b><span>{{STORY_FOUNDED}}</span></li>
-          <li><b>Kitchen</b><span>{{STORY_KITCHEN}}</span></li>
-          <li><b>Name</b><span>Mê — a craving, an attachment, an obsession</span></li>
-        </ul>
-      </div>
-      <div class="ph r-4-5 rv"><svg><use href="#bowl"/></svg><span class="ph-tag">Owners / kitchen team — portrait</span></div>
-    </div>
-  </section>
-
-  <section class="section" style="padding-top:0">
     <div class="wrap">
-      <div class="ph r-3-2 rv"><svg><use href="#bowl"/></svg><span class="ph-tag">The space — build-out or counter</span></div>
+      <div class="vcards rv">
+        <div class="vcard"><h2>Address</h2><p>4213 University Wy NE<br>Seattle, WA 98105</p></div>
+        <div class="vcard"><h2>Hours</h2><p>{{HOURS}}</p></div>
+        <div class="vcard"><h2>Phone</h2><p>{{PHONE}}</p></div>
+        <div class="vcard"><h2>Email</h2><p><a href="mailto:mekitchen.wa@gmail.com">mekitchen.wa@gmail.com</a></p></div>
+      </div>
+
+      <div class="prose rv">
+        <p>Getting here is easy on foot if you are anywhere near campus. We are on the Ave, the stretch of University Way that runs through the middle of the U-District, so most of the neighborhood is a few minutes away.</p>
+        <p>Most orders are placed on a phone before anyone walks in. Put it through <a href="https://me-kitchen.square.site/">Square</a>, and pick it up when it is ready — there is no line to stand in. If you want to see what is on offer first, the <a href="menu.html">full menu of phở, bánh mì and rice bowls</a> lists everything, prices included.</p>
+      </div>
+
+      <div class="ph rv"><svg><use href="#bowl"/></svg><span class="ph-tag">Storefront — photo placeholder</span></div>
+
+      <p style="margin:1.5rem 0 0">
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=4213+University+Wy+NE%2C+Seattle%2C+WA+98105" class="btn btn-fill">Get directions</a>
+      </p>
     </div>
   </section>
 
   <section class="closer">
     <div class="wrap">
-      <h2 class="display">Come eat with us</h2>
-      <p>We are in the U-District. Have a look at <a href="menu.html">the full menu of phở, bánh mì and rice bowls</a>, order ahead, and walk straight back out with it.</p>
+      <h2 class="display">Order ahead</h2>
+      <p>Pay on your phone, walk in, walk out.</p>
       <a href="https://me-kitchen.square.site/" class="btn btn-fill">Order on Square</a>
     </div>
   </section>
@@ -354,7 +303,29 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
       </div>
       <div class="foot-col"><h5>Eat</h5><a href="menu.html">Menu</a><a href="/#made">Made to order</a><a href="https://me-kitchen.square.site/">Order online</a></div>
       <div class="foot-col"><h5>About</h5><a href="/#how">How it works</a><a href="story.html">Our story</a><a href="location.html">Visit</a><a href="careers.html">Work here</a></div>
-      <div class="foot-col"><h5>Follow</h5><a href="{{INSTAGRAM_URL}}">Instagram</a><a href="{{TIKTOK_URL}}">TikTok</a><a href="https://www.google.com/maps/search/?api=1&amp;query=4213+University+Wy+NE%2C+Seattle%2C+WA+98105">Google</a></div>
+      <div class="foot-col">
+        <h5>Follow</h5>
+        <div class="foot-social">
+          <a href="https://www.instagram.com/mekitchen.wa/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4.2"/>
+              <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a href="https://www.tiktok.com/@mekitchen.wa" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M16.6 5.82c-.9-.86-1.46-2-1.6-3.32h-3.02v13.2c0 1.5-1.22 2.72-2.72 2.72a2.72 2.72 0 0 1 0-5.44c.28 0 .56.04.82.12V9.9a5.75 5.75 0 0 0-.82-.06 5.75 5.75 0 1 0 5.75 5.75V8.9a8.6 8.6 0 0 0 4.6 1.34V7.2a5.6 5.6 0 0 1-3.01-1.38z"/>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/people/Me-Kitchen/61593475710473/" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="-96 0 512 512" fill="currentColor" aria-hidden="true">
+              <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/>
+            </svg>
+          </a>
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=4213+University+Wy+NE%2C+Seattle%2C+WA+98105">Google</a>
+      </div>
     </div>
     <div class="foot-type" aria-hidden="true">Mê Kitchen</div>
     <div class="legal">
@@ -363,6 +334,39 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
     </div>
   </div>
 </footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Mê Kitchen",
+  "url": "https://me-kitchen.com/",
+  "description": "Vietnamese restaurant on University Way in Seattle's University District, a short walk from the UW campus.",
+  "servesCuisine": "Vietnamese",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "4213 University Wy NE",
+    "addressLocality": "Seattle",
+    "addressRegion": "WA",
+    "postalCode": "98105",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 47.658756,
+    "longitude": -122.3133633
+  },
+  "hasMap": "https://www.google.com/maps/search/?api=1&query=4213+University+Wy+NE%2C+Seattle%2C+WA+98105",
+  "email": "mekitchen.wa@gmail.com",
+  "image": "https://me-kitchen.com/assets/og-image.png",
+  "hasMenu": "https://me-kitchen.com/menu",
+  "sameAs": [
+    "https://www.instagram.com/mekitchen.wa/",
+    "https://www.tiktok.com/@mekitchen.wa",
+    "https://www.facebook.com/people/Me-Kitchen/61593475710473/"
+  ]
+}
+</script>
 
 <script>
 (function(){

@@ -11,13 +11,16 @@ by pushing.
 
 ```
 deploy/
-├── index.html      coming-soon holding page — what me-kitchen.com serves
-├── home.html       the main site, behind the holding page's preview gate
-├── story.html      the Our story page
+├── index.html      the main site — currently what me-kitchen.com serves
+├── menu.html       full menu, /menu — carries the MenuItem structured data
+├── location.html   address and hours, /location
+├── story.html      the Our story page, /story
+├── careers.html    placeholder careers page, noindex
+├── soon.html       the coming-soon holding page, saved but not served
 ├── 404.html        not-found page (Netlify picks this up automatically)
 ├── robots.txt      currently blocking search engines — see below
 ├── netlify.toml    security headers, caching, redirects
-└── assets/         logos and favicons
+└── assets/         logos, favicons, og-image.png
 ```
 
 `me-kitchen.com` serves the holding page. The full site sits at `/home.html`,
@@ -112,8 +115,21 @@ These render literally as `{{LIKE_THIS}}` on the page, so they are obvious.
 | `{{DELIVERY_ANSWER}}` | 1 | FAQ: delivery platforms at launch |
 | `{{STUDENT_DISCOUNT_ANSWER}}` | 1 | FAQ: student discount, yes or no |
 
-Also still placeholder, but not tokenised: **the 16 menu items and their prices**,
-across the four tabs. Swap these for the real menu before launch.
+### The 16 menu items and their prices — READ THIS
+
+These were drafted as placeholder copy and have **never been confirmed by the
+owner**. They are not tokenised, so they do not look like placeholders.
+
+They now appear in three places: the homepage tabs, `menu.html`, and — this is
+the new risk — **`menu.html`'s MenuItem JSON-LD, which search engines read as
+fact**. Wrong prices in structured data can surface directly in search results.
+
+An Excel export of this same menu was generated from the site on 2026-09-15 and
+may have circulated as if it were the real menu. If a "menu spreadsheet" comes
+back around, check it is not that export before trusting it.
+
+**Confirm every dish and price with the owner before `robots.txt`'s Disallow
+comes off.**
 
 ---
 
