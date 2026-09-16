@@ -65,11 +65,21 @@ non-render-blocking, resizing `logo-main.png`, and adding intrinsic
 | TBT | 0 ms | 0 ms |
 | Render-blocking savings | 1,560 ms | **none** |
 
-**Read this comparison carefully.** "Before" is the live site over the network;
-"after" is a local server with no network latency, so the two are not a clean
-A/B. The two numbers that *are* directly attributable to the fixes are the
-render-blocking savings (1,560 ms → none) and CLS (0.115 → 0.091). A fresh live
-run after deploy is the honest follow-up measurement.
+### Confirmed live, after deploy
+
+Re-measured against `https://me-kitchen.com/` once the fixes shipped, so this
+is a clean like-for-like comparison rather than local-vs-live.
+
+| | Before | After |
+|---|---|---|
+| Performance | 87 | **98** |
+| Accessibility | 95 | **99** |
+| Best Practices | 100 | 100 |
+| SEO | 69 | 69 *(unchanged — still the intentional Disallow)* |
+| LCP | 2.8 s | **1.2 s** |
+| FCP | 2.8 s | **1.2 s** |
+| CLS | 0.115 | **0.091** |
+| Render-blocking | 1,560 ms | **none** |
 
 ## Budgets now enforced
 
