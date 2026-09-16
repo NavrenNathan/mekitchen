@@ -11,22 +11,31 @@ by pushing.
 
 ```
 deploy/
-├── index.html      the main site — currently what me-kitchen.com serves
+├── index.html      coming-soon holding page — what me-kitchen.com serves
+├── home.html       the main site, /home, behind the holding page's gate
 ├── menu.html       full menu, /menu — carries the MenuItem structured data
 ├── location.html   address and hours, /location
 ├── story.html      the Our story page, /story
 ├── careers.html    placeholder careers page, noindex
-├── soon.html       the coming-soon holding page, saved but not served
 ├── 404.html        not-found page (Netlify picks this up automatically)
 ├── robots.txt      currently blocking search engines — see below
 ├── netlify.toml    security headers, caching, redirects
 └── assets/         logos, favicons, og-image.png
 ```
 
-`me-kitchen.com` serves the holding page. The full site sits at `/home.html`,
-reached through the concealed password gate at the bottom of the holding page.
-Netlify's pretty URLs also serve it as `/home`. A 301 in `netlify.toml` keeps
-the old `/site.html` path working.
+`me-kitchen.com` serves the coming-soon holding page. The full site sits at
+`/home` (`home.html`), reached through the concealed password gate at the
+bottom of the holding page — the dim dot under the footer. Password is in
+`index.html`'s inline script.
+
+The site was temporarily flipped (main site at the root) so a Semrush audit
+could crawl it, then flipped back. If it is ever flipped again, three things
+must move together or the site breaks:
+  1. `home.html`'s canonical and `og:url`
+  2. the `href="home.html"` links in menu/story/location/careers
+  3. the `netlify.toml` redirects — a `/home.html -> /` rule while the main
+     site lives at `/home` bounces every visitor onto the holding page
+Then rerun `node scripts/generate-sitemap.mjs` and the two check scripts.
 
 **The noindex tag that must go on launch day is in both `index.html` and
 `home.html`.**

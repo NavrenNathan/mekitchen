@@ -36,7 +36,20 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const LAUNCHED = false;
 
 const ORIGIN = 'https://me-kitchen.com';
-const EXCLUDE = new Set(['404.html', 'soon.html']);
+const EXCLUDE = new Set(['404.html']);
+
+/**
+ * Pages allowed to carry noindex, and why. Anything NOT listed here that has a
+ * noindex tag is treated as an error — that is the accident this guard exists
+ * to catch, since a stray noindex silently removes a page from search.
+ *
+ * ON LAUNCH DAY: when the coming-soon page is retired and the real site moves
+ * back to the root, delete the index.html entry so the root is protected again.
+ */
+const INTENTIONAL_NOINDEX = {
+  'index.html':   'coming-soon holding page with the preview gate',
+  'careers.html': 'placeholder filler, revisit before launch',
+};
 
 const errors = [];
 const warns = [];
@@ -90,8 +103,9 @@ for (const file of pages) {
   // --- noindex ---
   const noindex = html.match(/<meta\s+name=["']robots["'][^>]*content=["']([^"']*)["']/i);
   if (noindex && /noindex/i.test(noindex[1])) {
-    if (file === 'careers.html') {
-      notes.push(`${file}: noindex present — intentional, page is placeholder filler`);
+    const why = INTENTIONAL_NOINDEX[file];
+    if (why) {
+      notes.push(`${file}: noindex present — intentional (${why})`);
     } else {
       errors.push(`${file}: carries noindex ("${noindex[1]}") — this page will silently drop out of search`);
     }

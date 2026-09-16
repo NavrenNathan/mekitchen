@@ -29,14 +29,14 @@
 # --- Redirects ---------------------------------------------------------
 # The main site used to live at /site.html; it is now /home.html. Anything
 # already shared with the old path still lands on the right page.
+# The main site lives at /home again, with the coming-soon page at the root.
+# /site.html is a legacy path from an earlier rename.
+#
+# NOTE: there is deliberately NO "/home.html -> /" rule here. That existed
+# while the main site was at the root, and leaving it in place now would
+# bounce every visitor off the real site and back onto the holding page.
 [[redirects]]
   from = "/site.html"
-  to = "/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/home.html"
-  to = "/"
+  to = "/home"
   status = 301
   force = true
