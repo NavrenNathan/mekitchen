@@ -31,6 +31,12 @@
   "name": "Mê Kitchen",
   "url": "https://me-kitchen.com/",
   "description": "Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì, and rice bowls, cooked to order.",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "opens": "11:00",
+    "closes": "21:00"
+  },
   "servesCuisine": "Vietnamese",
   "address": {
     "@type": "PostalAddress",
@@ -831,7 +837,7 @@ a.bar-field:hover .val{opacity:.7}
         <div>
           <div class="vcards">
             <div class="vcard"><h4>Address</h4><p>4213 University Wy NE<br>Seattle, WA 98105</p></div>
-            <div class="vcard"><h4>Hours</h4><p>{{HOURS}}</p></div>
+            <div class="vcard"><h4>Hours</h4><p>11am&ndash;9pm, Monday to Saturday<br>Closed Sunday</p></div>
             <div class="vcard"><h4>Phone</h4><p>{{PHONE}}</p></div>
             <div class="vcard"><h4>Email</h4><p><a href="mailto:mekitchen.wa@gmail.com">mekitchen.wa@gmail.com</a></p></div>
           </div>
@@ -889,10 +895,11 @@ a.bar-field:hover .val{opacity:.7}
 
 <div class="bar" id="bar">
   <div class="bar-fields">
-    <!-- Daily update: replace {{HOURS}} below with today's pickup hours. -->
+    <!-- Filled by script from the regular schedule, so Sunday reads "Closed"
+         on its own and nobody has to edit this by hand each morning. -->
     <div class="bar-field">
       <span class="lbl">Pickup hours today</span>
-      <span class="val">{{HOURS}}</span>
+      <span class="val" id="todayHours">11am&ndash;9pm</span>
     </div>
     <a class="bar-field" href="tel:{{PHONE}}">
       <span class="lbl">Call</span>
@@ -1091,6 +1098,12 @@ a.bar-field:hover .val{opacity:.7}
     draw();
     if(window.ResizeObserver) new ResizeObserver(draw).observe(li);
   });
+
+  /* today's pickup hours — 11am-9pm Mon-Sat, closed Sunday */
+  var todayHours=document.getElementById('todayHours');
+  if(todayHours){
+    todayHours.textContent = new Date().getDay()===0 ? 'Closed today' : '11am\u20139pm';
+  }
 
   document.getElementById('yr').textContent=new Date().getFullYear();
 })();

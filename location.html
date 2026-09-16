@@ -10,10 +10,9 @@
 <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
-<!-- Hours and phone below are still {{HOURS}} / {{PHONE}} placeholders and
-     render literally. They are deliberately left out of this page's JSON-LD
-     rather than filled with fake values, since structured data is read as
-     fact by search engines. See DEPLOY.md. -->
+<!-- Hours are real (11am-9pm Mon-Sat, closed Sunday) and are in the JSON-LD
+     below as openingHoursSpecification. Phone is still a {{PHONE}} placeholder
+     and is deliberately kept OUT of the structured data rather than faked. -->
 
 <link rel="canonical" href="https://me-kitchen.com/location">
 <meta property="og:type" content="website">
@@ -267,7 +266,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
     <div class="wrap">
       <div class="vcards rv">
         <div class="vcard"><h2>Address</h2><p>4213 University Wy NE<br>Seattle, WA 98105</p></div>
-        <div class="vcard"><h2>Hours</h2><p>{{HOURS}}</p></div>
+        <div class="vcard"><h2>Hours</h2><p>11am&ndash;9pm, Monday to Saturday<br>Closed Sunday</p></div>
         <div class="vcard"><h2>Phone</h2><p>{{PHONE}}</p></div>
         <div class="vcard"><h2>Email</h2><p><a href="mailto:mekitchen.wa@gmail.com">mekitchen.wa@gmail.com</a></p></div>
       </div>
@@ -342,6 +341,12 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
   "name": "Mê Kitchen",
   "url": "https://me-kitchen.com/",
   "description": "Vietnamese restaurant on University Way in Seattle's University District, a short walk from the UW campus.",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "opens": "11:00",
+    "closes": "21:00"
+  },
   "servesCuisine": "Vietnamese",
   "address": {
     "@type": "PostalAddress",

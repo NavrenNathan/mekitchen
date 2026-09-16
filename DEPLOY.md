@@ -106,7 +106,7 @@ These render literally as `{{LIKE_THIS}}` on the page, so they are obvious.
 | `{{PHONE}}` | 2 | Phone — also used in the `tel:` link |
 | ~~`{{GOOGLE_MAPS_URL}}`~~ | 0 | **Done** — a Google Maps search link built from the real address, no Place ID needed |
 | ~~`{{STREET_ADDRESS}}` `{{ZIP}}`~~ | 0 | **Done** — 4213 University Wy NE, Seattle, WA 98105 |
-| `{{HOURS}}` | 1 | Opening hours |
+| ~~`{{HOURS}}`~~ | 0 | **Done** — 11am&ndash;9pm Monday to Saturday, closed Sunday. Also in `openingHoursSpecification` on all four pages. The sticky island computes today's line from the day of the week, so Sunday reads "Closed today" with no manual edit. |
 | ~~`{{EMAIL}}`~~ | 0 | **Done** — mekitchen.wa@gmail.com, wired as a `mailto:` link |
 | `{{SEATS}}` | 1 | Seat count (shown as a stat) |
 | `{{INSTAGRAM_URL}}` `{{TIKTOK_URL}}` | 1 each | Socials |
