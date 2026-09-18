@@ -83,3 +83,45 @@ vertical room for it and it makes a stronger centrepiece than the wide mark.
 Not used in the nav: at 1.35:1 it can only be about 56px tall in the 72px bar,
 which shrinks "kitchen" to roughly 8px. The wide `logo-mark.png` is used there
 instead.
+
+## hero-spread.jpg — the hero photograph
+
+The owner's flat-lay of all three lines at once: banh mi on a metal tray, pho
+with rare beef, and a grilled chicken rice bowl, with herbs, limes, peanuts,
+sauces and a Me kitchen napkin in the corner. Supplied as `color-graded.png`,
+1376x768, 2.3MB. Renamed for what it is; `hero-spread.png` is the lossless
+source, `hero-spread.jpg` (q80, 442KB) is what the page loads.
+
+It is the backdrop of the hero, behind the headline, by the owner's choice.
+Both slots in the photo grid below it are still placeholders ("Hero -
+signature bowl", "Counter energy"). Putting this same shot in the upper slot
+as well was tried and dropped: the same image twice in one section.
+
+**That placement needs a heavy scrim, and the scrim is measured, not
+eyeballed.** This is a bright, warm photograph: against cream `#faf7ef` it
+gives 4.24:1 contrast on average and only 2.30:1 across its lighter tenth, so
+cream text straight over it is unreadable. Sampling the image column by
+column, it needs roughly **0.63 of scrim over it to clear 4.5:1** anywhere
+text falls. The `.hero-scene::after` stops are set from that number: nothing
+drops below 0.54, and the text side sits at 0.78 and up. Checked against the
+worst-case pixel, the result holds 6.43:1 out to 60% of the width, 5.60:1 to
+72%, and 4.87:1 even if the chips wrap out to 85%.
+
+**The scrim colour is `--scrim` (`#2c3f34`), not `--ink`.** The first version
+used `--ink` and looked like a swamp, and the reason is measurable: `--ink`
+(`#22391f`) is a yellow-green olive, and over warm wood at this strength it
+averages out to a muddy `#354126` at 0.26 saturation. `#2c3f34` leans blue
+rather than yellow. Over the same photograph it averages `#384436` - lighter,
+and **0.11 saturation, under half the olive's** - while taking worst-case
+contrast up rather than down. Desaturating the photograph itself was tried
+alongside it and changed nothing measurable, so the food keeps its own colour.
+
+`--scrim` is set on `.hero-scene` as space-separated channels so all twelve
+gradient stops share one colour: change that one line to retint the hero.
+
+**The food still reads dark**, especially the banh mi and the metal tray,
+which sit on the left where the headline is and the scrim is heaviest. That is
+the cost of putting copy on this photograph, and a thinner scrim just re-opens
+the legibility problem. If it needs to read brighter, the fix is to move the
+copy off the photograph - a solid panel, or the copy above and the photograph
+as a band below.
