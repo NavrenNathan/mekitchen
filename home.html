@@ -153,10 +153,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
 .display{font-family:var(--display);font-weight:700;text-transform:uppercase;line-height:.92;letter-spacing:-.035em;margin:0}
 .tag{
-  display:inline-block;font-size:.6875rem;font-weight:600;letter-spacing:.16em;
+  display:inline-flex;align-items:center;gap:.4rem;font-size:.6875rem;font-weight:600;letter-spacing:.16em;
   text-transform:uppercase;padding:.4rem .8rem;border-radius:999px;
   border:1px solid currentColor;margin:0 0 1.5rem;
 }
+/* the pin icon on the location tag only — same mark used in the directions
+   modal, so "location" reads as one consistent glyph across the page */
+.tag-icon{width:12px;height:12px;flex:none}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 /* ---------- intro curtain ---------- */
@@ -230,12 +233,14 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   background:transparent; color:currentColor;
   border-width:1px; border-color:var(--fill);
 }
-.nav.on-dark:not(.solid) .btn-fill,.hero .btn-fill,.section.dark .btn-fill,.bar .btn-fill{
+.nav.on-dark:not(.solid) .btn-fill,.hero .btn-fill,.section.dark .btn-fill,footer .btn-fill{
   --fill:var(--paper); --fill-text:var(--ink);
 }
-/* resting text on the bar was inheriting currentColor up to body's dark
-   green, invisible on the bar's own dark green ground — made explicit */
-.bar .btn-fill{color:var(--paper)}
+/* the island is cream now, not dark green, so Call uses the default light-
+   ground .btn-fill styling (ink outline, fills ink on hover) — made explicit
+   rather than left to inherit, matching how this file already treats color
+   sourcing everywhere else */
+.bar .btn-fill{color:var(--ink)}
 .btn-fill::before{
   content:""; position:absolute; inset:0; z-index:-1; background:var(--fill);
   transform:scaleX(0); transform-origin:center;
@@ -516,6 +521,73 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 .foot-social a{color:#d8e0d2;opacity:.85;line-height:0;transition:opacity .25s,color .25s}
 .foot-social a:hover,.foot-social a:focus-visible{opacity:1;color:var(--paper)}
 .foot-social svg{width:19px;height:19px;display:block}
+/* Directions trigger: styled to match .foot a exactly (a real button, not an
+   <a>, since it opens a dialog rather than navigating) so it sits in the
+   "Find us" column without announcing itself as a different kind of control
+   until it's used. */
+.foot-directions-trigger{
+  position:relative;display:inline-block;font:inherit;font-size:.9375rem;
+  padding:.3rem 0;color:#d8e0d2;background:none;border:0;cursor:pointer;
+  transition:color .25s;
+}
+.foot-directions-trigger::after{
+  content:'';position:absolute;left:0;right:0;bottom:.18rem;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1);
+}
+.foot-directions-trigger:hover,.foot-directions-trigger:focus-visible{color:var(--paper)}
+.foot-directions-trigger:hover::after,.foot-directions-trigger:focus-visible::after{transform:scaleX(1)}
+
+/* ---------- directions modal ---------- */
+/* A real popup rather than an inline reveal: picking a maps app gets a
+   moment of protected focus instead of competing with the rest of the
+   footer list. Entrance uses this site's own dominant easing
+   (cubic-bezier(.2,.8,.2,1), used everywhere else on this page) rather than
+   a new curve, and the backdrop is --scrim — the same warm near-black
+   already carrying the hero overlay and the chip hover state — so this
+   reads as part of the site rather than a generic dialog component. */
+.modal-overlay{
+  position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
+  padding:1.25rem;background:rgb(var(--scrim)/.55);backdrop-filter:blur(3px);
+  opacity:0;visibility:hidden;
+  transition:opacity .3s cubic-bezier(.2,.8,.2,1),visibility 0s .3s;
+}
+.modal-overlay.open{
+  opacity:1;visibility:visible;transition:opacity .3s cubic-bezier(.2,.8,.2,1),visibility 0s;
+}
+.modal-card{
+  width:100%;max-width:340px;background:var(--paper);color:var(--ink);
+  border:1px solid var(--line);border-radius:var(--r);
+  padding:1.75rem 1.5rem 1.5rem;position:relative;
+  box-shadow:0 24px 64px rgba(24,57,31,.28);
+  transform:scale(.94);transition:transform .3s cubic-bezier(.2,.8,.2,1);
+}
+.modal-overlay.open .modal-card{transform:scale(1)}
+.modal-close{
+  position:absolute;top:.7rem;right:.7rem;width:2rem;height:2rem;
+  display:grid;place-items:center;background:none;border:0;border-radius:999px;
+  color:var(--dim);cursor:pointer;transition:background .2s,color .2s;
+}
+.modal-close:hover,.modal-close:focus-visible{background:var(--wash);color:var(--ink)}
+.modal-close svg{width:15px;height:15px}
+.modal-card h2{
+  font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:1.125rem;letter-spacing:-.01em;margin:0 0 .35rem;padding-right:1.5rem;
+}
+.modal-sub{font-size:.875rem;color:var(--dim);margin:0 0 1.35rem}
+.modal-options{display:flex;flex-direction:column;gap:.6rem}
+.modal-option{
+  display:flex;align-items:center;gap:.85rem;padding:.9rem 1rem;
+  border:1px solid var(--line);border-radius:var(--rb);color:var(--ink);
+  transition:border-color .2s,background .2s;
+}
+.modal-option svg{width:20px;height:20px;flex:none}
+.modal-option span{font-family:var(--display);font-weight:700;font-size:.875rem;letter-spacing:.01em;text-transform:uppercase}
+.modal-option:hover,.modal-option:focus-visible{border-color:var(--ink);background:var(--wash)}
+@media(prefers-reduced-motion:reduce){
+  .modal-overlay,.modal-card{transition-duration:.01ms!important}
+}
+
 /* brand block */
 .foot-brand{display:flex;flex-direction:column;align-items:flex-start;gap:1.15rem}
 .foot-brand img{height:50px;width:auto;filter:brightness(0) invert(1)}
@@ -530,9 +602,16 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
   position:fixed;inset:auto 0 0;z-index:98;display:flex;gap:.5rem;align-items:stretch;
   width:min(calc(100% - 1.25rem),var(--maxw));margin:0 auto .625rem;
   padding:.4rem;border-radius:14px;
-  background:rgba(24,43,26,.96);backdrop-filter:blur(14px);
-  border:1px solid rgba(250,247,239,.14);
-  box-shadow:0 12px 32px rgba(0,0,0,.28);
+  /* cream island, same alpha/blur treatment as before, just recoloured off
+     the dark-green base — Order on Square (.btn-inv) is already green by
+     itself, so it now reads clearly against this instead of nearly matching
+     the old dark-green ground */
+  background:rgba(250,247,239,.96);backdrop-filter:blur(14px);
+  border:1px solid rgba(34,57,31,.54);
+  /* a clearly visible green glow using --ink (the site's main green),
+     layered over the original drop shadow so the island still lifts off
+     the page behind it */
+  box-shadow:0 0 0 1px rgba(34,57,31,.15),0 0 16px rgba(34,57,31,.44),0 12px 32px rgba(24,43,26,.14);
   transform:translateY(160%);transition:transform .35s cubic-bezier(.2,.8,.2,1);
 }
 .bar.show{transform:none}
@@ -542,13 +621,13 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
   display:flex;flex-direction:column;justify-content:center;gap:.2rem;
   flex:1;min-width:0;padding:.3rem 2rem;
 }
-.bar-field+.bar-field{border-left:1px solid rgba(250,247,239,.16)}
+.bar-field+.bar-field{border-left:1px solid var(--line)}
 .bar-field .lbl{
   font-family:var(--display);font-size:.625rem;font-weight:500;
-  letter-spacing:.18em;text-transform:uppercase;color:#93a68d;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
 }
 .bar-field .val{
-  font-size:.9375rem;color:var(--paper);
+  font-size:.9375rem;color:var(--ink);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 a.bar-field .val{transition:opacity .2s}
@@ -751,9 +830,7 @@ a.bar-field:hover .val{opacity:.7}
    so the footer carries its own cream pair */
 .foot-solid{background:var(--paper);color:var(--ink);border-color:var(--paper)}
 .foot-solid:hover{background:var(--wash);border-color:var(--wash);color:var(--ink)}
-.foot-ghost{background:transparent;color:var(--paper);border-color:#5d7a58}
-.foot-ghost:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
-.foot a.foot-solid::after,.foot a.foot-ghost::after,.foot-band a::after{display:none}
+.foot a.foot-solid::after,.foot-band a::after{display:none}
 .foot-news{display:flex;flex-wrap:wrap;gap:.6rem}
 .foot-news input[type=email]{
   flex:1 1 220px;font:inherit;font-size:.9375rem;padding:.9rem 1rem;border-radius:var(--rb);
@@ -850,12 +927,12 @@ a.bar-field:hover .val{opacity:.7}
       </video>
     </div>
     <div class="wrap">
-      <span class="tag">Located in U District</span>
+      <span class="tag"><svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12Z"/><circle cx="12" cy="9" r="2.2"/></svg>Located in U District</span>
       <h1 class="display">Phở.<br>Bánh mì.<br><u>Rice bowls.</u></h1>
       <p class="hero-lede">Order on your phone, walk in, walk out. Twenty-four hour broth, twenty-minute lunch.</p>
       <div class="hero-cta">
-        <a href="https://me-kitchen.square.site/" class="btn btn-inv">Order on Square</a>
-        <a href="menu.html" class="btn btn-fill">See the menu</a>
+        <a href="https://me-kitchen.square.site/" class="btn">Order on Square</a>
+        <a href="menu.html" class="btn">See the menu</a>
       </div>
       <ul class="chips">
         <li>Order ahead<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li><li>Ready when you arrive<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li><li>Veg options<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li><li>Open late<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li>
@@ -1020,7 +1097,7 @@ a.bar-field:hover .val{opacity:.7}
 
       <div class="foot-col">
         <h5>Find us</h5>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=4213+University+Wy+NE%2C+Seattle%2C+WA+98105" target="_blank" rel="noopener">Google Maps</a>
+        <button type="button" class="foot-directions-trigger" data-open-directions aria-haspopup="dialog">Directions</button>
         <a href="mailto:mekitchen.wa@gmail.com">Email us</a>
         <a href="https://me-kitchen.square.site/" target="_blank" rel="noopener">Order on Square</a>
       </div>
@@ -1032,7 +1109,7 @@ a.bar-field:hover .val{opacity:.7}
         <p>Pick it on your phone and it is bagged and waiting when you get here. No queue, no ticket number.</p>
       </div>
       <div class="foot-cta">
-        <a href="menu.html" class="btn foot-ghost">See the menu</a>
+        <a href="menu.html" class="btn btn-fill">See the menu</a>
         <a href="https://me-kitchen.square.site/" class="btn foot-solid">Order on Square</a>
       </div>
     </div>
@@ -1059,6 +1136,26 @@ a.bar-field:hover .val{opacity:.7}
     </div>
   </div>
 </footer>
+<div class="modal-overlay" id="directionsModal" role="dialog" aria-modal="true" aria-labelledby="directionsTitle">
+  <div class="modal-card">
+    <button type="button" class="modal-close" data-close-directions aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <h2 id="directionsTitle">Get directions</h2>
+    <p class="modal-sub">Choose an app to open the route.</p>
+    <div class="modal-options">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=4213+University+Wy+NE%2C+Seattle%2C+WA+98105" target="_blank" rel="noopener" class="modal-option">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>
+        <span>Google Maps</span>
+      </a>
+      <a href="https://maps.apple.com/?q=Me+Kitchen&amp;address=4213+University+Wy+NE%2C+Seattle%2C+WA+98105" target="_blank" rel="noopener" class="modal-option">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>
+        <span>Apple Maps</span>
+      </a>
+    </div>
+  </div>
+</div>
+
 
 <div class="bar" id="bar">
   <div class="bar-fields">
@@ -1304,6 +1401,49 @@ a.bar-field:hover .val{opacity:.7}
   if(todayHours){
     todayHours.textContent = new Date().getDay()===0 ? 'Closed' : '11am\u20139pm';
   }
+
+  /* directions modal — a real popup instead of an inline reveal, opened from
+     the footer's "Find us" column. Vanilla JS matching this file's own
+     conventions: a class toggle plus a CSS transition, no library. Includes
+     a minimal focus trap and Escape-to-close since this is a real dialog. */
+  (function(){
+    var trigger=document.querySelector('[data-open-directions]');
+    var modal=document.getElementById('directionsModal');
+    if(!trigger||!modal) return;
+    var closeBtns=modal.querySelectorAll('[data-close-directions]');
+    var lastFocus;
+
+    function onKey(e){
+      if(e.key==='Escape'){ close(); return; }
+      if(e.key==='Tab'){
+        var f=modal.querySelectorAll('a,button');
+        if(!f.length) return;
+        var first=f[0],last=f[f.length-1];
+        if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+      }
+    }
+    function open(){
+      lastFocus=document.activeElement;
+      modal.classList.add('open');
+      document.body.style.overflow='hidden';
+      var first=modal.querySelector('.modal-option,.modal-close');
+      if(first) first.focus();
+      document.addEventListener('keydown',onKey);
+    }
+    function close(){
+      modal.classList.remove('open');
+      document.body.style.overflow='';
+      document.removeEventListener('keydown',onKey);
+      if(lastFocus) lastFocus.focus();
+    }
+
+    trigger.addEventListener('click',open);
+    closeBtns.forEach(function(b){ b.addEventListener('click',close); });
+    modal.addEventListener('click',function(e){ if(e.target===modal) close(); });
+  })();
+
+
 
   document.getElementById('yr').textContent=new Date().getFullYear();
 })();

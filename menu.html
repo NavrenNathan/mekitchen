@@ -204,6 +204,73 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 .foot-social a{color:#d8e0d2;opacity:.85;line-height:0;transition:opacity .25s,color .25s}
 .foot-social a:hover,.foot-social a:focus-visible{opacity:1;color:var(--paper)}
 .foot-social svg{width:19px;height:19px;display:block}
+/* Directions trigger: styled to match .foot a exactly (a real button, not an
+   <a>, since it opens a dialog rather than navigating) so it sits in the
+   "Find us" column without announcing itself as a different kind of control
+   until it's used. */
+.foot-directions-trigger{
+  position:relative;display:inline-block;font:inherit;font-size:.9375rem;
+  padding:.3rem 0;color:#d8e0d2;background:none;border:0;cursor:pointer;
+  transition:color .25s;
+}
+.foot-directions-trigger::after{
+  content:'';position:absolute;left:0;right:0;bottom:.18rem;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1);
+}
+.foot-directions-trigger:hover,.foot-directions-trigger:focus-visible{color:var(--paper)}
+.foot-directions-trigger:hover::after,.foot-directions-trigger:focus-visible::after{transform:scaleX(1)}
+
+/* ---------- directions modal ---------- */
+/* A real popup rather than an inline reveal: picking a maps app gets a
+   moment of protected focus instead of competing with the rest of the
+   footer list. Entrance uses this site's own dominant easing
+   (cubic-bezier(.2,.8,.2,1), used everywhere else on this page) rather than
+   a new curve, and the backdrop is --scrim — the same warm near-black
+   already carrying the hero overlay and the chip hover state — so this
+   reads as part of the site rather than a generic dialog component. */
+.modal-overlay{
+  position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
+  padding:1.25rem;background:rgb(var(--scrim)/.55);backdrop-filter:blur(3px);
+  opacity:0;visibility:hidden;
+  transition:opacity .3s cubic-bezier(.2,.8,.2,1),visibility 0s .3s;
+}
+.modal-overlay.open{
+  opacity:1;visibility:visible;transition:opacity .3s cubic-bezier(.2,.8,.2,1),visibility 0s;
+}
+.modal-card{
+  width:100%;max-width:340px;background:var(--paper);color:var(--ink);
+  border:1px solid var(--line);border-radius:var(--r);
+  padding:1.75rem 1.5rem 1.5rem;position:relative;
+  box-shadow:0 24px 64px rgba(24,57,31,.28);
+  transform:scale(.94);transition:transform .3s cubic-bezier(.2,.8,.2,1);
+}
+.modal-overlay.open .modal-card{transform:scale(1)}
+.modal-close{
+  position:absolute;top:.7rem;right:.7rem;width:2rem;height:2rem;
+  display:grid;place-items:center;background:none;border:0;border-radius:999px;
+  color:var(--dim);cursor:pointer;transition:background .2s,color .2s;
+}
+.modal-close:hover,.modal-close:focus-visible{background:var(--wash);color:var(--ink)}
+.modal-close svg{width:15px;height:15px}
+.modal-card h2{
+  font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:1.125rem;letter-spacing:-.01em;margin:0 0 .35rem;padding-right:1.5rem;
+}
+.modal-sub{font-size:.875rem;color:var(--dim);margin:0 0 1.35rem}
+.modal-options{display:flex;flex-direction:column;gap:.6rem}
+.modal-option{
+  display:flex;align-items:center;gap:.85rem;padding:.9rem 1rem;
+  border:1px solid var(--line);border-radius:var(--rb);color:var(--ink);
+  transition:border-color .2s,background .2s;
+}
+.modal-option svg{width:20px;height:20px;flex:none}
+.modal-option span{font-family:var(--display);font-weight:700;font-size:.875rem;letter-spacing:.01em;text-transform:uppercase}
+.modal-option:hover,.modal-option:focus-visible{border-color:var(--ink);background:var(--wash)}
+@media(prefers-reduced-motion:reduce){
+  .modal-overlay,.modal-card{transition-duration:.01ms!important}
+}
+
 .foot-brand{display:flex;flex-direction:column;align-items:flex-start;gap:1.15rem}
 .foot-brand img{height:50px;width:auto;filter:brightness(0) invert(1)}
 .foot-brand p{color:#d8e0d2;max-width:30ch;font-size:.9375rem;margin:0}
@@ -514,7 +581,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 
       <div class="foot-col">
         <h5>Find us</h5>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=4213+University+Wy+NE%2C+Seattle%2C+WA+98105" target="_blank" rel="noopener">Google Maps</a>
+        <button type="button" class="foot-directions-trigger" data-open-directions aria-haspopup="dialog">Directions</button>
         <a href="mailto:mekitchen.wa@gmail.com">Email us</a>
         <a href="https://me-kitchen.square.site/" target="_blank" rel="noopener">Order on Square</a>
       </div>
@@ -553,6 +620,26 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
     </div>
   </div>
 </footer>
+<div class="modal-overlay" id="directionsModal" role="dialog" aria-modal="true" aria-labelledby="directionsTitle">
+  <div class="modal-card">
+    <button type="button" class="modal-close" data-close-directions aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <h2 id="directionsTitle">Get directions</h2>
+    <p class="modal-sub">Choose an app to open the route.</p>
+    <div class="modal-options">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=4213+University+Wy+NE%2C+Seattle%2C+WA+98105" target="_blank" rel="noopener" class="modal-option">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>
+        <span>Google Maps</span>
+      </a>
+      <a href="https://maps.apple.com/?q=Me+Kitchen&amp;address=4213+University+Wy+NE%2C+Seattle%2C+WA+98105" target="_blank" rel="noopener" class="modal-option">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>
+        <span>Apple Maps</span>
+      </a>
+    </div>
+  </div>
+</div>
+
 
 <script type="application/ld+json">
 {
@@ -749,6 +836,49 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
   } else {
     rv.forEach(function(el){ el.classList.add('in'); });
   }
+
+  /* directions modal — a real popup instead of an inline reveal, opened from
+     the footer's "Find us" column. Vanilla JS matching this file's own
+     conventions: a class toggle plus a CSS transition, no library. Includes
+     a minimal focus trap and Escape-to-close since this is a real dialog. */
+  (function(){
+    var trigger=document.querySelector('[data-open-directions]');
+    var modal=document.getElementById('directionsModal');
+    if(!trigger||!modal) return;
+    var closeBtns=modal.querySelectorAll('[data-close-directions]');
+    var lastFocus;
+
+    function onKey(e){
+      if(e.key==='Escape'){ close(); return; }
+      if(e.key==='Tab'){
+        var f=modal.querySelectorAll('a,button');
+        if(!f.length) return;
+        var first=f[0],last=f[f.length-1];
+        if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+      }
+    }
+    function open(){
+      lastFocus=document.activeElement;
+      modal.classList.add('open');
+      document.body.style.overflow='hidden';
+      var first=modal.querySelector('.modal-option,.modal-close');
+      if(first) first.focus();
+      document.addEventListener('keydown',onKey);
+    }
+    function close(){
+      modal.classList.remove('open');
+      document.body.style.overflow='';
+      document.removeEventListener('keydown',onKey);
+      if(lastFocus) lastFocus.focus();
+    }
+
+    trigger.addEventListener('click',open);
+    closeBtns.forEach(function(b){ b.addEventListener('click',close); });
+    modal.addEventListener('click',function(e){ if(e.target===modal) close(); });
+  })();
+
+
 
   document.getElementById('yr').textContent = new Date().getFullYear();
 })();
