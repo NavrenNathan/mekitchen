@@ -123,6 +123,7 @@
    bar, tabbed menu. Built mobile-first around ordering.
    ============================================================ */
 :root{
+  --scrim:30 26 22;
   /* Mê Kitchen — deep green on cream. --ink doubles as the dark-section ground. */
   --ink:#22391f;               /* deep green: text, and background of .section.dark */
   --paper:#faf7ef;             /* cream ground */
@@ -282,37 +283,32 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .hero{--scrim:30 26 22;background:var(--ink);color:var(--paper);position:relative;overflow:hidden}
 /* the copy block is its own layer so the illustration can sit behind the words
    without running under the photo grid below them */
-.hero-copy{position:relative;padding:calc(72px + 4rem) 0 0}
+/* flow-root, not just relative: the chips row carries a bottom margin and
+   this box has no bottom padding or border, so without a block formatting
+   context that margin collapses straight out of .hero-copy and shows up as
+   a bare strip of .hero's green under the video, which only covers this box. */
+.hero-copy{position:relative;display:flow-root;padding:calc(72px + 4rem) 0 0}
 .hero-copy > .wrap{position:relative;z-index:1}
 
-/* The food photograph sits behind the copy. It is a bright, warm shot — cream
-   text straight over it measures 2.3:1 in the light areas, so this scrim is
-   doing real work, not decoration.
+/* A looping video, nothing laid over it, and the type carries no shadow.
 
-   --scrim is deliberately NOT --ink. --ink (#22391f) is a yellow-green olive,
-   and laid over warm wood it mixes to a muddy #354126 — the swamp. This warm
-   near-black carries no green at all: the hue stays in the food, and the
-   green comes from the page around the hero instead.
+   It holds the same composition as the stills it replaces — walnut left,
+   dishes right — so object-position stays pinned left to keep that dark
+   field under the copy. The motion is a hand setting the phở bowl down; it
+   enters from the top right and never crosses into the copy column.
 
-   Dropping the green is also what buys the photograph its brightness back. A
-   green scrim had to sit at .78 and up over the copy to keep cream legible;
-   near-black clears the same bar far lower, so these alphas are a good deal
-   looser and much more of the food shows through. They are still tuned rather
-   than guessed: every stop was scaled down 2.5% to lift the photograph 5% in
-   mean luminance, which lands the worst case at 4.94:1 against a 4.5:1 floor.
-   There is not much room left below these numbers.
+   On contrast: sampled on the first and middle frames, the wood runs about
+   4.0:1 against cream from 20% to 40% of the width — a little under the
+   4.5:1 body-text floor rather than clearly over it, and lower than the
+   still photograph managed, because the grain carries more highlight here.
+   Past roughly 45% it is the food and it fails outright. No scrim is applied
+   because none was wanted; this is the trade that buys that.
 
-   Mobile first: the copy runs the full width, so the scrim is flat. The
-   left-heavy version comes in at 768px, where the headline has a column of
-   its own and the right side can open up over the rice bowl. */
+   Two properties are load-bearing, not decoration: muted (autoplay is
+   blocked without it everywhere) and playsinline (iOS takes the video
+   fullscreen without it). */
 .hero-scene{position:absolute;inset:0;overflow:hidden;pointer-events:none}
-.hero-scene img{width:100%;height:100%;object-fit:cover;object-position:70% center}
-.hero-scene::after{
-  content:'';position:absolute;inset:0;
-  background:
-    linear-gradient(rgb(var(--scrim)/.68),rgb(var(--scrim)/.68)),
-    linear-gradient(to bottom,var(--ink) 0,rgb(var(--scrim)/.15) 20%,rgb(var(--scrim)/.15) 70%,var(--ink) 100%);
-}
+.hero-scene img,.hero-scene video{display:block;width:100%;height:100%;object-fit:cover;object-position:left center}
 /* the hero headline is huge — the shared 1.5rem tag gap reads tight against it */
 .hero .tag{margin-bottom:2.75rem}
 .hero h1{font-size:calc(clamp(3rem,11vw,9rem) - 5px);margin-bottom:1.75rem}
@@ -526,15 +522,6 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 .foot-brand p{color:#d8e0d2;max-width:30ch;font-size:.9375rem;margin:0}
 /* oversized outlined wordmark anchoring the base of the page — same hollow
    treatment as the underlined word in the hero headline */
-.foot-type{
-  font-family:var(--display);font-weight:700;text-transform:uppercase;
-  font-size:clamp(2rem,14vw,15rem);line-height:.8;letter-spacing:-.06em;
-  margin:clamp(2.5rem,7vw,4.5rem) 0 0;white-space:nowrap;color:#2c4728;
-  text-align:center;user-select:none;
-}
-@supports((-webkit-text-stroke:1px #000)){
-  .foot-type{color:transparent;-webkit-text-stroke:1px #3f5a42}
-}
 .legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid #33502f;font-size:.75rem;color:#93a68d}
 
 /* ---------- sticky order bar ---------- */
@@ -581,11 +568,6 @@ a.bar-field:hover .val{opacity:.7}
 @media(min-width:768px){
   .brand img{height:40px}
   .hero h1 u{-webkit-text-stroke:1.5px var(--paper)}
-  .hero-scene::after{
-    background:
-      linear-gradient(to right,rgb(var(--scrim)/.86) 0,rgb(var(--scrim)/.76) 30%,rgb(var(--scrim)/.68) 62%,rgb(var(--scrim)/.55) 84%,rgb(var(--scrim)/.43) 100%),
-      linear-gradient(to bottom,var(--ink) 0,rgb(var(--scrim)/.2) 16%,rgb(var(--scrim)/0) 45%,rgb(var(--scrim)/.3) 85%,var(--ink) 100%);
-  }
   .hero-art{grid-template-columns:1.6fr 1fr}
   .steps{grid-template-columns:repeat(2,1fr)}
   .foot{grid-template-columns:2fr 1fr 1fr 1fr}
@@ -612,6 +594,183 @@ a.bar-field:hover .val{opacity:.7}
   .chips li:hover .ring path{stroke-dashoffset:0}
   /* no staggered wait for the drawer items */
   .nav.open + .drawer .drawer-in>*{transition-delay:0s!important}
+  /* a looping hero video is exactly the motion this setting asks us to drop —
+     fall back to its own poster frame, so the hero still has a picture */
+  .hero-scene video{display:none}
+  .hero-scene{background:url(assets/hero-poster.jpg) left center/cover no-repeat}
+}
+
+/* ---------- buttons: green, hover to the logo green ---------- */
+/* --brand (#2d4a2d) is the colour sampled from the wordmark. It was declared
+   when the palette was set up and then never used; this is what it is for.
+   It sits only a little lighter than --ink, so the hover is a quiet shift of
+   shade rather than a jump — the -2px lift is still doing most of the work of
+   signalling the state. */
+.btn-inv{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn:not(.btn-fill):hover{background:var(--brand);border-color:var(--brand);color:var(--paper)}
+.btn-out:hover{background:var(--brand);color:var(--paper);border-color:var(--brand)}
+/* the hero's outline button becomes a green button too, and its centre-out
+   sweep runs to the logo green instead of to cream */
+.hero .btn-fill{background:var(--ink);border-color:var(--ink);color:var(--paper);--fill:var(--brand);--fill-text:var(--paper)}
+
+/* ---------- layout added for the reconstructed home page ---------- */
+/* A feature band: the photograph owns half the band outright — flush to the
+   outer edge of the viewport and to the full height of the row, with no
+   gutter, no corner radius and no letterboxing. That means the band sits
+   OUTSIDE .wrap (which would cap it at 1400px and pad it in) and the section
+   carries no vertical padding of its own; the copy column supplies the only
+   breathing room. align-items is stretch, not center — centring is what left
+   the green gaps above and below the picture when the copy ran taller. */
+.band{padding:0}
+/* one knob for the whole grid: the gaps between tiles and the green frame
+   around the outside use the same value, so the spacing reads as even */
+.gallery-band{--gap:clamp(14px,2vw,28px);padding:var(--gap) 0}
+.feature{display:grid;grid-template-columns:1fr;align-items:stretch}
+.feature .shot{position:relative;overflow:hidden;min-height:clamp(260px,58vw,420px)}
+.feature .shot img{width:100%;height:100%;object-fit:cover;display:block}
+.feature-copy{display:flex;align-items:center;padding:clamp(2.5rem,8vw,4.5rem) var(--pad)}
+.feature-copy > *{width:100%;max-width:46ch}
+.feature h2{font-size:clamp(2rem,5.5vw,3.75rem);margin-bottom:1.25rem}
+.feature p{color:var(--dim);margin:0 0 1.1rem;max-width:46ch}
+.feature p:last-of-type{margin-bottom:1.75rem}
+.feature em{font-style:italic}
+.section.dark .feature p{color:#b6c4b0}
+.feature .cta{display:flex;flex-wrap:wrap;gap:.75rem}
+/* The gallery: pictures only, no heading, no caption, no button. Six equal
+   squares, three across and two down, on the green — seams and an outer frame
+   of the same width, so the brand colour reads as even spacing rather than
+   as hairlines.
+
+   Five of the six tiles are cut from three photographs. Rather than shipping
+   small cropped files that would go soft once a tile renders ~480px wide,
+   each tile crops its full-resolution source at render time with
+   object-position. The percentages are computed from where each dish sits in
+   its frame, not eyeballed: on the 1376x768 flat-lay a square tile shows a
+   768-wide window, so 0% lands on the bánh mì, 47% on the phở and 100% on the
+   rice bowl; on the 1280x720 table frames the window is 720 wide, so 80%
+   lands on the phở bowl and 100% on the bánh mì tray. */
+.gallery{display:grid;gap:var(--gap);padding-inline:var(--gap);grid-template-columns:repeat(2,1fr);background:var(--ink)}
+.gallery figure{margin:0;position:relative;overflow:hidden;aspect-ratio:1;background:var(--ink)}
+.gallery img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.gallery figure:hover img{transform:scale(1.045)}
+.gallery .at-0 img{object-position:0% 50%}
+.gallery .at-47 img{object-position:47% 50%}
+.gallery .at-80 img{object-position:80% 50%}
+.gallery .at-100 img{object-position:100% 50%}
+@media(prefers-reduced-motion:reduce){.gallery figure:hover img{transform:none}}
+/* reviews: the shell is here, the quotes are not invented — see the note */
+.says{display:grid;gap:1.25rem;grid-template-columns:1fr}
+.say{border:1px solid var(--line);border-radius:var(--r);padding:clamp(1.25rem,3vw,2rem)}
+.section.dark .say{border-color:#33502f}
+.say p{margin:0 0 1rem;font-size:1.0625rem;line-height:1.5}
+.say cite{font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-style:normal;color:var(--dim)}
+.say.empty{display:grid;place-items:center;text-align:center;min-height:170px;border-style:dashed;color:var(--dim)}
+/* contact: the form sits beside the practical details rather than under them */
+.reach{display:grid;gap:clamp(2rem,5vw,3.5rem);grid-template-columns:1fr;align-items:start}
+.reach h2{font-size:clamp(2.25rem,7vw,5rem);margin-bottom:1.25rem}
+.reach p.sub{color:var(--dim);max-width:44ch;margin:0 0 2rem}
+.reach .picks{margin-bottom:2rem}
+.field{display:grid;gap:.4rem;margin:0 0 1rem}
+.field label{font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.14em;text-transform:uppercase}
+.field input,.field textarea{
+  font:inherit;font-size:.9375rem;padding:.85rem 1rem;border-radius:var(--rb);
+  border:1px solid var(--line-strong);background:var(--paper);color:var(--ink);width:100%;
+}
+.field textarea{min-height:130px;resize:vertical}
+.form-sent{
+  margin:0;padding:1.1rem 1.25rem;border-radius:var(--rb);
+  border:1px solid var(--line-strong);background:var(--wash);
+  color:var(--ink);font-size:.9375rem;
+}
+.form-sent.bad{border-color:#c9a79b;background:#f7ece8}
+.head p.sub a{color:inherit;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.head p.sub a:hover{color:var(--brand)}
+.section.dark .head p.sub a:hover{color:var(--paper)}
+.field input:focus-visible,.field textarea:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+@media(min-width:768px){
+  /* three across, two down */
+  .gallery{grid-template-columns:repeat(3,1fr)}
+  .says{grid-template-columns:repeat(2,1fr)}
+}
+@media(min-width:1024px){
+  .feature{grid-template-columns:1fr 1fr}
+  .feature .shot{min-height:clamp(460px,42vw,660px)}
+  .feature.flip .shot{order:2}
+  /* keep the outer gutter on the page's margin and tighten the inner one, so
+     the copy sits against the picture rather than floating mid-column */
+  .feature:not(.flip) .feature-copy{padding-left:clamp(2rem,4vw,3.5rem)}
+  .feature.flip .feature-copy{padding-right:clamp(2rem,4vw,3.5rem)}
+  .reach{grid-template-columns:1.05fr .95fr}
+  .says{grid-template-columns:repeat(4,1fr)}
+}
+
+/* ---------- header: permanent, cream, green wordmark ---------- */
+/* It used to start transparent over the hero and only turn solid past 40px,
+   with the wordmark flipped to white by a filter while it sat on the dark
+   video. Both of those are gone: the bar carries its own ground at every
+   scroll position, so the supplied green mark is shown as-is and never
+   changes colour under the reader. The .solid and .on-dark classes are still
+   toggled by the scroll handler; these rules simply make both states look the
+   same, which is cheaper and safer than unpicking the handler. */
+.nav,.nav.solid,.nav.on-dark,.nav.on-dark:not(.solid){
+  background:var(--paper);
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+  box-shadow:0 1px 0 var(--line);
+  color:var(--ink);
+}
+/* the mark keeps its own colour — no inversion over the hero any more */
+.nav .brand img,.nav.on-dark:not(.solid) .brand img{filter:none}
+/* the order button was cream-on-dark for the transparent state; on a cream
+   bar it needs the dark fill back */
+.nav.on-dark:not(.solid) .btn-fill{--fill:var(--ink);--fill-text:var(--paper)}
+
+/* ---------- footer ---------- */
+/* Brand column is widest, then three columns of links. The small headings are
+   sage rather than cream so they read as labels, not as more links. */
+.foot{grid-template-columns:1fr}
+.foot-addr{font-style:normal;color:#93a68d;font-size:.875rem;line-height:1.7}
+.foot-addr b{display:block;color:var(--paper);font-weight:600;margin-bottom:.35rem}
+/* social as bordered squares, as in the reference, rather than bare glyphs */
+.foot-social{display:flex;gap:.6rem;align-items:center;padding:0}
+.foot-social a{
+  display:grid;place-items:center;width:44px;height:44px;border-radius:var(--rb);
+  border:1px solid #33502f;color:#d8e0d2;opacity:1;
+  transition:border-color .25s,background .25s,color .25s;
+}
+.foot-social a:hover,.foot-social a:focus-visible{border-color:var(--paper);background:rgb(var(--scrim)/.35);color:var(--paper)}
+.foot-social a::after{display:none}
+/* the banded rows: copy left, action right, divided by a hairline */
+.foot-band{
+  display:grid;gap:1.5rem;grid-template-columns:1fr;align-items:center;
+  border-top:1px solid #33502f;margin-top:2.75rem;padding-top:2.75rem;
+}
+.foot-band p{color:#b6c4b0;margin:0;max-width:46ch;font-size:.9375rem}
+.foot-band h5{margin-bottom:.75rem}
+.foot-cta{display:flex;flex-wrap:wrap;gap:.75rem}
+/* the page's buttons are green, which disappears on the footer's green ground,
+   so the footer carries its own cream pair */
+.foot-solid{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.foot-solid:hover{background:var(--wash);border-color:var(--wash);color:var(--ink)}
+.foot-ghost{background:transparent;color:var(--paper);border-color:#5d7a58}
+.foot-ghost:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.foot a.foot-solid::after,.foot a.foot-ghost::after,.foot-band a::after{display:none}
+.foot-news{display:flex;flex-wrap:wrap;gap:.6rem}
+.foot-news input[type=email]{
+  flex:1 1 220px;font:inherit;font-size:.9375rem;padding:.9rem 1rem;border-radius:var(--rb);
+  border:1px solid #33502f;background:rgb(var(--scrim)/.35);color:var(--paper);
+}
+.foot-news input[type=email]::placeholder{color:#7d8f78}
+.foot-news input[type=email]:focus-visible{outline:2px solid var(--paper);outline-offset:2px}
+.legal a{color:inherit;text-decoration:none}
+.legal a:hover{color:var(--paper)}
+@media(min-width:640px){
+  .foot{grid-template-columns:1fr 1fr}
+  .foot-band{grid-template-columns:1fr auto}
+  .foot-cta,.foot-news{justify-content:flex-end}
+}
+@media(min-width:1024px){
+  .foot{grid-template-columns:1.6fr 1fr 1fr 1.1fr;gap:3rem}
+  .foot-band{gap:3rem}
 }
 </style>
 </head>
@@ -636,15 +795,14 @@ a.bar-field:hover .val{opacity:.7}
 
 <header class="nav on-dark" id="nav">
   <div class="wrap nav-in">
-    <a href="#" class="brand" aria-label="Mê Kitchen — home">
+    <a href="home.html" class="brand" aria-label="Mê Kitchen — home">
       <img src="assets/logo-mark.png" alt="Mê Kitchen" width="908" height="200">
     </a>
     <nav class="nav-links">
+      <a href="home.html">Home</a>
       <a href="menu.html">Menu</a>
-      <a href="#how">How it works</a>
-      <a href="#made">Made to order</a>
       <a href="story.html">Our story</a>
-      <a href="location.html">Visit</a>
+      <a href="#contact">Contact</a>
       <a href="https://me-kitchen.square.site/" class="btn btn-sm btn-fill">Order</a>
     </nav>
     <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="drawer">
@@ -655,21 +813,23 @@ a.bar-field:hover .val{opacity:.7}
 
 <div class="drawer" id="drawer">
   <div class="drawer-in">
+    <a href="home.html">Home</a>
     <a href="menu.html">Menu</a>
-    <a href="#how">How it works</a>
-    <a href="#made">Made to order</a>
     <a href="story.html">Our story</a>
-    <a href="location.html">Visit</a>
+    <a href="#contact">Contact</a>
     <a href="https://me-kitchen.square.site/" class="btn btn-inv">Order on Square</a>
   </div>
 </div>
 
 <main>
-  <!-- ============ HERO ============ -->
+<!-- ============ HERO ============ -->
   <section class="hero">
    <div class="hero-copy">
     <div class="hero-scene">
-      <img src="assets/hero-spread.jpg" alt="Overhead view of a bánh mì on a metal tray, a bowl of phở with rare beef and bean sprouts, and a grilled chicken rice bowl, set out on a wooden table with herbs, limes, peanuts and dipping sauces." width="1376" height="768" fetchpriority="high" decoding="async">
+      <video autoplay muted loop playsinline preload="metadata" width="1280" height="720"
+             poster="assets/hero-poster.jpg" aria-hidden="true" tabindex="-1">
+        <source src="assets/hero-video.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="wrap">
       <span class="tag">Located in U District</span>
@@ -684,15 +844,9 @@ a.bar-field:hover .val{opacity:.7}
       </ul>
     </div>
    </div>
-    <div class="wrap">
-      <div class="hero-art">
-        <div class="ph dark r-16-9"><svg><use href="#bowl"/></svg><span class="ph-tag">Hero — signature bowl</span></div>
-        <div class="ph dark r-16-9"><svg><use href="#bowl"/></svg><span class="ph-tag">Counter energy</span></div>
-      </div>
-    </div>
   </section>
 
-  <!-- ============ MARQUEE ============ -->
+<!-- ============ MARQUEE ============ -->
   <div class="marquee inv" aria-hidden="true">
     <div class="mq-track">
       <span>24-hour broth</span><span>Order ahead</span><span>Ready when you arrive</span><span>Cooked to order</span><span>Open late</span>
@@ -700,224 +854,109 @@ a.bar-field:hover .val{opacity:.7}
     </div>
   </div>
 
-  <!-- ============ TABBED MENU ============ -->
-  <section class="section" id="menu">
-    <div class="wrap">
-      <div class="head head-row">
+  <!-- ============ FEATURED ============ -->
+  <section class="section band">
+    <div class="feature rv">
+      <div class="shot"><img src="assets/hero-spread.jpg" alt="A bánh mì on a metal tray beside a bowl of phở, with limes and chilli." width="1376" height="768" loading="lazy" decoding="async"></div>
+      <div class="feature-copy">
         <div>
-          <span class="tag">The menu</span>
-          <h2 class="display">Pick a lane</h2>
-          <p style="color:var(--dim);margin:1rem 0 0;max-width:46ch">Tap a lane, add what you want, pay on your phone. If you would rather read what is actually in each dish first, <a href="menu.html" style="text-decoration:underline">the full menu has every description</a>.</p>
-        </div>
-        <a href="https://me-kitchen.square.site/" class="btn btn-fill">Order online</a>
-      </div>
-
-      <div class="tabs" role="tablist" aria-label="Menu categories">
-        <button class="tab" role="tab" id="tab-pho" aria-controls="p-pho" aria-selected="true">Phở</button>
-        <button class="tab" role="tab" id="tab-banh" aria-controls="p-banh" aria-selected="false">Bánh Mì</button>
-        <button class="tab" role="tab" id="tab-rice" aria-controls="p-rice" aria-selected="false">Rice Bowls</button>
-        <button class="tab" role="tab" id="tab-sides" aria-controls="p-sides" aria-selected="false">Sides &amp; Drinks</button>
-      </div>
-
-      <div class="panel" id="p-pho" role="tabpanel" aria-labelledby="tab-pho">
-        <div class="dishes">
-          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Phở tái</span></div>
-            <div class="dish-body"><h3>Phở Tái</h3>
-              <div class="dish-foot"><span class="dish-price">$16</span><a href="https://me-kitchen.square.site/" class="add">Add</a></div></div></article>
-          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Đặc biệt</span></div>
-            <div class="dish-body"><h3>Phở Đặc Biệt</h3>
-              <div class="dish-foot"><span class="dish-price">$17</span><a href="https://me-kitchen.square.site/" class="add">Add</a></div></div></article>
-          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Phở gà</span></div>
-            <div class="dish-body"><h3>Phở Gà</h3>
-              <div class="dish-foot"><span class="dish-price">$15</span><a href="https://me-kitchen.square.site/" class="add">Add</a></div></div></article>
-          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Phở chay</span></div>
-            <div class="dish-body"><span class="vflag">Vegetarian</span><h3>Phở Chay</h3>
-              <div class="dish-foot"><span class="dish-price">$15</span><a href="https://me-kitchen.square.site/" class="add">Add</a></div></div></article>
-        </div>
-      </div>
-
-      <div class="panel" id="p-banh" role="tabpanel" aria-labelledby="tab-banh" hidden>
-        <div class="dishes">
-          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Thịt nướng</span></div>
-            <div class="dish-body"><h3>Thịt Nướng</h3>
-              <div class="dish-foot"><span class="dish-price">$12</span><a href="https://me-kitchen.square.site/" class="add">Add</a></div></div></article>
-          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Đặc biệt</span></div>
-            <div class="dish-body"><h3>Bánh Mì Đặc Biệt</h3>
-              <div class="dish-foot"><span class="dish-price">$12</span><a href="https://me-kitchen.square.site/" class="add">Add</a></div></div></article>
-          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Gà nướng</span></div>
-            <div class="dish-body"><h3>Gà Nướng</h3>
-              <div class="dish-foot"><span class="dish-price">$12</span><a href="https://me-kitchen.square.site/" class="add">Add</a></div></div></article>
-          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Đậu hũ</span></div>
-            <div class="dish-body"><span class="vflag">Vegetarian</span><h3>Đậu Hũ</h3>
-              <div class="dish-foot"><span class="dish-price">$11</span><a href="https://me-kitchen.square.site/" class="add">Add</a></div></div></article>
-        </div>
-      </div>
-
-      <div class="panel" id="p-rice" role="tabpanel" aria-labelledby="tab-rice" hidden>
-        <div class="dishes">
-          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Grilled pork</span></div>
-            <div class="dish-body"><h3>Grilled Pork</h3>
-              <div class="dish-foot"><span class="dish-price">$15</span><a href="https://me-kitchen.square.site/" class="add">Add</a></div></div></article>
-          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Lemongrass chicken</span></div>
-            <div class="dish-body"><h3>Lemongrass Chicken</h3>
-              <div class="dish-foot"><span class="dish-price">$15</span><a href="https://me-kitchen.square.site/" class="add">Add</a></div></div></article>
-          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Short rib</span></div>
-            <div class="dish-body"><h3>Beef Short Rib</h3>
-              <div class="dish-foot"><span class="dish-price">$18</span><a href="https://me-kitchen.square.site/" class="add">Add</a></div></div></article>
-          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Tofu</span></div>
-            <div class="dish-body"><span class="vflag">Vegetarian</span><h3>Tofu &amp; Mushroom</h3>
-              <div class="dish-foot"><span class="dish-price">$14</span><a href="https://me-kitchen.square.site/" class="add">Add</a></div></div></article>
-        </div>
-      </div>
-
-      <div class="panel" id="p-sides" role="tabpanel" aria-labelledby="tab-sides" hidden>
-        <div class="dishes">
-          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Spring rolls</span></div>
-            <div class="dish-body"><h3>Fresh Spring Rolls</h3>
-              <div class="dish-foot"><span class="dish-price">$7</span><a href="https://me-kitchen.square.site/" class="add">Add</a></div></div></article>
-          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Egg rolls</span></div>
-            <div class="dish-body"><h3>Fried Egg Rolls</h3>
-              <div class="dish-foot"><span class="dish-price">$7</span><a href="https://me-kitchen.square.site/" class="add">Add</a></div></div></article>
-          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Cà phê</span></div>
-            <div class="dish-body"><h3>Cà Phê Sữa Đá</h3>
-              <div class="dish-foot"><span class="dish-price">$5</span><a href="https://me-kitchen.square.site/" class="add">Add</a></div></div></article>
-          <article class="dish"><div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">Chanh muối</span></div>
-            <div class="dish-body"><h3>Salted Lemonade</h3>
-              <div class="dish-foot"><span class="dish-price">$4</span><a href="https://me-kitchen.square.site/" class="add">Add</a></div></div></article>
-        </div>
-      </div>
-
-      <p style="font-size:.75rem;color:var(--dim);margin-top:2rem">Menu items and prices shown are placeholders for layout purposes.</p>
-    </div>
-  </section>
-
-  <!-- ============ HOW IT WORKS ============ -->
-  <section class="section dark" id="how">
-    <div class="wrap">
-      <div class="head">
-        <span class="tag">How it works</span>
-        <h2 class="display">Four steps,<br>no waiting</h2>
-      </div>
-      <div class="steps">
-        <div class="step rv"><b>01</b><h3>Order on your phone</h3><p>Square handles it. Pay before you leave the library.</p></div>
-        <div class="step rv"><b>02</b><h3>We start the bowl</h3><p>Broth is already hot. Nothing gets made in advance.</p></div>
-        <div class="step rv"><b>03</b><h3>Pick it up</h3><p>Pickup shelf is by the door. Your name is on it.</p></div>
-        <div class="step rv"><b>04</b><h3>Eat</h3><p>Herbs on the side. Chili is your business, not ours.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ BUILD A BOWL ============ -->
-  <section class="section" id="made">
-    <div class="wrap split">
-      <div class="rv">
-        <span class="tag">Made to order</span>
-        <h2 class="display">Cooked when<br>you order it</h2>
-        <p>Nothing is portioned out in advance and left waiting. That costs a few minutes, and it is the whole point.</p>
-        <ul class="picks">
-          <li><b>Broth</b><span>Twenty-four hours, started before open</span></li>
-          <li><b>Bread</b><span>Delivered every morning</span></li>
-          <li><b>Herbs</b><span>Cut when the order comes in</span></li>
-          <li><b>Wait</b><span>A few minutes, on purpose</span></li>
-        </ul>
-        <a href="https://me-kitchen.square.site/" class="btn">Order on Square</a>
-      </div>
-      <div class="ph r-4-5 rv"><svg><use href="#bowl"/></svg><span class="ph-tag">Kitchen — broth or grill in action</span></div>
-    </div>
-  </section>
-
-  <!-- ============ MARQUEE ============ -->
-  <div class="marquee" aria-hidden="true">
-    <div class="mq-track">
-      <span>Opening {{OPENING_MONTH}}</span><span>University District</span><span>Seattle</span><span>Phở · Bánh mì · Rice bowls</span>
-      <span>Opening {{OPENING_MONTH}}</span><span>University District</span><span>Seattle</span><span>Phở · Bánh mì · Rice bowls</span>
-    </div>
-  </div>
-
-  <!-- ============ OPENING (replaces reviews) ============ -->
-  <section class="section dark">
-    <div class="wrap split">
-      <div class="rv">
-        <span class="tag">Not open yet</span>
-        <h2 class="display">Doors open<br>{{OPENING_MONTH}}</h2>
-        <p>Leave an email and we send exactly one message — the day we open, with a free side attached to it.</p>
-        <form class="form" id="signup">
-          <input type="email" name="email" placeholder="you@uw.edu" required aria-label="Email address">
-          <button type="submit" class="btn btn-fill">Notify me</button>
-        </form>
-        <p class="note" id="signupNote">One email. No list, no newsletter.</p>
-      </div>
-      <div class="rv">
-        <ul class="count">
-          <li><b>24</b><small>Hour broth</small></li>
-          <li><b>3</b><small>Categories</small></li>
-          <li><b>20</b><small>Min lunch</small></li>
-          <li><b>{{SEATS}}</b><small>Seats</small></li>
-        </ul>
-        <div class="ph dark r-16-9"><svg><use href="#bowl"/></svg><span class="ph-tag">Space under build-out</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FAQ ============ -->
-  <section class="section">
-    <div class="wrap">
-      <div class="head">
-        <span class="tag">Questions</span>
-        <h2 class="display">Good to know</h2>
-      </div>
-      <div class="faq">
-        <details class="q"><summary>Is there anything vegetarian?</summary>
-          <p>Yes. The vegetable broth is built separately rather than thinned from the beef pot, and tofu is available in every category on the menu.</p></details>
-        <details class="q"><summary>Can I order ahead?</summary>
-          <p>Yes — ordering runs through Square. Pay on your phone, skip the line, grab it off the pickup shelf.</p></details>
-        <details class="q"><summary>Is the phở gluten-free?</summary>
-          <p>The rice noodles and broth are made without gluten-containing ingredients. It is one shared kitchen, so we cannot promise zero cross-contact.</p></details>
-        <details class="q"><summary>Do you deliver?</summary>
-          <p>{{DELIVERY_ANSWER}} — confirm which platforms, if any, go live on opening day.</p></details>
-        <details class="q"><summary>Is there a student discount?</summary>
-          <p>{{STUDENT_DISCOUNT_ANSWER}} — worth settling early; it is the single most common question a U District restaurant gets asked.</p></details>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ VISIT ============ -->
-  <section class="section" id="visit">
-    <div class="wrap">
-      <div class="head">
-        <span class="tag">Visit</span>
-        <h2 class="display">University<br>District</h2>
-      </div>
-      <div class="visit">
-        <div>
-          <div class="vcards">
-            <div class="vcard"><h4>Address</h4><p>4213 University Wy NE<br>Seattle, WA 98105</p></div>
-            <div class="vcard"><h4>Hours</h4><p>11am&ndash;9pm, Monday to Saturday<br>Closed Sunday</p></div>
-            <div class="vcard"><h4>Phone</h4><p>{{PHONE}}</p></div>
-            <div class="vcard"><h4>Email</h4><p><a href="mailto:mekitchen.wa@gmail.com">mekitchen.wa@gmail.com</a></p></div>
-          </div>
-          <div class="hero-cta" style="margin:1.75rem 0 0">
-            <a href="https://www.google.com/maps/search/?api=1&amp;query=4213+University+Wy+NE%2C+Seattle%2C+WA+98105" class="btn btn-fill">Get directions</a>
+          <span class="tag">Counter service</span>
+          <h2 class="display">Order ahead,<br>walk straight out</h2>
+          <p>Pick it on your phone, we start it when the order lands, and it is bagged and waiting by the time you reach the counter. No queue, no ticket number, no standing about.</p>
+          <div class="cta">
+            <a href="menu.html" class="btn btn-fill">See the menu</a>
             <a href="https://me-kitchen.square.site/" class="btn">Order on Square</a>
           </div>
         </div>
-        <div class="ph r-1-1"><svg><use href="#bowl"/></svg><span class="ph-tag">Map or storefront</span></div>
       </div>
     </div>
   </section>
+
+
+  <!-- ============ STORY ============ -->
+  <section class="section dark band">
+    <div class="feature flip rv">
+      <div class="shot"><img src="assets/bowl-beef.jpg" alt="A grilled beef rice bowl with cabbage slaw, pickled carrot and cucumber, on a wooden table." width="2000" height="1131" loading="lazy" decoding="async"></div>
+      <div class="feature-copy">
+        <div>
+          <h2 class="display">Eat well<br>on the run</h2>
+          <p>We started Mê Kitchen because the Vietnamese food we grew up loving usually asks for an hour nobody has. Everything here is cooked to order at the counter — phở, bánh mì, rice bowls, spring rolls and Vietnamese coffee — made with quality ingredients and nothing left standing around. Same food, done properly, handed over fast enough to eat on the run.</p>
+          <div class="cta">
+            <a href="story.html" class="btn btn-fill">Our story</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ GALLERY (the reference's catering slot) ============ -->
+  <!-- Photographs only, by request: no heading, no caption, no CTA. The alt
+       text stays — it is not rendered, and the tiles are content, not decoration. -->
+  <section class="section dark gallery-band">
+    <div class="gallery rv">
+      <figure class="at-0"><img src="assets/hero-spread.jpg" alt="A bánh mì on a metal tray." width="1376" height="768" loading="lazy" decoding="async"></figure>
+      <figure class="at-47"><img src="assets/hero-spread.jpg" alt="A bowl of phở with rare beef, bean sprouts, lime and Thai basil." width="1376" height="768" loading="lazy" decoding="async"></figure>
+      <figure class="at-100"><img src="assets/hero-spread.jpg" alt="A rice bowl with grilled chicken, pickled carrot, daikon and cucumber." width="1376" height="768" loading="lazy" decoding="async"></figure>
+      <figure class="at-80"><img src="assets/gallery-table.jpg" alt="A bowl of phở set on a dark walnut table." width="1280" height="720" loading="lazy" decoding="async"></figure>
+      <figure><img src="assets/hero-bowl.jpg" alt="A grilled chicken rice bowl on a dark walnut table." width="2000" height="1131" loading="lazy" decoding="async"></figure>
+      <figure class="at-100"><img src="assets/hero-poster.jpg" alt="A bánh mì on a tray beside a bowl of slaw and grilled beef." width="1280" height="720" loading="lazy" decoding="async"></figure>
+    </div>
+  </section>
+
+  <!-- ============ GET IN TOUCH ============ -->
+  <!-- Light section: cream ground, green type. The inputs were always styled
+       for a light ground, so they need no dark-mode variant here. -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="reach rv">
+        <div>
+          <h2 class="display">Get in touch</h2>
+          <p class="sub">However your visit went, we want to hear about it — it is the quickest way we get better. Ask about a large order, tell us what you thought, or talk to us about <a href="careers.html">joining the team</a>. Every message comes straight to us, and we read all of them.</p>
+          <ul class="picks">
+            <li><b>Email</b><span><a href="mailto:mekitchen.wa@gmail.com">mekitchen.wa@gmail.com</a></span></li>
+            <li><b>Address</b><span>4213 University Wy NE, Seattle, WA 98105</span></li>
+            <li><b>Hours</b><span>11am&ndash;9pm Mon&ndash;Sat, closed Sunday</span></li>
+          </ul>
+        </div>
+        <!-- Netlify detects this form when the site is deployed and stores every
+             submission. Two things are set here and one is NOT:
+               _subject  sets the notification email's subject line.
+               email     Netlify uses a field with this exact name as the
+                         Reply-To, so hitting reply goes back to the sender.
+             The DESTINATION ADDRESS CANNOT BE SET IN HTML. It is a dashboard
+             setting: Netlify > Site configuration > Forms > Form notifications
+             > Add notification > Email notification. Until someone adds
+             mekitchen.wa@gmail.com there, submissions are captured but nobody
+             is emailed about them. -->
+        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contact">
+          <input type="hidden" name="_subject" value="New Mê Kitchen website inquiry">
+          <!-- only used when JS is unavailable; Netlify redirects here itself.
+               Assumes this page is served at /home once promoted. -->
+          <input type="hidden" name="_next" value="/home?sent=1">
+          <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
+          <div class="field"><label for="c-name">Your name</label><input id="c-name" name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email" required></div>
+          <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" name="message" required></textarea></div>
+          <button type="submit" class="btn">Send it</button>
+        </form>
+        <p class="form-sent" id="contactSent" role="status" aria-live="polite" hidden>
+          Thank you — we have got your message and will get back to you soon.
+        </p>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer>
   <div class="wrap">
+
+    <!-- row 1: brand column, then three columns of real destinations only -->
     <div class="foot">
       <div class="foot-brand">
         <img src="assets/logo-mark.png" alt="Mê Kitchen" width="908" height="200">
-        <p>Phở, bánh mì, and rice bowls in Seattle's University District.</p>
-      </div>
-      <div class="foot-col"><h5>Eat</h5><a href="menu.html">Menu</a><a href="#made">Made to order</a><a href="https://me-kitchen.square.site/">Order online</a></div>
-      <div class="foot-col"><h5>About</h5><a href="#how">How it works</a><a href="location.html">Visit</a><a href="careers.html">Work here</a></div>
-      <div class="foot-col">
-        <h5>Follow</h5>
         <div class="foot-social">
           <a href="https://www.instagram.com/mekitchen.wa/" target="_blank" rel="noopener" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
@@ -937,12 +976,67 @@ a.bar-field:hover .val{opacity:.7}
             </svg>
           </a>
         </div>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=4213+University+Wy+NE%2C+Seattle%2C+WA+98105">Google</a>
+        <p>Vietnamese cooking made to order — phở, bánh mì and rice bowls, quick enough to eat on the run.</p>
+        <address class="foot-addr">
+          <b>Seattle, Washington</b>
+          4213 University Wy NE<br>
+          Seattle, WA 98105<br>
+          11am&ndash;9pm Mon&ndash;Sat
+        </address>
+      </div>
+
+      <div class="foot-col">
+        <h5>Eat</h5>
+        <a href="menu.html#pho">Phở</a>
+        <a href="menu.html#banh-mi">Bánh mì</a>
+        <a href="menu.html#rice-bowls">Rice bowls</a>
+        <a href="menu.html">Full menu</a>
+      </div>
+
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="story.html">Our story</a>
+        <a href="careers.html">Work here</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="foot-col">
+        <h5>Find us</h5>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=4213+University+Wy+NE%2C+Seattle%2C+WA+98105" target="_blank" rel="noopener">Google Maps</a>
+        <a href="mailto:mekitchen.wa@gmail.com">Email us</a>
+        <a href="https://me-kitchen.square.site/" target="_blank" rel="noopener">Order on Square</a>
       </div>
     </div>
-    <div class="foot-type" aria-hidden="true">Mê Kitchen</div>
+
+    <div class="foot-band">
+      <div>
+        <h5>Order ahead</h5>
+        <p>Pick it on your phone and it is bagged and waiting when you get here. No queue, no ticket number.</p>
+      </div>
+      <div class="foot-cta">
+        <a href="menu.html" class="btn foot-ghost">See the menu</a>
+        <a href="https://me-kitchen.square.site/" class="btn foot-solid">Order on Square</a>
+      </div>
+    </div>
+
+    <div class="foot-band">
+      <div>
+        <h5>Never miss a deal</h5>
+        <p>Be first to hear about specials, new dishes and one-off offers. No spam, and you can leave whenever you like.</p>
+      </div>
+      <form class="foot-news" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="nl-bot">
+        <input type="hidden" name="form-name" value="newsletter">
+        <input type="hidden" name="_subject" value="New Mê Kitchen newsletter signup">
+        <p hidden><label>Leave this empty: <input name="nl-bot"></label></p>
+        <label class="sr" for="nl-email">Your email</label>
+        <input id="nl-email" name="email" type="email" placeholder="you@email.com" autocomplete="email" required>
+        <button type="submit" class="btn foot-solid">Subscribe</button>
+      </form>
+    </div>
+
     <div class="legal">
-      <span>© <span id="yr"></span> Me. All rights reserved.</span>
+      <span>© <span id="yr"></span> Mê Kitchen. All rights reserved.</span>
+      <span><a href="mailto:mekitchen.wa@gmail.com">mekitchen.wa@gmail.com</a></span>
       <span>Seattle, WA</span>
     </div>
   </div>
@@ -956,10 +1050,6 @@ a.bar-field:hover .val{opacity:.7}
       <span class="lbl">Pickup hours today</span>
       <span class="val" id="todayHours">11am&ndash;9pm</span>
     </div>
-    <a class="bar-field" href="tel:{{PHONE}}">
-      <span class="lbl">Call</span>
-      <span class="val">{{PHONE}}</span>
-    </a>
   </div>
   <a href="tel:{{PHONE}}" class="btn btn-fill bar-call">Call</a>
   <a href="https://me-kitchen.square.site/" class="btn btn-inv">Order on Square</a>
@@ -1129,13 +1219,50 @@ a.bar-field:hover .val{opacity:.7}
     afterRows(d,function(){ d.open=false; rows(d,''); delete d.dataset.busy; });
   }
 
-  /* signup */
+  /* contact form — posted with fetch so the reader stays on the page and gets
+     the thank-you in place, instead of being thrown to Netlify's own success
+     screen. Falls back to a normal submit if JS is off, which is what _next is
+     for. ?sent=1 shows the confirmation directly, so the state can be looked at
+     without sending anything. */
+  var cform=document.querySelector('form[name="contact"]'), csent=document.getElementById('contactSent');
+  if(cform && csent){
+    function showSent(msg,bad){
+      cform.hidden=true; csent.hidden=false;
+      if(msg) csent.textContent=msg;
+      csent.classList.toggle('bad',!!bad);
+      csent.setAttribute('tabindex','-1'); csent.focus();
+    }
+    if(/[?&]sent=1(&|$)/.test(location.search)) showSent();
+    cform.addEventListener('submit',function(e){
+      e.preventDefault();
+      var btn=cform.querySelector('button[type=submit]');
+      if(btn){ btn.disabled=true; btn.textContent='Sending…'; }
+      fetch(location.pathname,{
+        method:'POST',
+        headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        body:new URLSearchParams(new FormData(cform)).toString()
+      }).then(function(r){
+        if(!r.ok) throw new Error(r.status);
+        showSent();
+      }).catch(function(){
+        if(btn){ btn.disabled=false; btn.textContent='Send it'; }
+        csent.hidden=false;
+        showSent('That did not send. Please email us at mekitchen.wa@gmail.com and we will pick it up there.',true);
+        cform.hidden=false;
+      });
+    });
+  }
+
+  /* signup — the block that held this form is not on every page, so guard it;
+     an unguarded null here throws and silently kills everything below it */
   var form=document.getElementById('signup'),note=document.getElementById('signupNote');
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    note.textContent='Thanks — you are on the list. (Mockup: not wired to a backend yet.)';
-    form.reset();
-  });
+  if(form){
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(note) note.textContent='Thanks — you are on the list. (Mockup: not wired to a backend yet.)';
+      form.reset();
+    });
+  }
 
   /* chip hover ring — trace a stadium starting at top centre, going clockwise,
      so the stroke opens and closes at the same point. Redrawn on resize since
