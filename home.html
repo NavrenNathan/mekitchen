@@ -248,6 +248,35 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .btn-fill:hover,.btn-fill:focus-visible,.btn-fill:active{color:var(--fill-text)}
 /* no lift on this one — the fill is the whole effect */
 .btn-fill:hover,.btn-fill:active{transform:none}
+/* Border-draw hover: a thin outline at rest, an SVG stroke traces the full
+   perimeter on hover (starting and closing at top centre, matching the
+   chip-ring convention below), plus a faint background wash. The traced
+   path is built in JS at the button's real rendered size — a fixed-pixel
+   SVG would misalign the moment the button's text (and so its width)
+   changes, which is exactly the case here ("Order on Square" vs
+   "See the menu"). pathLength="100" makes the dash math independent of the
+   button's actual pixel perimeter, same technique as .chips li .ring. */
+/* Same scrim recipe as .chips li just above — not a guess: it is the
+   contrast values already measured for this exact hero footage (text
+   10.4:1, border 3.2:1). A plain transparent background here would ride on
+   whatever the video shows through it frame to frame, which is the failure
+   mode the scrim tint exists to prevent. */
+.btn-draw{
+  position:relative; isolation:isolate; overflow:hidden;
+  background:rgb(var(--scrim)/.45); color:var(--paper);
+  border-width:1px; border-color:rgb(250 247 239/.42);
+  transition:background .3s,border-color .3s;
+}
+.btn-draw:hover,.btn-draw:focus-visible{background:rgb(var(--scrim)/.62);border-color:rgb(250 247 239/.6)}
+.btn-draw .draw{position:absolute;inset:-1px;pointer-events:none;overflow:visible;opacity:0;transition:opacity .25s}
+.btn-draw .draw path{
+  fill:none; stroke:rgb(250 247 239/.92); stroke-width:1;stroke-linecap:round;
+  stroke-dasharray:100; stroke-dashoffset:100;
+  filter:drop-shadow(0 0 1px rgba(250,247,239,.22)) drop-shadow(0 0 3px rgba(250,247,239,.08));
+  transition:stroke-dashoffset .5s cubic-bezier(.2,.8,.2,1);
+}
+.btn-draw:hover .draw,.btn-draw:focus-visible .draw{opacity:1}
+.btn-draw:hover .draw path,.btn-draw:focus-visible .draw path{stroke-dashoffset:0}
 .burger{display:flex;flex-direction:column;gap:5px;padding:.5rem;margin-right:-.5rem}
 .burger span{display:block;width:24px;height:2px;background:currentColor;border-radius:2px;transition:transform .3s,opacity .2s}
 .nav.open .burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -854,8 +883,14 @@ a.bar-field:hover .val{opacity:.7}
       <h1 class="display">Phở.<br>Bánh mì.<br><u>Rice bowls.</u></h1>
       <p class="hero-lede">Order on your phone, walk in, walk out. Twenty-four hour broth, twenty-minute lunch.</p>
       <div class="hero-cta">
-        <a href="https://me-kitchen.square.site/" class="btn btn-inv">Order on Square</a>
-        <a href="menu.html" class="btn btn-fill">See the menu</a>
+        <a href="https://me-kitchen.square.site/" class="btn btn-draw">
+          <svg class="draw" aria-hidden="true" focusable="false"><path pathLength="100"/></svg>
+          <span>Order on Square</span>
+        </a>
+        <a href="menu.html" class="btn btn-draw">
+          <svg class="draw" aria-hidden="true" focusable="false"><path pathLength="100"/></svg>
+          <span>See the menu</span>
+        </a>
       </div>
       <ul class="chips">
         <li>Order ahead<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li><li>Ready when you arrive<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li><li>Veg options<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li><li>Open late<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li>
@@ -1281,6 +1316,34 @@ a.bar-field:hover .val{opacity:.7}
       form.reset();
     });
   }
+
+  /* border-draw buttons — trace a soft-rounded rectangle starting at top
+     centre, going clockwise, matching --rb (10px) so the drawn line sits
+     on the button's own corner radius. Re-measured on resize since the two
+     buttons are different widths ("Order on Square" vs "See the menu"). */
+  document.querySelectorAll('.btn-draw').forEach(function(btn){
+    var svg=btn.querySelector('.draw'),p=svg&&svg.querySelector('path');
+    if(!p) return;
+    function draw(){
+      var w=btn.clientWidth,h=btn.clientHeight;
+      if(!w||!h) return;
+      var r=Math.min(10,h/2);
+      svg.setAttribute('viewBox','0 0 '+w+' '+h);
+      p.setAttribute('d',
+        'M'+(w/2)+' 0'+
+        'H'+(w-r)+
+        'A'+r+' '+r+' 0 0 1 '+w+' '+r+
+        'V'+(h-r)+
+        'A'+r+' '+r+' 0 0 1 '+(w-r)+' '+h+
+        'H'+r+
+        'A'+r+' '+r+' 0 0 1 0 '+(h-r)+
+        'V'+r+
+        'A'+r+' '+r+' 0 0 1 '+r+' 0'+
+        'Z');
+    }
+    draw();
+    if(window.ResizeObserver) new ResizeObserver(draw).observe(btn);
+  });
 
   /* chip hover ring — trace a stadium starting at top centre, going clockwise,
      so the stroke opens and closes at the same point. Redrawn on resize since
