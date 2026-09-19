@@ -772,6 +772,24 @@ a.bar-field:hover .val{opacity:.7}
   .foot{grid-template-columns:1.6fr 1fr 1fr 1.1fr;gap:3rem}
   .foot-band{gap:3rem}
 }
+
+/* ---------- hero on small screens ---------- */
+/* A phone crops the 16:9 clip to roughly its left 29%, which on this footage
+   is nothing but walnut — the food never appears. So the crop is pushed to
+   58%, which brings the phở bowl and the sauce cup into frame while keeping
+   some table on the left.
+   That puts copy over food, which bare footage cannot carry: measured across
+   the first and last frames, the worst case in that window is 1.27:1. A flat
+   .62 scrim lifts it to 5.10:1 on a 390px phone and 4.84:1 on a 430px one,
+   both clear of the 4.5:1 floor. The cost is that the food reads dark here.
+   Desktop is untouched: it keeps object-position left and no scrim at all. */
+@media(max-width:767px){
+  .hero-scene img,.hero-scene video{object-position:58% center}
+  .hero-scene::after{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:rgb(var(--scrim)/.62);
+  }
+}
 </style>
 </head>
 <body>
