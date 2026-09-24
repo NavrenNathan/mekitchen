@@ -141,8 +141,10 @@ footer{width:100%;max-width:900px;display:flex;flex-direction:column;align-items
   text-transform:uppercase;padding:.75rem 1.15rem;border-radius:var(--rb);
   background:var(--paper);color:var(--ink);border:1px solid var(--paper);cursor:pointer;
 }
-.social{display:flex;gap:1.1rem;align-items:center}
-.social a{color:var(--muted);opacity:.8;line-height:0;transition:opacity .25s,color .25s}
+/* the padding grows each tap target to 30px; the smaller gap offsets it so
+   the icons sit exactly where they did */
+.social{display:flex;gap:calc(1.1rem - 12px);align-items:center;margin:-6px 0}
+.social a{color:var(--muted);opacity:.8;line-height:0;padding:6px;transition:opacity .25s,color .25s}
 .social a:hover,.social a:focus-visible{opacity:1;color:var(--paper)}
 .social svg{width:18px;height:18px;display:block}
 .msg{font-size:.75rem;color:var(--bad);min-height:1em;margin:0}
@@ -176,7 +178,7 @@ footer{width:100%;max-width:900px;display:flex;flex-direction:column;align-items
 
     <form name="notify" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="notifyForm">
       <input type="hidden" name="form-name" value="notify">
-      <p class="hide"><label>Skip this field: <input name="bot-field"></label></p>
+      <p class="hide" aria-hidden="true"><label>Skip this field: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
       <label class="sr" for="email">Email address</label>
       <input type="email" id="email" name="email" placeholder="your@email.com" required autocomplete="email">
       <button type="submit" id="notifyBtn">I'm in</button>

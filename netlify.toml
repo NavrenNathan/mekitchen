@@ -12,6 +12,11 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    # Deliberately narrow: it does not restrict script/style sources (the
+    # pages use inline <script>/<style>), only things nothing here needs —
+    # plugins, <base> hijacking, framing by other sites, and forms posting
+    # anywhere but this origin (Netlify Forms posts to the same origin).
+    Content-Security-Policy = "object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'"
 
 # --- Caching ----------------------------------------------------------
 # HTML must revalidate so edits appear immediately.
@@ -20,11 +25,14 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Images are content-stable; cache them hard.
+# A week, not a year + immutable: asset filenames carry no content hash, and
+# files do get re-encoded in place under the same name (the 2026-09-22 media
+# pass did exactly that), so "immutable" would pin returning visitors to the
+# old file for a year. If assets are ever fingerprinted, this can go back up.
 [[headers]]
   for = "/assets/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=604800"
 
 # --- Redirects ---------------------------------------------------------
 # The main site used to live at /site.html; it is now /home.html. Anything
@@ -39,4 +47,33 @@
   from = "/site.html"
   to = "/home"
   status = 301
+  force = true
+
+# publish = "." ships the whole repo, so internal docs and tooling were
+# publicly downloadable (DEPLOY.md, scripts/, reports/, assets/README.md).
+# Serve the 404 page for them instead.
+[[redirects]]
+  from = "/DEPLOY.md"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/CLAUDE.md"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/assets/README.md"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/scripts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/reports/*"
+  to = "/404.html"
+  status = 404
   force = true

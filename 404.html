@@ -4,48 +4,197 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Page not found — Mê Kitchen</title>
+<meta name="description" content="That page is not on the menu. Head back to Mê Kitchen for phở, bánh mì and rice bowls in Seattle's University District.">
 <meta name="robots" content="noindex">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
-<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<!-- Netlify serves this file for a missing URL at any depth (/a/b/c), so
+     every asset and link here is root-absolute. -->
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" media="print" onload="this.media='all';this.onload=null" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Geist:wght@300;400&display=swap">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Geist:wght@300;400&display=swap"></noscript>
+<link rel="stylesheet" media="print" onload="this.media='all';this.onload=null" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Geist:wght@300;400;500&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Geist:wght@300;400;500&display=swap"></noscript>
 <style>
 :root{
-  --ink:#22391f;--paper:#faf7ef;--dim:#5e6e58;
-  --display:'Space Grotesk',sans-serif;
-  --body:'Geist',Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --ink:#22391f;
+  --paper:#faf7ef;
+  --wash:#f1ece0;
+  --sage:#93a68d;              /* labels on the green ground */
+  --soft:#c9d4c3;              /* body copy on the green ground */
+  --line:#33502f;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --display:'Space Grotesk',Inter,-apple-system,sans-serif;
+  --body:'Geist',Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --pad:clamp(1.25rem,4vw,3.5rem);
+  --rb:10px;
 }
 *,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
 body{
-  margin:0;min-height:100vh;background:var(--ink);color:var(--paper);
-  font-family:var(--body);font-weight:300;line-height:1.6;
-  display:grid;place-items:center;text-align:center;padding:2rem;
+  margin:0;min-height:100vh;min-height:100dvh;
+  display:grid;grid-template-rows:auto 1fr auto;
+  background:var(--ink);color:var(--paper);
+  font-family:var(--body);font-weight:300;font-size:1rem;line-height:1.6;
   -webkit-font-smoothing:antialiased;
 }
-.n{font-family:var(--display);font-weight:700;font-size:clamp(4rem,18vw,10rem);line-height:.85;letter-spacing:-.05em;margin:0 0 1rem;color:transparent;-webkit-text-stroke:2px #4f6b4c}
-h1{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(1.5rem,5vw,2.5rem);letter-spacing:-.03em;margin:0 0 1rem}
-p{color:#b6c4b0;max-width:38ch;margin:0 auto 2.25rem}
-a{
-  display:inline-flex;align-items:center;justify-content:center;
-  font-family:var(--display);font-weight:700;font-size:.8125rem;letter-spacing:.06em;
-  text-transform:uppercase;padding:1rem 1.75rem;border-radius:999px;
-  background:var(--paper);color:var(--ink);border:2px solid var(--paper);
-  text-decoration:none;transition:transform .18s cubic-bezier(.2,.8,.2,1);
+::selection{background:var(--paper);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--paper);outline-offset:3px;border-radius:4px}
+
+/* ---------- top bar ---------- */
+.top{padding:1.5rem var(--pad);display:flex;align-items:center}
+.top a{display:inline-block;padding:.25rem 0}
+.top img{display:block;height:34px;width:auto;filter:brightness(0) invert(1)}
+
+/* ---------- the plate ---------- */
+main{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:clamp(1.5rem,5vh,3rem) var(--pad) clamp(3rem,8vh,5rem);
 }
-a:hover{transform:translateY(-2px)}
-@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+/* 4 [bowl] 4 — the hollow digits are the hero's outlined "RICE BOWLS."
+   treatment, so this page reads as the same kitchen */
+.code{
+  display:flex;align-items:center;justify-content:center;
+  gap:clamp(.25rem,1.5vw,1rem);margin:0 0 clamp(1.75rem,4vw,2.75rem);
+  font-family:var(--display);font-weight:700;line-height:.8;
+  font-size:clamp(6.5rem,27vw,15rem);letter-spacing:-.04em;
+}
+.code .d{color:transparent;-webkit-text-stroke:1.5px var(--paper)}
+/* --u is one viewBox unit's stroke at this size, so the rim draws at the
+   same weight as the hollow digits beside it (1.5px phone, 2px desktop) */
+.bowl{--u:1.75;width:.9em;height:.9em;flex:none;overflow:visible;margin-top:-.04em}
+.bowl *{fill:none;stroke:var(--paper);stroke-linecap:round}
+.bowl .rim{stroke-width:var(--u)}
+.bowl .broth{stroke-width:calc(var(--u) * .75);stroke:var(--sage)}
+.bowl .sticks{stroke-width:calc(var(--u) * 1.6)}
+.bowl .steam path{stroke-width:calc(var(--u) * .9);stroke:var(--sage)}
+
+h1{
+  font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(1.75rem,5.2vw,3.25rem);line-height:.95;letter-spacing:-.03em;
+  margin:0 0 1.1rem;text-wrap:balance;
+}
+.lede{color:var(--soft);max-width:40ch;margin:0 auto 2.25rem;font-size:clamp(1rem,1.6vw,1.125rem);text-wrap:pretty}
+
+/* ---------- actions: the site's own button pair ---------- */
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem}
+.btn{
+  position:relative;isolation:isolate;overflow:hidden;
+  display:inline-flex;align-items:center;justify-content:center;min-height:48px;
+  font-family:var(--display);font-weight:700;font-size:.8125rem;letter-spacing:.06em;
+  text-transform:uppercase;padding:1rem 1.75rem;border-radius:var(--rb);
+  border:1px solid var(--paper);
+  transition:color .3s var(--ease),background-color .25s var(--ease),border-color .25s var(--ease);
+}
+.btn-solid{background:var(--paper);color:var(--ink)}
+.btn-solid:hover,.btn-solid:focus-visible{background:var(--wash);border-color:var(--wash)}
+/* outline at rest, cream fills from the centre out — the site's .btn-fill */
+.btn-fill{background:transparent;color:var(--paper)}
+.btn-fill::before{
+  content:"";position:absolute;inset:0;z-index:-1;background:var(--paper);
+  transform:scaleX(0);transform-origin:center;transition:transform .55s var(--ease);
+}
+.btn-fill:hover::before,.btn-fill:focus-visible::before,.btn-fill:active::before{transform:scaleX(1)}
+.btn-fill:hover,.btn-fill:focus-visible,.btn-fill:active{color:var(--ink)}
+
+.order{margin:1.75rem 0 0;font-size:.9375rem;color:var(--soft)}
+.order a{
+  color:var(--paper);text-decoration:underline;text-decoration-thickness:1px;
+  text-underline-offset:4px;text-decoration-color:rgb(250 247 239/.45);
+  transition:text-decoration-color .25s var(--ease);
+}
+.order a:hover{text-decoration-color:var(--paper)}
+
+/* ---------- foot ---------- */
+.foot{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:.35rem 1.5rem;
+  padding:1.25rem var(--pad) 1.75rem;border-top:1px solid var(--line);
+  font-size:.8125rem;color:var(--sage);
+}
+.foot a:hover{color:var(--paper)}
+
+/* ---------- motion: the one authored moment ----------
+   The rim draws itself round, the chopsticks come to rest across it, and
+   steam lifts off the empty bowl. Everything lands in a visible state if
+   animation never runs. */
+@media(prefers-reduced-motion:no-preference){
+  .bowl .rim{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.1s var(--ease) .15s forwards}
+  .bowl .broth{opacity:0;animation:fade .6s var(--ease) .8s forwards}
+  .bowl .sticks{opacity:0;transform:translate(14px,-14px) rotate(4deg);transform-origin:70px 30px;animation:rest .9s cubic-bezier(.16,1,.3,1) 1s forwards}
+  .bowl .steam path{opacity:0;animation:steam 3.6s ease-out 1.6s infinite}
+  .bowl .steam path:nth-child(2){animation-delay:2.4s}
+  .bowl .steam path:nth-child(3){animation-delay:3.1s}
+  .code .d,h1,.lede,.actions,.order{animation:rise .8s var(--ease) both}
+  .code .d{animation-delay:.05s}
+  h1{animation-delay:.35s}
+  .lede{animation-delay:.45s}
+  .actions{animation-delay:.55s}
+  .order{animation-delay:.65s}
+}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fade{to{opacity:1}}
+@keyframes rest{to{opacity:1;transform:none}}
+@keyframes steam{
+  0%{opacity:0;transform:translateY(8px)}
+  25%{opacity:.9}
+  100%{opacity:0;transform:translateY(-14px)}
+}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){
+  .bowl .steam path{opacity:.6}
+  .btn,.btn-fill::before,.order a{transition-duration:.01ms}
+}
+@media(min-width:768px){
+  .code .d{-webkit-text-stroke-width:2px}
+  .bowl{--u:1.25}
+  .top img{height:38px}
+}
+@media(min-width:1100px){
+  .bowl{--u:1}
+}
 </style>
 </head>
 <body>
+  <header class="top">
+    <a href="/home.html" aria-label="Mê Kitchen — home"><img src="/assets/logo-mark.png" alt="Mê Kitchen" width="908" height="200"></a>
+  </header>
+
   <main>
-    <p class="n">404</p>
-    <h1>Nothing here</h1>
-    <p>That page does not exist. The menu, hours, and directions are all on the home page.</p>
-    <a href="/">Back to Mê Kitchen</a>
+    <p class="code" aria-label="Error 404">
+      <span class="d" aria-hidden="true">4</span>
+      <svg class="bowl" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <g class="steam">
+          <path d="M38 14c-4-4 4-8 0-12"/>
+          <path d="M50 12c-4-4 4-8 0-12"/>
+          <path d="M62 14c-4-4 4-8 0-12"/>
+        </g>
+        <circle class="rim" cx="50" cy="58" r="40" pathLength="1" transform="rotate(-90 50 58)"/>
+        <circle class="broth" cx="50" cy="58" r="29"/>
+        <g class="sticks">
+          <path d="M24 40L90 16"/>
+          <path d="M28 50L94 28"/>
+        </g>
+      </svg>
+      <span class="d" aria-hidden="true">4</span>
+    </p>
+
+    <h1>This bowl is empty</h1>
+    <p class="lede">We couldn't find the page you were looking for. It may have moved, or the link has a typo.</p>
+
+    <div class="actions">
+      <a href="/home.html" class="btn btn-solid">Back to home</a>
+      <a href="/menu.html" class="btn btn-fill">See the menu</a>
+    </div>
+    <p class="order">Hungry already? <a href="https://me-kitchen.square.site/">Order ahead on Square</a></p>
   </main>
+
+  <footer class="foot">
+    <span>Mê Kitchen</span>
+    <span>4213 University Wy NE, Seattle</span>
+    <span>11am&ndash;9pm Mon&ndash;Sat</span>
+    <a href="mailto:mekitchen.wa@gmail.com">mekitchen.wa@gmail.com</a>
+  </footer>
 </body>
 </html>

@@ -112,7 +112,7 @@ a{color:inherit;text-decoration:none}
   transition:transform .18s cubic-bezier(.2,.8,.2,1),background .2s,color .2s;
 }
 .btn:hover{transform:translateY(-2px)}
-.btn-inv{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.btn:disabled{opacity:.6;cursor:progress;pointer-events:none}
 .btn-sm{padding:.68rem 1.2rem;font-size:.75rem}
 /* thin outline that fills from the centre outwards, as on the main site */
 .btn-fill{
@@ -154,9 +154,11 @@ a{color:inherit;text-decoration:none}
 /* ---------- drawer ---------- */
 .drawer{
   position:fixed;inset:72px 0 auto;z-index:99;background:var(--ink);color:var(--paper);
-  display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s ease;
+  display:grid;grid-template-rows:0fr;visibility:hidden;
+  transition:grid-template-rows .5s ease,visibility 0s .5s;
 }
-.nav.open + .drawer{grid-template-rows:1fr}
+/* visibility keeps the collapsed links out of the tab order */
+.nav.open + .drawer{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows .5s ease,visibility 0s}
 .drawer-in{overflow:hidden}
 .drawer a{
   display:block;font-family:var(--display);font-weight:700;font-size:1.75rem;
@@ -229,7 +231,7 @@ a{color:inherit;text-decoration:none}
 /* ---------- footer ---------- */
 footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0 2rem;overflow:hidden;border-top:1px solid #33502f}
 .foot{display:grid;gap:2rem;grid-template-columns:1fr;padding-top:.5rem}
-.foot h5{font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.18em;text-transform:uppercase;color:#93a68d;margin:0 0 1rem}
+.foot h2{font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.18em;text-transform:uppercase;color:#93a68d;margin:0 0 1rem}
 .foot-col{display:flex;flex-direction:column;align-items:flex-start}
 .foot a{position:relative;display:inline-block;font-size:.9375rem;padding:.3rem 0;color:#d8e0d2;transition:color .25s}
 .foot a::after{
@@ -343,11 +345,10 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
    shade rather than a jump — the -2px lift is still doing most of the work of
    signalling the state. */
 .btn-inv{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+/* the drawer's ground is --ink as well, so its Order button stays cream there */
+.drawer .btn-inv{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.drawer .btn.btn-inv:hover{background:var(--wash);border-color:var(--wash);color:var(--ink)}
 .btn:not(.btn-fill):hover{background:var(--brand);border-color:var(--brand);color:var(--paper)}
-.btn-out:hover{background:var(--brand);color:var(--paper);border-color:var(--brand)}
-/* the hero's outline button becomes a green button too, and its centre-out
-   sweep runs to the logo green instead of to cream */
-.hero .btn-fill{background:var(--ink);border-color:var(--ink);color:var(--paper);--fill:var(--brand);--fill-text:var(--paper)}
 /* ---------- footer ---------- */
 /* Brand column is widest, then three columns of links. The small headings are
    sage rather than cream so they read as labels, not as more links. */
@@ -369,14 +370,14 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
   border-top:1px solid #33502f;margin-top:2.75rem;padding-top:2.75rem;
 }
 .foot-band p{color:#b6c4b0;margin:0;max-width:46ch;font-size:.9375rem}
-.foot-band h5{margin-bottom:.75rem}
+.foot-band h2{font-size:.83em;font-weight:700;margin:1.67em 0 .75rem}
 .foot-cta{display:flex;flex-wrap:wrap;gap:.75rem}
 /* the page's buttons are green, which disappears on the footer's green ground,
    so the footer carries its own cream pair */
 .foot-solid{background:var(--paper);color:var(--ink);border-color:var(--paper)}
-.foot-solid:hover{background:var(--wash);border-color:var(--wash);color:var(--ink)}
+.btn.foot-solid:hover{background:var(--wash);border-color:var(--wash);color:var(--ink)}
 .foot-ghost{background:transparent;color:var(--paper);border-color:#5d7a58}
-.foot-ghost:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.btn.foot-ghost:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
 .foot a.foot-solid::after,.foot a.foot-ghost::after,.foot-band a::after{display:none}
 .foot-news{display:flex;flex-wrap:wrap;gap:.6rem}
 .foot-news input[type=email]{
@@ -384,6 +385,8 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
   border:1px solid #33502f;background:rgb(var(--scrim)/.35);color:var(--paper);
 }
 .foot-news input[type=email]::placeholder{color:#7d8f78}
+.foot-news-note{flex-basis:100%;margin:0;font-size:.875rem;color:#b6c4b0}
+.foot-news-note:empty{display:none}
 .foot-news input[type=email]:focus-visible{outline:2px solid var(--paper);outline-offset:2px}
 .legal a{color:inherit;text-decoration:none}
 .legal a:hover{color:var(--paper)}
@@ -518,7 +521,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
       </div>
 
       <div class="foot-col">
-        <h5>Eat</h5>
+        <h2>Eat</h2>
         <a href="menu.html#pho">Phở</a>
         <a href="menu.html#banh-mi">Bánh mì</a>
         <a href="menu.html#rice-bowls">Rice bowls</a>
@@ -526,14 +529,14 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
       </div>
 
       <div class="foot-col">
-        <h5>Company</h5>
+        <h2>Company</h2>
         <a href="story.html">Our story</a>
         <a href="careers.html">Work here</a>
         <a href="home.html#contact">Contact</a>
       </div>
 
       <div class="foot-col">
-        <h5>Find us</h5>
+        <h2>Find us</h2>
         <button type="button" class="foot-directions-trigger" data-open-directions aria-haspopup="dialog">Directions</button>
         <a href="mailto:mekitchen.wa@gmail.com">Email us</a>
         <a href="https://me-kitchen.square.site/" target="_blank" rel="noopener">Order on Square</a>
@@ -542,7 +545,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 
     <div class="foot-band">
       <div>
-        <h5>Order ahead</h5>
+        <h2>Order ahead</h2>
         <p>Pick it on your phone and it is bagged and waiting when you get here. No queue, no ticket number.</p>
       </div>
       <div class="foot-cta">
@@ -553,16 +556,17 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 
     <div class="foot-band">
       <div>
-        <h5>Never miss a deal</h5>
+        <h2>Never miss a deal</h2>
         <p>Be first to hear about specials, new dishes and one-off offers. No spam, and you can leave whenever you like.</p>
       </div>
       <form class="foot-news" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="nl-bot">
         <input type="hidden" name="form-name" value="newsletter">
-        <input type="hidden" name="_subject" value="New Mê Kitchen newsletter signup">
+        <input type="hidden" name="subject" value="New Mê Kitchen newsletter signup">
         <p hidden><label>Leave this empty: <input name="nl-bot"></label></p>
         <label class="sr" for="nl-email">Your email</label>
         <input id="nl-email" name="email" type="email" placeholder="you@email.com" autocomplete="email" required>
         <button type="submit" class="btn foot-solid">Subscribe</button>
+        <p class="foot-news-note" role="status" aria-live="polite"></p>
       </form>
     </div>
 
@@ -666,6 +670,30 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
   })();
 
 
+
+  /* newsletter — posted in place so the reader stays on the page, with the
+     button disabled while the request is in flight so a double click cannot
+     sign the same address up twice */
+  var news=document.querySelector('form[name="newsletter"]');
+  if(news){
+    news.addEventListener('submit',function(e){
+      e.preventDefault();
+      var btn=news.querySelector('button[type=submit]'), note=news.querySelector('.foot-news-note');
+      if(btn.disabled) return;
+      btn.disabled=true; note.textContent='';
+      fetch('/',{
+        method:'POST',
+        headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        body:new URLSearchParams(new FormData(news)).toString()
+      }).then(function(r){
+        if(!r.ok) throw new Error(r.status);
+        news.reset();
+        note.textContent='Thanks \u2014 you are on the list.';
+      }).catch(function(){
+        note.textContent='That did not go through. Please try again in a moment.';
+      }).then(function(){ btn.disabled=false; });
+    });
+  }
 
   document.getElementById('yr').textContent = new Date().getFullYear();
 })();

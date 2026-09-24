@@ -60,41 +60,9 @@
   ]
 }
 </script>
-<!-- FAQPage covers only the three answerable questions on this page. The
-     delivery and student-discount answers are still {{TOKEN}} placeholders
-     and are deliberately left out of schema until they are real. -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Is there anything vegetarian?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. The vegetable broth is built separately rather than thinned from the beef pot, and tofu is available in every category on the menu."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I order ahead?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes — ordering runs through Square. Pay on your phone, skip the line, grab it off the pickup shelf."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is the phở gluten-free?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The rice noodles and broth are made without gluten-containing ingredients. It is one shared kitchen, so we cannot promise zero cross-contact."
-      }
-    }
-  ]
-}
-</script>
+<!-- No FAQPage schema: Google requires FAQ markup to match questions visible
+     on the page, and this page no longer has an FAQ section. Re-add it only
+     alongside a visible FAQ whose answers the owner has confirmed. -->
 
 <!-- ============================================================
      The noindex meta tag was removed from this page (and story.html)
@@ -219,10 +187,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   transition:transform .18s cubic-bezier(.2,.8,.2,1),background .2s,color .2s;
 }
 .btn:hover{transform:translateY(-2px)}
+.btn:disabled{opacity:.6;cursor:progress;pointer-events:none}
 .btn:active{transform:translateY(0)}
-.btn-out{background:transparent;color:currentColor;border-color:currentColor}
-.btn-out:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.btn-inv{background:var(--paper);color:var(--ink);border-color:var(--paper)}
 .btn-sm{padding:.68rem 1.2rem;font-size:.75rem}
 /* nav order button: thin outline at rest, fill grows from the centre out to both
    edges on hover. --fill tracks the nav's own text colour so it works over the
@@ -260,9 +226,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .nav.open .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 .drawer{
   position:fixed;inset:72px 0 auto;z-index:99;background:var(--ink);color:var(--paper);
-  display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s ease;
+  display:grid;grid-template-rows:0fr;visibility:hidden;
+  transition:grid-template-rows .5s ease,visibility 0s .5s;
 }
-.nav.open + .drawer{grid-template-rows:1fr}
+/* visibility keeps the collapsed links out of the tab order */
+.nav.open + .drawer{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows .5s ease,visibility 0s}
 .drawer-in{overflow:hidden}
 /* items ease in one after another instead of arriving all at once with the
    panel. Uses `translate` rather than `transform` so the button keeps its own
@@ -348,25 +316,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .chips li:hover{background:rgb(var(--scrim)/.62);border-color:rgb(250 247 239/.6)}
 .chips li:hover .ring{opacity:1}
 .chips li:hover .ring path{stroke-dashoffset:0}
-.hero-art{display:grid;gap:2px;grid-template-columns:1fr;background:#33502f}
-
-/* ---------- photo placeholders ---------- */
-.ph{position:relative;background:var(--wash);display:grid;place-items:center;color:var(--line-strong);overflow:hidden}
-.ph.dark{background:#1e3323;color:#3f5a42}
-.ph::before{
-  content:'';position:absolute;inset:0;opacity:.6;
-  background-image:linear-gradient(currentColor 1px,transparent 1px),linear-gradient(90deg,currentColor 1px,transparent 1px);
-  background-size:26px 26px;
-}
-.ph svg{position:relative;width:34%;max-width:140px;height:auto}
-.ph-tag{
-  position:absolute;left:.75rem;bottom:.75rem;font-family:var(--display);font-weight:500;
-  font-size:.625rem;letter-spacing:.14em;text-transform:uppercase;
-  padding:.35rem .65rem;border-radius:999px;background:var(--ink);color:var(--paper);
-}
-.ph.dark .ph-tag{background:var(--paper);color:var(--ink)}
-.r-1-1{aspect-ratio:1}.r-4-5{aspect-ratio:4/5}.r-3-2{aspect-ratio:3/2}.r-16-9{aspect-ratio:16/9}
-
 /* ---------- marquee ---------- */
 .marquee{background:var(--ink);color:var(--paper);padding:1.1rem 0;overflow:hidden;border-block:2px solid var(--ink)}
 .marquee.inv{background:var(--paper);color:var(--ink)}
@@ -382,127 +331,16 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* ---------- sections ---------- */
 .section{padding:clamp(4rem,9vw,7.5rem) 0}
 .section.dark{background:var(--ink);color:var(--paper)}
-.head{margin-bottom:clamp(2rem,4vw,3.5rem)}
-.head h2{font-size:clamp(2.25rem,7vw,5rem)}
-.head-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1.5rem}
-.head p.sub{color:var(--dim);max-width:44ch;margin:1.25rem 0 0}
-.section.dark .head p.sub{color:#b6c4b0}
 
-/* ---------- tabbed menu (the interactive centrepiece) ---------- */
-.tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.25rem}
-.tab{
-  font-family:var(--display);font-weight:700;font-size:.8125rem;letter-spacing:.06em;
-  text-transform:uppercase;padding:.8rem 1.4rem;border-radius:var(--rb);
-  border:2px solid var(--line-strong);color:var(--dim);
-  transition:background .2s,color .2s,border-color .2s,transform .18s;
-}
-.tab:hover{transform:translateY(-2px);border-color:var(--ink);color:var(--ink)}
-.tab[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.panel[hidden]{display:none}
-.dishes{display:grid;gap:1.25rem;grid-template-columns:1fr}
-.dish{
-  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
-  display:flex;flex-direction:column;transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s;
-}
-.dish:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(24,43,26,.14)}
-.dish-body{padding:1.15rem 1.25rem 1.4rem;display:flex;flex-direction:column;gap:.4rem;flex:1}
-.dish h3{font-family:var(--display);font-weight:700;font-size:1.125rem;text-transform:uppercase;letter-spacing:-.01em;margin:0}
-.dish p{margin:0;font-size:.875rem;color:var(--dim);line-height:1.5;flex:1}
-.dish-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.6rem}
-.dish-price{font-family:var(--display);font-weight:700;font-size:1.0625rem}
-.add{
-  font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.1em;
-  text-transform:uppercase;padding:.55rem 1rem;border-radius:var(--rb);
-  border:2px solid var(--ink);transition:background .2s,color .2s;
-}
-.add:hover{background:var(--ink);color:var(--paper)}
-.vflag{
-  align-self:flex-start;font-size:.5625rem;font-weight:600;letter-spacing:.14em;
-  text-transform:uppercase;padding:.25rem .55rem;border-radius:999px;background:var(--wash);color:var(--dim);
-}
-
-/* ---------- how it works: giant digits ---------- */
-.steps{display:grid;gap:2px;grid-template-columns:1fr;background:#33502f}
-.step{background:var(--ink);padding:clamp(1.75rem,4vw,2.75rem);display:flex;flex-direction:column;gap:.75rem}
-.step b{font-family:var(--display);font-weight:700;font-size:clamp(3rem,9vw,5.5rem);line-height:.85;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1.5px #4f6b4c}
-.step h3{font-family:var(--display);font-weight:700;font-size:1.125rem;text-transform:uppercase;margin:0}
-.step p{margin:0;color:#b6c4b0;font-size:.9375rem}
-
-/* ---------- split ---------- */
-.split{display:grid;gap:clamp(2rem,5vw,4rem);grid-template-columns:1fr;align-items:center}
-/* grid children default to min-width:auto, which lets wide content blow out
-   the track and push the document sideways. Let them shrink instead. */
-.split > *,.dishes > *,.count,.count li,.vcards > *,.steps > *{min-width:0}
-.split h2{font-size:clamp(2rem,5.5vw,4rem);margin-bottom:1.5rem}
-.split p{color:var(--dim);margin:0 0 1.75rem;max-width:44ch}
-.section.dark .split p{color:#b6c4b0}
 .picks{list-style:none;padding:0;margin:0 0 2rem;display:grid;gap:.6rem}
 .picks li{display:flex;align-items:baseline;gap:1rem;font-size:.9375rem;padding:.75rem 0;border-bottom:1px solid var(--line)}
-.section.dark .picks li{border-color:#33502f}
 .picks b{font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;min-width:5.5rem}
 .picks span{color:var(--dim)}
-.section.dark .picks span{color:#b6c4b0}
-
-/* ---------- countdown / signup (replaces reviews) ---------- */
-.count{display:grid;gap:2px;grid-template-columns:repeat(2,1fr);background:#33502f;margin:0 0 2.5rem;padding:0;list-style:none}
-.count li{background:var(--ink);padding:1.5rem 1.25rem;text-align:center}
-.count b{display:block;font-family:var(--display);font-weight:700;font-size:clamp(2rem,7vw,3.25rem);line-height:1;letter-spacing:-.03em}
-.count small{font-size:.625rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#93a68d}
-.form{display:flex;flex-wrap:wrap;gap:.6rem;max-width:460px}
-.form input{
-  flex:1 1 200px;background:transparent;border:2px solid #3f5a42;color:var(--paper);
-  padding:.95rem 1.15rem;font:inherit;font-size:.9375rem;border-radius:var(--rb);
-}
-.form input::placeholder{color:#7d8f78}
-.form input:focus{outline:none;border-color:var(--paper)}
-.note{font-size:.75rem;color:#93a68d;margin:1rem 0 0}
-
-/* ---------- faq ---------- */
-.faq{max-width:860px}
-.q{border:1px solid var(--line);border-radius:var(--r);margin-bottom:.75rem;overflow:hidden;transition:border-color .2s}
-.q[open]{border-color:var(--ink)}
-.q summary{
-  list-style:none;cursor:pointer;padding:1.25rem 3.25rem 1.25rem 1.35rem;position:relative;
-  font-family:var(--display);font-weight:700;font-size:1rem;text-transform:uppercase;letter-spacing:-.005em;
-}
-.q summary::-webkit-details-marker{display:none}
-/* plus -> minus in one move: two bars share a centre, and only the upright
-   one turns. It lands flat on top of the other, so the + becomes a - with a
-   single quarter turn rather than a rotate plus a separate resize. */
-.q summary::before,.q summary::after{
-  content:'';position:absolute;right:1.35rem;top:50%;
-  width:13px;height:2px;border-radius:2px;background:currentColor;
-}
-.q summary::before{transform:translateY(-50%)}
-.q summary::after{
-  transform:translateY(-50%) rotate(90deg);
-  transition:transform .3s cubic-bezier(.2,.8,.2,1);
-}
-.q[open] summary::after{transform:translateY(-50%) rotate(0deg)}
-.q p{margin:0 1.35rem 1.35rem;color:var(--dim);font-size:.9375rem;max-width:60ch}
-/* The answer is wrapped at runtime in .q-body so it can be height-animated.
-   0fr -> 1fr on a grid row animates cleanly to the content's natural height,
-   which max-height cannot do without guessing a number. */
-.q-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s cubic-bezier(.2,.8,.2,1)}
-.q[open] .q-body{grid-template-rows:1fr}
-.q-body>div{overflow:hidden;min-height:0;opacity:0;transition:opacity .4s ease .12s}
-.q[open] .q-body>div{opacity:1}
-
-/* ---------- visit ---------- */
-.visit{display:grid;gap:clamp(2rem,5vw,3.5rem);grid-template-columns:1fr}
-.vcards{display:grid;gap:1rem;grid-template-columns:1fr}
-.vcard{border:1px solid var(--line);border-radius:var(--r);padding:1.35rem}
-.vcard h4{font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:0 0 .6rem}
-.vcard p{margin:0;font-size:1rem;line-height:1.5;color:var(--ink)}
-/* dark-section overrides, kept in case Visit is flipped back to green */
-.section.dark .vcard{border-color:#33502f}
-.section.dark .vcard h4{color:#93a68d}
-.section.dark .vcard p{color:var(--paper)}
 
 /* ---------- footer ---------- */
 footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0 2rem;overflow:hidden}
 .foot{display:grid;gap:2rem;grid-template-columns:1fr;border-top:1px solid #33502f;padding-top:2.5rem}
-.foot h5{font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.18em;text-transform:uppercase;color:#93a68d;margin:0 0 1rem}
+.foot h2{font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.18em;text-transform:uppercase;color:#93a68d;margin:0 0 1rem}
 /* columns stack as flex so each link is only as wide as its text — the hover
    rule underneath needs that to size correctly */
 .foot-col{display:flex;flex-direction:column;align-items:flex-start}
@@ -639,16 +477,9 @@ a.bar-field:hover .val{opacity:.7}
 .rv.in{opacity:1;transform:none}
 
 /* ---------- responsive ---------- */
-@media(min-width:640px){
-  .dishes{grid-template-columns:1fr 1fr}
-  .count{grid-template-columns:repeat(4,1fr)}
-  .vcards{grid-template-columns:1fr 1fr}
-}
 @media(min-width:768px){
   .brand img{height:40px}
   .hero h1 u{-webkit-text-stroke:1.5px var(--paper)}
-  .hero-art{grid-template-columns:1.6fr 1fr}
-  .steps{grid-template-columns:repeat(2,1fr)}
   .foot{grid-template-columns:2fr 1fr 1fr 1fr}
   /* shrink to content rather than spanning the full width */
   .bar{width:fit-content}
@@ -660,10 +491,6 @@ a.bar-field:hover .val{opacity:.7}
 @media(min-width:1024px){
   .nav-links{display:flex}
   .burger{display:none}
-  .split{grid-template-columns:1fr 1fr}
-  .dishes{grid-template-columns:repeat(3,1fr)}
-  .steps{grid-template-columns:repeat(4,1fr)}
-  .visit{grid-template-columns:1fr 1fr}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -686,11 +513,10 @@ a.bar-field:hover .val{opacity:.7}
    shade rather than a jump — the -2px lift is still doing most of the work of
    signalling the state. */
 .btn-inv{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+/* the drawer's ground is --ink as well, so its Order button stays cream there */
+.drawer .btn-inv{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.drawer .btn.btn-inv:hover{background:var(--wash);border-color:var(--wash);color:var(--ink)}
 .btn:not(.btn-fill):hover{background:var(--brand);border-color:var(--brand);color:var(--paper)}
-.btn-out:hover{background:var(--brand);color:var(--paper);border-color:var(--brand)}
-/* the hero's outline button becomes a green button too, and its centre-out
-   sweep runs to the logo green instead of to cream */
-.hero .btn-fill{background:var(--ink);border-color:var(--ink);color:var(--paper);--fill:var(--brand);--fill-text:var(--paper)}
 
 /* ---------- layout added for the reconstructed home page ---------- */
 /* A feature band: the photograph owns half the band outright — flush to the
@@ -715,35 +541,15 @@ a.bar-field:hover .val{opacity:.7}
 .feature em{font-style:italic}
 .section.dark .feature p{color:#b6c4b0}
 .feature .cta{display:flex;flex-wrap:wrap;gap:.75rem}
-/* The gallery: pictures only, no heading, no caption, no button. Six equal
-   squares, three across and two down, on the green — seams and an outer frame
-   of the same width, so the brand colour reads as even spacing rather than
-   as hairlines.
-
-   Five of the six tiles are cut from three photographs. Rather than shipping
-   small cropped files that would go soft once a tile renders ~480px wide,
-   each tile crops its full-resolution source at render time with
-   object-position. The percentages are computed from where each dish sits in
-   its frame, not eyeballed: on the 1376x768 flat-lay a square tile shows a
-   768-wide window, so 0% lands on the bánh mì, 47% on the phở and 100% on the
-   rice bowl; on the 1280x720 table frames the window is 720 wide, so 80%
-   lands on the phở bowl and 100% on the bánh mì tray. */
-.gallery{display:grid;gap:var(--gap);padding-inline:var(--gap);grid-template-columns:repeat(2,1fr);background:var(--ink)}
-.gallery figure{margin:0;position:relative;overflow:hidden;aspect-ratio:1;background:var(--ink)}
-.gallery img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
-.gallery figure:hover img{transform:scale(1.045)}
-.gallery .at-0 img{object-position:0% 50%}
-.gallery .at-47 img{object-position:47% 50%}
-.gallery .at-80 img{object-position:80% 50%}
-.gallery .at-100 img{object-position:100% 50%}
-@media(prefers-reduced-motion:reduce){.gallery figure:hover img{transform:none}}
-/* reviews: the shell is here, the quotes are not invented — see the note */
-.says{display:grid;gap:1.25rem;grid-template-columns:1fr}
-.say{border:1px solid var(--line);border-radius:var(--r);padding:clamp(1.25rem,3vw,2rem)}
-.section.dark .say{border-color:#33502f}
-.say p{margin:0 0 1rem;font-size:1.0625rem;line-height:1.5}
-.say cite{font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-style:normal;color:var(--dim)}
-.say.empty{display:grid;place-items:center;text-align:center;min-height:170px;border-style:dashed;color:var(--dim)}
+/* The gallery: pictures only, no heading, no caption, no button. One large
+   photo on the left, two smaller ones stacked on the right — three tiles
+   total, on the green frame (same --gap value as the seams). */
+.gallery-trio{display:grid;grid-template-columns:1.6fr 1fr;grid-auto-rows:1fr;gap:var(--gap);padding-inline:var(--gap);background:var(--ink);height:clamp(320px,68vw,640px)}
+.gallery-trio figure{margin:0;position:relative;overflow:hidden;background:var(--ink)}
+.gallery-trio img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.gallery-trio figure:hover img{transform:scale(1.045)}
+.g-stack{display:grid;grid-template-rows:1fr 1fr;gap:var(--gap)}
+@media(prefers-reduced-motion:reduce){.gallery-trio figure:hover img{transform:none}}
 /* contact: the form sits beside the practical details rather than under them */
 .reach{display:grid;gap:clamp(2rem,5vw,3.5rem);grid-template-columns:1fr;align-items:start}
 .reach h2{font-size:clamp(2.25rem,7vw,5rem);margin-bottom:1.25rem}
@@ -762,15 +568,9 @@ a.bar-field:hover .val{opacity:.7}
   color:var(--ink);font-size:.9375rem;
 }
 .form-sent.bad{border-color:#c9a79b;background:#f7ece8}
-.head p.sub a{color:inherit;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
-.head p.sub a:hover{color:var(--brand)}
-.section.dark .head p.sub a:hover{color:var(--paper)}
+.reach p.sub a{color:inherit;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.reach p.sub a:hover{color:var(--brand)}
 .field input:focus-visible,.field textarea:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-@media(min-width:768px){
-  /* three across, two down */
-  .gallery{grid-template-columns:repeat(3,1fr)}
-  .says{grid-template-columns:repeat(2,1fr)}
-}
 @media(min-width:1024px){
   .feature{grid-template-columns:1fr 1fr}
   .feature .shot{min-height:clamp(460px,42vw,660px)}
@@ -780,7 +580,6 @@ a.bar-field:hover .val{opacity:.7}
   .feature:not(.flip) .feature-copy{padding-left:clamp(2rem,4vw,3.5rem)}
   .feature.flip .feature-copy{padding-right:clamp(2rem,4vw,3.5rem)}
   .reach{grid-template-columns:1.05fr .95fr}
-  .says{grid-template-columns:repeat(4,1fr)}
 }
 
 /* ---------- header: permanent, cream, green wordmark ---------- */
@@ -824,12 +623,12 @@ a.bar-field:hover .val{opacity:.7}
   border-top:1px solid #33502f;margin-top:2.75rem;padding-top:2.75rem;
 }
 .foot-band p{color:#b6c4b0;margin:0;max-width:46ch;font-size:.9375rem}
-.foot-band h5{margin-bottom:.75rem}
+.foot-band h2{font-size:.83em;font-weight:700;margin:1.67em 0 .75rem}
 .foot-cta{display:flex;flex-wrap:wrap;gap:.75rem}
 /* the page's buttons are green, which disappears on the footer's green ground,
    so the footer carries its own cream pair */
 .foot-solid{background:var(--paper);color:var(--ink);border-color:var(--paper)}
-.foot-solid:hover{background:var(--wash);border-color:var(--wash);color:var(--ink)}
+.btn.foot-solid:hover{background:var(--wash);border-color:var(--wash);color:var(--ink)}
 .foot a.foot-solid::after,.foot-band a::after{display:none}
 .foot-news{display:flex;flex-wrap:wrap;gap:.6rem}
 .foot-news input[type=email]{
@@ -837,6 +636,8 @@ a.bar-field:hover .val{opacity:.7}
   border:1px solid #33502f;background:rgb(var(--scrim)/.35);color:var(--paper);
 }
 .foot-news input[type=email]::placeholder{color:#7d8f78}
+.foot-news-note{flex-basis:100%;margin:0;font-size:.875rem;color:#b6c4b0}
+.foot-news-note:empty{display:none}
 .foot-news input[type=email]:focus-visible{outline:2px solid var(--paper);outline-offset:2px}
 .legal a{color:inherit;text-decoration:none}
 .legal a:hover{color:var(--paper)}
@@ -879,15 +680,6 @@ a.bar-field:hover .val{opacity:.7}
   </div>
 </div>
 
-<svg class="sr" aria-hidden="true">
-  <symbol id="bowl" viewBox="0 0 100 100">
-    <circle cx="50" cy="56" r="40" fill="none" stroke="currentColor" stroke-width="2"/>
-    <circle cx="50" cy="56" r="28" fill="none" stroke="currentColor" stroke-width="1.5"/>
-    <circle cx="50" cy="56" r="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M38 18c0-6 6-6 6-12M50 14c0-6 6-6 6-12M62 18c0-6 6-6 6-12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  </symbol>
-</svg>
-
 <header class="nav on-dark" id="nav">
   <div class="wrap nav-in">
     <a href="home.html" class="brand" aria-label="Mê Kitchen — home">
@@ -922,7 +714,8 @@ a.bar-field:hover .val{opacity:.7}
    <div class="hero-copy">
     <div class="hero-scene">
       <video autoplay muted loop playsinline preload="metadata" width="1280" height="720"
-             poster="assets/hero-poster.jpg" aria-hidden="true" tabindex="-1">
+             poster="assets/hero-poster.webp" aria-hidden="true" tabindex="-1">
+        <source src="assets/hero-video.webm" type="video/webm">
         <source src="assets/hero-video.mp4" type="video/mp4">
       </video>
     </div>
@@ -952,7 +745,10 @@ a.bar-field:hover .val{opacity:.7}
   <!-- ============ FEATURED ============ -->
   <section class="section band">
     <div class="feature rv">
-      <div class="shot"><img src="assets/hero-spread.jpg" alt="A bánh mì on a metal tray beside a bowl of phở, with limes and chilli." width="1376" height="768" loading="lazy" decoding="async"></div>
+      <div class="shot"><picture>
+        <source srcset="assets/hero-spread.webp" type="image/webp">
+        <img src="assets/hero-spread.jpg" alt="A bánh mì on a metal tray beside a bowl of phở, with limes and chilli." width="1376" height="768" loading="lazy" decoding="async">
+      </picture></div>
       <div class="feature-copy">
         <div>
           <span class="tag">Counter service</span>
@@ -971,7 +767,10 @@ a.bar-field:hover .val{opacity:.7}
   <!-- ============ STORY ============ -->
   <section class="section dark band">
     <div class="feature flip rv">
-      <div class="shot"><img src="assets/bowl-beef.jpg" alt="A grilled beef rice bowl with cabbage slaw, pickled carrot and cucumber, on a wooden table." width="2000" height="1131" loading="lazy" decoding="async"></div>
+      <div class="shot"><picture>
+        <source srcset="assets/bowl-beef.webp" type="image/webp">
+        <img src="assets/bowl-beef.jpg" alt="A grilled beef rice bowl with cabbage slaw, pickled carrot and cucumber, on a wooden table." width="1600" height="905" loading="lazy" decoding="async">
+      </picture></div>
       <div class="feature-copy">
         <div>
           <h2 class="display">Eat well<br>on the run</h2>
@@ -989,13 +788,21 @@ a.bar-field:hover .val{opacity:.7}
   <!-- Photographs only, by request: no heading, no caption, no CTA. The alt
        text stays — it is not rendered, and the tiles are content, not decoration. -->
   <section class="section dark gallery-band">
-    <div class="gallery rv">
-      <figure class="at-0"><img src="assets/hero-spread.jpg" alt="A bánh mì on a metal tray." width="1376" height="768" loading="lazy" decoding="async"></figure>
-      <figure class="at-47"><img src="assets/hero-spread.jpg" alt="A bowl of phở with rare beef, bean sprouts, lime and Thai basil." width="1376" height="768" loading="lazy" decoding="async"></figure>
-      <figure class="at-100"><img src="assets/hero-spread.jpg" alt="A rice bowl with grilled chicken, pickled carrot, daikon and cucumber." width="1376" height="768" loading="lazy" decoding="async"></figure>
-      <figure class="at-80"><img src="assets/gallery-table.jpg" alt="A bowl of phở set on a dark walnut table." width="1280" height="720" loading="lazy" decoding="async"></figure>
-      <figure><img src="assets/hero-bowl.jpg" alt="A grilled chicken rice bowl on a dark walnut table." width="2000" height="1131" loading="lazy" decoding="async"></figure>
-      <figure class="at-100"><img src="assets/hero-poster.jpg" alt="A bánh mì on a tray beside a bowl of slaw and grilled beef." width="1280" height="720" loading="lazy" decoding="async"></figure>
+    <div class="gallery-trio rv">
+      <figure><picture>
+        <source srcset="assets/hero-bowl.webp" type="image/webp">
+        <img src="assets/hero-bowl.jpg" alt="A grilled chicken rice bowl on a dark walnut table." width="1600" height="905" loading="lazy" decoding="async">
+      </picture></figure>
+      <div class="g-stack">
+        <figure><picture>
+          <source srcset="assets/gallery-table.webp" type="image/webp">
+          <img src="assets/gallery-table.jpg" alt="A bowl of phở set on a dark walnut table." width="1280" height="720" loading="lazy" decoding="async">
+        </picture></figure>
+        <figure><picture>
+          <source srcset="assets/hero-poster.webp" type="image/webp">
+          <img src="assets/hero-poster.jpg" alt="A bánh mì on a tray beside a bowl of slaw and grilled beef." width="1280" height="720" loading="lazy" decoding="async">
+        </picture></figure>
+      </div>
     </div>
   </section>
 
@@ -1016,7 +823,7 @@ a.bar-field:hover .val{opacity:.7}
         </div>
         <!-- Netlify detects this form when the site is deployed and stores every
              submission. Two things are set here and one is NOT:
-               _subject  sets the notification email's subject line.
+               subject   sets the notification email's subject line.
                email     Netlify uses a field with this exact name as the
                          Reply-To, so hitting reply goes back to the sender.
              The DESTINATION ADDRESS CANNOT BE SET IN HTML. It is a dashboard
@@ -1024,12 +831,9 @@ a.bar-field:hover .val{opacity:.7}
              > Add notification > Email notification. Until someone adds
              mekitchen.wa@gmail.com there, submissions are captured but nobody
              is emailed about them. -->
-        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <form name="contact" action="/home?sent=1" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="contact">
-          <input type="hidden" name="_subject" value="New Mê Kitchen website inquiry">
-          <!-- only used when JS is unavailable; Netlify redirects here itself.
-               Assumes this page is served at /home once promoted. -->
-          <input type="hidden" name="_next" value="/home?sent=1">
+          <input type="hidden" name="subject" value="New Mê Kitchen website inquiry">
           <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
           <div class="field"><label for="c-name">Your name</label><input id="c-name" name="name" type="text" autocomplete="name" required></div>
           <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email" required></div>
@@ -1081,7 +885,7 @@ a.bar-field:hover .val{opacity:.7}
       </div>
 
       <div class="foot-col">
-        <h5>Eat</h5>
+        <h2>Eat</h2>
         <a href="menu.html#pho">Phở</a>
         <a href="menu.html#banh-mi">Bánh mì</a>
         <a href="menu.html#rice-bowls">Rice bowls</a>
@@ -1089,14 +893,14 @@ a.bar-field:hover .val{opacity:.7}
       </div>
 
       <div class="foot-col">
-        <h5>Company</h5>
+        <h2>Company</h2>
         <a href="story.html">Our story</a>
         <a href="careers.html">Work here</a>
         <a href="#contact">Contact</a>
       </div>
 
       <div class="foot-col">
-        <h5>Find us</h5>
+        <h2>Find us</h2>
         <button type="button" class="foot-directions-trigger" data-open-directions aria-haspopup="dialog">Directions</button>
         <a href="mailto:mekitchen.wa@gmail.com">Email us</a>
         <a href="https://me-kitchen.square.site/" target="_blank" rel="noopener">Order on Square</a>
@@ -1105,7 +909,7 @@ a.bar-field:hover .val{opacity:.7}
 
     <div class="foot-band">
       <div>
-        <h5>Order ahead</h5>
+        <h2>Order ahead</h2>
         <p>Pick it on your phone and it is bagged and waiting when you get here. No queue, no ticket number.</p>
       </div>
       <div class="foot-cta">
@@ -1116,16 +920,17 @@ a.bar-field:hover .val{opacity:.7}
 
     <div class="foot-band">
       <div>
-        <h5>Never miss a deal</h5>
+        <h2>Never miss a deal</h2>
         <p>Be first to hear about specials, new dishes and one-off offers. No spam, and you can leave whenever you like.</p>
       </div>
       <form class="foot-news" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="nl-bot">
         <input type="hidden" name="form-name" value="newsletter">
-        <input type="hidden" name="_subject" value="New Mê Kitchen newsletter signup">
+        <input type="hidden" name="subject" value="New Mê Kitchen newsletter signup">
         <p hidden><label>Leave this empty: <input name="nl-bot"></label></p>
         <label class="sr" for="nl-email">Your email</label>
         <input id="nl-email" name="email" type="email" placeholder="you@email.com" autocomplete="email" required>
         <button type="submit" class="btn foot-solid">Subscribe</button>
+        <p class="foot-news-note" role="status" aria-live="polite"></p>
       </form>
     </div>
 
@@ -1243,26 +1048,6 @@ a.bar-field:hover .val{opacity:.7}
   }
   window.addEventListener('scroll',onScroll,{passive:true});onScroll();
 
-  /* tabbed menu — click + full arrow-key support */
-  var tabs=[].slice.call(document.querySelectorAll('.tab'));
-  function select(tab){
-    tabs.forEach(function(t){
-      var on = t===tab;
-      t.setAttribute('aria-selected',on?'true':'false');
-      document.getElementById(t.getAttribute('aria-controls')).hidden=!on;
-    });
-    tab.focus();
-  }
-  tabs.forEach(function(t,i){
-    t.addEventListener('click',function(){select(t);});
-    t.addEventListener('keydown',function(e){
-      var d = e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;
-      if(!d) return;
-      e.preventDefault();
-      select(tabs[(i+d+tabs.length)%tabs.length]);
-    });
-  });
-
   /* reveal */
   var rv=document.querySelectorAll('.rv');
   if('IntersectionObserver' in window){
@@ -1272,78 +1057,17 @@ a.bar-field:hover .val{opacity:.7}
     rv.forEach(function(el){io.observe(el);});
   } else { rv.forEach(function(el){el.classList.add('in');}); }
 
-  /* accordion — <details> snaps open natively, so the toggle is intercepted
-     and the answer is eased to its own height instead. Real open/closed state
-     is preserved, so collapsed answers stay hidden from assistive tech. */
-  var qs=document.querySelectorAll('.q');
-
-  qs.forEach(function(d){
-    var sum=d.querySelector('summary');
-    if(!sum) return;
-
-    /* wrap everything after the summary so it has something to animate */
-    var body=document.createElement('div'); body.className='q-body';
-    var inner=document.createElement('div'); body.appendChild(inner);
-    var n=sum.nextSibling;
-    while(n){ var next=n.nextSibling; inner.appendChild(n); n=next; }
-    d.appendChild(body);
-
-    sum.addEventListener('click',function(e){
-      e.preventDefault();
-      if(d.dataset.busy) return;                 /* ignore clicks mid-animation */
-      if(d.open){ collapse(d); }
-      else {
-        qs.forEach(function(o){ if(o!==d && o.open) collapse(o); });
-        expand(d);
-      }
-    });
-  });
-
-  function rows(d,v){ var b=d.querySelector('.q-body'); if(b) b.style.gridTemplateRows=v; }
-
-  /* run fn once the row transition ends, with a timer as a safety net so a
-     missed transitionend can never leave a panel stuck */
-  function afterRows(d,fn){
-    var b=d.querySelector('.q-body'), done=false;
-    function fire(e){
-      if(e && e.propertyName!=='grid-template-rows') return;
-      if(done) return; done=true;
-      b.removeEventListener('transitionend',fire);
-      fn();
-    }
-    b.addEventListener('transitionend',fire);
-    setTimeout(fire,800);
-  }
-
-  function expand(d){
-    d.dataset.busy='1';
-    d.open=true;                                  /* render before measuring */
-    rows(d,'0fr');
-    requestAnimationFrame(function(){
-      requestAnimationFrame(function(){ rows(d,'1fr'); });
-    });
-    afterRows(d,function(){ rows(d,''); delete d.dataset.busy; });
-  }
-
-  function collapse(d){
-    d.dataset.busy='1';
-    rows(d,'1fr');
-    requestAnimationFrame(function(){
-      requestAnimationFrame(function(){ rows(d,'0fr'); });
-    });
-    afterRows(d,function(){ d.open=false; rows(d,''); delete d.dataset.busy; });
-  }
-
   /* contact form — posted with fetch so the reader stays on the page and gets
      the thank-you in place, instead of being thrown to Netlify's own success
-     screen. Falls back to a normal submit if JS is off, which is what _next is
-     for. ?sent=1 shows the confirmation directly, so the state can be looked at
+     screen. Falls back to a normal submit if JS is off, which is what the
+     form's action is for. ?sent=1 shows the confirmation directly, so the state can be looked at
      without sending anything. */
   var cform=document.querySelector('form[name="contact"]'), csent=document.getElementById('contactSent');
   if(cform && csent){
+    var sentText=csent.textContent;
     function showSent(msg,bad){
       cform.hidden=true; csent.hidden=false;
-      if(msg) csent.textContent=msg;
+      csent.textContent=msg||sentText;
       csent.classList.toggle('bad',!!bad);
       csent.setAttribute('tabindex','-1'); csent.focus();
     }
@@ -1361,21 +1085,9 @@ a.bar-field:hover .val{opacity:.7}
         showSent();
       }).catch(function(){
         if(btn){ btn.disabled=false; btn.textContent='Send it'; }
-        csent.hidden=false;
         showSent('That did not send. Please email us at mekitchen.wa@gmail.com and we will pick it up there.',true);
         cform.hidden=false;
       });
-    });
-  }
-
-  /* signup — the block that held this form is not on every page, so guard it;
-     an unguarded null here throws and silently kills everything below it */
-  var form=document.getElementById('signup'),note=document.getElementById('signupNote');
-  if(form){
-    form.addEventListener('submit',function(e){
-      e.preventDefault();
-      if(note) note.textContent='Thanks — you are on the list. (Mockup: not wired to a backend yet.)';
-      form.reset();
     });
   }
 
@@ -1444,6 +1156,30 @@ a.bar-field:hover .val{opacity:.7}
   })();
 
 
+
+  /* newsletter — posted in place so the reader stays on the page, with the
+     button disabled while the request is in flight so a double click cannot
+     sign the same address up twice */
+  var news=document.querySelector('form[name="newsletter"]');
+  if(news){
+    news.addEventListener('submit',function(e){
+      e.preventDefault();
+      var btn=news.querySelector('button[type=submit]'), note=news.querySelector('.foot-news-note');
+      if(btn.disabled) return;
+      btn.disabled=true; note.textContent='';
+      fetch('/',{
+        method:'POST',
+        headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        body:new URLSearchParams(new FormData(news)).toString()
+      }).then(function(r){
+        if(!r.ok) throw new Error(r.status);
+        news.reset();
+        note.textContent='Thanks \u2014 you are on the list.';
+      }).catch(function(){
+        note.textContent='That did not go through. Please try again in a moment.';
+      }).then(function(){ btn.disabled=false; });
+    });
+  }
 
   document.getElementById('yr').textContent=new Date().getFullYear();
 })();
