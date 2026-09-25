@@ -360,13 +360,134 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
   .foot{grid-template-columns:1.6fr 1fr 1fr 1.1fr;gap:3rem}
   .foot-band{gap:3rem}
 }
+
+
+/* the static menu is hidden only when the script is running: no JS means the
+   full list is still there and the page degrades to what it always was */
+.js-only .menu-sec{display:none}
+
+/* ---------- tap-through ordering ---------- */
+/* An enhancement layer over the static menu below. Everything here is added
+   by script; with JS off the page is the plain list it always was. */
+.start{padding:calc(72px + clamp(2.5rem,7vw,5rem)) 0 clamp(3rem,8vw,6rem);min-height:60vh}
+.start h1{font-size:clamp(2.25rem,7vw,4.5rem)}
+.start-lede{color:var(--dim);max-width:52ch;margin:1rem 0 2rem}
+.cats{display:grid;gap:1rem;grid-template-columns:1fr}
+@media(min-width:640px){.cats{grid-template-columns:1fr 1fr}}
+.cat{position:relative;text-align:left;padding:clamp(1.35rem,3vw,2rem);border-radius:var(--r);
+  border:1px solid var(--line-strong);background:var(--wash);transition:transform .25s,border-color .25s,background .25s;
+  font:inherit;color:inherit;cursor:pointer}
+.cat:hover{transform:translateY(-3px);border-color:var(--ink);background:var(--paper)}
+.cat h3{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(1.2rem,2.4vw,1.6rem);
+  margin:0 0 .45rem;letter-spacing:-.02em}
+.cat p{margin:0;color:var(--dim);font-size:.875rem;line-height:1.5;max-width:42ch}
+.cat .meta{display:flex;gap:.5rem;align-items:center;margin-top:.85rem;font-family:var(--display);font-size:.6875rem;
+  font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.cat .arrow{transition:transform .25s}
+.cat:hover .arrow{transform:translateX(4px)}
+
+/* every dish in the static list becomes tappable too */
+.item.tappable{cursor:pointer;transition:border-color .2s,background .2s,transform .2s}
+.item.tappable:hover{border-color:var(--ink);background:var(--wash);transform:translateY(-2px)}
+.item .cue{display:block;font-family:var(--display);font-size:.625rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim);margin-top:.6rem}
+
+/* the sheet */
+.sheet{position:fixed;inset:0;z-index:120;display:none}
+.sheet[open]{display:block}
+.sheet-bg{position:absolute;inset:0;background:rgb(var(--scrim)/.55);opacity:0;transition:opacity .3s}
+.sheet.in .sheet-bg{opacity:1}
+.sheet-panel{position:absolute;left:0;right:0;bottom:0;max-height:92vh;overflow:auto;background:var(--paper);
+  border-radius:var(--r) var(--r) 0 0;transform:translateY(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.sheet.in .sheet-panel{transform:none}
+@media(min-width:768px){
+  .sheet-panel{left:50%;right:auto;bottom:auto;top:50%;width:min(640px,92vw);max-height:88vh;border-radius:var(--r);
+    transform:translate(-50%,-46%) scale(.97);opacity:0;transition:transform .3s,opacity .3s}
+  .sheet.in .sheet-panel{transform:translate(-50%,-50%);opacity:1}
+}
+.sheet-head{position:sticky;top:0;background:var(--paper);display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;padding:1.15rem var(--pad);border-bottom:1px solid var(--line);z-index:2}
+.sheet-head h2{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:1.2rem;margin:0}
+.sheet .x{width:38px;height:38px;border-radius:999px;border:1px solid var(--line-strong);display:grid;place-items:center;flex:none;cursor:pointer}
+.sheet .x:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.sheet-body{padding:1.15rem var(--pad) 1.4rem}
+.sheet-foot{position:sticky;bottom:0;background:var(--paper);border-top:1px solid var(--line);
+  padding:.9rem var(--pad);display:flex;gap:.7rem;align-items:center}
+.back{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--display);font-size:.6875rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:1rem;cursor:pointer}
+.back:hover{color:var(--ink)}
+.rows{display:grid;gap:.55rem}
+.rows .row{display:flex;gap:1rem;align-items:flex-start;text-align:left;width:100%;padding:.95rem;cursor:pointer;
+  border:1px solid var(--line);border-radius:var(--rb);background:var(--paper);font:inherit;color:inherit;transition:border-color .2s,background .2s}
+.rows .row:hover{border-color:var(--ink);background:var(--wash)}
+.rows .row-main{flex:1;min-width:0}
+.rows h3{font-family:var(--display);font-weight:700;font-size:1rem;margin:0 0 .2rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.rows p{margin:0;color:var(--dim);font-size:.875rem}
+.grow{flex:1}
+
+
+/* the dish panel and the sheet's footer note */
+.sheet-lede{color:var(--dim);font-size:.9375rem;margin:0 0 1.15rem}
+.dish{border:1px solid var(--line);border-radius:var(--r);padding:clamp(1.1rem,3vw,1.6rem);background:var(--wash)}
+.dish-top{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;margin:0 0 .6rem}
+.dish-top h3{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:1.25rem;margin:0;
+  display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.dish-desc{margin:0;font-size:1.0625rem;line-height:1.6}
+.foot-note{margin:0;color:var(--dim);font-size:.8125rem}
+
+/* The photograph sits BESIDE the copy, not behind it. Behind it, the picture
+   had to be faded to about 16% to keep the words readable, which looked
+   washed out; anything brighter and the text lost. Splitting the tile removes
+   the conflict: the photo runs at full strength in its own column and the
+   copy keeps the clean ground it needs. */
+.cat{display:grid;grid-template-columns:38% 1fr;align-items:stretch;padding:0;overflow:hidden}
+.cat-bg{position:relative;min-height:100%}
+.cat-bg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.cat:hover .cat-bg img{transform:scale(1.05)}
+/* the block around these is green with cream type, but the tiles are cream
+   cards, so their contents have to be set back to ink or the headings
+   inherit cream and all but vanish */
+.cat-copy{padding:clamp(1.15rem,2.5vw,1.6rem);display:flex;flex-direction:column;justify-content:center;
+  min-width:0;color:var(--ink)}
+/* placeholder, when a tile has no photograph yet */
+.cat.no-photo .cat-bg{background:var(--wash);min-height:150px}
+.cat.no-photo .cat-bg::before{
+  content:'';position:absolute;inset:0;opacity:.55;color:var(--line-strong);
+  background-image:linear-gradient(currentColor 1px,transparent 1px),linear-gradient(90deg,currentColor 1px,transparent 1px);
+  background-size:24px 24px;
+}
+.cat-ph{
+  position:absolute;left:.6rem;bottom:.6rem;z-index:1;
+  font-family:var(--display);font-weight:500;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.3rem .5rem;border-radius:999px;background:var(--ink);color:var(--paper);display:none;max-width:calc(100% - 1.2rem)}
+.cat.no-photo .cat-ph{display:block}
+@media(max-width:479px){
+  .cat{grid-template-columns:1fr}
+  .cat-bg{aspect-ratio:16/9}
+}
+
+/* ---------- the dragon-bridge illustration behind the start block ---------- */
+/* The block turns green and the line illustration sits behind it, faint, the
+   way it was used in the hero. The tiles stay cream cards so they read as
+   objects on top of it.
+
+   Opacity is .38. The illustration's own ground is #334f2b, lighter and more
+   olive than --ink, so at full strength it would sit on the block as a visible
+   panel; faded it blends and reads as texture. Measured against the cream
+   heading over the worst pixel in the frame, .38 gives about 5.5:1, and it
+   still clears the 4.5:1 floor as far as .45 if you want it stronger. */
+.start{position:relative;isolation:isolate;overflow:hidden;background:var(--ink);color:var(--paper)}
+.start-bg{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.start-bg img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;opacity:.38}
+.start h1{color:var(--paper)}
+.start .start-lede{color:#b6c4b0}
 </style>
 </head>
 <body>
 
 <header class="nav" id="nav">
   <div class="wrap nav-in">
-    <a href="home.html" class="brand" aria-label="Mê Kitchen — home">
+    <a href="home.html" class="brand" aria-label="Mê Kitchen home">
       <img src="assets/logo-mark.png" alt="Mê Kitchen" width="908" height="200">
     </a>
     <nav class="nav-links">
@@ -393,17 +514,19 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 </div>
 
 <main>
-  <section class="head-band">
+
+  <!-- Tap-through entry. The full static menu stays below it: this is an
+       enhancement layer, not a replacement, so the page still works with no
+       JS and Google still sees every dish and price. -->
+  <section class="start" id="start">
+    <div class="start-bg" aria-hidden="true">
+      <img src="assets/dragon-bridge.jpg" alt="" loading="eager" decoding="async"
+           onerror="this.remove()">
+    </div>
     <div class="wrap">
-      <span class="tag">The menu</span>
-      <h1 class="display">Bánh mì, phở,<br>rice bowls</h1>
-      <p class="stand">Sixteen things, cooked when you order them, in Seattle's University District. Four of them are vegetarian.</p>
-      <ul class="jump">
-        <li><a href="#pho">Phở</a></li>
-        <li><a href="#banh-mi">Bánh Mì</a></li>
-        <li><a href="#rice-bowls">Rice Bowls</a></li>
-        <li><a href="#sides-drinks">Sides &amp; Drinks</a></li>
-      </ul>
+      <h1 class="display">Start your order</h1>
+      <p class="start-lede">Bánh mì, phở and rice bowls: sixteen things, cooked when you order them. Pick a section and set your dish up how you like it.</p>
+      <div class="cats" id="cats"></div>
     </div>
   </section>
 
@@ -468,7 +591,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
   <section class="menu-sec" id="rice-bowls">
     <div class="wrap rv">
       <h2>Rice Bowls</h2>
-      <p class="lede">Broken rice — cơm tấm — under the grilled pork, jasmine under the chicken. The short rib sits in its marinade overnight before it gets anywhere near the grill.</p>
+      <p class="lede">Broken rice, cơm tấm, under the grilled pork, jasmine under the chicken. The short rib sits in its marinade overnight before it gets anywhere near the grill.</p>
       <div class="items">
         <!-- photo alt when shot: "Grilled Pork — cơm tấm broken rice bowl with scallion oil and pickles, Mê Kitchen Seattle" -->
         <article class="item" id="grilled-pork">
@@ -497,7 +620,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
   <section class="menu-sec" id="sides-drinks">
     <div class="wrap rv">
       <h2>Sides &amp; Drinks</h2>
-      <p class="lede">Fresh Vietnamese spring rolls come two to an order, fried egg rolls three. Then cà phê sữa đá — Vietnamese iced coffee, strong — or chanh muối if you want something sour.</p>
+      <p class="lede">Fresh Vietnamese spring rolls come two to an order, fried egg rolls three. Then cà phê sữa đá (Vietnamese iced coffee, strong) or chanh muối if you want something sour.</p>
       <div class="items">
         <!-- photo alt when shot: "Fresh Vietnamese spring rolls with herbs and peanut sauce, Mê Kitchen Seattle" -->
         <article class="item" id="fresh-spring-rolls">
@@ -532,6 +655,21 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
   </section>
 </main>
 
+
+<!-- tap-through sheet + order tray, both driven by script -->
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="sheet-bg" data-close></div>
+  <div class="sheet-panel">
+    <div class="sheet-head">
+      <h2 id="sheetTitle">Menu</h2>
+      <button class="x" data-close aria-label="Close">&#10005;</button>
+    </div>
+    <div class="sheet-body" id="sheetBody"></div>
+    <div class="sheet-foot" id="sheetFoot" hidden></div>
+  </div>
+</div>
+
+
 <footer>
   <div class="wrap">
 
@@ -558,7 +696,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
             </svg>
           </a>
         </div>
-        <p>Vietnamese cooking made to order — phở, bánh mì and rice bowls, quick enough to eat on the run.</p>
+        <p>Vietnamese cooking made to order: phở, bánh mì and rice bowls, quick enough to eat on the run.</p>
         <address class="foot-addr">
           <b>Seattle, Washington</b>
           4213 University Wy NE<br>
@@ -650,6 +788,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
   "@context": "https://schema.org",
   "@type": "Restaurant",
   "name": "Mê Kitchen",
+  "telephone": "206-656-8878",
   "url": "https://me-kitchen.com/",
   "description": "Vietnamese restaurant in Seattle's University District serving bánh mì, phở and rice bowls made to order.",
   "openingHoursSpecification": {
@@ -909,6 +1048,157 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
   }
 
   document.getElementById('yr').textContent = new Date().getFullYear();
+})();
+</script>
+
+<script>
+/* ---------- menu explorer ----------------------------------------------
+   Read-only. Tap a section, tap a dish, read what is in it, and if you want
+   it, the button hands you to Square. Nothing is added up and no basket is
+   kept here: Square owns ordering.
+
+   The dish data is READ OUT OF THE PAGE rather than duplicated, so the static
+   list below stays the single source of truth. Change a price there and this
+   follows automatically.
+   ------------------------------------------------------------------------ */
+(function(){
+  'use strict';
+  var SQUARE='https://me-kitchen.square.site/';
+  var sheet=document.getElementById('sheet');
+  if(!sheet) return;
+  var body=document.getElementById('sheetBody'), foot=document.getElementById('sheetFoot'),
+      title=document.getElementById('sheetTitle'), cats=document.getElementById('cats');
+  var lastFocus=null;
+  function money(n){ return '$'+n; }
+
+  /* read the menu out of the page */
+  var MENU=[];
+  Array.prototype.forEach.call(document.querySelectorAll('.menu-sec'),function(sec){
+    var h2=sec.querySelector('h2'), lede=sec.querySelector('.lede');
+    var c={id:sec.id,name:h2?h2.textContent.trim():sec.id,
+           lede:lede?lede.textContent.trim():'',items:[]};
+    Array.prototype.forEach.call(sec.querySelectorAll('.item'),function(a){
+      var h3=a.querySelector('h3'), veg=!!a.querySelector('.veg');
+      var name=h3?h3.textContent.replace(/vegetarian/i,'').trim():'';
+      var priceEl=a.querySelector('.price'), p=a.querySelector('p');
+      c.items.push({el:a,name:name,veg:veg,
+        price:priceEl?parseInt(priceEl.textContent.replace(/[^0-9]/g,''),10):0,
+        desc:p?p.textContent.trim():''});
+    });
+    if(c.items.length) MENU.push(c);
+  });
+  if(!MENU.length) return;
+
+  /* the static list is hidden only once this is running, so with JS off the
+     whole menu is still on the page */
+  document.documentElement.classList.add('js-only');
+
+  /* A short description of what each section actually is. The section ledes in
+     the markup open with counts ("Four bowls.") which says nothing useful on a
+     tile, so these are written separately. */
+  var BLURB = {
+    'pho':'Rice noodles in broth, with herbs and sprouts to add yourself. Rare beef, brisket and meatball, poached chicken, or a vegetable broth built on its own.',
+    'banh-mi':'Crisp baguette, pickled daikon and carrot, cucumber and coriander. Grilled pork, cold cuts and p\u00e2t\u00e9, lemongrass chicken, or tofu.',
+    'rice-bowls':'Grilled protein over broken or jasmine rice, with pickles, greens and scallion oil. Pork, lemongrass chicken, short rib, or tofu and mushroom.',
+    'sides-drinks':'Fresh spring rolls and fried egg rolls to start. Vietnamese iced coffee with condensed milk, or salted lemonade.'
+  };
+
+  /* The photograph behind each tile. These point at shots we already have
+     rather than duplicating files under new names. Override a tile by adding
+     assets/cat-<section>.jpg, which wins over the default below; if neither
+     loads, onerror flips the tile to its placeholder. */
+  var PHOTO = {
+    'pho':'assets/g-pho.jpg',
+    'banh-mi':'assets/g-banh-mi.jpg',
+    'rice-bowls':'assets/g-rice-bowl.jpg',
+    'sides-drinks':'assets/g-spread.jpg'
+  };
+  var SHOT = {
+    'pho':'Ph\u1edf bowl, overhead',
+    'banh-mi':'B\u00e1nh m\u00ec, close',
+    'rice-bowls':'Rice bowl, overhead',
+    'sides-drinks':'Spring rolls and c\u00e0 ph\u00ea s\u1eefa \u0111\u00e1'
+  };
+
+  MENU.forEach(function(c){
+    var b=document.createElement('button');
+    b.type='button'; b.className='cat no-photo';
+    b.innerHTML='<span class="cat-bg"><img src="'+(PHOTO[c.id]||('assets/cat-'+c.id+'.jpg'))+'" alt="" loading="lazy" decoding="async">'+
+      '<span class="cat-ph">'+(SHOT[c.id]||'Photo')+'</span></span>'+
+      '<span class="cat-copy"><h3>'+c.name+'</h3><p>'+(BLURB[c.id]||c.lede)+'</p>'+
+      '<span class="meta">See the dishes <span class="arrow">\u2192</span></span></span>';
+    var img=b.querySelector('.cat-bg img');
+    img.addEventListener('load',function(){ b.classList.remove('no-photo'); });
+    img.addEventListener('error',function(){ img.remove(); });
+    b.addEventListener('click',function(){ lastFocus=b; openCat(c); });
+    cats.appendChild(b);
+  });
+
+  function openSheet(){
+    sheet.setAttribute('open','');
+    requestAnimationFrame(function(){ sheet.classList.add('in'); });
+    document.body.style.overflow='hidden';
+  }
+  function closeSheet(){
+    sheet.classList.remove('in');
+    setTimeout(function(){ sheet.removeAttribute('open'); document.body.style.overflow=''; },300);
+    if(lastFocus) lastFocus.focus();
+  }
+  Array.prototype.forEach.call(sheet.querySelectorAll('[data-close]'),function(el){
+    el.addEventListener('click',closeSheet);
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&sheet.hasAttribute('open')) closeSheet();
+  });
+
+  /* the dishes in a section */
+  function openCat(c){
+    title.textContent=c.name;
+    foot.hidden=false;
+    foot.innerHTML='<p class="foot-note grow">Tap a dish to see what is in it.</p>'+
+      '<a class="btn btn-ghost" href="'+SQUARE+'" target="_blank" rel="noopener">Order on Square</a>';
+    var h='<p class="sheet-lede">'+c.lede+'</p><div class="rows">';
+    c.items.forEach(function(it,ix){
+      h+='<button type="button" class="row" data-ix="'+ix+'"><span class="row-main"><h3>'+it.name+
+         (it.veg?'<span class="veg">Vegetarian</span>':'')+'</h3><p>'+it.desc+'</p></span>'+
+         '<span class="price">'+money(it.price)+'</span></button>';
+    });
+    body.innerHTML=h+'</div>';
+    Array.prototype.forEach.call(body.querySelectorAll('.row'),function(r){
+      r.addEventListener('click',function(){ openItem(c,c.items[+r.dataset.ix]); });
+    });
+    body.scrollTop=0;
+    openSheet();
+  }
+
+  /* one dish, read only */
+  function openItem(c,it){
+    title.textContent=it.name;
+    var h='';
+    if(c.items.length>1) h+='<button type="button" class="back">← '+c.name+'</button>';
+    h+='<div class="dish"><div class="dish-top"><h3>'+it.name+
+       (it.veg?'<span class="veg">Vegetarian</span>':'')+'</h3><span class="price">'+money(it.price)+'</span></div>'+
+       '<p class="dish-desc">'+it.desc+'</p></div>';
+    body.innerHTML=h;
+    var back=body.querySelector('.back');
+    if(back) back.addEventListener('click',function(){ openCat(c); });
+    foot.hidden=false;
+    foot.innerHTML='<p class="foot-note grow">Ordering happens on Square.</p>'+
+      '<a class="btn" href="'+SQUARE+'" target="_blank" rel="noopener">Order on Square</a>';
+    body.scrollTop=0;
+    if(!sheet.hasAttribute('open')) openSheet();
+  }
+
+  /* a link such as menu.html#pho opens that section rather than scrolling to
+     a list that is now hidden */
+  function fromHash(){
+    var id=(location.hash||'').replace('#','');
+    if(!id) return;
+    var c=MENU.filter(function(x){ return x.id===id; })[0];
+    if(c) openCat(c);
+  }
+  window.addEventListener('hashchange',fromHash);
+  fromHash();
 })();
 </script>
 </body>

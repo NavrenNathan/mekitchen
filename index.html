@@ -2,200 +2,244 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mê Kitchen | Opening soon</title>
+<meta name="description" content="Mê Kitchen is a Vietnamese restaurant opening this fall at 4213 University Wy NE, Seattle. Phở, bánh mì and rice bowls, cooked to order.">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<!-- ============================================================
+     PREVIEW ONLY — REMOVE BEFORE PUBLIC LAUNCH
+     ============================================================ -->
+<meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" media="print" onload="this.media='all';this.onload=null" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Geist:wght@300;400;500&display=swap">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Geist:wght@300;400;500&display=swap"></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box}
 :root{
-  --ink:#22391f;               /* deep green ground */
-  --paper:#faf7ef;             /* cream text */
-  --muted:#93a68d;             /* light sage on the green ground */
-  --dim:#d8e0d2;
-  --line:#33502f;              /* hairline on green */
-  --bad:#e0a99b;               /* error red, light enough for green */
+  --ink:#22391f; --paper:#faf7ef; --muted:#93a68d; --dim:#d8e0d2;
+  --line:#33502f; --bad:#e0a99b; --brand:#2d4a2d; --scrim:30 26 22;
   --display:'Space Grotesk',Inter,-apple-system,sans-serif;
   --body:'Geist',Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-  --rb:10px;
+  --rb:10px; --r:14px;
   --pad:clamp(1.25rem,4vw,3.5rem);
 }
+*,*::before,*::after{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{
   min-height:100dvh;background:var(--ink);color:var(--paper);
-  font-family:var(--body);font-weight:300;
-  display:flex;flex-direction:column;align-items:center;
-  padding:clamp(2rem,5vw,3.5rem) var(--pad) 1.25rem;
-  -webkit-font-smoothing:antialiased;
+  font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;
 }
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--paper);outline-offset:3px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.display{font-family:var(--display);font-weight:700;text-transform:uppercase;line-height:.92;letter-spacing:-.035em;margin:0}
 
-/* ---------- centre stack ---------- */
-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;width:100%;max-width:900px;text-align:center}
-.logo{height:clamp(48px,7.5vw,72px);width:auto;filter:brightness(0) invert(1)}
+/* ---------- layout: the flyer beside the words ---------- */
+.shell{
+  flex:1;display:grid;gap:clamp(2rem,5vw,4rem);align-items:center;
+  grid-template-columns:1fr;
+  max-width:1200px;width:100%;margin:0 auto;
+  padding:clamp(2rem,6vw,4rem) var(--pad);
+}
+@media(min-width:900px){
+  .shell{grid-template-columns:minmax(0,.85fr) minmax(0,1fr)}
+}
+
+/* the flyer itself, presented as a printed thing rather than a web banner */
+.flyer{
+  position:relative;margin:0;border-radius:var(--r);overflow:hidden;
+  box-shadow:0 24px 60px rgb(0 0 0/.38), 0 2px 0 rgb(250 247 239/.08);
+  transform:rotate(-1.1deg);
+  transition:transform .5s cubic-bezier(.2,.8,.2,1);
+  max-width:520px;width:100%;justify-self:center;
+}
+.flyer:hover{transform:rotate(0deg) translateY(-4px)}
+.flyer img{width:100%;height:auto}
+@media(prefers-reduced-motion:reduce){ .flyer,.flyer:hover{transform:none;transition:none} }
+
+/* ---------- the words ---------- */
+.copy{min-width:0}
+.logo{height:clamp(38px,5vw,52px);width:auto;filter:brightness(0) invert(1);margin:0 0 1.75rem}
 .tag{
-  display:inline-block;font-family:var(--display);font-size:.6875rem;font-weight:600;
-  letter-spacing:.16em;text-transform:uppercase;padding:.4rem .85rem;
-  border-radius:999px;border:1px solid currentColor;color:var(--muted);
+  display:inline-block;font-size:.6875rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  padding:.4rem .8rem;border-radius:999px;border:1px solid currentColor;color:var(--muted);margin:0 0 1.25rem;
 }
-h1{
-  font-family:var(--display);font-weight:700;text-transform:uppercase;
-  font-size:clamp(2.1rem,7vw,4.25rem);line-height:.94;letter-spacing:-.035em;margin:0;
-}
-h1 u{text-decoration:none;-webkit-text-stroke:.75px var(--paper);color:transparent}
-.lede{font-size:clamp(.95rem,1.6vw,1.125rem);color:var(--dim);max-width:42ch;margin:0;line-height:1.55}
+h1{font-size:clamp(2.25rem,6vw,4rem);margin:0 0 1.25rem}
+h1 u{text-decoration:none;-webkit-text-stroke:1px var(--paper);color:transparent}
+.lede{color:var(--dim);max-width:44ch;margin:0 0 2rem;font-weight:300;font-size:clamp(1rem,1.6vw,1.1875rem)}
 
-/* ---------- countdown ---------- */
-/* Segmented like the site's sticky order island: hairline rules, small
-   letter-spaced labels under big tabular figures. */
-.count{
-  display:flex;align-items:stretch;width:100%;max-width:430px;
-  border:1px solid rgba(250,247,239,.16);border-radius:14px;
-  background:rgba(250,247,239,.03);padding:.3rem;
-}
-.unit{flex:1;min-width:0;padding:.85rem .25rem;display:flex;flex-direction:column;gap:.35rem;justify-content:center}
-.unit+.unit{border-left:1px solid rgba(250,247,239,.16)}
-.num{
-  font-family:var(--display);font-weight:700;font-variant-numeric:tabular-nums;
-  font-size:clamp(1.75rem,6vw,3rem);line-height:1;letter-spacing:-.03em;
-}
-.lbl{font-family:var(--display);font-size:.5625rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-.done{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:1.4rem;font-size:1.1rem}
 
-/* ---------- notify list ---------- */
-.notify{
-  width:100%;max-width:470px;margin-top:1rem;
-  display:flex;flex-direction:column;align-items:center;gap:1.4rem;
-}
-.notify h2{
-  font-family:var(--display);font-weight:700;text-transform:uppercase;
-  font-size:clamp(1.05rem,2.8vw,1.35rem);letter-spacing:-.01em;margin:0;
-}
-.notify form{display:flex;gap:.55rem;width:100%;flex-wrap:wrap}
+/* the facts the flyer carries as pixels, repeated as real text */
+.facts{list-style:none;margin:0 0 2rem;padding:0;display:grid;gap:.55rem;max-width:42ch}
+.facts li{display:flex;gap:.85rem;align-items:baseline;font-size:.9375rem;color:var(--dim);
+  padding:.55rem 0;border-bottom:1px solid var(--line)}
+.facts b{font-family:var(--display);font-weight:700;font-size:.625rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);min-width:5.5rem;flex:none}
+.facts a{color:var(--paper);text-decoration:underline;text-underline-offset:3px}
+.facts a:hover{color:var(--muted)}
+
+/* notify */
+.notify h2{font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 .85rem}
+.notify form{display:flex;flex-wrap:wrap;gap:.6rem;max-width:440px}
 .notify input[type=email]{
-  flex:1 1 200px;min-width:0;background:transparent;border:1px solid var(--line);
-  color:var(--paper);border-radius:var(--rb);padding:1.05rem 1.2rem;font:inherit;font-size:.9375rem;
-  transition:border-color .25s;
+  flex:1 1 210px;font:inherit;font-size:.9375rem;padding:.9rem 1rem;border-radius:var(--rb);
+  border:1px solid var(--line);background:rgb(var(--scrim)/.35);color:var(--paper);
 }
-.notify input[type=email]::placeholder{color:#7d8f78}
-.notify input[type=email]:focus{outline:none;border-color:var(--paper)}
-/* same centre-out fill the site's buttons use */
+.notify input::placeholder{color:#7d8f78}
+.notify input:focus-visible{outline:2px solid var(--paper);outline-offset:2px}
 .notify button{
-  position:relative;isolation:isolate;overflow:hidden;flex:0 0 auto;
-  font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.08em;
-  text-transform:uppercase;padding:1.05rem 1.7rem;border-radius:var(--rb);
-  background:transparent;color:var(--paper);border:1px solid var(--paper);
-  cursor:pointer;transition:color .3s;
+  font-family:var(--display);font-weight:700;font-size:.8125rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:.9rem 1.5rem;border-radius:var(--rb);background:var(--paper);color:var(--ink);
+  border:2px solid var(--paper);transition:transform .18s,background .2s
 }
-.notify button::before{
-  content:"";position:absolute;inset:0;z-index:-1;background:var(--paper);
-  transform:scaleX(0);transform-origin:center;
-  transition:transform .55s cubic-bezier(.2,.8,.2,1);
-}
-.notify button:hover::before,.notify button:focus-visible::before{transform:scaleX(1)}
-.notify button:hover,.notify button:focus-visible{color:var(--ink)}
-.notify button[disabled]{opacity:.55;cursor:default}
-.notify button[disabled]::before{transform:scaleX(0)}
-.hide{position:absolute;left:-9999px}
-.note{font-size:.75rem;color:var(--muted);margin:0;min-height:1em}
-.note.bad{color:var(--bad)}
-/* success swaps the form out entirely */
-.ok{display:none;flex-direction:column;align-items:center;gap:.4rem;animation:rise .4s ease both}
+.notify button:hover{transform:translateY(-2px);background:#f1ece0;border-color:#f1ece0}
+.notify button[disabled]{opacity:.5;pointer-events:none}
+.notify .ok{display:none}
 .notify.done form{display:none}
-.notify.done .ok{display:flex}
-.ok strong{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:1rem}
-.ok span{font-size:.8125rem;color:var(--dim)}
+.notify.done .ok{display:block}
+.notify .ok strong{display:block;font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:1rem}
+.notify .ok span{color:var(--dim);font-size:.9375rem}
+.note{font-size:.8125rem;color:var(--muted);margin:.75rem 0 0;min-height:1.2em}
+.note.bad{color:var(--bad)}
+.hide{position:absolute;left:-9999px}
 
-/* ---------- footer + concealed unlock ---------- */
-footer{width:100%;max-width:900px;display:flex;flex-direction:column;align-items:center;gap:1rem;padding-top:2rem}
-.meta{font-size:.75rem;letter-spacing:.04em;color:var(--muted);margin:0}
-/* the way in: a dim full stop. Reachable by keyboard, easy to miss by eye. */
-.dot{
-  appearance:none;background:none;border:0;cursor:pointer;padding:.6rem;
-  line-height:0;opacity:.22;transition:opacity .3s;
-}
-.dot:hover,.dot:focus-visible{opacity:.6}
-.dot span{display:block;width:7px;height:7px;border-radius:50%;background:var(--paper)}
-.gate{
-  display:none;gap:.4rem;align-items:center;justify-content:center;flex-wrap:wrap;
-  animation:rise .35s ease both;
-}
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:1.25rem var(--pad);
+  display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;
+  max-width:1200px;width:100%;margin:0 auto}
+.meta{margin:0;color:var(--muted);font-size:.75rem}
+/* the padding grows each tap target to 30px; the smaller gap offsets it so
+   the icons sit exactly where they did (from Vincent's audit pass) */
+.social{display:flex;gap:calc(.9rem - 12px);align-items:center;margin:-6px 0}
+.social a{color:var(--dim);opacity:.85;line-height:0;padding:6px;transition:opacity .25s,color .25s}
+.social a:hover{opacity:1;color:var(--paper)}
+.social svg{width:19px;height:19px;display:block}
+
+/* concealed staff gate */
+.dot{width:26px;height:26px;display:grid;place-items:center;opacity:.35;transition:opacity .25s}
+.dot:hover{opacity:1}
+.dot span{width:7px;height:7px;border-radius:50%;background:var(--muted);display:block}
+.gate{display:none;gap:.5rem;width:100%;max-width:340px}
 .gate.on{display:flex}
-@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.gate input{
-  background:transparent;border:1px solid var(--line);color:var(--paper);
-  border-radius:var(--rb);padding:.7rem .9rem;font:inherit;font-size:.875rem;
-  width:min(230px,60vw);
-}
+.gate input{flex:1;font:inherit;font-size:.875rem;padding:.6rem .8rem;border-radius:var(--rb);
+  border:1px solid var(--line);background:rgb(var(--scrim)/.35);color:var(--paper)}
 .gate input::placeholder{color:#7d8f78}
 .gate input:focus{outline:none;border-color:var(--paper)}
-.gate button{
-  font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.1em;
-  text-transform:uppercase;padding:.75rem 1.15rem;border-radius:var(--rb);
-  background:var(--paper);color:var(--ink);border:1px solid var(--paper);cursor:pointer;
+.gate button{font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:.6rem 1rem;border-radius:var(--rb);background:var(--paper);color:var(--ink)}
+.msg{font-size:.75rem;color:var(--muted);margin:.5rem 0 0;width:100%}
+@keyframes shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}
+  30%,50%,70%{transform:translateX(-4px)}40%,60%{transform:translateX(4px)}}
+.gate.shake{animation:shake .5s}
+
+/* ---------- free drink, as steps ---------- */
+.claim{border:1px solid var(--line);border-radius:var(--r);padding:clamp(1.25rem,3vw,1.75rem);
+  background:rgb(var(--scrim)/.3);margin:0 0 2rem}
+.claim h2{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(1.1rem,2.4vw,1.4rem);
+  margin:0 0 .35rem;letter-spacing:-.01em}
+.claim-lede{color:var(--muted);font-size:.875rem;margin:0 0 1.35rem}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:1.1rem;counter-reset:step}
+.steps li{display:flex;gap:.9rem;align-items:flex-start}
+.steps .n{
+  flex:none;width:26px;height:26px;border-radius:999px;display:grid;place-items:center;
+  background:var(--paper);color:var(--ink);font-family:var(--display);font-weight:700;font-size:.75rem;margin-top:.1rem;
 }
-/* the padding grows each tap target to 30px; the smaller gap offsets it so
-   the icons sit exactly where they did */
-.social{display:flex;gap:calc(1.1rem - 12px);align-items:center;margin:-6px 0}
-.social a{color:var(--muted);opacity:.8;line-height:0;padding:6px;transition:opacity .25s,color .25s}
-.social a:hover,.social a:focus-visible{opacity:1;color:var(--paper)}
-.social svg{width:18px;height:18px;display:block}
-.msg{font-size:.75rem;color:var(--bad);min-height:1em;margin:0}
-.shake{animation:shake .32s}
-@keyframes shake{
-  0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)}
-  50%{transform:translateX(5px)} 75%{transform:translateX(-3px)}
+.steps b{display:block;font-family:var(--display);font-weight:700;font-size:.9375rem;letter-spacing:-.01em}
+.steps p{margin:.2rem 0 0;color:var(--dim);font-size:.875rem}
+.steps .btn{
+  display:inline-flex;align-items:center;justify-content:center;margin-top:.7rem;
+  font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:.7rem 1.1rem;border-radius:var(--rb);background:var(--paper);color:var(--ink);
+  border:2px solid var(--paper);text-decoration:none;transition:transform .18s,background .2s,border-color .2s;
 }
-@media(prefers-reduced-motion:reduce){
-  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
-}
+.steps .btn:hover{transform:translateY(-2px);background:#f1ece0;border-color:#f1ece0}
+.steps .btn-ghost{background:transparent;color:var(--paper);border-color:#5d7a58}
+.steps .btn-ghost:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
 </style>
 </head>
 <body>
 
-<main>
-  <img class="logo" src="assets/logo-mark.png" alt="Mê Kitchen" width="908" height="200">
-  <span class="tag">U District · Seattle</span>
-  <h1>Phở.<br>Bánh mì.<br><u>Rice bowls.</u></h1>
-  <p class="lede">Order on your phone, walk in, walk out. We are firing up the broth — doors open soon.</p>
+<div class="shell">
 
-  <div class="count" id="count" role="timer" aria-live="off">
-    <div class="unit"><span class="num" id="d">--</span><span class="lbl">Days</span></div>
-    <div class="unit"><span class="num" id="h">--</span><span class="lbl">Hours</span></div>
-    <div class="unit"><span class="num" id="m">--</span><span class="lbl">Minutes</span></div>
-    <div class="unit"><span class="num" id="s">--</span><span class="lbl">Seconds</span></div>
+  <figure class="flyer">
+    <img src="assets/MekitchenFlier.jpg"
+         alt="Mê Kitchen flyer: Coming this fall. Phở, bánh mì and rice bowls. 4213 University Wy NE, Seattle, across from H Mart. Follow @mekitchen.wa on Instagram to claim a free drink."
+         width="1024" height="1536" fetchpriority="high" decoding="async">
+  </figure>
+
+  <div class="copy">
+    <img class="logo" src="assets/logo-mark.png" alt="Mê Kitchen" width="908" height="200">
+    <span class="tag">U District · Seattle</span>
+    <h1 class="display">Coming<br><u>this fall</u></h1>
+    <p class="lede">Phở, bánh mì and rice bowls, cooked to order. Order on your phone, walk in, walk out.</p>
+
+
+    <!-- The flyer carries all of this as pixels. Repeated here as real text so
+         a screen reader, and Google, can actually read it. -->
+    <ul class="facts">
+      <li><b>Where</b><span>4213 University Wy NE, Seattle, WA 98105 &middot; across from H Mart</span></li>
+      <li><b>Instagram</b><span><a href="https://www.instagram.com/mekitchen.wa/" target="_blank" rel="noopener">@mekitchen.wa</a></span></li>
+    </ul>
+
+
+    <section class="claim">
+      <h2>Claim a free drink</h2>
+      <p class="claim-lede">Three steps, and there is one waiting for you when we open.</p>
+      <ol class="steps">
+        <li>
+          <span class="n">1</span>
+          <div>
+            <b>Join the loyalty list</b>
+            <p>Sign up on Square. It takes a minute.</p>
+            <a class="btn" href="https://squareup.com/customer-programs/enroll/wWZxq9nuvBBA?utm_medium=copied-link&amp;utm_source=online" target="_blank" rel="noopener">Sign up on Square</a>
+          </div>
+        </li>
+        <li>
+          <span class="n">2</span>
+          <div>
+            <b>Follow us on Instagram</b>
+            <p>That is where the claim goes out.</p>
+            <a class="btn btn-ghost" href="https://www.instagram.com/mekitchen.wa/" target="_blank" rel="noopener">Follow @mekitchen.wa</a>
+          </div>
+        </li>
+        <li>
+          <span class="n">3</span>
+          <div>
+            <b>Watch for our message</b>
+            <p>We will send one out before opening day telling you how to claim it.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="notify" id="notify">
+      <h2>Be first through the door</h2>
+      <form name="notify" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="notifyForm">
+        <input type="hidden" name="form-name" value="notify">
+        <input type="hidden" name="_subject" value="New Mê Kitchen opening-list signup">
+        <p class="hide" aria-hidden="true"><label>Skip this field: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <label class="sr" for="email">Email address</label>
+        <input type="email" id="email" name="email" placeholder="your@email.com" required autocomplete="email">
+        <button type="submit" id="notifyBtn">I'm in</button>
+      </form>
+      <div class="ok">
+        <strong>You're on the list</strong>
+        <span>We will let you know the moment the doors open.</span>
+      </div>
+      <p class="note" id="notifyNote"></p>
+    </section>
   </div>
-
-  <section class="notify" id="notify">
-    <h2>Be first through the door!</h2>
-
-    <form name="notify" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="notifyForm">
-      <input type="hidden" name="form-name" value="notify">
-      <p class="hide" aria-hidden="true"><label>Skip this field: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-      <label class="sr" for="email">Email address</label>
-      <input type="email" id="email" name="email" placeholder="your@email.com" required autocomplete="email">
-      <button type="submit" id="notifyBtn">I'm in</button>
-    </form>
-
-    <div class="ok">
-      <strong>You're on the list</strong>
-      <span>See you 30 September. Bring an appetite.</span>
-    </div>
-
-    <p class="note" id="notifyNote"></p>
-  </section>
-</main>
+</div>
 
 <footer>
   <p class="meta">Mê Kitchen · Seattle, WA</p>
-
   <nav class="social" aria-label="Social media">
     <a href="https://www.instagram.com/mekitchen.wa/" target="_blank" rel="noopener" aria-label="Instagram">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
@@ -215,9 +259,7 @@ footer{width:100%;max-width:900px;display:flex;flex-direction:column;align-items
       </svg>
     </a>
   </nav>
-
   <button class="dot" id="dot" aria-label="Staff preview access"><span></span></button>
-
   <form class="gate" id="gate" autocomplete="off">
     <label class="sr" for="pw">Preview password</label>
     <input type="password" id="pw" placeholder="Password" autocomplete="off">
@@ -231,36 +273,9 @@ footer{width:100%;max-width:900px;display:flex;flex-direction:column;align-items
   'use strict';
 
   /* ---------------------------------------------------------------
-     CHANGE THESE TWO
-     LAUNCH  — the opening date/time. Placeholder until the real
-               opening date is confirmed. Local time.
-     PASS    — the preview password.
+     PASS — the preview password.
      --------------------------------------------------------------- */
-  var LAUNCH = new Date('2026-09-30T11:00:00');
-  var PASS   = 'Mekitchen123';
-
-  /* countdown */
-  var d=document.getElementById('d'), h=document.getElementById('h'),
-      m=document.getElementById('m'), s=document.getElementById('s'),
-      box=document.getElementById('count'), timer;
-
-  function pad(n){ return n<10 ? '0'+n : ''+n; }
-
-  function tick(){
-    var left = LAUNCH - new Date();
-    if(left <= 0){
-      clearInterval(timer);
-      box.innerHTML = '<div class="done">We are open</div>';
-      return;
-    }
-    var sec = Math.floor(left/1000);
-    d.textContent = Math.floor(sec/86400);
-    h.textContent = pad(Math.floor(sec/3600)%24);
-    m.textContent = pad(Math.floor(sec/60)%60);
-    s.textContent = pad(sec%60);
-  }
-  tick();
-  timer = setInterval(tick, 1000);
+  var PASS = 'Mekitchen123';
 
   /* notify list — posts to Netlify Forms without leaving the page, so the
      countdown keeps running. Only works on the deployed Netlify site; a local
@@ -288,7 +303,7 @@ footer{width:100%;max-width:900px;display:flex;flex-direction:column;align-items
       nBtn.disabled=false;
       nBtn.textContent="I'm in";
       nNote.className='note bad';
-      nNote.textContent='That did not save — try again in a moment.';
+      nNote.textContent='That did not save. Try again in a moment.';
     });
   });
 
@@ -305,7 +320,7 @@ footer{width:100%;max-width:900px;display:flex;flex-direction:column;align-items
     e.preventDefault();
     if(pw.value === PASS){
       msg.style.color = '#a8dd93';
-      msg.textContent = 'Unlocked — loading the site…';
+      msg.textContent = 'Unlocked. Loading the site…';
       try { sessionStorage.setItem('mk_preview','1'); } catch(err){}
       setTimeout(function(){ window.location.href = 'home.html'; }, 500);
     } else {

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mê Kitchen | Vietnamese Restaurant — Phở &amp; Bánh Mì, Seattle</title>
-<meta name="description" content="Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì, and rice bowls, cooked to order — order ahead on Square.">
+<title>Mê Kitchen | Vietnamese Restaurant, Phở &amp; Bánh Mì, Seattle</title>
+<meta name="description" content="Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì, and rice bowls, cooked to order. Order ahead on Square.">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
@@ -15,20 +15,21 @@
 <meta property="og:site_name" content="Mê Kitchen">
 <meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://me-kitchen.com/home">
-<meta property="og:title" content="Mê Kitchen | Vietnamese Restaurant — Phở &amp; Bánh Mì, Seattle">
-<meta property="og:description" content="Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì, and rice bowls, cooked to order — order ahead on Square.">
+<meta property="og:title" content="Mê Kitchen | Vietnamese Restaurant, Phở &amp; Bánh Mì, Seattle">
+<meta property="og:description" content="Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì, and rice bowls, cooked to order. Order ahead on Square.">
 <meta property="og:image" content="https://me-kitchen.com/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Mê Kitchen | Vietnamese Restaurant — Phở &amp; Bánh Mì, Seattle">
-<meta name="twitter:description" content="Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì, and rice bowls, cooked to order — order ahead on Square.">
+<meta name="twitter:title" content="Mê Kitchen | Vietnamese Restaurant, Phở &amp; Bánh Mì, Seattle">
+<meta name="twitter:description" content="Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì, and rice bowls, cooked to order. Order ahead on Square.">
 <meta name="twitter:image" content="https://me-kitchen.com/assets/og-image.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Restaurant",
   "name": "Mê Kitchen",
+  "telephone": "206-656-8878",
   "url": "https://me-kitchen.com/",
   "description": "Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì, and rice bowls, cooked to order.",
   "openingHoursSpecification": {
@@ -478,6 +479,7 @@ a.bar-field:hover .val{opacity:.7}
 
 /* ---------- responsive ---------- */
 @media(min-width:768px){
+  .gallery{grid-template-columns:repeat(3,1fr)}
   .brand img{height:40px}
   .hero h1 u{-webkit-text-stroke:1.5px var(--paper)}
   .foot{grid-template-columns:2fr 1fr 1fr 1fr}
@@ -541,15 +543,18 @@ a.bar-field:hover .val{opacity:.7}
 .feature em{font-style:italic}
 .section.dark .feature p{color:#b6c4b0}
 .feature .cta{display:flex;flex-wrap:wrap;gap:.75rem}
-/* The gallery: pictures only, no heading, no caption, no button. One large
-   photo on the left, two smaller ones stacked on the right — three tiles
-   total, on the green frame (same --gap value as the seams). */
-.gallery-trio{display:grid;grid-template-columns:1.6fr 1fr;grid-auto-rows:1fr;gap:var(--gap);padding-inline:var(--gap);background:var(--ink);height:clamp(320px,68vw,640px)}
-.gallery-trio figure{margin:0;position:relative;overflow:hidden;background:var(--ink)}
-.gallery-trio img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
-.gallery-trio figure:hover img{transform:scale(1.045)}
-.g-stack{display:grid;grid-template-rows:1fr 1fr;gap:var(--gap)}
-@media(prefers-reduced-motion:reduce){.gallery-trio figure:hover img{transform:none}}
+/* The gallery: pictures only, no heading, no caption, no button. Six equal
+   squares, three across and two down, on the green — the seams and the outer
+   frame share one --gap so the spacing reads as even.
+
+   The six sources are square already, so unlike the previous set there is no
+   object-position cropping: each tile shows its whole frame. */
+.gallery{display:grid;gap:var(--gap);padding-inline:var(--gap);grid-template-columns:repeat(2,1fr);background:var(--ink)}
+.gallery figure{margin:0;position:relative;overflow:hidden;aspect-ratio:1;background:var(--ink)}
+.gallery img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.gallery figure:hover img{transform:scale(1.045)}
+@media(prefers-reduced-motion:reduce){.gallery figure:hover img{transform:none}}
+
 /* contact: the form sits beside the practical details rather than under them */
 .reach{display:grid;gap:clamp(2rem,5vw,3.5rem);grid-template-columns:1fr;align-items:start}
 .reach h2{font-size:clamp(2.25rem,7vw,5rem);margin-bottom:1.25rem}
@@ -682,7 +687,7 @@ a.bar-field:hover .val{opacity:.7}
 
 <header class="nav on-dark" id="nav">
   <div class="wrap nav-in">
-    <a href="home.html" class="brand" aria-label="Mê Kitchen — home">
+    <a href="home.html" class="brand" aria-label="Mê Kitchen home">
       <img src="assets/logo-mark.png" alt="Mê Kitchen" width="908" height="200">
     </a>
     <nav class="nav-links">
@@ -747,7 +752,7 @@ a.bar-field:hover .val{opacity:.7}
     <div class="feature rv">
       <div class="shot"><picture>
         <source srcset="assets/hero-spread.webp" type="image/webp">
-        <img src="assets/hero-spread.jpg" alt="A bánh mì on a metal tray beside a bowl of phở, with limes and chilli." width="1376" height="768" loading="lazy" decoding="async">
+        <img src="assets/g-spread.jpg" alt="A bánh mì, a bowl of phở and a grilled beef rice bowl laid out together with sauces, herbs and chopsticks." width="1024" height="1024" loading="lazy" decoding="async">
       </picture></div>
       <div class="feature-copy">
         <div>
@@ -774,7 +779,7 @@ a.bar-field:hover .val{opacity:.7}
       <div class="feature-copy">
         <div>
           <h2 class="display">Eat well<br>on the run</h2>
-          <p>We started Mê Kitchen because the Vietnamese food we grew up loving usually asks for an hour nobody has. Everything here is cooked to order at the counter — phở, bánh mì, rice bowls, spring rolls and Vietnamese coffee — made with quality ingredients and nothing left standing around. Same food, done properly, handed over fast enough to eat on the run.</p>
+          <p>We started Mê Kitchen because the Vietnamese food we grew up loving usually asks for an hour nobody has. Everything here is cooked to order at the counter: phở, bánh mì, rice bowls, spring rolls and Vietnamese coffee, made with quality ingredients and nothing left standing around. Same food, done properly, handed over fast enough to eat on the run.</p>
           <div class="cta">
             <a href="story.html" class="btn btn-fill">Our story</a>
           </div>
@@ -788,21 +793,13 @@ a.bar-field:hover .val{opacity:.7}
   <!-- Photographs only, by request: no heading, no caption, no CTA. The alt
        text stays — it is not rendered, and the tiles are content, not decoration. -->
   <section class="section dark gallery-band">
-    <div class="gallery-trio rv">
-      <figure><picture>
-        <source srcset="assets/hero-bowl.webp" type="image/webp">
-        <img src="assets/hero-bowl.jpg" alt="A grilled chicken rice bowl on a dark walnut table." width="1600" height="905" loading="lazy" decoding="async">
-      </picture></figure>
-      <div class="g-stack">
-        <figure><picture>
-          <source srcset="assets/gallery-table.webp" type="image/webp">
-          <img src="assets/gallery-table.jpg" alt="A bowl of phở set on a dark walnut table." width="1280" height="720" loading="lazy" decoding="async">
-        </picture></figure>
-        <figure><picture>
-          <source srcset="assets/hero-poster.webp" type="image/webp">
-          <img src="assets/hero-poster.jpg" alt="A bánh mì on a tray beside a bowl of slaw and grilled beef." width="1280" height="720" loading="lazy" decoding="async">
-        </picture></figure>
-      </div>
+    <div class="gallery rv">
+      <figure><img src="assets/g-spread.jpg" alt="A bánh mì, a bowl of phở and a grilled beef rice bowl laid out together with sauces, herbs and chopsticks." width="1024" height="1024" loading="lazy" decoding="async"></figure>
+      <figure><img src="assets/g-rice-bowl.jpg" alt="A grilled beef rice bowl with cabbage slaw, pickled carrot and a pot of green sauce." width="1024" height="1024" loading="lazy" decoding="async"></figure>
+      <figure><img src="assets/g-banh-mi.jpg" alt="A bánh mì on a metal tray beside a dish of cucumber, pickled carrot, coriander and jalapeño." width="1024" height="1024" loading="lazy" decoding="async"></figure>
+      <figure><img src="assets/g-pho.jpg" alt="A bowl of phở with rare beef and spring onion, with Thai basil and bean sprouts on the side." width="1024" height="1024" loading="lazy" decoding="async"></figure>
+      <figure><img src="assets/g-poster.jpg" alt="A bowl of phở on the counter beneath a Mê Kitchen poster reading Phở Brings People Together." width="1024" height="1024" loading="lazy" decoding="async"></figure>
+      <figure><img src="assets/g-pho-table.jpg" alt="A bowl of phở on a table with chopsticks, lime and chilli, and herbs on a steel tray." width="1024" height="1024" loading="lazy" decoding="async"></figure>
     </div>
   </section>
 
@@ -814,9 +811,10 @@ a.bar-field:hover .val{opacity:.7}
       <div class="reach rv">
         <div>
           <h2 class="display">Get in touch</h2>
-          <p class="sub">However your visit went, we want to hear about it — it is the quickest way we get better. Ask about a large order, tell us what you thought, or talk to us about <a href="careers.html">joining the team</a>. Every message comes straight to us, and we read all of them.</p>
+          <p class="sub">However your visit went, we want to hear about it. It is the quickest way we get better. Ask about a large order, tell us what you thought, or talk to us about <a href="careers.html">joining the team</a>. Every message comes straight to us, and we read all of them.</p>
           <ul class="picks">
             <li><b>Email</b><span><a href="mailto:mekitchen.wa@gmail.com">mekitchen.wa@gmail.com</a></span></li>
+            <li><b>Phone</b><span><a href="tel:+12066568878">206-656-8878</a></span></li>
             <li><b>Address</b><span>4213 University Wy NE, Seattle, WA 98105</span></li>
             <li><b>Hours</b><span>11am&ndash;9pm Mon&ndash;Sat, closed Sunday</span></li>
           </ul>
@@ -841,7 +839,7 @@ a.bar-field:hover .val{opacity:.7}
           <button type="submit" class="btn">Send it</button>
         </form>
         <p class="form-sent" id="contactSent" role="status" aria-live="polite" hidden>
-          Thank you — we have got your message and will get back to you soon.
+          Thank you. We have got your message and will get back to you soon.
         </p>
       </div>
     </div>
@@ -875,7 +873,7 @@ a.bar-field:hover .val{opacity:.7}
             </svg>
           </a>
         </div>
-        <p>Vietnamese cooking made to order — phở, bánh mì and rice bowls, quick enough to eat on the run.</p>
+        <p>Vietnamese cooking made to order: phở, bánh mì and rice bowls, quick enough to eat on the run.</p>
         <address class="foot-addr">
           <b>Seattle, Washington</b>
           4213 University Wy NE<br>
@@ -971,7 +969,7 @@ a.bar-field:hover .val{opacity:.7}
       <span class="val" id="todayHours">11am&ndash;9pm</span>
     </div>
   </div>
-  <a href="tel:{{PHONE}}" class="btn btn-fill bar-call">Call</a>
+  <a href="tel:+12066568878" class="btn btn-fill bar-call">Call</a>
   <a href="https://me-kitchen.square.site/" class="btn btn-inv">Order on Square</a>
 </div>
 
