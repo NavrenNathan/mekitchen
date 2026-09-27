@@ -144,24 +144,15 @@ footer{border-top:1px solid var(--line);padding:1.25rem var(--pad);
   background:rgb(var(--scrim)/.3);margin:0 0 2rem}
 .claim h2{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(1.1rem,2.4vw,1.4rem);
   margin:0 0 .35rem;letter-spacing:-.01em}
-.claim-lede{color:var(--muted);font-size:.875rem;margin:0 0 1.35rem}
-.steps{list-style:none;margin:0;padding:0;display:grid;gap:1.1rem;counter-reset:step}
-.steps li{display:flex;gap:.9rem;align-items:flex-start}
-.steps .n{
-  flex:none;width:26px;height:26px;border-radius:999px;display:grid;place-items:center;
-  background:var(--paper);color:var(--ink);font-family:var(--display);font-weight:700;font-size:.75rem;margin-top:.1rem;
-}
-.steps b{display:block;font-family:var(--display);font-weight:700;font-size:.9375rem;letter-spacing:-.01em}
-.steps p{margin:.2rem 0 0;color:var(--dim);font-size:.875rem}
-.steps .btn{
-  display:inline-flex;align-items:center;justify-content:center;margin-top:.7rem;
+.claim-lede{color:var(--dim);font-size:.9375rem;margin:0 0 1.35rem;max-width:44ch}
+.claim .btn{
+  display:inline-flex;align-items:center;justify-content:center;
   font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;
-  padding:.7rem 1.1rem;border-radius:var(--rb);background:var(--paper);color:var(--ink);
+  padding:.85rem 1.35rem;border-radius:var(--rb);background:var(--paper);color:var(--ink);
   border:2px solid var(--paper);text-decoration:none;transition:transform .18s,background .2s,border-color .2s;
 }
-.steps .btn:hover{transform:translateY(-2px);background:#f1ece0;border-color:#f1ece0}
-.steps .btn-ghost{background:transparent;color:var(--paper);border-color:#5d7a58}
-.steps .btn-ghost:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.claim .btn:hover{transform:translateY(-2px);background:#f1ece0;border-color:#f1ece0}
+
 </style>
 </head>
 <body>
@@ -191,32 +182,8 @@ footer{border-top:1px solid var(--line);padding:1.25rem var(--pad);
 
     <section class="claim">
       <h2>Claim a free drink</h2>
-      <p class="claim-lede">Three steps, and there is one waiting for you when we open.</p>
-      <ol class="steps">
-        <li>
-          <span class="n">1</span>
-          <div>
-            <b>Join the loyalty list</b>
-            <p>Sign up on Square. It takes a minute.</p>
-            <a class="btn" href="https://squareup.com/customer-programs/enroll/wWZxq9nuvBBA?utm_medium=copied-link&amp;utm_source=online" target="_blank" rel="noopener">Sign up on Square</a>
-          </div>
-        </li>
-        <li>
-          <span class="n">2</span>
-          <div>
-            <b>Follow us on Instagram</b>
-            <p>That is where the claim goes out.</p>
-            <a class="btn btn-ghost" href="https://www.instagram.com/mekitchen.wa/" target="_blank" rel="noopener">Follow @mekitchen.wa</a>
-          </div>
-        </li>
-        <li>
-          <span class="n">3</span>
-          <div>
-            <b>Watch for our message</b>
-            <p>We will send one out before opening day telling you how to claim it.</p>
-          </div>
-        </li>
-      </ol>
+      <p class="claim-lede">Follow us on Instagram. We will post how to claim it before opening day.</p>
+      <a class="btn" href="https://www.instagram.com/mekitchen.wa/" target="_blank" rel="noopener">Follow @mekitchen.wa</a>
     </section>
 
     <section class="notify" id="notify">
@@ -237,6 +204,8 @@ footer{border-top:1px solid var(--line);padding:1.25rem var(--pad);
     </section>
   </div>
 </div>
+
+
 
 <footer>
   <p class="meta">Mê Kitchen · Seattle, WA</p>
@@ -334,5 +303,6 @@ footer{border-top:1px solid var(--line);padding:1.25rem var(--pad);
   });
 })();
 </script>
+
 </body>
 </html>
