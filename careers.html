@@ -311,7 +311,6 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 }
 .foot-band p{color:#b6c4b0;margin:0;max-width:46ch;font-size:.9375rem}
 .foot-band h2{font-size:.83em;font-weight:700;margin:1.67em 0 .75rem}
-.foot-cta{display:flex;flex-wrap:wrap;gap:.75rem}
 /* the page's buttons are green, which disappears on the footer's green ground,
    so the footer carries its own cream pair */
 .foot-solid{background:var(--paper);color:var(--ink);border-color:var(--paper)}
@@ -320,20 +319,12 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 .btn.foot-ghost:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
 .foot a.foot-solid::after,.foot a.foot-ghost::after,.foot-band a::after{display:none}
 .foot-news{display:flex;flex-wrap:wrap;gap:.6rem}
-.foot-news input[type=email]{
-  flex:1 1 220px;font:inherit;font-size:.9375rem;padding:.9rem 1rem;border-radius:var(--rb);
-  border:1px solid #33502f;background:rgb(var(--scrim)/.35);color:var(--paper);
-}
-.foot-news input[type=email]::placeholder{color:#7d8f78}
-.foot-news-note{flex-basis:100%;margin:0;font-size:.875rem;color:#b6c4b0}
-.foot-news-note:empty{display:none}
-.foot-news input[type=email]:focus-visible{outline:2px solid var(--paper);outline-offset:2px}
 .legal a{color:inherit;text-decoration:none}
 .legal a:hover{color:var(--paper)}
 @media(min-width:640px){
   .foot{grid-template-columns:1fr 1fr}
   .foot-band{grid-template-columns:1fr auto}
-  .foot-cta,.foot-news{justify-content:flex-end}
+  .foot-news{justify-content:flex-end}
 }
 @media(min-width:1024px){
   .foot{grid-template-columns:1.6fr 1fr 1fr 1.1fr;gap:3rem}
@@ -469,31 +460,15 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
       </div>
     </div>
 
-    <div class="foot-band">
-      <div>
-        <h2>Order ahead</h2>
-        <p>Pick it on your phone and it is bagged and waiting when you get here. No queue, no ticket number.</p>
-      </div>
-      <div class="foot-cta">
-        <a href="menu.html" class="btn foot-ghost">See the menu</a>
-        <a href="https://me-kitchen.square.site/" class="btn foot-solid">Order on Square</a>
-      </div>
-    </div>
 
     <div class="foot-band">
       <div>
         <h2>Never miss a deal</h2>
         <p>Be first to hear about specials, new dishes and one-off offers. No spam, and you can leave whenever you like.</p>
       </div>
-      <form class="foot-news" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="nl-bot">
-        <input type="hidden" name="form-name" value="newsletter">
-        <input type="hidden" name="subject" value="New Mê Kitchen newsletter signup">
-        <p hidden><label>Leave this empty: <input name="nl-bot"></label></p>
-        <label class="sr" for="nl-email">Your email</label>
-        <input id="nl-email" name="email" type="email" placeholder="you@email.com" autocomplete="email" required>
-        <button type="submit" class="btn foot-solid">Subscribe</button>
-        <p class="foot-news-note" role="status" aria-live="polite"></p>
-      </form>
+      <div class="foot-news">
+        <a href="https://squareup.com/customer-programs/enroll/wWZxq9nuvBBA?utm_medium=copied-link&amp;utm_source=online" class="btn foot-solid" target="_blank" rel="noopener">Join the loyalty list</a>
+      </div>
     </div>
 
     <div class="legal">
@@ -597,29 +572,6 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 
 
 
-  /* newsletter — posted in place so the reader stays on the page, with the
-     button disabled while the request is in flight so a double click cannot
-     sign the same address up twice */
-  var news=document.querySelector('form[name="newsletter"]');
-  if(news){
-    news.addEventListener('submit',function(e){
-      e.preventDefault();
-      var btn=news.querySelector('button[type=submit]'), note=news.querySelector('.foot-news-note');
-      if(btn.disabled) return;
-      btn.disabled=true; note.textContent='';
-      fetch('/',{
-        method:'POST',
-        headers:{'Content-Type':'application/x-www-form-urlencoded'},
-        body:new URLSearchParams(new FormData(news)).toString()
-      }).then(function(r){
-        if(!r.ok) throw new Error(r.status);
-        news.reset();
-        note.textContent='Thanks \u2014 you are on the list.';
-      }).catch(function(){
-        note.textContent='That did not go through. Please try again in a moment.';
-      }).then(function(){ btn.disabled=false; });
-    });
-  }
 
   document.getElementById('yr').textContent = new Date().getFullYear();
 })();
