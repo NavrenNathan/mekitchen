@@ -543,14 +543,18 @@ a.bar-field:hover .val{opacity:.7}
 .section.dark .feature p{color:#b6c4b0}
 .feature .cta{display:flex;flex-wrap:wrap;gap:.75rem}
 /* The gallery: pictures only, no heading, no caption, no button. Six equal
-   squares, three across and two down at every width, on the green — the seams and the outer
-   frame share one --gap so the spacing reads as even.
+   4:3 frames, three across and two down at every width, on the green — the
+   seams and the outer frame share one --gap so the spacing reads as even.
 
-   The six sources are square already, so unlike the previous set there is no
-   object-position cropping: each tile shows its whole frame. */
+   The six sources are square, so each frame loses an eighth off the top and
+   bottom. Three are nudged so the bowl stays whole: phở (4th), the poster (5th,
+   keeps the bowl and the tagline over the logo) and the phở on the table (6th). */
 .gallery{display:grid;gap:var(--gap);padding-inline:var(--gap);grid-template-columns:repeat(3,1fr);background:var(--ink)}
-.gallery figure{margin:0;position:relative;overflow:hidden;aspect-ratio:1;background:var(--ink)}
+.gallery figure{margin:0;position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--ink)}
 .gallery img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.gallery figure:nth-child(4) img{object-position:50% 68%}
+.gallery figure:nth-child(5) img{object-position:50% 85%}
+.gallery figure:nth-child(6) img{object-position:50% 60%}
 .gallery figure:hover img{transform:scale(1.045)}
 @media(prefers-reduced-motion:reduce){.gallery figure:hover img{transform:none}}
 
