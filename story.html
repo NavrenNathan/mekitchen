@@ -391,6 +391,65 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
   .foot{grid-template-columns:1.6fr 1fr 1fr 1.1fr;gap:3rem}
   .foot-band{gap:3rem}
 }
+
+/* ---------- story: motion drawn from the words ----------
+   Each effect acts out the line it sits on, and plays once when its row's
+   existing .rv reveal fires (or, for the quote, as you read down past it).
+   Everything is gated on m2i-motion / no-preference, so reduced-motion
+   visitors get the finished text. The rail, day card, turn and Mê
+   tap-through keep their own motion untouched. */
+
+/* 1. hero: "Then" arrives first, "Now" follows a beat later, moving forward */
+@media(prefers-reduced-motion:no-preference){
+  .m2-h1-then{animation:m2x-rise .8s cubic-bezier(.2,.8,.2,1) .15s backwards}
+  .m2-h1-now{animation:m2x-forward .8s cubic-bezier(.2,.8,.2,1) .75s backwards}
+  .m2-lead{animation:m2x-fade .8s cubic-bezier(.2,.8,.2,1) 1.1s backwards}
+}
+@keyframes m2x-rise{from{opacity:0;translate:0 16px}}
+@keyframes m2x-forward{from{opacity:0;translate:-18px 0}}
+@keyframes m2x-fade{from{opacity:0}}
+
+/* 2. "Between classes, work, studying, and everything else": the day fills up */
+.m2x-busy{transition:opacity .45s cubic-bezier(.2,.8,.2,1);transition-delay:calc(.45s + var(--b) * .2s)}
+html.m2i-motion .rv:not(.in) .m2x-busy{opacity:.15}
+
+/* 3. "Something quick and convenient…": said one word at a time, as you read */
+@media(prefers-reduced-motion:no-preference){
+  @supports(animation-timeline:view()){
+    .m2-quote p{view-timeline:--m2x-quote block}
+    .m2x-w{animation:m2x-ink linear both;animation-timeline:--m2x-quote;
+      animation-range:cover calc(12% + var(--w) * 2.5%) cover calc(24% + var(--w) * 2.5%)}
+  }
+}
+@keyframes m2x-ink{from{opacity:.16}}
+
+/* 4. "phở, bánh mì, rice bowls": each classic gets underlined, in turn */
+html.m2i-motion .m2-copy p a{
+  text-decoration:none;
+  background:linear-gradient(var(--ul,var(--line-strong)),var(--ul,var(--line-strong))) 0 100%/100% 1px no-repeat;
+  transition:background-size .7s cubic-bezier(.2,.8,.2,1);
+}
+html.m2i-motion .m2-copy p a:hover,html.m2i-motion .m2-copy p a:focus-visible{--ul:var(--ink)}
+html.m2i-motion .rv:not(.in) .m2-copy p a{background-size:0% 1px}
+html.m2i-motion .m2-copy p a:nth-of-type(1){transition-delay:.5s}
+html.m2i-motion .m2-copy p a:nth-of-type(2){transition-delay:.72s}
+html.m2i-motion .m2-copy p a:nth-of-type(3){transition-delay:.94s}
+
+/* 5. "The place you come back to": the three moments arrive in the order of
+   a day, each coming back in from the side */
+.m2-moments li{transition:opacity .6s cubic-bezier(.2,.8,.2,1),translate .7s cubic-bezier(.2,.8,.2,1)}
+.m2-moments li:nth-child(1){transition-delay:.25s}
+.m2-moments li:nth-child(2){transition-delay:.42s}
+.m2-moments li:nth-child(3){transition-delay:.59s}
+html.m2i-motion .rv:not(.in) .m2-moments li{opacity:0;translate:20px 0}
+
+/* 6. "It just has to be done right.": its underline draws once the line lands */
+html.m2i-motion .m2-close-kick span{
+  border-bottom-color:transparent;
+  background:linear-gradient(#93a68d,#93a68d) 0 100%/100% 3px no-repeat border-box;
+  transition:background-size .9s cubic-bezier(.2,.8,.2,1) .6s;
+}
+html.m2i-motion .rv:not(.in) .m2-close-kick span{background-size:0% 3px}
 </style>
 <style>
 /* ===== Mockup 2: Then and Now =====
@@ -991,7 +1050,7 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
             <span class="m2-when">Then &middot; 01</span>
             <h3>We know life in the U District</h3>
             <p>As former University of Washington students, we know what life in the U District is like.</p>
-            <p>Between classes, work, studying, and everything else, there were plenty of days when we wanted a good meal but didn&rsquo;t have an hour to sit down for one.</p>
+            <p>Between <span class="m2x-busy" style="--b:0">classes</span>, <span class="m2x-busy" style="--b:1">work</span>, <span class="m2x-busy" style="--b:2">studying</span>, <span class="m2x-busy" style="--b:3">and everything else</span>, there were plenty of days when we wanted a good meal but didn&rsquo;t have an hour to sit down for one.</p>
           </div>
           <div class="m2-aside">
             <div class="m2-day m2i-day">
@@ -1032,7 +1091,7 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
             <span class="m2-when">Then &middot; 02</span>
             <h3>What we wanted</h3>
             <blockquote class="m2-quote">
-              <p>&ldquo;Something quick and convenient without feeling like we had to sacrifice quality.&rdquo;</p>
+              <p><span class="m2x-w" style="--w:0">&ldquo;Something</span> <span class="m2x-w" style="--w:1">quick</span> <span class="m2x-w" style="--w:2">and</span> <span class="m2x-w" style="--w:3">convenient</span> <span class="m2x-w" style="--w:4">without</span> <span class="m2x-w" style="--w:5">feeling</span> <span class="m2x-w" style="--w:6">like</span> <span class="m2x-w" style="--w:7">we</span> <span class="m2x-w" style="--w:8">had</span> <span class="m2x-w" style="--w:9">to</span> <span class="m2x-w" style="--w:10">sacrifice</span> <span class="m2x-w" style="--w:11">quality.&rdquo;</span></p>
             </blockquote>
           </div>
         </li>

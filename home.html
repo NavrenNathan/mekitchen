@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- motion gate: set before first paint so the hero entrance can start on
+     frame one. "mm" = motion allowed; "intro-run" = the once-per-session
+     curtain will play, so the hero waits for it to lift. -->
+<script>(function(h){try{if(matchMedia('(prefers-reduced-motion: no-preference)').matches){h.classList.add('mm');if(!sessionStorage.getItem('mk_intro'))h.classList.add('intro-run')}}catch(e){}})(document.documentElement)</script>
 <title>Mê Kitchen | Vietnamese Restaurant, Phở &amp; Bánh Mì, Seattle</title>
 <meta name="description" content="Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì, and rice bowls, cooked to order. Order ahead online.">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
@@ -92,6 +96,7 @@
    bar, tabbed menu. Built mobile-first around ordering.
    ============================================================ */
 :root{
+  --ease:cubic-bezier(.2,.8,.2,1);   /* the house curve — every motion uses it */
   --scrim:30 26 22;
   /* Mê Kitchen — deep green on cream. --ink doubles as the dark-section ground. */
   --ink:#22391f;               /* deep green: text, and background of .section.dark */
@@ -474,8 +479,8 @@ a.bar-field:hover .val{opacity:.7}
 .bar .btn{flex:1;align-self:stretch;border-radius:var(--rb)}
 
 /* ---------- reveal ---------- */
-.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
-.rv.in{opacity:1;transform:none}
+.rv{transition:opacity .7s var(--ease),translate .7s var(--ease)}
+html.fx .rv:not(.in){opacity:0;translate:0 22px}
 
 /* ---------- responsive ---------- */
 @media(min-width:768px){
@@ -496,7 +501,6 @@ a.bar-field:hover .val{opacity:.7}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}
-  .rv{opacity:1;transform:none}
   /* skip the draw-on — land straight on the fully lit ring */
   .chips li:hover .ring path{stroke-dashoffset:0}
   /* no staggered wait for the drawer items */
@@ -667,6 +671,91 @@ a.bar-field:hover .val{opacity:.7}
     background:rgb(var(--scrim)/.62);
   }
 }
+
+/* ---------- scroll motion ----------
+   One curve (--ease), and each section enters its own way rather than every
+   block doing the same fade-up: the hero's dish names rise through their own
+   lines, the two feature photos slide open from their outer edges, the gallery plates are set down one after another, contact simply
+   rises, and the footer's rules draw across. Hidden starting states exist
+   only under html.fx, which the script adds once it is ready to reveal them,
+   so no-JS and reduced-motion visitors always get the finished page. */
+
+/* hero entrance — once per load; waits for the curtain when it plays */
+.hero h1 .ln{display:block;clip-path:inset(-.45em -.25em -.08em -.25em)}
+.hero h1 .ln-in{display:inline-block}
+html.mm{--hd:.15s}
+html.mm.intro-run{--hd:2.3s}
+html.mm .hero h1 .ln-in{animation:mo-line .9s var(--ease) backwards;animation-delay:calc(var(--hd) + var(--i) * 90ms)}
+html.mm .hero .tag{animation:mo-fade .6s var(--ease) backwards;animation-delay:var(--hd)}
+html.mm .hero-lede{animation:mo-rise .7s var(--ease) backwards;animation-delay:calc(var(--hd) + .35s)}
+html.mm .hero-cta{animation:mo-rise .7s var(--ease) backwards;animation-delay:calc(var(--hd) + .45s)}
+html.mm .chips{animation:mo-fade .8s var(--ease) backwards;animation-delay:calc(var(--hd) + .6s)}
+@keyframes mo-line{from{translate:0 105%}}
+@keyframes mo-rise{from{opacity:0;translate:0 14px}}
+@keyframes mo-fade{from{opacity:0}}
+/* desktop only: the video settles a little slower than the page as you leave
+   the hero. Vertical only, so the walnut stays under the copy column. */
+@supports (animation-timeline:scroll()){
+  @media(min-width:1024px){
+    html.mm .hero-scene video{animation:mo-sink linear both;animation-timeline:scroll(root);animation-range:0 100vh}
+  }
+}
+@keyframes mo-sink{to{translate:0 12%}}
+
+/* shared copy stagger for the two feature bands */
+html.fx [data-mo] .feature-copy > div > *{transition:opacity .7s var(--ease),translate .7s var(--ease),clip-path .9s var(--ease)}
+html.fx [data-mo] .feature-copy > div > :nth-child(1){transition-delay:.2s}
+html.fx [data-mo] .feature-copy > div > :nth-child(2){transition-delay:.28s}
+html.fx [data-mo] .feature-copy > div > :nth-child(3){transition-delay:.36s}
+html.fx [data-mo] .feature-copy > div > :nth-child(4){transition-delay:.44s}
+
+/* Order ahead: the photo is handed over from its outer edge */
+html.fx [data-mo=tray] .shot{clip-path:inset(0 0 0 0);transition:clip-path 1s var(--ease)}
+html.fx [data-mo=tray] .shot img{scale:1;transition:scale 1.3s var(--ease)}
+html.fx [data-mo=tray]:not(.in) .shot{clip-path:inset(0 100% 0 0)}
+html.fx [data-mo=tray]:not(.in) .shot img{scale:1.08}
+html.fx [data-mo=tray]:not(.in) .feature-copy > div > *{opacity:0;translate:0 16px}
+
+/* Eat well: the photo is handed over the same way as Order ahead's — from
+   its own outer edge, which on desktop is the right; the heading wipes up */
+html.fx [data-mo=clear] .shot{clip-path:inset(0 0 0 0);transition:clip-path 1s var(--ease)}
+html.fx [data-mo=clear] .shot img{scale:1;transition:scale 1.3s var(--ease)}
+html.fx [data-mo=clear]:not(.in) .shot{clip-path:inset(0 100% 0 0)}
+html.fx [data-mo=clear]:not(.in) .shot img{scale:1.08}
+@media(min-width:1024px){html.fx [data-mo=clear]:not(.in) .shot{clip-path:inset(0 0 0 100%)}}
+html.fx [data-mo=clear] h2{clip-path:inset(-.45em -.25em -.1em -.25em)}
+html.fx [data-mo=clear]:not(.in) h2{clip-path:inset(100% -.25em -.1em -.25em);translate:0 18px}
+html.fx [data-mo=clear]:not(.in) .feature-copy > div > :not(h2){opacity:0}
+
+/* Gallery: plates are set down on the pass, row by row */
+html.fx [data-mo=plates] figure{transition:opacity .7s var(--ease),translate .8s var(--ease),scale .8s var(--ease)}
+html.fx [data-mo=plates]:not(.in) figure{opacity:0;translate:0 -14px;scale:1.02}
+html.fx [data-mo=plates] figure:nth-child(2){transition-delay:.08s}
+html.fx [data-mo=plates] figure:nth-child(3){transition-delay:.16s}
+html.fx [data-mo=plates] figure:nth-child(4){transition-delay:.14s}
+html.fx [data-mo=plates] figure:nth-child(5){transition-delay:.22s}
+html.fx [data-mo=plates] figure:nth-child(6){transition-delay:.3s}
+
+/* Footer: the closing beat — each rule draws across, then its row lands */
+.foot,.foot-band,.legal{position:relative}
+html.fx footer [data-mo=rule]{border-top-color:transparent}
+html.fx footer [data-mo=rule]::before{
+  content:'';position:absolute;top:-1px;left:0;right:0;height:1px;background:#33502f;
+  transform-origin:left center;scale:0 1;transition:scale .9s var(--ease);
+}
+html.fx footer [data-mo=rule].in::before{scale:1 1}
+html.fx footer [data-mo=rule] > *{transition:opacity .6s var(--ease),translate .6s var(--ease)}
+html.fx footer [data-mo=rule]:not(.in) > *{opacity:0;translate:0 -10px}
+html.fx footer [data-mo=rule] > :nth-child(1){transition-delay:.15s}
+html.fx footer [data-mo=rule] > :nth-child(2){transition-delay:.21s}
+html.fx footer [data-mo=rule] > :nth-child(3){transition-delay:.27s}
+html.fx footer [data-mo=rule] > :nth-child(4){transition-delay:.33s}
+
+/* phones: shorter travel, no blur (it is costly on mobile GPUs) */
+@media(max-width:767px){
+  html.fx [data-mo=tray]:not(.in) .feature-copy > div > *{translate:0 8px}
+  html.fx [data-mo=plates]:not(.in) figure{translate:0 -8px}
+}
 </style>
 </head>
 <body>
@@ -720,7 +809,7 @@ a.bar-field:hover .val{opacity:.7}
     </div>
     <div class="wrap">
       <span class="tag"><svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12Z"/><circle cx="12" cy="9" r="2.2"/></svg>Located in U District</span>
-      <h1 class="display">Phở.<br>Bánh mì.<br><u>Rice bowls.</u></h1>
+      <h1 class="display"><span class="ln"><span class="ln-in" style="--i:0">Phở.</span></span> <span class="ln"><span class="ln-in" style="--i:1">Bánh mì.</span></span> <span class="ln"><u class="ln-in" style="--i:2">Rice bowls.</u></span></h1>
       <p class="hero-lede">Order on your phone, walk in, walk out. Twenty-four hour broth, twenty-minute lunch.</p>
       <div class="hero-cta">
         <a href="https://me-kitchen.square.site/" class="btn">Order online</a>
@@ -743,7 +832,7 @@ a.bar-field:hover .val{opacity:.7}
 
   <!-- ============ FEATURED ============ -->
   <section class="section band">
-    <div class="feature rv">
+    <div class="feature" data-mo="tray">
       <div class="shot"><picture>
         <img src="assets/g-spread.jpg" alt="A bánh mì, a bowl of phở and a grilled beef rice bowl laid out together with sauces, herbs and chopsticks." width="1024" height="1024" loading="lazy" decoding="async">
       </picture></div>
@@ -764,7 +853,7 @@ a.bar-field:hover .val{opacity:.7}
 
   <!-- ============ STORY ============ -->
   <section class="section dark band">
-    <div class="feature flip rv">
+    <div class="feature flip" data-mo="clear">
       <div class="shot"><picture>
         <source srcset="assets/bowl-beef.webp" type="image/webp">
         <img src="assets/bowl-beef.jpg" alt="A grilled beef rice bowl with cabbage slaw, pickled carrot and cucumber, on a wooden table." width="1600" height="905" loading="lazy" decoding="async">
@@ -786,7 +875,7 @@ a.bar-field:hover .val{opacity:.7}
   <!-- Photographs only, by request: no heading, no caption, no CTA. The alt
        text stays — it is not rendered, and the tiles are content, not decoration. -->
   <section class="section dark gallery-band">
-    <div class="gallery rv">
+    <div class="gallery" data-mo="plates">
       <figure><img src="assets/g-spread.jpg" alt="A bánh mì, a bowl of phở and a grilled beef rice bowl laid out together with sauces, herbs and chopsticks." width="1024" height="1024" loading="lazy" decoding="async"></figure>
       <figure><img src="assets/g-rice-bowl.jpg" alt="A grilled beef rice bowl with cabbage slaw, pickled carrot and a pot of green sauce." width="1024" height="1024" loading="lazy" decoding="async"></figure>
       <figure><img src="assets/g-banh-mi.jpg" alt="A bánh mì on a metal tray beside a dish of cucumber, pickled carrot, coriander and jalapeño." width="1024" height="1024" loading="lazy" decoding="async"></figure>
@@ -844,7 +933,7 @@ a.bar-field:hover .val{opacity:.7}
   <div class="wrap">
 
     <!-- row 1: brand column, then three columns of real destinations only -->
-    <div class="foot">
+    <div class="foot" data-mo="rule">
       <div class="foot-brand">
         <img src="assets/logo-mark.png" alt="Mê Kitchen" width="908" height="200">
         <div class="foot-social">
@@ -899,7 +988,7 @@ a.bar-field:hover .val{opacity:.7}
     </div>
 
 
-    <div class="foot-band">
+    <div class="foot-band" data-mo="rule">
       <div>
         <h2>Never miss a deal</h2>
         <p>Be first to hear about specials, new dishes and one-off offers. No spam, and you can leave whenever you like.</p>
@@ -909,7 +998,7 @@ a.bar-field:hover .val{opacity:.7}
       </div>
     </div>
 
-    <div class="legal">
+    <div class="legal" data-mo="rule">
       <span>© <span id="yr"></span> Mê Kitchen. All rights reserved.</span>
       <span><a href="mailto:mekitchen.wa@gmail.com">mekitchen.wa@gmail.com</a></span>
       <span>Seattle, WA</span>
@@ -1014,23 +1103,51 @@ a.bar-field:hover .val{opacity:.7}
     a.addEventListener('click',function(){nav.classList.remove('open');burger.setAttribute('aria-expanded','false');});
   });
 
+  /* the order island docks the moment the hero's Order button scrolls away
+     under the nav, and stays; the old fixed 560px threshold is the fallback */
+  var heroCta=document.querySelector('.hero-cta');
+  var barIO=!!(heroCta && 'IntersectionObserver' in window);
+  if(barIO){
+    new IntersectionObserver(function(es){
+      var e=es[0];
+      bar.classList.toggle('show',!e.isIntersecting && e.boundingClientRect.top<72);
+    },{rootMargin:'-72px 0px 0px 0px'}).observe(heroCta);
+  }
+  /* the hero video only plays while the hero is on screen */
+  var heroVid=document.querySelector('.hero-scene video');
+  var motionOK=document.documentElement.classList.contains('mm');
+  if(heroVid && 'IntersectionObserver' in window){
+    new IntersectionObserver(function(es){
+      if(es[0].isIntersecting){ if(motionOK) heroVid.play().catch(function(){}); }
+      else heroVid.pause();
+    }).observe(hero);
+  }
+
   /* nav goes solid past hero; keeps white text while over the dark hero */
   function onScroll(){
     var y=window.scrollY;
     nav.classList.toggle('solid',y>40);
     nav.classList.toggle('on-dark',y < hero.offsetHeight - 80);
-    bar.classList.toggle('show',y>560);
+    if(!barIO) bar.classList.toggle('show',y>560);
   }
   window.addEventListener('scroll',onScroll,{passive:true});onScroll();
 
-  /* reveal */
-  var rv=document.querySelectorAll('.rv');
-  if('IntersectionObserver' in window){
+  /* scroll reveals — each section plays its own entrance once. html.fx (which
+     arms the hidden starting states) is only added here, when motion is
+     allowed and the observer exists, so nothing can be left hidden. */
+  var rv=document.querySelectorAll('[data-mo],.rv');
+  if(motionOK && 'IntersectionObserver' in window){
+    document.documentElement.classList.add('fx');
     var io=new IntersectionObserver(function(es){
       es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
-    },{rootMargin:'0px 0px -10% 0px'});
-    rv.forEach(function(el){io.observe(el);});
-  } else { rv.forEach(function(el){el.classList.add('in');}); }
+    },{rootMargin:'0px 0px -12% 0px'});
+    /* the footer rows sit at the very end of the page, where the last one can
+       never climb past a bottom inset — so they trigger as soon as they show */
+    var ioEnd=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ioEnd.unobserve(e.target);}});
+    });
+    rv.forEach(function(el){(el.closest('footer')?ioEnd:io).observe(el);});
+  }
 
   /* contact form — posted with fetch so the reader stays on the page and gets
      the thank-you in place, instead of being thrown to Netlify's own success
