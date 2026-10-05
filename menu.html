@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Bánh Mì, Phở &amp; Rice Bowls | Mê Kitchen, Seattle</title>
-<meta name="description" content="Our full menu: bánh mì, phở, rice bowls, spring rolls and cà phê sữa đá. Made to order in Seattle's University District. Order ahead on Square.">
+<meta name="description" content="Our full menu: bánh mì, phở, rice bowls, spring rolls and cà phê sữa đá. Made to order in Seattle's University District. Order ahead online.">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
@@ -500,7 +500,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
     <a href="menu.html">Menu</a>
     <a href="story.html">Our story</a>
     <a href="home.html#contact">Contact</a>
-    <a href="https://me-kitchen.square.site/" class="btn btn-inv">Order on Square</a>
+    <a href="https://me-kitchen.square.site/" class="btn btn-inv">Order online</a>
   </div>
 </div>
 
@@ -641,7 +641,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
     <div class="wrap">
       <h2 class="display">Order ahead</h2>
       <p>Pay on your phone, walk in, walk out. We are on University Way in the U-District.</p>
-      <a href="https://me-kitchen.square.site/" class="btn btn-fill">Order on Square</a>
+      <a href="https://me-kitchen.square.site/" class="btn btn-fill">Order online</a>
     </div>
   </section>
 </main>
@@ -715,7 +715,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
         <h2>Find us</h2>
         <button type="button" class="foot-directions-trigger" data-open-directions aria-haspopup="dialog">Directions</button>
         <a href="mailto:mekitchen.wa@gmail.com">Email us</a>
-        <a href="https://me-kitchen.square.site/" target="_blank" rel="noopener">Order on Square</a>
+        <a href="https://me-kitchen.square.site/" target="_blank" rel="noopener">Order online</a>
       </div>
     </div>
 
@@ -1108,7 +1108,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
     title.textContent=c.name;
     foot.hidden=false;
     foot.innerHTML='<p class="foot-note grow">Tap a dish to see what is in it.</p>'+
-      '<a class="btn btn-ghost" href="'+SQUARE+'" target="_blank" rel="noopener">Order on Square</a>';
+      '<a class="btn btn-ghost" href="'+SQUARE+'" target="_blank" rel="noopener">Order online</a>';
     var h='<p class="sheet-lede">'+c.lede+'</p><div class="rows">';
     c.items.forEach(function(it,ix){
       h+='<button type="button" class="row" data-ix="'+ix+'"><span class="row-main"><h3>'+it.name+
@@ -1135,8 +1135,8 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
     var back=body.querySelector('.back');
     if(back) back.addEventListener('click',function(){ openCat(c); });
     foot.hidden=false;
-    foot.innerHTML='<p class="foot-note grow">Ordering happens on Square.</p>'+
-      '<a class="btn" href="'+SQUARE+'" target="_blank" rel="noopener">Order on Square</a>';
+    foot.innerHTML='<p class="foot-note grow">Orders are placed on our online ordering page.</p>'+
+      '<a class="btn" href="'+SQUARE+'" target="_blank" rel="noopener">Order online</a>';
     body.scrollTop=0;
     if(!sheet.hasAttribute('open')) openSheet();
   }

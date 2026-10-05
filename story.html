@@ -415,12 +415,6 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
   font-size:clamp(1.0625rem,1.8vw,1.25rem);color:var(--dim);
   max-width:44ch;margin:1.5rem 0 0;line-height:1.55;
 }
-.m2-facts{
-  list-style:none;padding:0;margin:1.5rem 0 0;display:flex;flex-wrap:wrap;
-  gap:.4rem 1.25rem;font-size:.8125rem;color:var(--dim);
-}
-.m2-facts li{display:flex;align-items:center;gap:.5rem}
-.m2-facts li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ink);flex:none}
 
 /* then / now diptych */
 .m2-dip{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;max-width:40rem}
@@ -642,7 +636,6 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 .m2-keep h2{font-size:clamp(1.75rem,5vw,3rem)}
 .m2-keep p{color:var(--dim);font-size:1.0625rem;margin:1rem 0 0;max-width:44ch}
 .m2-keep .btn{margin-top:1.75rem}
-.m2-keep p.m2-keep-note{font-size:.8125rem;margin-top:.75rem}
 
 /* ---------- desktop: the rail moves to the centre and rows alternate ---------- */
 @media(min-width:960px){
@@ -683,8 +676,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 .m2-h1-now{border-left-color:var(--paper)}
 .m2-k{color:#93a68d}
 .m2-h1-now .m2-k{color:var(--paper)}
-.m2-lead,.m2-facts,.m2-dip figcaption{color:#b6c4b0}
-.m2-facts li::before{background:var(--paper)}
+.m2-lead,.m2-dip figcaption{color:#b6c4b0}
 .m2-dip-then .ph{border-color:#5d7a58}
 .m2-dip-now img{outline-color:var(--paper)}
 .m2-dip-now .m2-pill{background:var(--paper);color:var(--ink)}
@@ -936,7 +928,7 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
     <a href="menu.html">Menu</a>
     <a href="story.html">Our story</a>
     <a href="home.html#contact">Contact</a>
-    <a href="https://me-kitchen.square.site/" class="btn btn-inv">Order on Square</a>
+    <a href="https://me-kitchen.square.site/" class="btn btn-inv">Order online</a>
   </div>
 </div>
 
@@ -960,11 +952,6 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
           <span class="m2-h1-now"><span class="m2-k">Now<span class="sr">:</span></span>Mê on the Ave.</span>
         </h1>
         <p class="m2-lead">Mê Kitchen started with a simple idea: create the Vietnamese restaurant we wish we had when we were students at UW. Phở, bánh mì and rice bowls, fast-casual, on University Way.</p>
-        <ul class="m2-facts" aria-label="At a glance">
-          <li>Opening this fall</li>
-          <li>11am&ndash;9pm Mon&ndash;Sat</li>
-          <li>In the U District</li>
-        </ul>
         <a class="m2i-begin" href="#m2i-then">Scroll to begin<span class="m2i-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></a>
       </div>
 
@@ -993,8 +980,8 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
     <div class="wrap">
       <header class="m2-era-head rv">
         <span class="m2-era-k">Then</span>
-        <h2 id="m2-then-h" class="display">Students in the U District</h2>
-        <p>We were students here once. This is the part of the story before Mê Kitchen.</p>
+        <h2 id="m2-then-h" class="display">Before Mê Kitchen</h2>
+        <p>We were students here once. This is where the story starts.</p>
       </header>
 
       <ol class="m2-line">
@@ -1029,7 +1016,7 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
                   <span class="m2i-day-label">Now</span>
                   <span class="m2-day-h">A day on the Ave, now</span>
                   <ul>
-                    <li>Grabbing a bánh mì between classes</li>
+                    <li>Grabbing a bánh mì on your lunch break</li>
                     <li>Sitting down over a bowl of phở with friends</li>
                     <li>Picking up dinner on your way home</li>
                   </ul>
@@ -1099,8 +1086,8 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
             <span class="m2-when">Now &middot; 02</span>
             <h3>Back where our story started</h3>
             <p>Being in the U District was important to us because this neighborhood is part of our own story.</p>
-            <p>We were students here once, and now we get to build something for the students, neighbors, and community that make the Ave what it is.</p>
-            <p class="m2-fact">4213 University Wy NE, across from&nbsp;H&nbsp;Mart.</p>
+            <p>Now we get to build something for the neighbors and community that make the Ave what it is.</p>
+            <p class="m2-fact">4213 University Wy NE, on the Ave.</p>
           </div>
           <div class="m2-aside">
             <div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">The storefront on University Way</span></div>
@@ -1147,13 +1134,13 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
             <span class="m2-when">Now &middot; 04</span>
             <h3>The place you come back to</h3>
             <p>At the end of the day, we want Mê Kitchen to be the place you can come back to again and again.</p>
-            <p>Whether you&rsquo;re grabbing a bánh mì between classes, sitting down over a bowl of phở with friends, or picking up dinner on your way home, we want you to remember one thing.</p>
+            <p>Whether you&rsquo;re grabbing a bánh mì on your lunch break, sitting down over a bowl of phở with friends, or picking up dinner on your way home, we want you to remember one thing.</p>
           </div>
           <div class="m2-aside">
             <ul class="m2-moments">
               <li>
                 <img src="assets/g-banh-mi.jpg" width="1024" height="1024" loading="lazy" decoding="async" alt="Bánh mì on a metal tray with pickles and herbs">
-                <div><b>Between classes</b><span>A bánh mì in your hand</span></div>
+                <div><b>On your lunch break</b><span>A bánh mì in your hand</span></div>
               </li>
               <li>
                 <img src="assets/g-pho-table.jpg" width="1024" height="1024" loading="lazy" decoding="async" alt="A bowl of phở on a table with chopsticks, lime and chilli">
@@ -1203,9 +1190,8 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
       <div class="m2-keep-in rv">
         <span class="m2-node" aria-hidden="true"></span>
         <h2 id="m2-keep-h" class="display">Keep in touch</h2>
-        <p>Join our loyalty list on Square and we will keep you posted as we get ready to open.</p>
+        <p>Join our loyalty list and we will keep you posted as we get ready to open.</p>
         <a href="https://squareup.com/customer-programs/enroll/wWZxq9nuvBBA?utm_medium=copied-link&amp;utm_source=online" target="_blank" rel="noopener" class="btn">Join the loyalty list</a>
-        <p class="m2-keep-note">Opens Square&rsquo;s sign-up page.</p>
       </div>
     </div>
   </section>
@@ -1266,7 +1252,7 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
         <h2>Find us</h2>
         <button type="button" class="foot-directions-trigger" data-open-directions aria-haspopup="dialog">Directions</button>
         <a href="mailto:mekitchen.wa@gmail.com">Email us</a>
-        <a href="https://me-kitchen.square.site/" target="_blank" rel="noopener">Order on Square</a>
+        <a href="https://me-kitchen.square.site/" target="_blank" rel="noopener">Order online</a>
       </div>
     </div>
 
