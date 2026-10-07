@@ -4,12 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Careers | Mê Kitchen</title>
-<meta name="description" content="Work with Mê Kitchen in Seattle's University District.">
-<!-- FILLER PAGE — content below is Lorem Ipsum placeholder text, put in only
-     to replace a broken {{CAREERS_URL}} link. Revisit before launch: real
-     copy, real (or removed) open positions, and remove this noindex tag
-     once that's done. See DEPLOY.md. -->
-<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Join the Mê Kitchen team in Seattle's University District. Apply online and attach your resume.">
+<link rel="canonical" href="https://me-kitchen.com/careers">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
@@ -132,41 +128,55 @@ a{color:inherit;text-decoration:none}
 .nav.open + .drawer .drawer-in>*:nth-child(5){transition-delay:.46s}
 .nav.open + .drawer .drawer-in>*:nth-child(6){transition-delay:.54s}
 
-/* ---------- page head ---------- */
-.head-band{padding:calc(72px + clamp(3rem,8vw,6rem)) 0 clamp(2rem,5vw,3.5rem)}
-.head-band h1{font-size:clamp(2.75rem,9vw,7rem)}
-.head-band p.stand{
-  font-size:clamp(1.0625rem,2vw,1.375rem);color:var(--dim);
-  max-width:46ch;margin:1.75rem 0 0;font-weight:300;
+/* ---------- the one block: copy on the left, application on the right ---------- */
+.apply{padding:calc(72px + clamp(3rem,7vw,5.5rem)) 0 clamp(3.5rem,8vw,6rem)}
+.apply-in{display:grid;gap:clamp(2rem,5vw,4rem);grid-template-columns:1fr;align-items:start}
+.apply-in>*{min-width:0}
+.apply h1{font-size:clamp(2.75rem,8vw,6rem)}
+.apply p.stand{font-size:clamp(1.0625rem,1.8vw,1.25rem);color:var(--dim);max-width:40ch;margin:1.5rem 0 0;line-height:1.55}
+.apply p.ask{font-size:.9375rem;color:var(--dim);margin:1.5rem 0 0}
+.apply p.ask a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.apply p.ask a:hover{color:var(--brand)}
+
+/* form: same fields as the contact form on the home page */
+.app-form{background:var(--wash);border:1px solid var(--line);border-radius:var(--r);padding:clamp(1.25rem,3vw,2rem)}
+.row2{display:grid;gap:0 1rem;grid-template-columns:1fr}
+.field{display:grid;gap:.4rem;margin:0 0 1rem}
+.field label,.field .lab{font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.14em;text-transform:uppercase}
+.opt{font-family:var(--body);font-weight:400;letter-spacing:0;text-transform:none;color:var(--dim)}
+.field input,.field textarea,.field select{
+  font:inherit;font-size:.9375rem;padding:.85rem 1rem;border-radius:var(--rb);
+  border:1px solid var(--line-strong);background:var(--paper);color:var(--ink);width:100%;
 }
+.field select{appearance:none;-webkit-appearance:none;padding-right:2.5rem;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322391f' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .9rem center;background-size:16px}
+.field textarea{min-height:96px;resize:vertical}
+.field input:focus-visible,.field textarea:focus-visible,.field select:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.field-note{font-size:.8125rem;color:var(--dim);margin:-.4rem 0 1rem}
 
-/* ---------- body ---------- */
-.section{padding:clamp(3rem,7vw,5.5rem) 0}
-.split{display:grid;gap:clamp(2rem,5vw,4rem);grid-template-columns:1fr;align-items:center}
-.split > *{min-width:0}
-.prose p{color:var(--dim);margin:0 0 1.5rem;max-width:48ch;font-size:1.0625rem}
-.prose p:last-of-type{margin-bottom:2rem}
-.picks{list-style:none;padding:0;margin:0 0 2rem;display:grid;gap:.6rem}
-.picks li{display:flex;align-items:baseline;gap:1rem;font-size:.9375rem;padding:.75rem 0;border-bottom:1px solid var(--line)}
-.picks b{font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;min-width:9rem}
-.picks span{color:var(--dim)}
-
-/* photo placeholders */
-.ph{position:relative;background:var(--wash);display:grid;place-items:center;color:var(--line-strong);overflow:hidden;border-radius:var(--r)}
-.ph.r-4-5{aspect-ratio:4/5}
-.ph.r-3-2{aspect-ratio:3/2}
-.ph svg{position:relative;width:34%;max-width:140px;height:auto}
-.ph-tag{
-  position:absolute;left:.75rem;bottom:.75rem;font-family:var(--display);font-weight:500;
-  font-size:.625rem;letter-spacing:.14em;text-transform:uppercase;
-  padding:.35rem .65rem;border-radius:999px;background:var(--ink);color:var(--paper);
+/* upload boxes: the real file input covers the whole box, so clicking and
+   dropping a file both work without any script */
+.drops{display:grid;gap:1rem;grid-template-columns:1fr;margin:0 0 1.25rem}
+.drop{position:relative;display:grid;justify-items:center;gap:.35rem;text-align:center;
+  padding:1.4rem 1rem;border:1.5px dashed var(--line-strong);border-radius:var(--rb);background:var(--paper);
+  transition:border-color .2s,background .2s}
+.drop input[type=file]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.drop svg{width:26px;height:26px;color:var(--dim)}
+.drop b{font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase}
+.drop span{font-size:.8125rem;color:var(--dim)}
+.drop .name{color:var(--ink);font-weight:500;word-break:break-all}
+.drop:hover,.drop.over{border-color:var(--ink);background:#fffdf7}
+.drop.has{border-style:solid;border-color:var(--ink)}
+.drop:focus-within{outline:2px solid var(--ink);outline-offset:2px}
+.drop.bad{border-color:#a5533f;background:#f7ece8}
+.app-form .btn{width:100%}
+.form-sent{
+  margin:0;padding:1.1rem 1.25rem;border-radius:var(--rb);
+  border:1px solid var(--line-strong);background:var(--wash);
+  color:var(--ink);font-size:.9375rem;
 }
-
-/* ---------- closing CTA ---------- */
-.closer{background:var(--ink);color:var(--paper);text-align:center;padding:clamp(3.5rem,8vw,6rem) 0}
-.closer h2{font-size:clamp(2rem,6vw,4rem);margin-bottom:1.5rem}
-.closer p{color:#d8e0d2;max-width:44ch;margin:0 auto 2rem;font-weight:300}
-.closer .btn-fill{--fill:var(--paper); --fill-text:var(--ink)}
+.form-sent.bad{border-color:#c9a79b;background:#f7ece8}
 
 /* ---------- footer ---------- */
 footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0 2rem;overflow:hidden;border-top:1px solid #33502f}
@@ -264,12 +274,14 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 /* ---------- responsive ---------- */
 @media(min-width:768px){
   .brand img{height:40px}
-  .split{grid-template-columns:1.1fr .9fr}
+  .row2,.drops{grid-template-columns:1fr 1fr}
   .foot{grid-template-columns:2fr 1fr 1fr 1fr}
 }
 @media(min-width:1024px){
   .nav-links{display:flex}
   .burger{display:none}
+  .apply-in{grid-template-columns:.85fr 1.15fr}
+  .apply-copy{position:sticky;top:calc(72px + 2rem)}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -334,13 +346,6 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 </head>
 <body>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="bowl" viewBox="0 0 100 100">
-    <path d="M12 42h76c0 22-17 38-38 38S12 64 12 42Z" fill="none" stroke="currentColor" stroke-width="3"/>
-    <path d="M30 32c0-6 6-8 6-14M50 30c0-7 7-9 7-16M70 32c0-6 6-8 6-14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-  </symbol>
-</svg>
-
 <header class="nav" id="nav">
   <div class="wrap nav-in">
     <a href="home.html" class="brand" aria-label="Mê Kitchen home">
@@ -370,34 +375,67 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 </div>
 
 <main>
-  <section class="head-band">
-    <div class="wrap">
-      <span class="tag">Careers</span>
-      <h1 class="display">Join the<br>kitchen</h1>
-      <p class="stand">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap split">
-      <div class="prose rv">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <ul class="picks">
-          <li><b>Lorem Ipsum Role</b><span>Dolor sit amet, consectetur</span></li>
-          <li><b>Lorem Ipsum Role</b><span>Adipiscing elit sed do eiusmod</span></li>
-          <li><b>Lorem Ipsum Role</b><span>Tempor incididunt ut labore</span></li>
-        </ul>
+  <section class="apply">
+    <div class="wrap apply-in">
+      <div class="apply-copy">
+        <span class="tag">Careers</span>
+        <h1 class="display">Join the<br>team</h1>
+        <p class="stand">We are always happy to hear from people who want to join the Mê Kitchen team. Tell us a bit about yourself, attach your resume if you have one, and we will be in touch.</p>
+        <p class="ask">Questions first? Email <a href="mailto:mekitchen.wa@gmail.com">mekitchen.wa@gmail.com</a>.</p>
       </div>
-      <div class="ph r-4-5 rv"><svg><use href="#bowl"/></svg><span class="ph-tag">Team photo placeholder</span></div>
-    </div>
-  </section>
 
-  <section class="closer">
-    <div class="wrap">
-      <h2 class="display">Interested?</h2>
-      <p>This page is a placeholder. Real openings go here. Reach out and we will follow up.</p>
-      <a href="mailto:mekitchen.wa@gmail.com" class="btn btn-fill">Email us</a>
+      <div>
+        <!-- Netlify detects this form on deploy and stores each application,
+             attachments included. As with the contact form, the address that
+             gets emailed is a dashboard setting, not HTML: Netlify > Site
+             configuration > Forms > Form notifications > Email notification,
+             for the "careers" form. Netlify limits: one file per upload field,
+             8 MB per submission, so each box is capped at 4 MB below. -->
+        <form class="app-form" name="careers" action="/careers?sent=1" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="careers">
+          <input type="hidden" name="subject" value="New Mê Kitchen job application">
+          <p hidden><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+          <div class="field"><label for="a-name">Full name</label><input id="a-name" name="name" type="text" autocomplete="name" required></div>
+          <div class="row2">
+            <div class="field"><label for="a-email">Email</label><input id="a-email" name="email" type="email" autocomplete="email" required></div>
+            <div class="field"><label for="a-phone">Phone</label><input id="a-phone" name="phone" type="tel" autocomplete="tel" required></div>
+          </div>
+          <div class="field">
+            <label for="a-role">Position</label>
+            <select id="a-role" name="position" required>
+              <option value="" selected disabled>Choose one</option>
+              <option>Front of house</option>
+              <option>Kitchen</option>
+              <option>Either</option>
+            </select>
+          </div>
+          <div class="field"><label for="a-avail">Availability</label><textarea id="a-avail" name="availability" placeholder="Which days and times can you work, and when could you start?" required></textarea></div>
+          <div class="field"><label for="a-about">Anything else? <span class="opt">(optional)</span></label><textarea id="a-about" name="about" placeholder="Experience, what you are looking for, anything you want us to know."></textarea></div>
+
+          <div class="drops">
+            <div class="drop">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+              <b>Resume <span class="opt">(optional)</span></b>
+              <span class="name" data-default="Click or drop a file here">Click or drop a file here</span>
+              <span>PDF or Word, up to 4 MB</span>
+              <input type="file" name="resume" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" aria-label="Resume, optional. PDF or Word, up to 4 MB">
+            </div>
+            <div class="drop">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+              <b>Cover letter <span class="opt">(optional)</span></b>
+              <span class="name" data-default="Click or drop a file here">Click or drop a file here</span>
+              <span>PDF or Word, up to 4 MB</span>
+              <input type="file" name="cover_letter" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" aria-label="Cover letter, optional. PDF or Word, up to 4 MB">
+            </div>
+          </div>
+
+          <button type="submit" class="btn">Send application</button>
+        </form>
+        <p class="form-sent" id="applySent" role="status" aria-live="polite" hidden>
+          Thank you for applying. We have got your application and will be in touch.
+        </p>
+      </div>
     </div>
   </section>
 </main>
@@ -572,6 +610,57 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 
 
 
+
+
+  /* upload boxes — show the chosen file's name, and turn away anything that
+     is not PDF/Word or is over 4 MB before it ever reaches Netlify */
+  var MAX=4*1024*1024, OK=/\.(pdf|docx?)$/i;
+  document.querySelectorAll('.drop').forEach(function(box){
+    var input=box.querySelector('input[type=file]'), name=box.querySelector('.name');
+    function show(){
+      var f=input.files && input.files[0];
+      box.classList.remove('bad');
+      input.setCustomValidity('');
+      if(!f){ box.classList.remove('has'); name.textContent=name.getAttribute('data-default'); return; }
+      if(!OK.test(f.name)){ input.setCustomValidity('Please attach a PDF or Word file.'); }
+      else if(f.size>MAX){ input.setCustomValidity('That file is over 4 MB. Please attach a smaller copy.'); }
+      if(input.validationMessage){ box.classList.add('bad'); box.classList.remove('has'); name.textContent=input.validationMessage; }
+      else { box.classList.add('has'); name.textContent=f.name; }
+    }
+    input.addEventListener('change',show);
+    input.addEventListener('dragenter',function(){ box.classList.add('over'); });
+    ['dragleave','drop'].forEach(function(t){ input.addEventListener(t,function(){ box.classList.remove('over'); }); });
+  });
+
+  /* application — posted with fetch so the applicant gets the thank-you in
+     place. Sent as multipart FormData (no Content-Type header, the browser
+     sets the boundary) because it carries files. ?sent=1 shows the
+     confirmation without sending anything, and is where the no-JS fallback
+     lands. */
+  var aform=document.querySelector('form[name="careers"]'), asent=document.getElementById('applySent');
+  if(aform && asent){
+    var sentText=asent.textContent;
+    function showSent(msg,bad){
+      aform.hidden=!bad; asent.hidden=false;
+      asent.textContent=msg||sentText;
+      asent.classList.toggle('bad',!!bad);
+      asent.setAttribute('tabindex','-1'); asent.focus();
+    }
+    if(/[?&]sent=1(&|$)/.test(location.search)) showSent();
+    aform.addEventListener('submit',function(e){
+      e.preventDefault();
+      var btn=aform.querySelector('button[type=submit]');
+      if(btn){ btn.disabled=true; btn.textContent='Sending…'; }
+      fetch(location.pathname,{ method:'POST', body:new FormData(aform) })
+        .then(function(r){
+          if(!r.ok) throw new Error(r.status);
+          showSent();
+        }).catch(function(){
+          if(btn){ btn.disabled=false; btn.textContent='Send application'; }
+          showSent('That did not send. Please try again, or email your application to mekitchen.wa@gmail.com.',true);
+        });
+    });
+  }
 
   document.getElementById('yr').textContent = new Date().getFullYear();
 })();

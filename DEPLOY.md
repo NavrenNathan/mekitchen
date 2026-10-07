@@ -16,7 +16,7 @@ deploy/
 ├── menu.html       full menu, /menu — carries the MenuItem structured data
 ├── location.html   address and hours, /location
 ├── story.html      the Our story page, /story
-├── careers.html    placeholder careers page, noindex
+├── careers.html    careers page with the "careers" Netlify application form, /careers
 ├── 404.html        not-found page (Netlify picks this up automatically)
 ├── robots.txt      currently blocking search engines — see below
 ├── netlify.toml    security headers, caching, redirects
@@ -119,7 +119,7 @@ These render literally as `{{LIKE_THIS}}` on the page, so they are obvious.
 | ~~`{{EMAIL}}`~~ | 0 | **Done** — mekitchen.wa@gmail.com, wired as a `mailto:` link |
 | `{{SEATS}}` | 1 | Seat count (shown as a stat) |
 | `{{INSTAGRAM_URL}}` `{{TIKTOK_URL}}` | 1 each | Socials |
-| ~~`{{CAREERS_URL}}`~~ | 0 | **Partially done** — points at `careers.html`, a new page. Its content is Lorem Ipsum placeholder text (marked `noindex` and flagged with an HTML comment). Needs real copy and real open positions, or a decision to delete the page and the link, before launch. |
+| ~~`{{CAREERS_URL}}`~~ | 0 | **Done** — points at `careers.html`: one block with a Netlify application form (name, email, phone, position, availability, optional note, optional resume and cover letter uploads, 4 MB each). Add an email notification for the `careers` form in the Netlify dashboard so applications reach mekitchen.wa@gmail.com. |
 | `{{STORY_*}}` (in `story.html`) | 5 | **The Our story page.** `STORY_STANDFIRST` (opening line), `STORY_INTRO` and `STORY_DETAIL` (two paragraphs), plus `STORY_FOUNDED` and `STORY_KITCHEN` for the facts list. Needs the owners' real account, not invented copy. The name meaning is already in, from the owner. |
 | `{{DELIVERY_ANSWER}}` | 1 | FAQ: delivery platforms at launch |
 | `{{STUDENT_DISCOUNT_ANSWER}}` | 1 | FAQ: student discount, yes or no |
