@@ -457,8 +457,15 @@ html.m2i-motion .rv:not(.in) .m2-close-kick span{background-size:0% 3px}
    ("then"), solid green once Mê exists ("now"), ending at the closing note. */
 
 /* ---------- hero ---------- */
-.m2-hero{padding:calc(72px + clamp(3rem,6vw,5rem)) 0 clamp(3rem,7vw,5.5rem)}
-.m2-hero-in{display:grid;gap:clamp(2.5rem,5vw,4.5rem);align-items:center}
+/* hero: a 55/45 split. Words take the left 55%, lined up with the header
+   logo; one photo fills the right 45% to the edge of the screen. On phones
+   the photo drops below the words, full width. */
+.m2-hero-in{display:grid;grid-template-columns:1fr}
+.m2-hero-copy{padding:calc(72px + clamp(3rem,6vw,5rem)) var(--pad) clamp(3rem,7vw,5.5rem)}
+/* our-story.jpg has its edit baked in: the street at 86% brightness, the
+   sign at 106%, so the sign reads first. Source: ~/mekitchen-scratch/_src. */
+.m2-hero-shot{margin:0;position:relative;overflow:hidden;aspect-ratio:1/1}
+.m2-hero-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:47% 60%}
 .m2-hero-in>*{min-width:0}
 .m2-hero .tag{margin-bottom:1.25rem}
 .m2-h1{font-size:clamp(2.2rem,8.4vw,5.25rem);line-height:.95}
@@ -476,29 +483,6 @@ html.m2i-motion .rv:not(.in) .m2-close-kick span{background-size:0% 3px}
 }
 
 /* then / now diptych */
-.m2-dip{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;max-width:40rem}
-.m2-dip figure{margin:0;min-width:0}
-.m2-dip-media{position:relative}
-.m2-dip-media .ph,.m2-dip-media img{aspect-ratio:1/1;width:100%;height:auto;border-radius:var(--r)}
-.m2-dip-media img{object-fit:cover}
-.m2-dip-then .ph{border:2px dashed var(--line-strong)}
-.m2-dip-then .ph svg{width:40%}
-.m2-dip-now img{outline:2px solid var(--ink);outline-offset:-2px}
-.m2-pill{
-  position:absolute;top:.6rem;left:.6rem;z-index:1;
-  font-family:var(--display);font-weight:700;font-size:.625rem;letter-spacing:.16em;
-  text-transform:uppercase;padding:.3rem .6rem;border-radius:999px;line-height:1.2;
-}
-.m2-dip-then .m2-pill{background:var(--paper);color:var(--dim);border:1px dashed var(--line-strong)}
-.m2-dip-now .m2-pill{background:var(--ink);color:var(--paper)}
-.m2-arrow{
-  position:absolute;top:50%;left:calc(-.375rem - 18px);z-index:2;
-  width:36px;height:36px;border-radius:50%;display:grid;place-items:center;
-  background:var(--ink);color:var(--paper);transform:translateY(-50%);
-  box-shadow:0 0 0 4px var(--paper);
-}
-.m2-arrow svg{width:16px;height:16px}
-.m2-dip figcaption{font-size:.8125rem;color:var(--dim);margin-top:.6rem;line-height:1.4}
 
 /* ---------- eras + the rail ---------- */
 .m2-era{position:relative;padding:clamp(3.5rem,8vw,6rem) 0}
@@ -694,7 +678,14 @@ html.m2i-motion .rv:not(.in) .m2-close-kick span{background-size:0% 3px}
 
 /* ---------- desktop: the rail moves to the centre and rows alternate ---------- */
 @media(min-width:960px){
-  .m2-hero-in{grid-template-columns:1.05fr .95fr}
+  .m2-hero-in{grid-template-columns:55fr 45fr;min-height:clamp(560px,52vw,760px)}
+  .m2-hero-copy{
+    align-self:center;
+    padding-left:max(var(--pad),calc((100vw - var(--maxw)) / 2 + var(--pad)));
+    padding-right:clamp(2rem,5vw,4.5rem);
+  }
+  /* starts under the fixed header rather than behind it */
+  .m2-hero-shot{aspect-ratio:auto;margin-top:72px}
 
   .m2-era::before,.m2-turn::before,.m2-turn::after,.m2-close::after,.m2-keep::before{left:calc(50% - 1px)}
   .m2-era-head{padding-left:0;text-align:center;max-width:44rem;margin-left:auto;margin-right:auto;padding:1.25rem 1.5rem}
@@ -731,11 +722,7 @@ html.m2i-motion .rv:not(.in) .m2-close-kick span{background-size:0% 3px}
 .m2-h1-now{border-left-color:var(--paper)}
 .m2-k{color:#93a68d}
 .m2-h1-now .m2-k{color:var(--paper)}
-.m2-lead,.m2-dip figcaption{color:#b6c4b0}
-.m2-dip-then .ph{border-color:#5d7a58}
-.m2-dip-now img{outline-color:var(--paper)}
-.m2-dip-now .m2-pill{background:var(--paper);color:var(--ink)}
-.m2-arrow{background:var(--paper);color:var(--ink);box-shadow:0 0 0 4px var(--ink)}
+.m2-lead{color:#b6c4b0}
 .m2-hero a:focus-visible{outline-color:var(--paper)}
 </style>
 <style>
@@ -999,7 +986,7 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
 
   <!-- ===== HERO: then / now in one headline ===== -->
   <section class="m2-hero">
-    <div class="wrap m2-hero-in">
+    <div class="m2-hero-in">
       <div class="m2-hero-copy">
         <span class="tag">Our story</span>
         <h1 class="display m2-h1">
@@ -1009,24 +996,9 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
         <p class="m2-lead">Mê Kitchen started with a simple idea: create the Vietnamese restaurant we wish we had when we were students at UW.</p>
         <a class="m2i-begin" href="#m2i-then">Scroll to begin<span class="m2i-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></a>
       </div>
-
-      <div class="m2-dip">
-        <figure class="m2-dip-then">
-          <div class="m2-dip-media">
-            <span class="m2-pill">Then</span>
-            <div class="ph"><svg><use href="#bowl"/></svg><span class="ph-tag">Us as students on the Ave</span></div>
-          </div>
-          <figcaption>Us, a few years back.</figcaption>
-        </figure>
-        <figure class="m2-dip-now">
-          <div class="m2-dip-media">
-            <span class="m2-pill">Now</span>
-            <span class="m2-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            <img src="assets/g-poster.jpg" width="1024" height="1024" alt="A bowl of phở on the counter under a Mê Kitchen poster that reads Phở Brings People Together">
-          </div>
-          <figcaption>Phở, ready when you are.</figcaption>
-        </figure>
-      </div>
+      <figure class="m2-hero-shot">
+        <img src="assets/our-story.jpg" width="1300" height="1613" alt="The round green Mê Kitchen sign hanging outside the restaurant, with trees behind it.">
+      </figure>
     </div>
   </section>
 
@@ -1144,7 +1116,9 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
             <p>Now we get to build something for the neighbors and community that make the Ave what it is.</p>
           </div>
           <div class="m2-aside">
-            <div class="ph r-3-2"><svg><use href="#bowl"/></svg><span class="ph-tag">The storefront on University Way</span></div>
+            <figure class="m2-shot">
+              <img src="assets/u-district.jpg" width="1100" height="733" loading="lazy" decoding="async" alt="The University District from above in autumn, with towers, rooftops and tree-lined streets">
+            </figure>
           </div>
           <div class="m2i-next"><a href="#m2i-me">Next: Mê <span aria-hidden="true">&darr;</span></a></div>
         </li>
