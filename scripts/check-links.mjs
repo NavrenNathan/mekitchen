@@ -30,7 +30,7 @@ const pending = [];
 const htmlFiles = readdirSync(ROOT).filter((f) => f.endsWith('.html')).sort();
 
 // Pages that exist but are deliberately not part of the indexable site.
-const NON_INDEXABLE = new Set(['404.html', 'soon.html', 'careers.html']);
+const NON_INDEXABLE = new Set(['404.html', 'index.html']);
 
 /**
  * Placeholders that are known-outstanding and consciously accepted for now.
@@ -90,7 +90,8 @@ for (const file of htmlFiles) {
 
     // Split path and fragment.
     const [rawPath, frag] = url.split('#');
-    let p = rawPath;
+    // drop any ?query (e.g. the ?v= cache-busting fingerprints on scripts)
+    let p = rawPath.split('?')[0];
     if (!p) continue;
 
     // Root-relative "/" and "/menu" style links -> resolve to a file.

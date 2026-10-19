@@ -11,12 +11,18 @@
     X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
-    # Deliberately narrow: it does not restrict script/style sources (the
-    # pages use inline <script>/<style>), only things nothing here needs —
-    # plugins, <base> hijacking, framing by other sites, and forms posting
-    # anywhere but this origin (Netlify Forms posts to the same origin).
-    Content-Security-Policy = "object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
+    # Everything comes from this site: fonts are self-hosted in /fonts and
+    # page scripts live in /assets/js. Forms post and fetch back to this
+    # origin only. Scripts: only files from this site, plus the home page's
+    # one-line head script, allowed by its hash (if you edit that line, run
+    # `node scripts/stamp-assets.mjs` and paste the new hash it prints here).
+    # Styles still allow inline because pages use <style> blocks and
+    # style="" attributes.
+    # Google Analytics 4 (assets/js/analytics.js) is the one outside service:
+    # the hosts are Google's documented list for GA4 *without* Ads features
+    # (developers.google.com/tag-platform/security/guides/csp).
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'sha256-ORf1yTYJCLzkZY6VfpkVmPY+ogn8mEJTG+AIVHGJgWQ=' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; media-src 'self'; connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests"
 
 # --- Caching ----------------------------------------------------------
 # HTML must revalidate so edits appear immediately.
@@ -33,6 +39,15 @@
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"
+
+# Font files are never edited in place (a new version would get a new name),
+# so these can be cached for a year. Kept outside /assets/ so only one
+# Cache-Control rule ever matches them (Netlify doesn't document how
+# overlapping rules combine).
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
 
 # --- Redirects ---------------------------------------------------------
 # The main site used to live at /site.html; it is now /home.html. Anything
@@ -74,6 +89,11 @@
   force = true
 [[redirects]]
   from = "/reports/*"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/docs/*"
   to = "/404.html"
   status = 404
   force = true

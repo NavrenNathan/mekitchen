@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Our Story | Authentic Vietnamese Restaurant in Seattle</title>
-<meta name="description" content="The story behind Mê Kitchen, an authentic Vietnamese restaurant in Seattle's University District.">
+<meta name="description" content="The story behind Mê Kitchen, a fast-casual Vietnamese restaurant on the Ave in Seattle's University District, and what the name Mê means.">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
@@ -16,13 +16,13 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://me-kitchen.com/story">
 <meta property="og:title" content="Our Story | Authentic Vietnamese Restaurant in Seattle">
-<meta property="og:description" content="The story behind Mê Kitchen, an authentic Vietnamese restaurant in Seattle's University District.">
+<meta property="og:description" content="The story behind Mê Kitchen, a fast-casual Vietnamese restaurant on the Ave in Seattle's University District, and what the name Mê means.">
 <meta property="og:image" content="https://me-kitchen.com/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Our Story | Authentic Vietnamese Restaurant in Seattle">
-<meta name="twitter:description" content="The story behind Mê Kitchen, an authentic Vietnamese restaurant in Seattle's University District.">
+<meta name="twitter:description" content="The story behind Mê Kitchen, a fast-casual Vietnamese restaurant on the Ave in Seattle's University District, and what the name Mê means.">
 <meta name="twitter:image" content="https://me-kitchen.com/assets/og-image.png">
 <script type="application/ld+json">
 {
@@ -30,6 +30,7 @@
   "@type": "Restaurant",
   "name": "Mê Kitchen",
   "telephone": "206-656-8878",
+  "email": "mekitchen.wa@gmail.com",
   "url": "https://me-kitchen.com/",
   "description": "The story behind Mê Kitchen, an authentic Vietnamese restaurant in Seattle's University District.",
   "openingHoursSpecification": {
@@ -60,16 +61,19 @@
   ]
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Loaded non-render-blocking: the stylesheet is fetched as print (which
-     does not block paint) then promoted to all once ready. The URL already
-     carries display=swap, so text paints in the fallback and swaps in place.
-     Saves ~1.5s of render-blocking time measured at baseline. -->
-<link rel="stylesheet" media="print" onload="this.media='all';this.onload=null"
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Geist:wght@300;400;500;600&display=swap">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Geist:wght@300;400;500;600&display=swap"></noscript>
+<link rel="preload" href="/fonts/spacegrotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+/* Self-hosted from Google Fonts (variable fonts: one file covers every
+   weight). Latin, Latin Extended and Vietnamese subsets only; the browser
+   downloads a subset only when a page uses its characters. */
+@font-face{font-family:'Geist';font-style:normal;font-weight:300 600;font-display:swap;src:url(/fonts/geist-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Geist';font-style:normal;font-weight:300 600;font-display:swap;src:url(/fonts/geist-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Geist';font-style:normal;font-weight:300 600;font-display:swap;src:url(/fonts/geist-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/spacegrotesk-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/spacegrotesk-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/spacegrotesk-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+
 *,*::before,*::after{box-sizing:border-box}
 :root{
   --scrim:30 26 22;
@@ -179,56 +183,11 @@ a{color:inherit;text-decoration:none}
 .nav.open + .drawer .drawer-in>*:nth-child(6){transition-delay:.54s}
 
 /* ---------- page head ---------- */
-.head-band{padding:calc(72px + clamp(3rem,8vw,6rem)) 0 clamp(2rem,5vw,3.5rem)}
-.head-band h1{font-size:clamp(2.75rem,9vw,7rem)}
-.head-band p.stand{
-  font-size:clamp(1.0625rem,2vw,1.375rem);color:var(--dim);
-  max-width:46ch;margin:1.75rem 0 0;font-weight:300;
-}
-
 /* ---------- name meaning ---------- */
-.meaning{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(2.5rem,6vw,4.5rem) 0;text-align:center}
-.meaning .word{
-  font-family:var(--display);font-weight:700;line-height:1;margin:0;
-  font-size:clamp(4.5rem,17vw,11rem);letter-spacing:-.05em;
-}
-.meaning .pron{
-  display:block;font-family:var(--display);font-size:.6875rem;font-weight:500;
-  letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-top:1.25rem;
-}
-.meaning .def{
-  font-size:clamp(1.125rem,2.6vw,1.75rem);font-weight:300;line-height:1.4;
-  max-width:32ch;margin:1.5rem auto 0;
-}
-
 /* ---------- story body ---------- */
 .section{padding:clamp(3rem,7vw,5.5rem) 0}
-.split{display:grid;gap:clamp(2rem,5vw,4rem);grid-template-columns:1fr;align-items:center}
-.split > *{min-width:0}
-.prose p{color:var(--dim);margin:0 0 1.5rem;max-width:48ch;font-size:1.0625rem}
-.prose p:last-of-type{margin-bottom:2rem}
-.picks{list-style:none;padding:0;margin:0 0 2rem;display:grid;gap:.6rem}
-.picks li{display:flex;align-items:baseline;gap:1rem;font-size:.9375rem;padding:.75rem 0;border-bottom:1px solid var(--line)}
-.picks b{font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;min-width:5.5rem}
-.picks span{color:var(--dim)}
-
 /* photo placeholders */
-.ph{position:relative;background:var(--wash);display:grid;place-items:center;color:var(--line-strong);overflow:hidden;border-radius:var(--r)}
-.ph.r-4-5{aspect-ratio:4/5}
-.ph.r-3-2{aspect-ratio:3/2}
-.ph svg{position:relative;width:34%;max-width:140px;height:auto}
-.ph-tag{
-  position:absolute;left:.75rem;bottom:.75rem;font-family:var(--display);font-weight:500;
-  font-size:.625rem;letter-spacing:.14em;text-transform:uppercase;
-  padding:.35rem .65rem;border-radius:999px;background:var(--ink);color:var(--paper);
-}
-
 /* ---------- closing CTA ---------- */
-.closer{background:var(--ink);color:var(--paper);text-align:center;padding:clamp(3.5rem,8vw,6rem) 0}
-.closer h2{font-size:clamp(2rem,6vw,4rem);margin-bottom:1.5rem}
-.closer p{color:#d8e0d2;max-width:44ch;margin:0 auto 2rem;font-weight:300}
-.closer .btn-fill{--fill:var(--paper); --fill-text:var(--ink)}
-
 /* ---------- footer ---------- */
 footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0 2rem;overflow:hidden;border-top:1px solid #33502f}
 .foot{display:grid;gap:2rem;grid-template-columns:1fr;padding-top:.5rem}
@@ -309,6 +268,15 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 .modal-option svg{width:20px;height:20px;flex:none}
 .modal-option span{font-family:var(--display);font-weight:700;font-size:.875rem;letter-spacing:.01em;text-transform:uppercase}
 .modal-option:hover,.modal-option:focus-visible{border-color:var(--ink);background:var(--wash)}
+/* email popup: the address itself, then a copy button styled as an option */
+.modal-email{
+  display:block;margin:0 0 .75rem;padding:.9rem 1rem;border-radius:var(--rb);
+  background:var(--wash);border:1px solid var(--line);
+  font-size:1rem;font-weight:600;color:var(--ink);word-break:break-all;
+  user-select:all;-webkit-user-select:all;
+}
+.modal-copy{width:100%;background:none;font:inherit;cursor:pointer;text-align:left}
+.modal-copy.done{border-color:var(--ink);background:var(--wash)}
 @media(prefers-reduced-motion:reduce){
   .modal-overlay,.modal-card{transition-duration:.01ms!important}
 }
@@ -324,9 +292,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 
 /* ---------- responsive ---------- */
 @media(min-width:768px){
-  .brand img{height:40px}
-  .split{grid-template-columns:1.1fr .9fr}
-  .foot{grid-template-columns:2fr 1fr 1fr 1fr}
+  .brand img{height:40px}  .foot{grid-template-columns:2fr 1fr 1fr 1fr}
 }
 @media(min-width:1024px){
   .nav-links{display:flex}
@@ -375,10 +341,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 /* the page's buttons are green, which disappears on the footer's green ground,
    so the footer carries its own cream pair */
 .foot-solid{background:var(--paper);color:var(--ink);border-color:var(--paper)}
-.btn.foot-solid:hover{background:var(--wash);border-color:var(--wash);color:var(--ink)}
-.foot-ghost{background:transparent;color:var(--paper);border-color:#5d7a58}
-.btn.foot-ghost:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
-.foot a.foot-solid::after,.foot a.foot-ghost::after,.foot-band a::after{display:none}
+.btn.foot-solid:hover{background:var(--wash);border-color:var(--wash);color:var(--ink)}.foot a.foot-solid::after,.foot-band a::after{display:none}
 .foot-news{display:flex;flex-wrap:wrap;gap:.6rem}
 .legal a{color:inherit;text-decoration:none}
 .legal a:hover{color:var(--paper)}
@@ -450,6 +413,12 @@ html.m2i-motion .m2-close-kick span{
   transition:background-size .9s cubic-bezier(.2,.8,.2,1) .6s;
 }
 html.m2i-motion .rv:not(.in) .m2-close-kick span{background-size:0% 3px}
+/* skip link: off-screen until a keyboard user tabs to it */
+.skip{position:absolute;left:12px;top:-100px;z-index:1000;padding:.7rem 1.1rem;border-radius:10px;
+  background:#22391f;color:#faf7ef;font:600 .875rem/1.2 'Geist',-apple-system,sans-serif;text-decoration:none;
+  box-shadow:0 0 0 2px #faf7ef}
+.skip:focus{top:12px;outline:2px solid #22391f;outline-offset:2px}
+#main:focus{outline:none}
 </style>
 <style>
 /* ===== Mockup 2: Then and Now =====
@@ -613,6 +582,7 @@ html.m2i-motion .rv:not(.in) .m2-close-kick span{background-size:0% 3px}
 .m2-close::before{
   content:"";position:absolute;inset:0;z-index:-1;opacity:.35;
   background:url("assets/dragon-bridge.jpg") center bottom/cover no-repeat;
+  background-image:image-set(url("assets/dragon-bridge-1600.webp") type("image/webp"),url("assets/dragon-bridge.jpg") type("image/jpeg"));
 }
 .m2-close::after{
   content:"";position:absolute;top:0;width:2px;height:clamp(4rem,9vw,6.5rem);
@@ -936,8 +906,29 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
 .m2-hero .m2i-begin:focus-visible{outline-color:var(--paper)}
 .m2-hero .m2i-chev{border-color:#5d7a58;color:var(--paper)}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://me-kitchen.com/home"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Our story",
+      "item": "https://me-kitchen.com/story"
+    }
+  ]
+}
+</script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="bowl" viewBox="0 0 100 100">
@@ -956,7 +947,7 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
       <a href="menu.html">Menu</a>
       <a href="story.html" aria-current="page">Our story</a>
       <a href="home.html#contact">Contact</a>
-      <a href="https://me-kitchen.square.site/" class="btn btn-sm btn-fill">Order</a>
+      <a href="https://me-kitchen.square.site/" class="btn btn-sm btn-fill" target="_blank" rel="noopener">Order</a>
     </nav>
     <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="drawer">
       <span></span><span></span><span></span>
@@ -970,11 +961,11 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
     <a href="menu.html">Menu</a>
     <a href="story.html">Our story</a>
     <a href="home.html#contact">Contact</a>
-    <a href="https://me-kitchen.square.site/" class="btn btn-inv">Order online</a>
+    <a href="https://me-kitchen.square.site/" class="btn btn-inv" target="_blank" rel="noopener">Order online</a>
   </div>
 </div>
 
-<main>
+<main id="main" tabindex="-1">
   <!-- ===== Story map (interactive layer): slim strip on phones and tablets ===== -->
   <div class="m2i-strip" aria-hidden="true">
     <div class="wrap m2i-strip-in">
@@ -997,7 +988,7 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
         <a class="m2i-begin" href="#m2i-then">Scroll to begin<span class="m2i-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></a>
       </div>
       <figure class="m2-hero-shot">
-        <img src="assets/our-story.jpg" width="1300" height="1613" alt="The round green Mê Kitchen sign hanging outside the restaurant, with trees behind it.">
+        <picture><source type="image/webp" srcset="assets/our-story-700.webp 700w, assets/our-story-1000.webp 1000w, assets/our-story-1300.webp 1300w" sizes="(min-width:960px) 45vw, 100vw"><img src="assets/our-story.jpg" width="1300" height="1613" alt="The round green Mê Kitchen sign hanging outside the restaurant, with trees behind it." fetchpriority="high"></picture>
       </figure>
     </div>
   </section>
@@ -1102,7 +1093,7 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
           </div>
           <div class="m2-aside">
             <figure class="m2-shot">
-              <img src="assets/g-spread.jpg" width="1024" height="1024" loading="lazy" decoding="async" alt="Bánh mì, a bowl of phở and a rice bowl together on one table with sauces and chopsticks">
+              <picture><source type="image/webp" srcset="assets/g-spread-480.webp 480w, assets/g-spread-960.webp 960w" sizes="(min-width:960px) 32rem, 90vw"><img src="assets/g-spread.jpg" width="1024" height="1024" loading="lazy" decoding="async" alt="Bánh mì, a bowl of phở and a rice bowl together on one table with sauces and chopsticks"></picture>
             </figure>
           </div>
         </li>
@@ -1117,7 +1108,7 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
           </div>
           <div class="m2-aside">
             <figure class="m2-shot">
-              <img src="assets/u-district.jpg" width="1100" height="733" loading="lazy" decoding="async" alt="The University District from above in autumn, with towers, rooftops and tree-lined streets">
+              <picture><source type="image/webp" srcset="assets/u-district-600.webp 600w, assets/u-district-1100.webp 1100w" sizes="(min-width:960px) 32rem, 90vw"><img src="assets/u-district.jpg" width="1100" height="733" loading="lazy" decoding="async" alt="The University District from above in autumn, with towers, rooftops and tree-lined streets"></picture>
             </figure>
           </div>
           <div class="m2i-next"><a href="#m2i-me">Next: Mê <span aria-hidden="true">&darr;</span></a></div>
@@ -1165,15 +1156,15 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
           <div class="m2-aside">
             <ul class="m2-moments">
               <li>
-                <img src="assets/g-banh-mi.jpg" width="1024" height="1024" loading="lazy" decoding="async" alt="Bánh mì on a metal tray with pickles and herbs">
+                <picture><source type="image/webp" srcset="assets/g-banh-mi-480.webp 480w, assets/g-banh-mi-960.webp 960w" sizes="76px"><img src="assets/g-banh-mi.jpg" width="1024" height="1024" loading="lazy" decoding="async" alt="Bánh mì on a metal tray with pickles and herbs"></picture>
                 <div><b>On your lunch break</b><span>A bánh mì in your hand</span></div>
               </li>
               <li>
-                <img src="assets/g-pho-table.jpg" width="1024" height="1024" loading="lazy" decoding="async" alt="A bowl of phở on a table with chopsticks, lime and chilli">
+                <picture><source type="image/webp" srcset="assets/g-pho-table-480.webp 480w, assets/g-pho-table-960.webp 960w" sizes="76px"><img src="assets/g-pho-table.jpg" width="1024" height="1024" loading="lazy" decoding="async" alt="A bowl of phở on a table with chopsticks, lime and chili"></picture>
                 <div><b>With friends</b><span>Sitting down over a bowl of phở</span></div>
               </li>
               <li>
-                <img src="assets/g-rice-bowl.jpg" width="1024" height="1024" loading="lazy" decoding="async" alt="Grilled beef rice bowl from above with slaw and green sauce">
+                <picture><source type="image/webp" srcset="assets/g-rice-bowl-480.webp 480w, assets/g-rice-bowl-960.webp 960w" sizes="76px"><img src="assets/g-rice-bowl.jpg" width="1024" height="1024" loading="lazy" decoding="async" alt="Grilled beef rice bowl from above with slaw and green sauce"></picture>
                 <div><b>On your way home</b><span>Dinner, picked up</span></div>
               </li>
             </ul>
@@ -1250,7 +1241,7 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
             </svg>
           </a>
         </div>
-        <p>Vietnamese cooking made to order: phở, bánh mì and rice bowls, quick enough to eat on the run.</p>
+        <p>Vietnamese cooking, made fresh daily: phở, bánh mì and rice bowls, quick enough to eat on the run.</p>
         <address class="foot-addr">
           <b>Seattle, Washington</b>
           4213 University Wy NE<br>
@@ -1270,14 +1261,14 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
       <div class="foot-col">
         <h2>Company</h2>
         <a href="story.html">Our story</a>
-        <a href="careers.html">Work here</a>
+        <a href="careers.html">Careers</a>
         <a href="home.html#contact">Contact</a>
       </div>
 
       <div class="foot-col">
         <h2>Find us</h2>
         <button type="button" class="foot-directions-trigger" data-open-directions aria-haspopup="dialog">Directions</button>
-        <a href="mailto:mekitchen.wa@gmail.com">Email us</a>
+        <button type="button" class="foot-directions-trigger" data-open-email aria-haspopup="dialog">Email us</button>
         <a href="https://me-kitchen.square.site/" target="_blank" rel="noopener">Order online</a>
       </div>
     </div>
@@ -1286,7 +1277,7 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
     <div class="foot-band">
       <div>
         <h2>Never miss a deal</h2>
-        <p>Be first to hear about specials, new dishes and one-off offers. No spam, and you can leave whenever you like.</p>
+        <p>Be first to hear about specials, new dishes and one-time offers. No spam, and you can leave whenever you like.</p>
       </div>
       <div class="foot-news">
         <a href="https://squareup.com/customer-programs/enroll/wWZxq9nuvBBA?utm_medium=copied-link&amp;utm_source=online" class="btn foot-solid" target="_blank" rel="noopener">Join the loyalty list</a>
@@ -1297,6 +1288,7 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
       <span>© <span id="yr"></span> Mê Kitchen. All rights reserved.</span>
       <span><a href="mailto:mekitchen.wa@gmail.com">mekitchen.wa@gmail.com</a></span>
       <span>Seattle, WA</span>
+      <span><a href="privacy.html">Privacy policy</a></span>
     </div>
   </div>
 </footer>
@@ -1320,352 +1312,25 @@ html.m2i-js{scroll-padding-top:calc(var(--m2i-top) + .5rem)}
   </div>
 </div>
 
-
-<script>
-(function(){
-  'use strict';
-
-  /* burger + drawer */
-  var nav=document.getElementById('nav'), burger=document.getElementById('burger');
-  burger.addEventListener('click', function(){
-    var open = nav.classList.toggle('open');
-    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  document.querySelectorAll('#drawer a').forEach(function(a){
-    a.addEventListener('click', function(){
-      nav.classList.remove('open');
-      burger.setAttribute('aria-expanded','false');
-    });
-  });
-
-  /* scroll reveal */
-  var rv = document.querySelectorAll('.rv');
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    },{rootMargin:'0px 0px -10% 0px'});
-    rv.forEach(function(el){ io.observe(el); });
-  } else {
-    rv.forEach(function(el){ el.classList.add('in'); });
-  }
-
-  /* directions modal — a real popup instead of an inline reveal, opened from
-     the footer's "Find us" column. Vanilla JS matching this file's own
-     conventions: a class toggle plus a CSS transition, no library. Includes
-     a minimal focus trap and Escape-to-close since this is a real dialog. */
-  (function(){
-    var trigger=document.querySelector('[data-open-directions]');
-    var modal=document.getElementById('directionsModal');
-    if(!trigger||!modal) return;
-    var closeBtns=modal.querySelectorAll('[data-close-directions]');
-    var lastFocus;
-
-    function onKey(e){
-      if(e.key==='Escape'){ close(); return; }
-      if(e.key==='Tab'){
-        var f=modal.querySelectorAll('a,button');
-        if(!f.length) return;
-        var first=f[0],last=f[f.length-1];
-        if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
-        else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
-      }
-    }
-    function open(){
-      lastFocus=document.activeElement;
-      modal.classList.add('open');
-      document.body.style.overflow='hidden';
-      var first=modal.querySelector('.modal-option,.modal-close');
-      if(first) first.focus();
-      document.addEventListener('keydown',onKey);
-    }
-    function close(){
-      modal.classList.remove('open');
-      document.body.style.overflow='';
-      document.removeEventListener('keydown',onKey);
-      if(lastFocus) lastFocus.focus();
-    }
-
-    trigger.addEventListener('click',open);
-    closeBtns.forEach(function(b){ b.addEventListener('click',close); });
-    modal.addEventListener('click',function(e){ if(e.target===modal) close(); });
-  })();
+<div class="modal-overlay" id="emailModal" role="dialog" aria-modal="true" aria-labelledby="emailTitle">
+  <div class="modal-card">
+    <button type="button" class="modal-close" data-close-email aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <h2 id="emailTitle">Email us</h2>
+    <p class="modal-sub">Copy our address and drop us a line.</p>
+    <p class="modal-email" id="emailAddr">mekitchen.wa@gmail.com</p>
+    <button type="button" class="modal-option modal-copy" data-copy-email>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>
+      <span>Copy email</span>
+    </button>
+  </div>
+</div>
 
 
-
-
-  document.getElementById('yr').textContent = new Date().getFullYear();
-})();
-</script>
-<script>
-/* ===== Mockup 2, interactive layer =====
-   Story map (strip), the then / now switch, the turn, the Mê
-   tap-through and the scroll hint. Native scrolling throughout. */
-(function(){
-  'use strict';
-  var root = document.documentElement;
-  root.classList.add('m2i-js');
-  var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-  var reduce = !!(mq && mq.matches);
-  if(!reduce) root.classList.add('m2i-motion');
-  var hasIO = 'IntersectionObserver' in window;
-  function each(list, fn){ Array.prototype.forEach.call(list || [], fn); }
-
-  /* ---------- 1. live story map ---------- */
-  var STAGES = [
-    { id:'m2i-then', name:'Then' },
-    { id:'m2i-idea', name:'The idea' },
-    { id:'m2i-now',  name:'Now' },
-    { id:'m2i-me',   name:'Mê' }
-  ];
-  var starts = STAGES.map(function(s){ return document.getElementById(s.id); });
-  var haveStages = starts.every(function(el){ return !!el; });
-  var endEl = document.querySelector('.m2-keep');
-  var stripLabel = document.querySelector('.m2i-strip-label');
-  var stripFill = document.querySelector('.m2i-strip-fill');
-  var stripPips = document.querySelectorAll('.m2i-strip-pips i');
-  var strip = document.querySelector('.m2i-strip');
-  var mainEl = document.querySelector('main');
-  var LINE = 0.45;            /* the reading line, 45% down the viewport */
-  var passed = [false, false, false, false];
-  var current = -2;
-
-  function setStage(i){
-    if(i === current) return;
-    current = i;
-    each(stripPips, function(p, n){ p.classList.toggle('is-on', n <= i); });
-    if(stripLabel){
-      stripLabel.textContent = i < 0 ? 'Our story in 4 parts' : (i + 1) + ' of 4 · ' + STAGES[i].name;
-    }
-  }
-  function highestPassed(){
-    var c = -1;
-    for(var k = 0; k < passed.length; k++){ if(passed[k]) c = k; }
-    return c;
-  }
-
-  if(haveStages){
-    if(hasIO){
-      /* root = the top 45% of the viewport; a stage has begun once its first
-         element reaches that line (or has already scrolled past the top) */
-      var sio = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          var k = starts.indexOf(e.target);
-          if(k < 0) return;
-          passed[k] = e.isIntersecting || e.boundingClientRect.top < 0;
-        });
-        setStage(highestPassed());
-      }, { rootMargin:'0px 0px -55% 0px', threshold:0 });
-      starts.forEach(function(el){ sio.observe(el); });
-    }
-
-    var ticking = false;
-    function paint(){
-      ticking = false;
-      var vh = window.innerHeight || root.clientHeight;
-      var line = vh * LINE;
-      var tops = starts.map(function(el){ return el.getBoundingClientRect().top; });
-      tops.push(endEl ? endEl.getBoundingClientRect().bottom : tops[3] + vh);
-      var f = 0;
-      if(tops[0] <= line){
-        f = 1;
-        for(var k = 0; k < 4; k++){
-          if(tops[k + 1] > line){
-            var span = tops[k + 1] - tops[k];
-            f = (k + (span > 0 ? (line - tops[k]) / span : 1)) / 4;
-            break;
-          }
-        }
-      }
-      f = Math.max(0, Math.min(1, f));
-      if(stripFill) stripFill.style.transform = 'scaleX(' + f.toFixed(4) + ')';
-      if(mainEl){
-        var mb = mainEl.getBoundingClientRect().bottom;
-        if(strip) strip.classList.toggle('m2i-off', mb < strip.getBoundingClientRect().bottom + 8);
-      }
-      if(!hasIO){
-        var c = -1;
-        for(var j = 0; j < 4; j++){ if(tops[j] <= line) c = j; }
-        setStage(c);
-      }
-    }
-    function onScroll(){
-      if(!ticking){ ticking = true; window.requestAnimationFrame(paint); }
-    }
-    window.addEventListener('scroll', onScroll, { passive:true });
-    window.addEventListener('resize', onScroll, { passive:true });
-    paint();
-  }
-
-  /* ---------- 5a. scroll hint, gone once it has been seen and scrolled past ----------
-     It fades only after its own bottom edge rises above 40% of the viewport,
-     so on a short phone, where it starts below the fold, it is still there
-     when the visitor reaches it. It keeps its space, so nothing jumps. */
-  var begin = document.querySelector('.m2i-begin');
-  if(begin){
-    var hideBegin = function(){
-      var vh = window.innerHeight || root.clientHeight;
-      if(begin.getBoundingClientRect().bottom < vh * 0.4){
-        /* never hide the element that has focus: hand focus on to the Then stage */
-        if(document.activeElement === begin){
-          var t = document.getElementById('m2i-then');
-          if(t){
-            t.setAttribute('tabindex', '-1');
-            try { t.focus({ preventScroll:true }); } catch(err){ t.focus(); }
-          }
-        }
-        begin.classList.add('m2i-gone');
-        window.removeEventListener('scroll', hideBegin);
-      }
-    };
-    window.addEventListener('scroll', hideBegin, { passive:true });
-    hideBegin();
-  }
-
-  /* ---------- 2. a day on the Ave: then / now ---------- */
-  var day = document.querySelector('.m2i-day');
-  if(day){
-    var sw = day.querySelector('.m2i-switch');
-    var hint = day.querySelector('.m2i-day-hint');
-    var swBtns = sw ? sw.querySelectorAll('button[data-show]') : [];
-    var panels = {
-      then: day.querySelector('[data-panel="then"]'),
-      now:  day.querySelector('[data-panel="now"]')
-    };
-    if(sw && swBtns.length === 2 && panels.then && panels.now){
-      var ticked = {};
-      var active = 'then';
-      var tick = function(key){
-        var panel = panels[key];
-        if(!panel || ticked[key]) return;
-        ticked[key] = true;
-        each(panel.querySelectorAll('li'), function(li, i){
-          var go = function(){
-            li.classList.add('m2i-tick');
-            if(li.classList.contains('m2-miss')){
-              if(reduce) li.classList.add('m2i-drawn');
-              else window.setTimeout(function(){ li.classList.add('m2i-drawn'); }, 200);
-            }
-          };
-          if(reduce) go(); else window.setTimeout(go, 150 + i * 220);
-        });
-      };
-      var show = function(key){
-        active = key;
-        each(swBtns, function(b){
-          b.setAttribute('aria-pressed', b.getAttribute('data-show') === key ? 'true' : 'false');
-        });
-        panels.then.classList.toggle('is-active', key === 'then');
-        panels.now.classList.toggle('is-active', key === 'now');
-        day.classList.toggle('is-now', key === 'now');
-        if(hint) hint.textContent = key === 'now' ? 'Switch to Then to look back.' : 'Switch to Now to see a day on the Ave today.';
-        if(seen) tick(key);
-      };
-      var seen = false;
-      each(swBtns, function(b){
-        b.addEventListener('click', function(){ show(b.getAttribute('data-show')); });
-      });
-      day.classList.add('m2i-ready');
-      sw.hidden = false;
-      if(hint) hint.hidden = false;
-      show('then');
-      if(hasIO && !reduce){
-        var dio = new IntersectionObserver(function(entries){
-          entries.forEach(function(e){
-            if(e.isIntersecting){ seen = true; tick(active); dio.disconnect(); }
-          });
-        }, { threshold:0.35 });
-        dio.observe(day);
-      } else {
-        seen = true;
-        tick('then');
-      }
-    }
-  }
-
-  /* ---------- 3. the turn: the rail carries from then into now ---------- */
-  var turn = document.getElementById('m2i-idea');
-  var turnH = document.getElementById('m2-turn-h');
-  var nowEra = document.getElementById('m2i-now');
-  if(!reduce && hasIO && turn && turnH && nowEra){
-    var vh0 = window.innerHeight || root.clientHeight;
-    var wideMq = window.matchMedia ? window.matchMedia('(min-width: 960px)') : null;
-    var turnSeen = turnH.getBoundingClientRect().top < vh0 * 0.88;
-    var nowSeen = nowEra.getBoundingClientRect().top < vh0 * 0.88;
-    var releaseTurn = function(){
-      if(turn.classList.contains('m2i-wait')){
-        turn.classList.remove('m2i-wait');
-        turn.classList.add('m2i-go');
-      }
-    };
-    if(!turnSeen) turn.classList.add('m2i-wait');
-    if(!nowSeen) nowEra.classList.add('m2i-wait');
-    var tio = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(!e.isIntersecting) return;
-        var wide = !!(wideMq && wideMq.matches);
-        if(e.target === turnH){
-          tio.unobserve(turnH);
-          /* on phones the line runs beside the heading, so it draws now; on
-             desktop the drawn segment sits at the foot of the band, so it
-             waits for the Now era to arrive */
-          if(wide) turn.classList.add('m2i-go'); else releaseTurn();
-        } else if(e.target === nowEra){
-          tio.unobserve(nowEra);
-          releaseTurn();
-          window.setTimeout(function(){
-            nowEra.classList.add('m2i-go');
-            window.setTimeout(function(){ nowEra.classList.remove('m2i-wait', 'm2i-go'); }, 1600);
-          }, wide ? 500 : 150);
-        }
-      });
-    }, { rootMargin:'0px 0px -12% 0px' });
-    if(!turnSeen) tio.observe(turnH);
-    if(!nowSeen) tio.observe(nowEra);
-  }
-
-  /* ---------- 4. why we called it Mê: tap-through ---------- */
-  var nm = document.querySelector('.m2i-name');
-  if(nm){
-    var nBtn = nm.querySelector('.m2i-name-btn');
-    var steps = nm.querySelectorAll('.m2i-name-step');
-    var foot = nm.querySelector('.m2i-name-foot');
-    var nCount = nm.querySelector('.m2i-name-n');
-    var cue = nm.querySelector('.m2i-name-cue');
-    var reset = nm.querySelector('.m2i-name-reset');
-    var live = nm.querySelector('.m2i-name-live');
-    var pips = nm.querySelectorAll('.m2i-pips i');
-    if(nBtn && foot && steps.length === 3){
-      var CUES = ['Press Mê for what it means', 'Press Mê for how it feels', 'Press Mê to start again'];
-      var step = 0;
-      var render = function(announce){
-        each(steps, function(s, i){ s.classList.toggle('is-on', i === step); });
-        each(pips, function(p, i){ p.classList.toggle('is-on', i <= step); });
-        if(nCount) nCount.textContent = (step + 1) + ' of 3';
-        if(cue){
-          cue.textContent = CUES[step];
-          /* on the last step the reset takes the cue's place, in the same slot */
-          cue.hidden = !!reset && step === 2;
-        }
-        if(reset) reset.hidden = step !== 2;
-        if(announce && live){
-          var k = steps[step].querySelector('.m2-name-say');
-          var v = steps[step].querySelector('.m2i-name-v');
-          live.textContent = (step + 1) + ' of 3. ' + (k ? k.textContent : '') + ': ' + (v ? v.textContent : '');
-        }
-      };
-      nBtn.addEventListener('click', function(){ step = (step + 1) % 3; render(true); });
-      if(reset){
-        reset.addEventListener('click', function(){ step = 0; render(true); nBtn.focus(); });
-      }
-      nm.classList.add('m2i-ready');
-      nBtn.hidden = false;
-      foot.hidden = false;
-      render(false);
-    }
-  }
-})();
-</script>
+<script src="assets/js/site.js?v=ea58444b25"></script>
+<script src="assets/js/footer.js?v=c05a55e448"></script>
+<script src="assets/js/story.js?v=90ea715390"></script>
+<script src="assets/js/analytics.js?v=6aa35cd01e"></script>
 </body>
 </html>

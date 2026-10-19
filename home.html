@@ -8,7 +8,7 @@
      curtain will play, so the hero waits for it to lift. -->
 <script>(function(h){try{if(matchMedia('(prefers-reduced-motion: no-preference)').matches){h.classList.add('mm');if(!sessionStorage.getItem('mk_intro'))h.classList.add('intro-run')}}catch(e){}})(document.documentElement)</script>
 <title>Mê Kitchen | Vietnamese Restaurant, Phở &amp; Bánh Mì, Seattle</title>
-<meta name="description" content="Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì, and rice bowls, cooked to order. Order ahead online.">
+<meta name="description" content="Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì and rice bowls, made fresh every day. Order ahead online.">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
@@ -20,13 +20,13 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://me-kitchen.com/home">
 <meta property="og:title" content="Mê Kitchen | Vietnamese Restaurant, Phở &amp; Bánh Mì, Seattle">
-<meta property="og:description" content="Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì, and rice bowls, cooked to order. Order ahead online.">
+<meta property="og:description" content="Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì and rice bowls, made fresh every day. Order ahead online.">
 <meta property="og:image" content="https://me-kitchen.com/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Mê Kitchen | Vietnamese Restaurant, Phở &amp; Bánh Mì, Seattle">
-<meta name="twitter:description" content="Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì, and rice bowls, cooked to order. Order ahead online.">
+<meta name="twitter:description" content="Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì and rice bowls, made fresh every day. Order ahead online.">
 <meta name="twitter:image" content="https://me-kitchen.com/assets/og-image.png">
 <script type="application/ld+json">
 {
@@ -34,8 +34,9 @@
   "@type": "Restaurant",
   "name": "Mê Kitchen",
   "telephone": "206-656-8878",
+  "email": "mekitchen.wa@gmail.com",
   "url": "https://me-kitchen.com/",
-  "description": "Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì, and rice bowls, cooked to order.",
+  "description": "Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì and rice bowls, made fresh every day.",
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
@@ -80,16 +81,21 @@
      phone, hours, maps link and a few other fields are still
      placeholders. See DEPLOY.md.
      ============================================================ -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Loaded non-render-blocking: the stylesheet is fetched as print (which
-     does not block paint) then promoted to all once ready. The URL already
-     carries display=swap, so text paints in the fallback and swaps in place.
-     Saves ~1.5s of render-blocking time measured at baseline. -->
-<link rel="stylesheet" media="print" onload="this.media='all';this.onload=null"
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Geist:wght@300;400;500;600&display=swap">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Geist:wght@300;400;500;600&display=swap"></noscript>
+<!-- reduced-motion visitors get the poster as a CSS background instead of the video; fetch it straight away -->
+<link rel="preload" as="image" type="image/webp" href="assets/hero-poster.webp" media="(prefers-reduced-motion: reduce)">
+<link rel="preload" href="/fonts/spacegrotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+/* Self-hosted from Google Fonts (variable fonts: one file covers every
+   weight). Latin, Latin Extended and Vietnamese subsets only; the browser
+   downloads a subset only when a page uses its characters. */
+@font-face{font-family:'Geist';font-style:normal;font-weight:300 600;font-display:swap;src:url(/fonts/geist-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Geist';font-style:normal;font-weight:300 600;font-display:swap;src:url(/fonts/geist-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Geist';font-style:normal;font-weight:300 600;font-display:swap;src:url(/fonts/geist-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/spacegrotesk-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/spacegrotesk-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/spacegrotesk-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+
 /* ============================================================
    DIRECTION 03 — "KINETIC"
    Hard black/white blocks, pill controls, marquee, sticky order
@@ -114,7 +120,10 @@
   --rb:10px;                   /* buttons & controls: square with soft corners */
 }
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;
+  /* the floating order bar covers the bottom ~81px, so keyboard focus and
+     anchor jumps scroll things clear of it (WCAG 2.4.11) */
+  scroll-padding-bottom:6rem}
 body{
   margin:0;background:var(--paper);color:var(--ink);
   font-family:var(--body);font-size:16px;line-height:1.55;font-weight:400;
@@ -124,6 +133,8 @@ img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+/* on the dark grounds (hero video, green bands, drawer, footer) the green ring disappears, so it turns cream there */
+.hero :focus-visible,.section.dark :focus-visible,.drawer :focus-visible,footer :focus-visible{outline-color:var(--paper)}
 .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
 .display{font-family:var(--display);font-weight:700;text-transform:uppercase;line-height:.92;letter-spacing:-.035em;margin:0}
 .tag{
@@ -169,6 +180,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   transition:opacity .7s ease .35s,transform .9s cubic-bezier(.2,.8,.2,1) .35s;
 }
 .intro.go .intro-logo{opacity:1;transform:none}
+/* the logo sits in a <picture> (WebP with PNG fallback); keep that box tight so the logo stays centred */
+.intro-row picture{display:block;line-height:0}
 
 /* ---------- nav ---------- */
 .nav{position:fixed;inset:0 0 auto;z-index:100;transition:background .35s,box-shadow .35s}
@@ -312,6 +325,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
    gradient because a gradient advances by angle, which on a wide pill crawls
    across the long edges and snaps around the caps. A stroke advances by
    distance, so the line moves at one steady speed the whole way round. */
+/* keeps the hero's second sentence in one piece, so it starts its own line */
+.hero-lede .keep{display:inline-block}
 .chips li .ring{position:absolute;inset:0;overflow:visible;pointer-events:none;opacity:0;transition:opacity .25s}
 .chips li .ring path{
   fill:none;stroke:rgb(250 247 239/.92);stroke-width:1;stroke-linecap:round;
@@ -428,6 +443,15 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 .modal-option svg{width:20px;height:20px;flex:none}
 .modal-option span{font-family:var(--display);font-weight:700;font-size:.875rem;letter-spacing:.01em;text-transform:uppercase}
 .modal-option:hover,.modal-option:focus-visible{border-color:var(--ink);background:var(--wash)}
+/* email popup: the address itself, then a copy button styled as an option */
+.modal-email{
+  display:block;margin:0 0 .75rem;padding:.9rem 1rem;border-radius:var(--rb);
+  background:var(--wash);border:1px solid var(--line);
+  font-size:1rem;font-weight:600;color:var(--ink);word-break:break-all;
+  user-select:all;-webkit-user-select:all;
+}
+.modal-copy{width:100%;background:none;font:inherit;cursor:pointer;text-align:left}
+.modal-copy.done{border-color:var(--ink);background:var(--wash)}
 @media(prefers-reduced-motion:reduce){
   .modal-overlay,.modal-card{transition-duration:.01ms!important}
 }
@@ -459,6 +483,8 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
   transform:translateY(160%);transition:transform .35s cubic-bezier(.2,.8,.2,1);
 }
 .bar.show{transform:none}
+/* room under the footer so its last links can scroll clear of the bar */
+footer{padding-bottom:calc(2rem + 6rem)}
 /* segments — small dim label stacked over the value, hairline rule between */
 .bar-fields{display:none;flex:1;align-items:stretch;min-width:0}
 .bar-field{
@@ -509,6 +535,7 @@ html.fx .rv:not(.in){opacity:0;translate:0 22px}
      fall back to its own poster frame, so the hero still has a picture */
   .hero-scene video{display:none}
   .hero-scene{background:url(assets/hero-poster.jpg) left center/cover no-repeat}
+  .hero-scene{background-image:image-set(url("assets/hero-poster.webp") type("image/webp"),url("assets/hero-poster.jpg") type("image/jpeg"))}
 }
 
 /* ---------- buttons: green, hover to the logo green ---------- */
@@ -756,15 +783,22 @@ html.fx footer [data-mo=rule] > :nth-child(4){transition-delay:.33s}
   html.fx [data-mo=tray]:not(.in) .feature-copy > div > *{translate:0 8px}
   html.fx [data-mo=plates]:not(.in) figure{translate:0 -8px}
 }
+/* skip link: off-screen until a keyboard user tabs to it */
+.skip{position:absolute;left:12px;top:-100px;z-index:1000;padding:.7rem 1.1rem;border-radius:10px;
+  background:#22391f;color:#faf7ef;font:600 .875rem/1.2 'Geist',-apple-system,sans-serif;text-decoration:none;
+  box-shadow:0 0 0 2px #faf7ef}
+.skip:focus{top:12px;outline:2px solid #22391f;outline-offset:2px}
+#main:focus{outline:none}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <div class="intro" id="intro" aria-hidden="true">
   <div class="intro-row">
     <span class="intro-txt l">Phở · Bánh mì · Rice</span>
-    <img class="intro-logo" src="assets/logo-main.png" alt="" width="323" height="240">
-    <span class="intro-txt r">Located in U District</span>
+    <picture><source type="image/webp" srcset="assets/logo-main.webp"><img class="intro-logo" src="assets/logo-main.png" alt="" width="323" height="240"></picture>
+    <span class="intro-txt r">Located in the U District</span>
   </div>
 </div>
 
@@ -778,7 +812,7 @@ html.fx footer [data-mo=rule] > :nth-child(4){transition-delay:.33s}
       <a href="menu.html">Menu</a>
       <a href="story.html">Our story</a>
       <a href="#contact">Contact</a>
-      <a href="https://me-kitchen.square.site/" class="btn btn-sm btn-fill">Order</a>
+      <a href="https://me-kitchen.square.site/" class="btn btn-sm btn-fill" target="_blank" rel="noopener">Order</a>
     </nav>
     <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="drawer">
       <span></span><span></span><span></span>
@@ -792,31 +826,32 @@ html.fx footer [data-mo=rule] > :nth-child(4){transition-delay:.33s}
     <a href="menu.html">Menu</a>
     <a href="story.html">Our story</a>
     <a href="#contact">Contact</a>
-    <a href="https://me-kitchen.square.site/" class="btn btn-inv">Order online</a>
+    <a href="https://me-kitchen.square.site/" class="btn btn-inv" target="_blank" rel="noopener">Order online</a>
   </div>
 </div>
 
-<main>
+<main id="main" tabindex="-1">
 <!-- ============ HERO ============ -->
   <section class="hero">
    <div class="hero-copy">
     <div class="hero-scene">
       <video autoplay muted loop playsinline preload="metadata" width="1280" height="720"
-             poster="assets/hero-poster.webp" aria-hidden="true" tabindex="-1">
-        <source src="assets/hero-video.webm" type="video/webm">
-        <source src="assets/hero-video.mp4" type="video/mp4">
+             poster="assets/hero-poster.webp" data-webm="assets/hero-video.webm" data-mp4="assets/hero-video.mp4" aria-hidden="true" tabindex="-1">
+        <!-- no sources yet: the script adds them (from data-webm and data-mp4
+             on the <video>) after the page has loaded, so the poster (the LCP
+             image) doesn't compete with 400 KB of video -->
       </video>
     </div>
     <div class="wrap">
-      <span class="tag"><svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12Z"/><circle cx="12" cy="9" r="2.2"/></svg>Located in U District</span>
+      <span class="tag"><svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12Z"/><circle cx="12" cy="9" r="2.2"/></svg>Located in the U District</span>
       <h1 class="display"><span class="ln"><span class="ln-in" style="--i:0">Phở.</span></span> <span class="ln"><span class="ln-in" style="--i:1">Bánh mì.</span></span> <span class="ln"><u class="ln-in" style="--i:2">Rice bowls.</u></span></h1>
-      <p class="hero-lede">Order on your phone, walk in, walk out. Twenty-four hour broth, twenty-minute lunch.</p>
+      <p class="hero-lede">Order on your phone, walk in, walk out. <span class="keep">Fresh broth every day, twenty-minute lunch.</span></p>
       <div class="hero-cta">
-        <a href="https://me-kitchen.square.site/" class="btn">Order online</a>
+        <a href="https://me-kitchen.square.site/" class="btn" target="_blank" rel="noopener">Order online</a>
         <a href="menu.html" class="btn">See the menu</a>
       </div>
       <ul class="chips">
-        <li>Order ahead<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li><li>Ready when you arrive<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li><li>Veg options<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li>
+        <li>Order ahead<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li><li>Ready when you arrive<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li><li>Veggie options<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li>
       </ul>
     </div>
    </div>
@@ -825,8 +860,8 @@ html.fx footer [data-mo=rule] > :nth-child(4){transition-delay:.33s}
 <!-- ============ MARQUEE ============ -->
   <div class="marquee inv" aria-hidden="true">
     <div class="mq-track">
-      <span>24-hour broth</span><span>Order ahead</span><span>Ready when you arrive</span><span>Cooked to order</span>
-      <span>24-hour broth</span><span>Order ahead</span><span>Ready when you arrive</span><span>Cooked to order</span>
+      <span>Fresh broth daily</span><span>Order ahead</span><span>Ready when you arrive</span><span>Quality ingredients</span>
+      <span>Fresh broth daily</span><span>Order ahead</span><span>Ready when you arrive</span><span>Quality ingredients</span>
     </div>
   </div>
 
@@ -834,16 +869,17 @@ html.fx footer [data-mo=rule] > :nth-child(4){transition-delay:.33s}
   <section class="section band">
     <div class="feature" data-mo="tray">
       <div class="shot"><picture>
+        <source type="image/webp" srcset="assets/g-spread-480.webp 480w, assets/g-spread-960.webp 960w" sizes="(min-width:1024px) 50vw, 100vw">
         <img src="assets/g-spread.jpg" alt="A bánh mì, a bowl of phở and a grilled beef rice bowl laid out together with sauces, herbs and chopsticks." width="1024" height="1024" loading="lazy" decoding="async">
       </picture></div>
       <div class="feature-copy">
         <div>
           <span class="tag">Counter service</span>
           <h2 class="display">Order ahead,<br>walk straight out</h2>
-          <p>Pick it on your phone, we start it when the order lands, and it is bagged and waiting by the time you reach the counter. No queue, no ticket number, no standing about.</p>
+          <p>Order on your phone and we get it ready the moment it comes in, so it is bagged and waiting by the time you reach the counter. No line, no ticket number, no standing around.</p>
           <div class="cta">
             <a href="menu.html" class="btn btn-fill">See the menu</a>
-            <a href="https://me-kitchen.square.site/" class="btn">Order online</a>
+            <a href="https://me-kitchen.square.site/" class="btn" target="_blank" rel="noopener">Order online</a>
           </div>
         </div>
       </div>
@@ -855,13 +891,13 @@ html.fx footer [data-mo=rule] > :nth-child(4){transition-delay:.33s}
   <section class="section dark band">
     <div class="feature flip" data-mo="clear">
       <div class="shot"><picture>
-        <source srcset="assets/bowl-beef.webp" type="image/webp">
+        <source type="image/webp" srcset="assets/bowl-beef-800.webp 800w, assets/bowl-beef.webp 1600w" sizes="(min-width:1024px) 50vw, 100vw">
         <img src="assets/bowl-beef.jpg" alt="A grilled beef rice bowl with cabbage slaw, pickled carrot and cucumber, on a wooden table." width="1600" height="905" loading="lazy" decoding="async">
       </picture></div>
       <div class="feature-copy">
         <div>
           <h2 class="display">Eat well<br>on the run</h2>
-          <p>We started Mê Kitchen because the Vietnamese food we grew up loving usually asks for an hour nobody has. Everything here is cooked to order at the counter: phở, bánh mì, rice bowls, spring rolls and Vietnamese coffee, made with quality ingredients and nothing left standing around. Same food, done properly, handed over fast enough to eat on the run.</p>
+          <p>We started Mê Kitchen because the Vietnamese food we grew up loving usually asks for an hour nobody has. Everything here is made fresh every day: phở, bánh mì, rice bowls, spring rolls and Vietnamese coffee, all with quality ingredients. Same food, done properly, handed over fast enough to eat on the run.</p>
           <div class="cta">
             <a href="story.html" class="btn btn-fill">Our story</a>
           </div>
@@ -874,14 +910,15 @@ html.fx footer [data-mo=rule] > :nth-child(4){transition-delay:.33s}
   <!-- ============ GALLERY (the reference's catering slot) ============ -->
   <!-- Photographs only, by request: no heading, no caption, no CTA. The alt
        text stays — it is not rendered, and the tiles are content, not decoration. -->
-  <section class="section dark gallery-band">
+  <section class="section dark gallery-band" aria-labelledby="gallery-h">
+    <h2 class="sr" id="gallery-h">Photos</h2>
     <div class="gallery" data-mo="plates">
-      <figure><img src="assets/g-bowl-close.jpg" alt="A close-up of a bowl topped with grilled meat, crushed peanuts, shredded carrot, cucumber and fresh herbs." width="700" height="525" loading="lazy" decoding="async"></figure>
-      <figure><img src="assets/g-rice-bowl.jpg" alt="A grilled beef rice bowl with cabbage slaw, pickled carrot and a pot of green sauce." width="1024" height="1024" loading="lazy" decoding="async"></figure>
-      <figure><img src="assets/g-banh-mi.jpg" alt="A bánh mì on a metal tray beside a dish of cucumber, pickled carrot, coriander and jalapeño." width="1024" height="1024" loading="lazy" decoding="async"></figure>
-      <figure><img src="assets/g-pho.jpg" alt="A bowl of phở with rare beef and spring onion, with Thai basil and bean sprouts on the side." width="1024" height="1024" loading="lazy" decoding="async"></figure>
-      <figure><img src="assets/g-poster.jpg" alt="A bowl of phở on the counter beneath a Mê Kitchen poster reading Phở Brings People Together." width="1024" height="1024" loading="lazy" decoding="async"></figure>
-      <figure><img src="assets/g-pho-table.jpg" alt="A bowl of phở on a table with chopsticks, lime and chilli, and herbs on a steel tray." width="1024" height="1024" loading="lazy" decoding="async"></figure>
+      <figure><picture><source type="image/webp" srcset="assets/g-bowl-close-480.webp 480w, assets/g-bowl-close-700.webp 700w" sizes="33vw"><img src="assets/g-bowl-close.jpg" alt="A close-up of a bowl topped with grilled meat, crushed peanuts, shredded carrot, cucumber and fresh herbs." width="700" height="525" loading="lazy" decoding="async"></picture></figure>
+      <figure><picture><source type="image/webp" srcset="assets/g-rice-bowl-480.webp 480w, assets/g-rice-bowl-960.webp 960w" sizes="33vw"><img src="assets/g-rice-bowl.jpg" alt="A grilled beef rice bowl with cabbage slaw, pickled carrot and a pot of green sauce." width="1024" height="1024" loading="lazy" decoding="async"></picture></figure>
+      <figure><picture><source type="image/webp" srcset="assets/g-banh-mi-480.webp 480w, assets/g-banh-mi-960.webp 960w" sizes="33vw"><img src="assets/g-banh-mi.jpg" alt="A bánh mì on a metal tray beside a dish of cucumber, pickled carrot, cilantro and jalapeño." width="1024" height="1024" loading="lazy" decoding="async"></picture></figure>
+      <figure><picture><source type="image/webp" srcset="assets/g-pho-480.webp 480w, assets/g-pho-960.webp 960w" sizes="33vw"><img src="assets/g-pho.jpg" alt="A bowl of phở with rare beef and green onion, with Thai basil and bean sprouts on the side." width="1024" height="1024" loading="lazy" decoding="async"></picture></figure>
+      <figure><picture><source type="image/webp" srcset="assets/g-poster-480.webp 480w, assets/g-poster-960.webp 960w" sizes="33vw"><img src="assets/g-poster.jpg" alt="A bowl of phở on the counter beneath a Mê Kitchen poster reading Phở Brings People Together." width="1024" height="1024" loading="lazy" decoding="async"></picture></figure>
+      <figure><picture><source type="image/webp" srcset="assets/g-pho-table-480.webp 480w, assets/g-pho-table-960.webp 960w" sizes="33vw"><img src="assets/g-pho-table.jpg" alt="A bowl of phở on a table with chopsticks, lime and chili, and herbs on a steel tray." width="1024" height="1024" loading="lazy" decoding="async"></picture></figure>
     </div>
   </section>
 
@@ -921,7 +958,7 @@ html.fx footer [data-mo=rule] > :nth-child(4){transition-delay:.33s}
           <button type="submit" class="btn">Send it</button>
         </form>
         <p class="form-sent" id="contactSent" role="status" aria-live="polite" hidden>
-          Thank you. We have got your message and will get back to you soon.
+          Thank you. We&rsquo;ve got your message and will get back to you soon.
         </p>
       </div>
     </div>
@@ -955,7 +992,7 @@ html.fx footer [data-mo=rule] > :nth-child(4){transition-delay:.33s}
             </svg>
           </a>
         </div>
-        <p>Vietnamese cooking made to order: phở, bánh mì and rice bowls, quick enough to eat on the run.</p>
+        <p>Vietnamese cooking, made fresh daily: phở, bánh mì and rice bowls, quick enough to eat on the run.</p>
         <address class="foot-addr">
           <b>Seattle, Washington</b>
           4213 University Wy NE<br>
@@ -975,14 +1012,14 @@ html.fx footer [data-mo=rule] > :nth-child(4){transition-delay:.33s}
       <div class="foot-col">
         <h2>Company</h2>
         <a href="story.html">Our story</a>
-        <a href="careers.html">Work here</a>
+        <a href="careers.html">Careers</a>
         <a href="#contact">Contact</a>
       </div>
 
       <div class="foot-col">
         <h2>Find us</h2>
         <button type="button" class="foot-directions-trigger" data-open-directions aria-haspopup="dialog">Directions</button>
-        <a href="mailto:mekitchen.wa@gmail.com">Email us</a>
+        <button type="button" class="foot-directions-trigger" data-open-email aria-haspopup="dialog">Email us</button>
         <a href="https://me-kitchen.square.site/" target="_blank" rel="noopener">Order online</a>
       </div>
     </div>
@@ -991,7 +1028,7 @@ html.fx footer [data-mo=rule] > :nth-child(4){transition-delay:.33s}
     <div class="foot-band" data-mo="rule">
       <div>
         <h2>Never miss a deal</h2>
-        <p>Be first to hear about specials, new dishes and one-off offers. No spam, and you can leave whenever you like.</p>
+        <p>Be first to hear about specials, new dishes and one-time offers. No spam, and you can leave whenever you like.</p>
       </div>
       <div class="foot-news">
         <a href="https://squareup.com/customer-programs/enroll/wWZxq9nuvBBA?utm_medium=copied-link&amp;utm_source=online" class="btn foot-solid" target="_blank" rel="noopener">Join the loyalty list</a>
@@ -1002,6 +1039,7 @@ html.fx footer [data-mo=rule] > :nth-child(4){transition-delay:.33s}
       <span>© <span id="yr"></span> Mê Kitchen. All rights reserved.</span>
       <span><a href="mailto:mekitchen.wa@gmail.com">mekitchen.wa@gmail.com</a></span>
       <span>Seattle, WA</span>
+      <span><a href="privacy.html">Privacy policy</a></span>
     </div>
   </div>
 </footer>
@@ -1025,6 +1063,21 @@ html.fx footer [data-mo=rule] > :nth-child(4){transition-delay:.33s}
   </div>
 </div>
 
+<div class="modal-overlay" id="emailModal" role="dialog" aria-modal="true" aria-labelledby="emailTitle">
+  <div class="modal-card">
+    <button type="button" class="modal-close" data-close-email aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <h2 id="emailTitle">Email us</h2>
+    <p class="modal-sub">Copy our address and drop us a line.</p>
+    <p class="modal-email" id="emailAddr">mekitchen.wa@gmail.com</p>
+    <button type="button" class="modal-option modal-copy" data-copy-email>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>
+      <span>Copy email</span>
+    </button>
+  </div>
+</div>
+
 
 <div class="bar" id="bar">
   <div class="bar-fields">
@@ -1036,222 +1089,11 @@ html.fx footer [data-mo=rule] > :nth-child(4){transition-delay:.33s}
     </div>
   </div>
   <a href="tel:+12066568878" class="btn btn-fill bar-call">Call</a>
-  <a href="https://me-kitchen.square.site/" class="btn btn-inv">Order online</a>
+  <a href="https://me-kitchen.square.site/" class="btn btn-inv" target="_blank" rel="noopener">Order online</a>
 </div>
 
-<script>
-(function(){
-  'use strict';
-
-  /* intro curtain — first visit of the session only. Skipped entirely for
-     reduced-motion, and never shown if JS is off since .on is added here. */
-  (function(){
-    var intro = document.getElementById('intro');
-    if(!intro) return;
-
-    var seen = false;
-    try { seen = !!sessionStorage.getItem('mk_intro'); } catch(e){}
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-    if(seen || reduce) return;
-    try { sessionStorage.setItem('mk_intro','1'); } catch(e){}
-
-    var logo = intro.querySelector('.intro-logo');
-    var prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    intro.classList.add('on');
-
-    /* Part exactly far enough to clear the logo, then, if the parted line
-       would be wider than the screen, scale the whole row down to fit. That
-       keeps it on one line on a phone instead of colliding or wrapping. */
-    var row = intro.querySelector('.intro-row'),
-        lTxt = intro.querySelector('.intro-txt.l'),
-        rTxt = intro.querySelector('.intro-txt.r');
-
-    function measure(){
-      row.style.transform = '';                      /* measure unscaled */
-      var g = logo.getBoundingClientRect();
-      if(!g.width) return;
-      var gap = Math.max(18, g.width * 0.34);   /* breathing room either side */
-      var sep = g.width / 2 + gap;
-      intro.style.setProperty('--sep', sep + 'px');
-
-      var needed = 2 * sep + lTxt.getBoundingClientRect().width
-                           + rTxt.getBoundingClientRect().width;
-      var avail  = window.innerWidth - 24;           /* small safety margin */
-      var k = Math.min(1, avail / needed);
-      if(k < 1) row.style.transform = 'scale(' + k.toFixed(4) + ')';
-    }
-    if(logo.complete) measure(); else logo.addEventListener('load', measure);
-    window.addEventListener('resize', measure);
-
-    requestAnimationFrame(function(){ intro.classList.add('in'); });
-    setTimeout(function(){ measure(); intro.classList.add('go'); }, 700);
-    setTimeout(function(){ intro.classList.add('out'); }, 2500);
-    setTimeout(function(){
-      intro.classList.remove('on');
-      document.body.style.overflow = prevOverflow;
-    }, 3150);
-  })();
-  var nav=document.getElementById('nav'),burger=document.getElementById('burger'),bar=document.getElementById('bar');
-  var hero=document.querySelector('.hero');
-
-  burger.addEventListener('click',function(){
-    var open=nav.classList.toggle('open');
-    burger.setAttribute('aria-expanded',open?'true':'false');
-  });
-  document.querySelectorAll('#drawer a').forEach(function(a){
-    a.addEventListener('click',function(){nav.classList.remove('open');burger.setAttribute('aria-expanded','false');});
-  });
-
-  /* the order island docks the moment the hero's Order button scrolls away
-     under the nav, and stays; the old fixed 560px threshold is the fallback */
-  var heroCta=document.querySelector('.hero-cta');
-  var barIO=!!(heroCta && 'IntersectionObserver' in window);
-  if(barIO){
-    new IntersectionObserver(function(es){
-      var e=es[0];
-      bar.classList.toggle('show',!e.isIntersecting && e.boundingClientRect.top<72);
-    },{rootMargin:'-72px 0px 0px 0px'}).observe(heroCta);
-  }
-  /* the hero video only plays while the hero is on screen */
-  var heroVid=document.querySelector('.hero-scene video');
-  var motionOK=document.documentElement.classList.contains('mm');
-  if(heroVid && 'IntersectionObserver' in window){
-    new IntersectionObserver(function(es){
-      if(es[0].isIntersecting){ if(motionOK) heroVid.play().catch(function(){}); }
-      else heroVid.pause();
-    }).observe(hero);
-  }
-
-  /* nav goes solid past hero; keeps white text while over the dark hero */
-  function onScroll(){
-    var y=window.scrollY;
-    nav.classList.toggle('solid',y>40);
-    nav.classList.toggle('on-dark',y < hero.offsetHeight - 80);
-    if(!barIO) bar.classList.toggle('show',y>560);
-  }
-  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
-
-  /* scroll reveals — each section plays its own entrance once. html.fx (which
-     arms the hidden starting states) is only added here, when motion is
-     allowed and the observer exists, so nothing can be left hidden. */
-  var rv=document.querySelectorAll('[data-mo],.rv');
-  if(motionOK && 'IntersectionObserver' in window){
-    document.documentElement.classList.add('fx');
-    var io=new IntersectionObserver(function(es){
-      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
-    },{rootMargin:'0px 0px -12% 0px'});
-    /* the footer rows sit at the very end of the page, where the last one can
-       never climb past a bottom inset — so they trigger as soon as they show */
-    var ioEnd=new IntersectionObserver(function(es){
-      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ioEnd.unobserve(e.target);}});
-    });
-    rv.forEach(function(el){(el.closest('footer')?ioEnd:io).observe(el);});
-  }
-
-  /* contact form — posted with fetch so the reader stays on the page and gets
-     the thank-you in place, instead of being thrown to Netlify's own success
-     screen. Falls back to a normal submit if JS is off, which is what the
-     form's action is for. ?sent=1 shows the confirmation directly, so the state can be looked at
-     without sending anything. */
-  var cform=document.querySelector('form[name="contact"]'), csent=document.getElementById('contactSent');
-  if(cform && csent){
-    var sentText=csent.textContent;
-    function showSent(msg,bad){
-      cform.hidden=true; csent.hidden=false;
-      csent.textContent=msg||sentText;
-      csent.classList.toggle('bad',!!bad);
-      csent.setAttribute('tabindex','-1'); csent.focus();
-    }
-    if(/[?&]sent=1(&|$)/.test(location.search)) showSent();
-    cform.addEventListener('submit',function(e){
-      e.preventDefault();
-      var btn=cform.querySelector('button[type=submit]');
-      if(btn){ btn.disabled=true; btn.textContent='Sending…'; }
-      fetch(location.pathname,{
-        method:'POST',
-        headers:{'Content-Type':'application/x-www-form-urlencoded'},
-        body:new URLSearchParams(new FormData(cform)).toString()
-      }).then(function(r){
-        if(!r.ok) throw new Error(r.status);
-        showSent();
-      }).catch(function(){
-        if(btn){ btn.disabled=false; btn.textContent='Send it'; }
-        showSent('That did not send. Please email us at mekitchen.wa@gmail.com and we will pick it up there.',true);
-        cform.hidden=false;
-      });
-    });
-  }
-
-  /* chip hover ring — trace a stadium starting at top centre, going clockwise,
-     so the stroke opens and closes at the same point. Redrawn on resize since
-     the chips are text-width. */
-  document.querySelectorAll('.chips li').forEach(function(li){
-    var svg=li.querySelector('.ring'),p=svg&&svg.querySelector('path');
-    if(!p) return;
-    function draw(){
-      var w=li.clientWidth,h=li.clientHeight,r=h/2;
-      if(!w||!h) return;
-      svg.setAttribute('viewBox','0 0 '+w+' '+h);
-      p.setAttribute('d','M'+(w/2)+' 0H'+(w-r)+'A'+r+' '+r+' 0 0 1 '+(w-r)+' '+h+
-                        'H'+r+'A'+r+' '+r+' 0 0 1 '+r+' 0Z');
-    }
-    draw();
-    if(window.ResizeObserver) new ResizeObserver(draw).observe(li);
-  });
-
-  /* today's pickup hours — 11am-9pm Mon-Sat, closed Sunday */
-  var todayHours=document.getElementById('todayHours');
-  if(todayHours){
-    todayHours.textContent = new Date().getDay()===0 ? 'Closed' : '11am\u20139pm';
-  }
-
-  /* directions modal — a real popup instead of an inline reveal, opened from
-     the footer's "Find us" column. Vanilla JS matching this file's own
-     conventions: a class toggle plus a CSS transition, no library. Includes
-     a minimal focus trap and Escape-to-close since this is a real dialog. */
-  (function(){
-    var trigger=document.querySelector('[data-open-directions]');
-    var modal=document.getElementById('directionsModal');
-    if(!trigger||!modal) return;
-    var closeBtns=modal.querySelectorAll('[data-close-directions]');
-    var lastFocus;
-
-    function onKey(e){
-      if(e.key==='Escape'){ close(); return; }
-      if(e.key==='Tab'){
-        var f=modal.querySelectorAll('a,button');
-        if(!f.length) return;
-        var first=f[0],last=f[f.length-1];
-        if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
-        else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
-      }
-    }
-    function open(){
-      lastFocus=document.activeElement;
-      modal.classList.add('open');
-      document.body.style.overflow='hidden';
-      var first=modal.querySelector('.modal-option,.modal-close');
-      if(first) first.focus();
-      document.addEventListener('keydown',onKey);
-    }
-    function close(){
-      modal.classList.remove('open');
-      document.body.style.overflow='';
-      document.removeEventListener('keydown',onKey);
-      if(lastFocus) lastFocus.focus();
-    }
-
-    trigger.addEventListener('click',open);
-    closeBtns.forEach(function(b){ b.addEventListener('click',close); });
-    modal.addEventListener('click',function(e){ if(e.target===modal) close(); });
-  })();
-
-
-
-
-  document.getElementById('yr').textContent=new Date().getFullYear();
-})();
-</script>
+<script src="assets/js/home.js?v=fd6075adde"></script>
+<script src="assets/js/footer.js?v=c05a55e448"></script>
+<script src="assets/js/analytics.js?v=6aa35cd01e"></script>
 </body>
 </html>

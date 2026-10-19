@@ -1,0 +1,19 @@
+# Mê Kitchen
+
+> Mê Kitchen is a fast-casual Vietnamese restaurant at 4213 University Wy NE, Seattle, WA 98105, in the University District ("the Ave"). It serves phở, bánh mì, rice bowls, appetizers and drinks, made fresh every day, with online ordering ahead for pickup through Square.
+
+- Hours: 11am–9pm, Monday to Saturday; closed Sunday
+- Phone: 206-656-8878
+- Email: mekitchen.wa@gmail.com
+- Order online: https://me-kitchen.square.site/
+- Instagram: https://www.instagram.com/mekitchen.wa/
+
+The name Mê comes from a Vietnamese word for when you really love something: when you're hooked on it, craving it, or can't get enough.
+
+## Pages
+
+- [Home](https://me-kitchen.com/home): what Mê Kitchen serves, how ordering ahead works, photos, and a contact form
+- [Menu](https://me-kitchen.com/menu): every dish with its description and price, matching the Square ordering site
+- [Our story](https://me-kitchen.com/story): how Mê Kitchen started, why it's in the U District, and what the name means
+- [Careers](https://me-kitchen.com/careers): job application form with resume upload
+- [Privacy policy](https://me-kitchen.com/privacy): what the site's forms collect and who else is involved in running the site
