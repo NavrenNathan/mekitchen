@@ -29,8 +29,6 @@ const CHECK = process.argv.includes('--check');
 const EXCLUDE = new Set([
   '404.html',   // error page
 ]);
-// The coming-soon holding page at index.html excludes itself via its own
-// noindex tag, so it needs no entry here.
 
 const pages = readdirSync(ROOT)
   .filter((f) => f.endsWith('.html'))

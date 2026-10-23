@@ -11,8 +11,7 @@ by pushing.
 
 ```
 deploy/
-├── index.html      coming-soon holding page — what me-kitchen.com serves (noindex)
-├── home.html       the main site, /home, behind the holding page's gate
+├── index.html      the home page — what me-kitchen.com serves, with the "contact" form
 ├── menu.html       full menu, /menu — matches the Square ordering site, with Menu structured data
 ├── story.html      the Our story page, /story
 ├── careers.html    careers page with the "careers" Netlify application form, /careers
@@ -29,23 +28,15 @@ deploy/
 └── docs/           website-checklist.md and local-listings.md (blocked from public download)
 ```
 
-`me-kitchen.com` serves the coming-soon holding page. The full site sits at
-`/home` (`home.html`), reached through the concealed password gate at the
-bottom of the holding page — the dim dot under the footer. The password is stored
-only as a SHA-256 hash in `index.html`'s inline script (ask Nathan for it);
-the comment there explains how to change it.
+`me-kitchen.com` serves the full site. The coming-soon holding page and its
+password gate were retired on 22 October 2026, and the home page moved from
+`/home` to the root. `/home` and `/home.html` redirect to `/` (301) in
+`netlify.toml`, so old links still work.
 
-The site was temporarily flipped (main site at the root) so a Semrush audit
-could crawl it, then flipped back. If it is ever flipped again, three things
-must move together or the site breaks:
-  1. `home.html`'s canonical and `og:url`
-  2. the `href="home.html"` links in menu/story/careers/privacy, and the
-     breadcrumb "Home" URL and `Restaurant` `url` in the structured data
-  3. the `netlify.toml` redirects — a `/home.html -> /` rule while the main
-     site lives at `/home` bounces every visitor onto the holding page
-Then rerun `node scripts/generate-sitemap.mjs` and the two check scripts.
+`siteaudit-N2IzM2FhN2.txt` at the root is Semrush's Site Audit ownership
+check. Leave it in place while Semrush audits the site.
 
-**Only `index.html` (the holding page) and `404.html` carry a noindex tag.**
+**Only `404.html` carries a noindex tag.**
 The main pages don't; `robots.txt` is what keeps Google out (below).
 
 ---
@@ -107,8 +98,8 @@ trick would flatten that.
 
 ## The site is currently hidden from Google — on purpose
 
-`Disallow: /` in `robots.txt` is what keeps search engines out. The holding
-page also carries `noindex`, which stays for as long as it is a holding page.
+`Disallow: /` in `robots.txt` is what keeps search engines out. No page
+other than the 404 carries `noindex`.
 
 On launch day, delete the `Disallow: /` line from `robots.txt` and redeploy.
 The full launch steps, and everything still outstanding, are tracked in

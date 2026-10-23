@@ -3,17 +3,86 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mê Kitchen | Opening soon</title>
-<meta name="description" content="Mê Kitchen is a Vietnamese restaurant opening this fall at 4213 University Wy NE, Seattle. Phở, bánh mì and rice bowls, made fresh every day.">
+<!-- motion gate: set before first paint so the hero entrance can start on
+     frame one. "mm" = motion allowed; "intro-run" = the once-per-session
+     curtain will play, so the hero waits for it to lift. -->
+<script>(function(h){try{if(matchMedia('(prefers-reduced-motion: no-preference)').matches){h.classList.add('mm');if(!sessionStorage.getItem('mk_intro'))h.classList.add('intro-run')}}catch(e){}})(document.documentElement)</script>
+<title>Mê Kitchen | Vietnamese Restaurant, Phở &amp; Bánh Mì, Seattle</title>
+<meta name="description" content="Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì and rice bowls, made fresh every day. Order ahead online.">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
+<link rel="canonical" href="https://me-kitchen.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mê Kitchen">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://me-kitchen.com/">
+<meta property="og:title" content="Mê Kitchen | Vietnamese Restaurant, Phở &amp; Bánh Mì, Seattle">
+<meta property="og:description" content="Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì and rice bowls, made fresh every day. Order ahead online.">
+<meta property="og:image" content="https://me-kitchen.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mê Kitchen | Vietnamese Restaurant, Phở &amp; Bánh Mì, Seattle">
+<meta name="twitter:description" content="Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì and rice bowls, made fresh every day. Order ahead online.">
+<meta name="twitter:image" content="https://me-kitchen.com/assets/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Mê Kitchen",
+  "telephone": "206-656-8878",
+  "email": "mekitchen.wa@gmail.com",
+  "url": "https://me-kitchen.com/",
+  "description": "Mê Kitchen is a Vietnamese restaurant in Seattle's University District. Phở, bánh mì and rice bowls, made fresh every day.",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "opens": "11:00",
+    "closes": "21:00"
+  },
+  "servesCuisine": "Vietnamese",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "4213 University Wy NE",
+    "addressLocality": "Seattle",
+    "addressRegion": "WA",
+    "postalCode": "98105",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 47.658756,
+    "longitude": -122.3133633
+  },
+  "image": "https://me-kitchen.com/assets/og-image.png",
+  "hasMenu": "https://me-kitchen.com/menu",
+  "sameAs": [
+    "https://www.instagram.com/mekitchen.wa/",
+    "https://www.tiktok.com/@mekitchen.wa",
+    "https://www.facebook.com/people/Me-Kitchen/61593475710473/"
+  ]
+}
+</script>
+<!-- No FAQPage schema: Google requires FAQ markup to match questions visible
+     on the page, and this page no longer has an FAQ section. Re-add it only
+     alongside a visible FAQ whose answers the owner has confirmed. -->
+
 <!-- ============================================================
-     PREVIEW ONLY — REMOVE BEFORE PUBLIC LAUNCH
+     The noindex meta tag was removed from this page (and story.html)
+     to satisfy a Semrush technical audit — it was flagging the tag as
+     a "possible issue," and having it fetch/analyse the page does not
+     require exposing the site to Google. It has NOT been removed from
+     robots.txt: "Disallow: /" is still in force for every crawler
+     except Semrush's SiteAuditBot, so Google still cannot reach any
+     page here. That Disallow line is the actual protection while the
+     phone, hours, maps link and a few other fields are still
+     placeholders. See DEPLOY.md.
      ============================================================ -->
-<meta name="robots" content="noindex, nofollow">
+<!-- reduced-motion visitors get the poster as a CSS background instead of the video; fetch it straight away -->
+<link rel="preload" as="image" type="image/webp" href="assets/hero-poster.webp" media="(prefers-reduced-motion: reduce)">
 <link rel="preload" href="/fonts/spacegrotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -27,145 +96,693 @@
 @font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/spacegrotesk-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
 @font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/spacegrotesk-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
 
+/* ============================================================
+   DIRECTION 03 — "KINETIC"
+   Hard black/white blocks, pill controls, marquee, sticky order
+   bar, tabbed menu. Built mobile-first around ordering.
+   ============================================================ */
 :root{
-  --ink:#22391f; --paper:#faf7ef; --muted:#93a68d; --dim:#d8e0d2;
-  --line:#33502f; --bad:#e0a99b; --brand:#2d4a2d; --scrim:30 26 22;
+  --ease:cubic-bezier(.2,.8,.2,1);   /* the house curve — every motion uses it */
+  --scrim:30 26 22;
+  /* Mê Kitchen — deep green on cream. --ink doubles as the dark-section ground. */
+  --ink:#22391f;               /* deep green: text, and background of .section.dark */
+  --paper:#faf7ef;             /* cream ground */
+  --dim:#5e6e58;
+  --line:#dfd8c8;
+  --line-strong:#c3bba8;
+  --wash:#f1ece0;
+  --brand:#2d4a2d;             /* logo green */
   --display:'Space Grotesk',Inter,-apple-system,sans-serif;
   --body:'Geist',Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-  --rb:10px; --r:14px;
   --pad:clamp(1.25rem,4vw,3.5rem);
+  --maxw:1400px;
+  --r:14px;
+  --rb:10px;                   /* buttons & controls: square with soft corners */
 }
 *,*::before,*::after{box-sizing:border-box}
-html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;
+  /* the floating order bar covers the bottom ~81px, so keyboard focus and
+     anchor jumps scroll things clear of it (WCAG 2.4.11) */
+  scroll-padding-bottom:6rem}
 body{
-  min-height:100dvh;background:var(--ink);color:var(--paper);
-  font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;
-  display:flex;flex-direction:column;
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:16px;line-height:1.55;font-weight:400;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:0;
 }
 img{max-width:100%;display:block}
-a{color:inherit}
+a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-:focus-visible{outline:2px solid var(--paper);outline-offset:3px}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+/* on the dark grounds (hero video, green bands, drawer, footer) the green ring disappears, so it turns cream there */
+.hero :focus-visible,.section.dark :focus-visible,.drawer :focus-visible,footer :focus-visible{outline-color:var(--paper)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
 .display{font-family:var(--display);font-weight:700;text-transform:uppercase;line-height:.92;letter-spacing:-.035em;margin:0}
-
-/* ---------- layout: the flyer beside the words ---------- */
-.shell{
-  flex:1;display:grid;gap:clamp(2rem,5vw,4rem);align-items:center;
-  grid-template-columns:1fr;
-  max-width:1200px;width:100%;margin:0 auto;
-  padding:clamp(2rem,6vw,4rem) var(--pad);
-}
-@media(min-width:900px){
-  .shell{grid-template-columns:minmax(0,.85fr) minmax(0,1fr)}
-}
-
-/* the flyer itself, presented as a printed thing rather than a web banner */
-.flyer{
-  position:relative;margin:0;border-radius:var(--r);overflow:hidden;
-  box-shadow:0 24px 60px rgb(0 0 0/.38), 0 2px 0 rgb(250 247 239/.08);
-  transform:rotate(-1.1deg);
-  transition:transform .5s cubic-bezier(.2,.8,.2,1);
-  max-width:520px;width:100%;justify-self:center;
-}
-.flyer:hover{transform:rotate(0deg) translateY(-4px)}
-.flyer img{width:100%;height:auto}
-@media(prefers-reduced-motion:reduce){ .flyer,.flyer:hover{transform:none;transition:none} }
-
-/* ---------- the words ---------- */
-.copy{min-width:0}
-.logo{height:clamp(38px,5vw,52px);width:auto;filter:brightness(0) invert(1);margin:0 0 1.75rem}
 .tag{
-  display:inline-block;font-size:.6875rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-  padding:.4rem .8rem;border-radius:999px;border:1px solid currentColor;color:var(--muted);margin:0 0 1.25rem;
+  display:inline-flex;align-items:center;gap:.4rem;font-size:.6875rem;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;padding:.4rem .8rem;border-radius:999px;
+  border:1px solid currentColor;margin:0 0 1.5rem;
 }
-h1{font-size:clamp(2.25rem,6vw,4rem);margin:0 0 1.25rem}
-h1 u{text-decoration:none;-webkit-text-stroke:1px var(--paper);color:transparent}
-.lede{color:var(--dim);max-width:44ch;margin:0 0 2rem;font-weight:300;font-size:clamp(1rem,1.6vw,1.1875rem)}
+/* the pin icon on the location tag only — same mark used in the directions
+   modal, so "location" reads as one consistent glyph across the page */
+.tag-icon{width:12px;height:12px;flex:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
-
-/* the facts the flyer carries as pixels, repeated as real text */
-.facts{list-style:none;margin:0 0 2rem;padding:0;display:grid;gap:.55rem;max-width:42ch}
-.facts li{display:flex;gap:.85rem;align-items:baseline;font-size:.9375rem;color:var(--dim);
-  padding:.55rem 0;border-bottom:1px solid var(--line)}
-.facts b{font-family:var(--display);font-weight:700;font-size:.625rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--muted);min-width:5.5rem;flex:none}
-.facts a{color:var(--paper);text-decoration:underline;text-underline-offset:3px}
-.facts a:hover{color:var(--muted)}
-
-/* notify */
-.notify h2{font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--muted);margin:0 0 .85rem}
-.notify form{display:flex;flex-wrap:wrap;gap:.6rem;max-width:440px}
-.notify input[type=email]{
-  flex:1 1 210px;font:inherit;font-size:.9375rem;padding:.9rem 1rem;border-radius:var(--rb);
-  border:1px solid var(--line);background:rgb(var(--scrim)/.35);color:var(--paper);
+/* ---------- intro curtain ---------- */
+/* Two lines meet at the centre, then part to make room for the logo between
+   them. Hidden unless JS turns it on, so no-JS visitors never see a curtain
+   stuck over the page. --sep is measured from the logo at runtime. */
+.intro{
+  display:none;position:fixed;inset:0;z-index:999;background:var(--ink);
+  place-items:center;opacity:1;transition:opacity .6s ease;
 }
-.notify input::placeholder{color:#7d8f78}
-.notify input:focus-visible{outline:2px solid var(--paper);outline-offset:2px}
-.notify button{
-  font-family:var(--display);font-weight:700;font-size:.8125rem;letter-spacing:.06em;text-transform:uppercase;
-  padding:.9rem 1.5rem;border-radius:var(--rb);background:var(--paper);color:var(--ink);
-  border:2px solid var(--paper);transition:transform .18s,background .2s
+.intro.on{display:grid}
+.intro.out{opacity:0}
+/* the row is scaled down as a whole if the parted layout would not fit,
+   so the composition stays on one line at every width */
+.intro-row{position:relative;display:grid;place-items:center;width:100%;transform-origin:center}
+.intro-txt{
+  position:absolute;top:50%;white-space:nowrap;opacity:0;
+  font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(.5rem,1.5vw,.875rem);letter-spacing:clamp(.07em,.3vw,.18em);
+  color:var(--paper);
+  transition:opacity .55s ease,transform 1s cubic-bezier(.65,0,.35,1);
 }
-.notify button:hover{transform:translateY(-2px);background:#f1ece0;border-color:#f1ece0}
-.notify button[disabled]{opacity:.5;pointer-events:none}
-.notify .ok{display:none}
-.notify.done form{display:none}
-.notify.done .ok{display:block}
-.notify .ok strong{display:block;font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:1rem}
-.notify .ok span{color:var(--dim);font-size:.9375rem}
-.notify .fine{font-size:.75rem;color:var(--muted);margin:.7rem 0 0;max-width:440px;line-height:1.5}
-.notify .fine a,.meta a{color:inherit;text-decoration:underline;text-underline-offset:2px}
-.notify .fine a:hover,.meta a:hover{color:var(--paper)}
-.notify.done .fine{display:none}
-.note{font-size:.8125rem;color:var(--muted);margin:.75rem 0 0;min-height:1.2em}
-.note.bad{color:var(--bad)}
-.hide{position:absolute;left:-9999px}
+.intro-txt.l{right:50%;transform:translateY(-50%)}
+.intro-txt.r{left:50%;transform:translateY(-50%)}
+.intro.in .intro-txt{opacity:1}
+.intro.go .intro-txt.l{transform:translateY(-50%) translateX(calc(-1 * var(--sep,150px)))}
+.intro.go .intro-txt.r{transform:translateY(-50%) translateX(var(--sep,150px))}
+.intro-logo{
+  /* stacked lockup here, so it needs more height than the wide mark */
+  /* dark green ground, so the mark is forced to cream like the nav logo */
+  height:clamp(46px,6vw,80px);width:auto;filter:brightness(0) invert(1);
+  opacity:0;transform:scale(.94);
+  transition:opacity .7s ease .35s,transform .9s cubic-bezier(.2,.8,.2,1) .35s;
+}
+.intro.go .intro-logo{opacity:1;transform:none}
+/* the logo sits in a <picture> (WebP with PNG fallback); keep that box tight so the logo stays centred */
+.intro-row picture{display:block;line-height:0}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:0 0 auto;z-index:100;transition:background .35s,box-shadow .35s}
+.nav.solid{background:rgba(250,247,239,.92);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.nav.on-dark:not(.solid){color:var(--paper)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:72px;gap:1.5rem}
+.brand{display:block;flex:none}
+/* wordmark only — no tagline underneath, so it reads bigger than the old
+   mark did at the same height and needs slightly less of it */
+.brand img{height:38px;width:auto;transition:filter .35s}
+/* nav sits over the dark hero until it goes solid */
+.nav.on-dark:not(.solid) .brand img{filter:brightness(0) invert(1)}
+.nav-links{display:none;align-items:center;gap:2rem}
+.nav-links a{font-size:.8125rem;font-weight:500;letter-spacing:.04em}
+.nav-links a:not(.btn){opacity:.72;transition:opacity .2s}
+.nav-links a:not(.btn):hover{opacity:1}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  font-family:var(--display);font-weight:700;font-size:.8125rem;letter-spacing:.06em;
+  text-transform:uppercase;padding:1rem 1.75rem;border-radius:var(--rb);
+  background:var(--ink);color:var(--paper);border:2px solid var(--ink);
+  transition:transform .18s cubic-bezier(.2,.8,.2,1),background .2s,color .2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:disabled{opacity:.6;cursor:progress;pointer-events:none}
+.btn:active{transform:translateY(0)}
+.btn-sm{padding:.68rem 1.2rem;font-size:.75rem}
+/* nav order button: thin outline at rest, fill grows from the centre out to both
+   edges on hover. --fill tracks the nav's own text colour so it works over the
+   dark hero and the solid cream nav alike. */
+.btn-fill{
+  --fill:var(--ink); --fill-text:var(--paper);
+  position:relative; isolation:isolate; overflow:hidden;
+  background:transparent; color:currentColor;
+  border-width:1px; border-color:var(--fill);
+}
+.nav.on-dark:not(.solid) .btn-fill,.hero .btn-fill,.section.dark .btn-fill,footer .btn-fill{
+  --fill:var(--paper); --fill-text:var(--ink);
+}
+/* the island is cream now, not dark green, so Call uses the default light-
+   ground .btn-fill styling (ink outline, fills ink on hover) — made explicit
+   rather than left to inherit, matching how this file already treats color
+   sourcing everywhere else */
+.bar .btn-fill{color:var(--ink)}
+.btn-fill::before{
+  content:""; position:absolute; inset:0; z-index:-1; background:var(--fill);
+  transform:scaleX(0); transform-origin:center;
+  transition:transform .55s cubic-bezier(.2,.8,.2,1);
+}
+/* :active is included alongside :hover — on a touch device the tap fires
+   :active reliably, while :hover can be inconsistent or stick, which is what
+   made the fill and its text colour unreliable on the mobile order island. */
+.btn-fill:hover::before,.btn-fill:focus-visible::before,.btn-fill:active::before{transform:scaleX(1)}
+.btn-fill:hover,.btn-fill:focus-visible,.btn-fill:active{color:var(--fill-text)}
+/* no lift on this one — the fill is the whole effect */
+.btn-fill:hover,.btn-fill:active{transform:none}
+.burger{display:flex;flex-direction:column;gap:5px;padding:.5rem;margin-right:-.5rem}
+.burger span{display:block;width:24px;height:2px;background:currentColor;border-radius:2px;transition:transform .3s,opacity .2s}
+.nav.open .burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav.open .burger span:nth-child(2){opacity:0}
+.nav.open .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.drawer{
+  position:fixed;inset:72px 0 auto;z-index:99;background:var(--ink);color:var(--paper);
+  display:grid;grid-template-rows:0fr;visibility:hidden;
+  transition:grid-template-rows .5s ease,visibility 0s .5s;
+}
+/* visibility keeps the collapsed links out of the tab order */
+.nav.open + .drawer{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows .5s ease,visibility 0s}
+.drawer-in{overflow:hidden}
+/* items ease in one after another instead of arriving all at once with the
+   panel. Uses `translate` rather than `transform` so the button keeps its own
+   hover transform. Delays apply only while opening, so closing stays snappy. */
+.drawer-in>*{
+  opacity:0;translate:0 12px;
+  transition:opacity .5s ease,translate .5s cubic-bezier(.2,.8,.2,1);
+}
+.nav.open + .drawer .drawer-in>*{opacity:1;translate:none}
+.nav.open + .drawer .drawer-in>*:nth-child(1){transition-delay:.14s}
+.nav.open + .drawer .drawer-in>*:nth-child(2){transition-delay:.22s}
+.nav.open + .drawer .drawer-in>*:nth-child(3){transition-delay:.30s}
+.nav.open + .drawer .drawer-in>*:nth-child(4){transition-delay:.38s}
+.nav.open + .drawer .drawer-in>*:nth-child(5){transition-delay:.46s}
+.nav.open + .drawer .drawer-in>*:nth-child(6){transition-delay:.54s}
+.drawer a{
+  display:block;font-family:var(--display);font-weight:700;font-size:1.75rem;
+  text-transform:uppercase;letter-spacing:-.02em;padding:.6rem var(--pad);
+}
+.drawer .btn{margin:1.25rem var(--pad) 2rem;width:calc(100% - var(--pad)*2)}
+
+/* ---------- hero ---------- */
+.hero{--scrim:30 26 22;background:var(--ink);color:var(--paper);position:relative;overflow:hidden}
+/* the copy block is its own layer so the illustration can sit behind the words
+   without running under the photo grid below them */
+/* flow-root, not just relative: the chips row carries a bottom margin and
+   this box has no bottom padding or border, so without a block formatting
+   context that margin collapses straight out of .hero-copy and shows up as
+   a bare strip of .hero's green under the video, which only covers this box. */
+.hero-copy{position:relative;display:flow-root;padding:calc(72px + 4rem) 0 0}
+.hero-copy > .wrap{position:relative;z-index:1}
+
+/* A looping video, nothing laid over it, and the type carries no shadow.
+
+   It holds the same composition as the stills it replaces — walnut left,
+   dishes right — so object-position stays pinned left to keep that dark
+   field under the copy. The motion is a hand setting the phở bowl down; it
+   enters from the top right and never crosses into the copy column.
+
+   On contrast: sampled on the first and middle frames, the wood runs about
+   4.0:1 against cream from 20% to 40% of the width — a little under the
+   4.5:1 body-text floor rather than clearly over it, and lower than the
+   still photograph managed, because the grain carries more highlight here.
+   Past roughly 45% it is the food and it fails outright. No scrim is applied
+   because none was wanted; this is the trade that buys that.
+
+   Two properties are load-bearing, not decoration: muted (autoplay is
+   blocked without it everywhere) and playsinline (iOS takes the video
+   fullscreen without it). */
+.hero-scene{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.hero-scene img,.hero-scene video{display:block;width:100%;height:100%;object-fit:cover;object-position:left center}
+/* the hero headline is huge — the shared 1.5rem tag gap reads tight against it */
+.hero .tag{margin-bottom:2.75rem}
+.hero h1{font-size:calc(clamp(3rem,11vw,9rem) - 5px);margin-bottom:1.75rem}
+/* thin on mobile to match the rest of the site; the stroke thickens with the type */
+.hero h1 u{text-decoration:none;-webkit-text-stroke:.75px var(--paper);color:transparent}
+.hero-lede{font-size:calc(clamp(1.0625rem,2vw,1.375rem) - 4px);color:#d8e0d2;max-width:34ch;margin:0 0 2.25rem;font-weight:300}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:3rem}
+.chips{display:flex;flex-wrap:wrap;gap:.65rem;margin:0 0 3.25rem;padding:0;list-style:none}
+.chips li{
+  font-size:.6875rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  padding:.6rem 1.05rem;border-radius:999px;
+  /* tinted with the hero's own scrim rather than the old green, so the pills
+     belong to the photograph behind them. Measured over the worst-case
+     pixel: text 10.4:1, border 3.2:1. */
+  background:rgb(var(--scrim)/.45);
+  border:1px solid rgb(250 247 239/.42);
+  color:var(--paper);
+  position:relative;transition:background .3s,border-color .3s;
+}
+/* hover: the lit line draws itself around the chip in one continuous stroke,
+   opening and closing at top centre. This is an SVG stroke rather than a conic
+   gradient because a gradient advances by angle, which on a wide pill crawls
+   across the long edges and snaps around the caps. A stroke advances by
+   distance, so the line moves at one steady speed the whole way round. */
+/* keeps the hero's second sentence in one piece, so it starts its own line */
+.hero-lede .keep{display:inline-block}
+.chips li .ring{position:absolute;inset:0;overflow:visible;pointer-events:none;opacity:0;transition:opacity .25s}
+.chips li .ring path{
+  fill:none;stroke:rgb(250 247 239/.92);stroke-width:1;stroke-linecap:round;
+  stroke-dasharray:100;stroke-dashoffset:100;
+  filter:drop-shadow(0 0 1px rgba(250,247,239,.22)) drop-shadow(0 0 3px rgba(250,247,239,.08));
+  transition:stroke-dashoffset .8s ease-in-out;
+}
+.chips li:hover{background:rgb(var(--scrim)/.62);border-color:rgb(250 247 239/.6)}
+.chips li:hover .ring{opacity:1}
+.chips li:hover .ring path{stroke-dashoffset:0}
+/* ---------- marquee ---------- */
+.marquee{background:var(--ink);color:var(--paper);padding:1.1rem 0;overflow:hidden;border-block:2px solid var(--ink)}
+.marquee.inv{background:var(--paper);color:var(--ink)}
+.mq-track{display:flex;width:max-content;animation:slide 30s linear infinite}
+.mq-track span{
+  font-family:var(--display);font-weight:700;font-size:clamp(1.125rem,3vw,2rem);
+  text-transform:uppercase;letter-spacing:-.02em;white-space:nowrap;
+  display:flex;align-items:center;gap:2rem;padding-right:2rem;
+}
+.mq-track span::after{content:'';width:8px;height:8px;border-radius:50%;background:currentColor;flex:none}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ---------- sections ---------- */
+.section{padding:clamp(4rem,9vw,7.5rem) 0}
+.section.dark{background:var(--ink);color:var(--paper)}
+
+.picks{list-style:none;padding:0;margin:0 0 2rem;display:grid;gap:.6rem}
+.picks li{display:flex;align-items:baseline;gap:1rem;font-size:.9375rem;padding:.75rem 0;border-bottom:1px solid var(--line)}
+.picks b{font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;min-width:5.5rem}
+.picks span{color:var(--dim)}
 
 /* ---------- footer ---------- */
-footer{border-top:1px solid var(--line);padding:1.25rem var(--pad);
-  display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;
-  max-width:1200px;width:100%;margin:0 auto}
-.meta{margin:0;color:var(--muted);font-size:.75rem}
-/* the padding grows each tap target to 30px; the smaller gap offsets it so
-   the icons sit exactly where they did (from Vincent's audit pass) */
-.social{display:flex;gap:calc(.9rem - 12px);align-items:center;margin:-6px 0}
-.social a{color:var(--dim);opacity:.85;line-height:0;padding:6px;transition:opacity .25s,color .25s}
-.social a:hover{opacity:1;color:var(--paper)}
-.social svg{width:19px;height:19px;display:block}
-
-/* concealed staff gate */
-.dot{width:26px;height:26px;display:grid;place-items:center;opacity:.35;transition:opacity .25s}
-.dot:hover{opacity:1}
-.dot span{width:7px;height:7px;border-radius:50%;background:var(--muted);display:block}
-.gate{display:none;gap:.5rem;width:100%;max-width:340px}
-.gate.on{display:flex}
-.gate input{flex:1;font:inherit;font-size:.875rem;padding:.6rem .8rem;border-radius:var(--rb);
-  border:1px solid var(--line);background:rgb(var(--scrim)/.35);color:var(--paper)}
-.gate input::placeholder{color:#7d8f78}
-.gate input:focus{outline:none;border-color:var(--paper)}
-.gate button{font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;
-  padding:.6rem 1rem;border-radius:var(--rb);background:var(--paper);color:var(--ink)}
-.msg{font-size:.75rem;color:var(--muted);margin:.5rem 0 0;width:100%}
-@keyframes shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}
-  30%,50%,70%{transform:translateX(-4px)}40%,60%{transform:translateX(4px)}}
-.gate.shake{animation:shake .5s}
-
-/* ---------- free drink, as steps ---------- */
-.claim{border:1px solid var(--line);border-radius:var(--r);padding:clamp(1.25rem,3vw,1.75rem);
-  background:rgb(var(--scrim)/.3);margin:0 0 2rem}
-.claim h2{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(1.1rem,2.4vw,1.4rem);
-  margin:0 0 .35rem;letter-spacing:-.01em}
-.claim-lede{color:var(--dim);font-size:.9375rem;margin:0 0 1.35rem;max-width:44ch}
-.claim .btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;
-  padding:.85rem 1.35rem;border-radius:var(--rb);background:var(--paper);color:var(--ink);
-  border:2px solid var(--paper);text-decoration:none;transition:transform .18s,background .2s,border-color .2s;
+footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0 2rem;overflow:hidden}
+.foot{display:grid;gap:2rem;grid-template-columns:1fr;border-top:1px solid #33502f;padding-top:2.5rem}
+.foot h2{font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.18em;text-transform:uppercase;color:#93a68d;margin:0 0 1rem}
+/* columns stack as flex so each link is only as wide as its text — the hover
+   rule underneath needs that to size correctly */
+.foot-col{display:flex;flex-direction:column;align-items:flex-start}
+.foot a{
+  position:relative;display:inline-block;font-size:.9375rem;padding:.3rem 0;
+  color:#d8e0d2;transition:color .25s;
 }
-.claim .btn:hover{transform:translateY(-2px);background:#f1ece0;border-color:#f1ece0}
+.foot a::after{
+  content:'';position:absolute;left:0;right:0;bottom:.18rem;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1);
+}
+.foot a:hover{color:var(--paper)}
+.foot a:hover::after{transform:scaleX(1)}
+.foot-social{display:flex;gap:.9rem;align-items:center;padding:.3rem 0 .7rem}
+.foot-social a{color:#d8e0d2;opacity:.85;line-height:0;transition:opacity .25s,color .25s}
+.foot-social a:hover,.foot-social a:focus-visible{opacity:1;color:var(--paper)}
+.foot-social svg{width:19px;height:19px;display:block}
+/* Directions trigger: styled to match .foot a exactly (a real button, not an
+   <a>, since it opens a dialog rather than navigating) so it sits in the
+   "Find us" column without announcing itself as a different kind of control
+   until it's used. */
+.foot-directions-trigger{
+  position:relative;display:inline-block;font:inherit;font-size:.9375rem;
+  padding:.3rem 0;color:#d8e0d2;background:none;border:0;cursor:pointer;
+  transition:color .25s;
+}
+.foot-directions-trigger::after{
+  content:'';position:absolute;left:0;right:0;bottom:.18rem;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1);
+}
+.foot-directions-trigger:hover,.foot-directions-trigger:focus-visible{color:var(--paper)}
+.foot-directions-trigger:hover::after,.foot-directions-trigger:focus-visible::after{transform:scaleX(1)}
 
+/* ---------- directions modal ---------- */
+/* A real popup rather than an inline reveal: picking a maps app gets a
+   moment of protected focus instead of competing with the rest of the
+   footer list. Entrance uses this site's own dominant easing
+   (cubic-bezier(.2,.8,.2,1), used everywhere else on this page) rather than
+   a new curve, and the backdrop is --scrim — the same warm near-black
+   already carrying the hero overlay and the chip hover state — so this
+   reads as part of the site rather than a generic dialog component. */
+.modal-overlay{
+  position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
+  padding:1.25rem;background:rgb(var(--scrim)/.55);backdrop-filter:blur(3px);
+  opacity:0;visibility:hidden;
+  transition:opacity .3s cubic-bezier(.2,.8,.2,1),visibility 0s .3s;
+}
+.modal-overlay.open{
+  opacity:1;visibility:visible;transition:opacity .3s cubic-bezier(.2,.8,.2,1),visibility 0s;
+}
+.modal-card{
+  width:100%;max-width:340px;background:var(--paper);color:var(--ink);
+  border:1px solid var(--line);border-radius:var(--r);
+  padding:1.75rem 1.5rem 1.5rem;position:relative;
+  box-shadow:0 24px 64px rgba(24,57,31,.28);
+  transform:scale(.94);transition:transform .3s cubic-bezier(.2,.8,.2,1);
+}
+.modal-overlay.open .modal-card{transform:scale(1)}
+.modal-close{
+  position:absolute;top:.7rem;right:.7rem;width:2rem;height:2rem;
+  display:grid;place-items:center;background:none;border:0;border-radius:999px;
+  color:var(--dim);cursor:pointer;transition:background .2s,color .2s;
+}
+.modal-close:hover,.modal-close:focus-visible{background:var(--wash);color:var(--ink)}
+.modal-close svg{width:15px;height:15px}
+.modal-card h2{
+  font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:1.125rem;letter-spacing:-.01em;margin:0 0 .35rem;padding-right:1.5rem;
+}
+.modal-sub{font-size:.875rem;color:var(--dim);margin:0 0 1.35rem}
+.modal-options{display:flex;flex-direction:column;gap:.6rem}
+.modal-option{
+  display:flex;align-items:center;gap:.85rem;padding:.9rem 1rem;
+  border:1px solid var(--line);border-radius:var(--rb);color:var(--ink);
+  transition:border-color .2s,background .2s;
+}
+.modal-option svg{width:20px;height:20px;flex:none}
+.modal-option span{font-family:var(--display);font-weight:700;font-size:.875rem;letter-spacing:.01em;text-transform:uppercase}
+.modal-option:hover,.modal-option:focus-visible{border-color:var(--ink);background:var(--wash)}
+/* email popup: the address itself, then a copy button styled as an option */
+.modal-email{
+  display:block;margin:0 0 .75rem;padding:.9rem 1rem;border-radius:var(--rb);
+  background:var(--wash);border:1px solid var(--line);
+  font-size:1rem;font-weight:600;color:var(--ink);word-break:break-all;
+  user-select:all;-webkit-user-select:all;
+}
+.modal-copy{width:100%;background:none;font:inherit;cursor:pointer;text-align:left}
+.modal-copy.done{border-color:var(--ink);background:var(--wash)}
+@media(prefers-reduced-motion:reduce){
+  .modal-overlay,.modal-card{transition-duration:.01ms!important}
+}
+
+/* brand block */
+.foot-brand{display:flex;flex-direction:column;align-items:flex-start;gap:1.15rem}
+.foot-brand img{height:50px;width:auto;filter:brightness(0) invert(1)}
+.foot-brand p{color:#d8e0d2;max-width:30ch;font-size:.9375rem;margin:0}
+/* oversized outlined wordmark anchoring the base of the page — same hollow
+   treatment as the underlined word in the hero headline */
+.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid #33502f;font-size:.75rem;color:#93a68d}
+
+/* ---------- sticky order bar ---------- */
+/* Floating island: segmented info on the left, one solid CTA flush right. */
+.bar{
+  position:fixed;inset:auto 0 0;z-index:98;display:flex;gap:.5rem;align-items:stretch;
+  width:min(calc(100% - 1.25rem),var(--maxw));margin:0 auto .625rem;
+  padding:.4rem;border-radius:14px;
+  /* cream island, same alpha/blur treatment as before, just recoloured off
+     the dark-green base — Order online (.btn-inv) is already green by
+     itself, so it now reads clearly against this instead of nearly matching
+     the old dark-green ground */
+  background:rgba(250,247,239,.96);backdrop-filter:blur(14px);
+  border:1px solid rgba(34,57,31,.54);
+  /* a clearly visible green glow using --ink (the site's main green),
+     layered over the original drop shadow so the island still lifts off
+     the page behind it */
+  box-shadow:0 0 0 1px rgba(34,57,31,.15),0 0 16px rgba(34,57,31,.44),0 12px 32px rgba(24,43,26,.14);
+  transform:translateY(160%);transition:transform .35s cubic-bezier(.2,.8,.2,1);
+}
+.bar.show{transform:none}
+/* room under the footer so its last links can scroll clear of the bar */
+footer{padding-bottom:calc(2rem + 6rem)}
+/* segments — small dim label stacked over the value, hairline rule between */
+.bar-fields{display:none;flex:1;align-items:stretch;min-width:0}
+.bar-field{
+  display:flex;flex-direction:column;justify-content:center;gap:.2rem;
+  flex:1;min-width:0;padding:.3rem 2rem;
+}
+.bar-field+.bar-field{border-left:1px solid var(--line)}
+.bar-field .lbl{
+  font-family:var(--display);font-size:.625rem;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+}
+.bar-field .val{
+  font-size:.9375rem;color:var(--ink);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+a.bar-field .val{transition:opacity .2s}
+a.bar-field:hover .val{opacity:.7}
+.bar .btn{flex:1;align-self:stretch;border-radius:var(--rb)}
+
+/* ---------- reveal ---------- */
+.rv{transition:opacity .7s var(--ease),translate .7s var(--ease)}
+html.fx .rv:not(.in){opacity:0;translate:0 22px}
+
+/* ---------- responsive ---------- */
+@media(min-width:768px){
+  .brand img{height:40px}
+  .hero h1 u{-webkit-text-stroke:1.5px var(--paper)}
+  .foot{grid-template-columns:2fr 1fr 1fr 1fr}
+  /* shrink to content rather than spanning the full width */
+  .bar{width:fit-content}
+  .bar-fields{display:flex;flex:0 0 auto}
+  .bar-field{flex:0 0 auto}
+  .bar-call{display:none}
+  .bar .btn{flex:0 0 auto;padding-left:2.25rem;padding-right:2.25rem}
+}
+@media(min-width:1024px){
+  .nav-links{display:flex}
+  .burger{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  /* skip the draw-on — land straight on the fully lit ring */
+  .chips li:hover .ring path{stroke-dashoffset:0}
+  /* no staggered wait for the drawer items */
+  .nav.open + .drawer .drawer-in>*{transition-delay:0s!important}
+  /* a looping hero video is exactly the motion this setting asks us to drop —
+     fall back to its own poster frame, so the hero still has a picture */
+  .hero-scene video{display:none}
+  .hero-scene{background:url(assets/hero-poster.jpg) left center/cover no-repeat}
+  .hero-scene{background-image:image-set(url("assets/hero-poster.webp") type("image/webp"),url("assets/hero-poster.jpg") type("image/jpeg"))}
+}
+
+/* ---------- buttons: green, hover to the logo green ---------- */
+/* --brand (#2d4a2d) is the colour sampled from the wordmark. It was declared
+   when the palette was set up and then never used; this is what it is for.
+   It sits only a little lighter than --ink, so the hover is a quiet shift of
+   shade rather than a jump — the -2px lift is still doing most of the work of
+   signalling the state. */
+.btn-inv{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+/* the drawer's ground is --ink as well, so its Order button stays cream there */
+.drawer .btn-inv{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.drawer .btn.btn-inv:hover{background:var(--wash);border-color:var(--wash);color:var(--ink)}
+.btn:not(.btn-fill):hover{background:var(--brand);border-color:var(--brand);color:var(--paper)}
+
+/* ---------- layout added for the reconstructed home page ---------- */
+/* A feature band: the photograph owns half the band outright — flush to the
+   outer edge of the viewport and to the full height of the row, with no
+   gutter, no corner radius and no letterboxing. That means the band sits
+   OUTSIDE .wrap (which would cap it at 1400px and pad it in) and the section
+   carries no vertical padding of its own; the copy column supplies the only
+   breathing room. align-items is stretch, not center — centring is what left
+   the green gaps above and below the picture when the copy ran taller. */
+.band{padding:0}
+/* one knob for the whole grid: the gaps between tiles and the green frame
+   around the outside use the same value, so the spacing reads as even */
+.gallery-band{--gap:clamp(14px,2vw,28px);padding:var(--gap) 0}
+.feature{display:grid;grid-template-columns:1fr;align-items:stretch}
+.feature .shot{position:relative;overflow:hidden;min-height:clamp(260px,58vw,420px)}
+.feature .shot img{width:100%;height:100%;object-fit:cover;display:block}
+.feature-copy{display:flex;align-items:center;padding:clamp(2.5rem,8vw,4.5rem) var(--pad)}
+.feature-copy > *{width:100%;max-width:46ch}
+.feature h2{font-size:clamp(2rem,5.5vw,3.75rem);margin-bottom:1.25rem}
+.feature p{color:var(--dim);margin:0 0 1.1rem;max-width:46ch}
+.feature p:last-of-type{margin-bottom:1.75rem}
+.feature em{font-style:italic}
+.section.dark .feature p{color:#b6c4b0}
+.feature .cta{display:flex;flex-wrap:wrap;gap:.75rem}
+/* The gallery: pictures only, no heading, no caption, no button. Six equal
+   4:3 frames, three across and two down at every width, on the green — the
+   seams and the outer frame share one --gap so the spacing reads as even.
+
+   The six sources are square, so each frame loses an eighth off the top and
+   bottom. Three are nudged so the bowl stays whole: phở (4th), the poster (5th,
+   keeps the bowl and the tagline over the logo) and the phở on the table (6th). */
+.gallery{display:grid;gap:var(--gap);padding-inline:var(--gap);grid-template-columns:repeat(3,1fr);background:var(--ink)}
+.gallery figure{margin:0;position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--ink)}
+.gallery img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.gallery figure:nth-child(4) img{object-position:50% 68%}
+.gallery figure:nth-child(5) img{object-position:50% 85%}
+.gallery figure:nth-child(6) img{object-position:50% 60%}
+.gallery figure:hover img{transform:scale(1.045)}
+@media(prefers-reduced-motion:reduce){.gallery figure:hover img{transform:none}}
+
+/* contact: the form sits beside the practical details rather than under them */
+.reach{display:grid;gap:clamp(2rem,5vw,3.5rem);grid-template-columns:1fr;align-items:start}
+.reach h2{font-size:clamp(2.25rem,7vw,5rem);margin-bottom:1.25rem}
+.reach p.sub{color:var(--dim);max-width:44ch;margin:0 0 2rem}
+.reach .picks{margin-bottom:2rem}
+.field{display:grid;gap:.4rem;margin:0 0 1rem}
+.field label{font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.14em;text-transform:uppercase}
+.field input,.field textarea{
+  font:inherit;font-size:.9375rem;padding:.85rem 1rem;border-radius:var(--rb);
+  border:1px solid var(--line-strong);background:var(--paper);color:var(--ink);width:100%;
+}
+.field textarea{min-height:130px;resize:vertical}
+.form-sent{
+  margin:0;padding:1.1rem 1.25rem;border-radius:var(--rb);
+  border:1px solid var(--line-strong);background:var(--wash);
+  color:var(--ink);font-size:.9375rem;
+}
+.form-sent.bad{border-color:#c9a79b;background:#f7ece8}
+.reach p.sub a{color:inherit;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.reach p.sub a:hover{color:var(--brand)}
+.field input:focus-visible,.field textarea:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+@media(min-width:1024px){
+  .feature{grid-template-columns:1fr 1fr}
+  .feature .shot{min-height:clamp(460px,42vw,660px)}
+  .feature.flip .shot{order:2}
+  /* keep the outer gutter on the page's margin and tighten the inner one, so
+     the copy sits against the picture rather than floating mid-column */
+  .feature:not(.flip) .feature-copy{padding-left:clamp(2rem,4vw,3.5rem)}
+  .feature.flip .feature-copy{padding-right:clamp(2rem,4vw,3.5rem)}
+  .reach{grid-template-columns:1.05fr .95fr}
+}
+
+/* ---------- header: permanent, cream, green wordmark ---------- */
+/* It used to start transparent over the hero and only turn solid past 40px,
+   with the wordmark flipped to white by a filter while it sat on the dark
+   video. Both of those are gone: the bar carries its own ground at every
+   scroll position, so the supplied green mark is shown as-is and never
+   changes colour under the reader. The .solid and .on-dark classes are still
+   toggled by the scroll handler; these rules simply make both states look the
+   same, which is cheaper and safer than unpicking the handler. */
+.nav,.nav.solid,.nav.on-dark,.nav.on-dark:not(.solid){
+  background:var(--paper);
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+  box-shadow:0 1px 0 var(--line);
+  color:var(--ink);
+}
+/* the mark keeps its own colour — no inversion over the hero any more */
+.nav .brand img,.nav.on-dark:not(.solid) .brand img{filter:none}
+/* the order button was cream-on-dark for the transparent state; on a cream
+   bar it needs the dark fill back */
+.nav.on-dark:not(.solid) .btn-fill{--fill:var(--ink);--fill-text:var(--paper)}
+
+/* ---------- footer ---------- */
+/* Brand column is widest, then three columns of links. The small headings are
+   sage rather than cream so they read as labels, not as more links. */
+.foot{grid-template-columns:1fr}
+.foot-addr{font-style:normal;color:#93a68d;font-size:.875rem;line-height:1.7}
+.foot-addr b{display:block;color:var(--paper);font-weight:600;margin-bottom:.35rem}
+/* social as bordered squares, as in the reference, rather than bare glyphs */
+.foot-social{display:flex;gap:.6rem;align-items:center;padding:0}
+.foot-social a{
+  display:grid;place-items:center;width:44px;height:44px;border-radius:var(--rb);
+  border:1px solid #33502f;color:#d8e0d2;opacity:1;
+  transition:border-color .25s,background .25s,color .25s;
+}
+.foot-social a:hover,.foot-social a:focus-visible{border-color:var(--paper);background:rgb(var(--scrim)/.35);color:var(--paper)}
+.foot-social a::after{display:none}
+/* the banded rows: copy left, action right, divided by a hairline */
+.foot-band{
+  display:grid;gap:1.5rem;grid-template-columns:1fr;align-items:center;
+  border-top:1px solid #33502f;margin-top:2.75rem;padding-top:2.75rem;
+}
+.foot-band p{color:#b6c4b0;margin:0;max-width:46ch;font-size:.9375rem}
+.foot-band h2{font-size:.83em;font-weight:700;margin:1.67em 0 .75rem}
+/* the page's buttons are green, which disappears on the footer's green ground,
+   so the footer carries its own cream pair */
+.foot-solid{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.btn.foot-solid:hover{background:var(--wash);border-color:var(--wash);color:var(--ink)}
+.foot a.foot-solid::after,.foot-band a::after{display:none}
+.foot-news{display:flex;flex-wrap:wrap;gap:.6rem}
+.legal a{color:inherit;text-decoration:none}
+.legal a:hover{color:var(--paper)}
+@media(min-width:640px){
+  .foot{grid-template-columns:1fr 1fr}
+  .foot-band{grid-template-columns:1fr auto}
+  .foot-news{justify-content:flex-end}
+}
+@media(min-width:1024px){
+  .foot{grid-template-columns:1.6fr 1fr 1fr 1.1fr;gap:3rem}
+  .foot-band{gap:3rem}
+}
+
+/* ---------- hero on small screens ---------- */
+/* A phone crops the 16:9 clip to roughly its left 29%, which on this footage
+   is nothing but walnut — the food never appears. So the crop is pushed to
+   58%, which brings the phở bowl and the sauce cup into frame while keeping
+   some table on the left.
+   That puts copy over food, which bare footage cannot carry: measured across
+   the first and last frames, the worst case in that window is 1.27:1. A flat
+   .62 scrim lifts it to 5.10:1 on a 390px phone and 4.84:1 on a 430px one,
+   both clear of the 4.5:1 floor. The cost is that the food reads dark here.
+   Desktop is untouched: it keeps object-position left and no scrim at all. */
+@media(max-width:767px){
+  .hero-scene img,.hero-scene video{object-position:58% center}
+  .hero-scene::after{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:rgb(var(--scrim)/.62);
+  }
+}
+
+/* ---------- scroll motion ----------
+   One curve (--ease), and each section enters its own way rather than every
+   block doing the same fade-up: the hero's dish names rise through their own
+   lines, the two feature photos slide open from their outer edges, the gallery plates are set down one after another, contact simply
+   rises, and the footer's rules draw across. Hidden starting states exist
+   only under html.fx, which the script adds once it is ready to reveal them,
+   so no-JS and reduced-motion visitors always get the finished page. */
+
+/* hero entrance — once per load; waits for the curtain when it plays */
+.hero h1 .ln{display:block;clip-path:inset(-.45em -.25em -.08em -.25em)}
+.hero h1 .ln-in{display:inline-block}
+html.mm{--hd:.15s}
+html.mm.intro-run{--hd:2.3s}
+html.mm .hero h1 .ln-in{animation:mo-line .9s var(--ease) backwards;animation-delay:calc(var(--hd) + var(--i) * 90ms)}
+html.mm .hero .tag{animation:mo-fade .6s var(--ease) backwards;animation-delay:var(--hd)}
+html.mm .hero-lede{animation:mo-rise .7s var(--ease) backwards;animation-delay:calc(var(--hd) + .35s)}
+html.mm .hero-cta{animation:mo-rise .7s var(--ease) backwards;animation-delay:calc(var(--hd) + .45s)}
+html.mm .chips{animation:mo-fade .8s var(--ease) backwards;animation-delay:calc(var(--hd) + .6s)}
+@keyframes mo-line{from{translate:0 105%}}
+@keyframes mo-rise{from{opacity:0;translate:0 14px}}
+@keyframes mo-fade{from{opacity:0}}
+/* desktop only: the video settles a little slower than the page as you leave
+   the hero. Vertical only, so the walnut stays under the copy column. */
+@supports (animation-timeline:scroll()){
+  @media(min-width:1024px){
+    html.mm .hero-scene video{animation:mo-sink linear both;animation-timeline:scroll(root);animation-range:0 100vh}
+  }
+}
+@keyframes mo-sink{to{translate:0 12%}}
+
+/* shared copy stagger for the two feature bands */
+html.fx [data-mo] .feature-copy > div > *{transition:opacity .7s var(--ease),translate .7s var(--ease),clip-path .9s var(--ease)}
+html.fx [data-mo] .feature-copy > div > :nth-child(1){transition-delay:.2s}
+html.fx [data-mo] .feature-copy > div > :nth-child(2){transition-delay:.28s}
+html.fx [data-mo] .feature-copy > div > :nth-child(3){transition-delay:.36s}
+html.fx [data-mo] .feature-copy > div > :nth-child(4){transition-delay:.44s}
+
+/* Order ahead: the photo is handed over from its outer edge */
+html.fx [data-mo=tray] .shot{clip-path:inset(0 0 0 0);transition:clip-path 1s var(--ease)}
+html.fx [data-mo=tray] .shot img{scale:1;transition:scale 1.3s var(--ease)}
+html.fx [data-mo=tray]:not(.in) .shot{clip-path:inset(0 100% 0 0)}
+html.fx [data-mo=tray]:not(.in) .shot img{scale:1.08}
+html.fx [data-mo=tray]:not(.in) .feature-copy > div > *{opacity:0;translate:0 16px}
+
+/* Eat well: the photo is handed over the same way as Order ahead's — from
+   its own outer edge, which on desktop is the right; the heading wipes up */
+html.fx [data-mo=clear] .shot{clip-path:inset(0 0 0 0);transition:clip-path 1s var(--ease)}
+html.fx [data-mo=clear] .shot img{scale:1;transition:scale 1.3s var(--ease)}
+html.fx [data-mo=clear]:not(.in) .shot{clip-path:inset(0 100% 0 0)}
+html.fx [data-mo=clear]:not(.in) .shot img{scale:1.08}
+@media(min-width:1024px){html.fx [data-mo=clear]:not(.in) .shot{clip-path:inset(0 0 0 100%)}}
+html.fx [data-mo=clear] h2{clip-path:inset(-.45em -.25em -.1em -.25em)}
+html.fx [data-mo=clear]:not(.in) h2{clip-path:inset(100% -.25em -.1em -.25em);translate:0 18px}
+html.fx [data-mo=clear]:not(.in) .feature-copy > div > :not(h2){opacity:0}
+
+/* Gallery: plates are set down on the pass, row by row */
+html.fx [data-mo=plates] figure{transition:opacity .7s var(--ease),translate .8s var(--ease),scale .8s var(--ease)}
+html.fx [data-mo=plates]:not(.in) figure{opacity:0;translate:0 -14px;scale:1.02}
+html.fx [data-mo=plates] figure:nth-child(2){transition-delay:.08s}
+html.fx [data-mo=plates] figure:nth-child(3){transition-delay:.16s}
+html.fx [data-mo=plates] figure:nth-child(4){transition-delay:.14s}
+html.fx [data-mo=plates] figure:nth-child(5){transition-delay:.22s}
+html.fx [data-mo=plates] figure:nth-child(6){transition-delay:.3s}
+
+/* Footer: the closing beat — each rule draws across, then its row lands */
+.foot,.foot-band,.legal{position:relative}
+html.fx footer [data-mo=rule]{border-top-color:transparent}
+html.fx footer [data-mo=rule]::before{
+  content:'';position:absolute;top:-1px;left:0;right:0;height:1px;background:#33502f;
+  transform-origin:left center;scale:0 1;transition:scale .9s var(--ease);
+}
+html.fx footer [data-mo=rule].in::before{scale:1 1}
+html.fx footer [data-mo=rule] > *{transition:opacity .6s var(--ease),translate .6s var(--ease)}
+html.fx footer [data-mo=rule]:not(.in) > *{opacity:0;translate:0 -10px}
+html.fx footer [data-mo=rule] > :nth-child(1){transition-delay:.15s}
+html.fx footer [data-mo=rule] > :nth-child(2){transition-delay:.21s}
+html.fx footer [data-mo=rule] > :nth-child(3){transition-delay:.27s}
+html.fx footer [data-mo=rule] > :nth-child(4){transition-delay:.33s}
+
+/* phones: shorter travel, no blur (it is costly on mobile GPUs) */
+@media(max-width:767px){
+  html.fx [data-mo=tray]:not(.in) .feature-copy > div > *{translate:0 8px}
+  html.fx [data-mo=plates]:not(.in) figure{translate:0 -8px}
+}
 /* skip link: off-screen until a keyboard user tabs to it */
 .skip{position:absolute;left:12px;top:-100px;z-index:1000;padding:.7rem 1.1rem;border-radius:10px;
   background:#22391f;color:#faf7ef;font:600 .875rem/1.2 'Geist',-apple-system,sans-serif;text-decoration:none;
@@ -177,89 +794,306 @@ footer{border-top:1px solid var(--line);padding:1.25rem var(--pad);
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="shell" id="main" role="main" tabindex="-1">
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-row">
+    <span class="intro-txt l">Phở · Bánh mì · Rice</span>
+    <picture><source type="image/webp" srcset="assets/logo-main.webp"><img class="intro-logo" src="assets/logo-main.png" alt="" width="323" height="240"></picture>
+    <span class="intro-txt r">Located in the U District</span>
+  </div>
+</div>
 
-  <figure class="flyer">
-    <picture><source type="image/webp" srcset="assets/MekitchenFlier-600.webp 600w, assets/MekitchenFlier-1024.webp 1024w" sizes="(min-width:900px) 40vw, 92vw"><img src="assets/MekitchenFlier.jpg"
-         alt="Mê Kitchen flyer: Coming this fall. Phở, bánh mì and rice bowls. 4213 University Wy NE, Seattle. Follow @mekitchen.wa on Instagram to claim a free drink."
-         width="1024" height="1536" fetchpriority="high" decoding="async"></picture>
-  </figure>
+<header class="nav on-dark" id="nav">
+  <div class="wrap nav-in">
+    <a href="/" class="brand" aria-label="Mê Kitchen home">
+      <img src="assets/logo-mark.png" alt="Mê Kitchen" width="908" height="200">
+    </a>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="story.html">Our story</a>
+      <a href="#contact">Contact</a>
+      <a href="https://me-kitchen.square.site/" class="btn btn-sm btn-fill" target="_blank" rel="noopener">Order</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="drawer">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
 
-  <div class="copy">
-    <img class="logo" src="assets/logo-mark.png" alt="Mê Kitchen" width="908" height="200">
-    <span class="tag">U District · Seattle</span>
-    <h1 class="display">Coming<br><u>this fall</u></h1>
-    <p class="lede">Phở, bánh mì and rice bowls, made fresh every day. Order on your phone, walk in, walk out.</p>
+<div class="drawer" id="drawer">
+  <div class="drawer-in">
+    <a href="/">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="story.html">Our story</a>
+    <a href="#contact">Contact</a>
+    <a href="https://me-kitchen.square.site/" class="btn btn-inv" target="_blank" rel="noopener">Order online</a>
+  </div>
+</div>
 
-
-    <!-- The flyer carries all of this as pixels. Repeated here as real text so
-         a screen reader, and Google, can actually read it. -->
-    <ul class="facts">
-      <li><b>Where</b><span>4213 University Wy NE, Seattle, WA 98105 &middot; U District</span></li>
-      <li><b>Instagram</b><span><a href="https://www.instagram.com/mekitchen.wa/" target="_blank" rel="noopener">@mekitchen.wa</a></span></li>
-    </ul>
-
-
-    <section class="claim">
-      <h2>Claim a free drink</h2>
-      <p class="claim-lede">Follow us on Instagram. We will post how to claim it before opening day.</p>
-      <a class="btn" href="https://www.instagram.com/mekitchen.wa/" target="_blank" rel="noopener">Follow @mekitchen.wa</a>
-    </section>
-
-    <section class="notify" id="notify">
-      <h2>Be first through the door</h2>
-      <form name="notify" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="notifyForm">
-        <input type="hidden" name="form-name" value="notify">
-        <input type="hidden" name="subject" value="New Mê Kitchen opening-list signup">
-        <p class="hide" aria-hidden="true"><label>Skip this field: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-        <label class="sr" for="email">Email address</label>
-        <input type="email" id="email" name="email" placeholder="your@email.com" required autocomplete="email">
-        <button type="submit" id="notifyBtn">I'm in</button>
-      </form>
-      <p class="fine">We will only email you news about Mê Kitchen, and you can unsubscribe any time. <a href="privacy.html">Privacy policy</a></p>
-      <div class="ok">
-        <strong>You're on the list</strong>
-        <span>We will let you know the moment the doors open.</span>
+<main id="main" tabindex="-1">
+<!-- ============ HERO ============ -->
+  <section class="hero">
+   <div class="hero-copy">
+    <div class="hero-scene">
+      <video autoplay muted loop playsinline preload="metadata" width="1280" height="720"
+             poster="assets/hero-poster.webp" data-webm="assets/hero-video.webm" data-mp4="assets/hero-video.mp4" aria-hidden="true" tabindex="-1">
+        <!-- no sources yet: the script adds them (from data-webm and data-mp4
+             on the <video>) after the page has loaded, so the poster (the LCP
+             image) doesn't compete with 400 KB of video -->
+      </video>
+    </div>
+    <div class="wrap">
+      <span class="tag"><svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12Z"/><circle cx="12" cy="9" r="2.2"/></svg>Located in the U District</span>
+      <h1 class="display"><span class="ln"><span class="ln-in" style="--i:0">Phở.</span></span> <span class="ln"><span class="ln-in" style="--i:1">Bánh mì.</span></span> <span class="ln"><u class="ln-in" style="--i:2">Rice bowls.</u></span></h1>
+      <p class="hero-lede">Order on your phone, walk in, walk out. <span class="keep">Fresh broth every day, twenty-minute lunch.</span></p>
+      <div class="hero-cta">
+        <a href="https://me-kitchen.square.site/" class="btn" target="_blank" rel="noopener">Order online</a>
+        <a href="menu.html" class="btn">See the menu</a>
       </div>
-      <p class="note" id="notifyNote"></p>
-    </section>
+      <ul class="chips">
+        <li>Order ahead<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li><li>Ready when you arrive<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li><li>Veggie options<svg class="ring" aria-hidden="true" focusable="false"><path pathLength="100"/></svg></li>
+      </ul>
+    </div>
+   </div>
+  </section>
+
+<!-- ============ MARQUEE ============ -->
+  <div class="marquee inv" aria-hidden="true">
+    <div class="mq-track">
+      <span>Fresh broth daily</span><span>Order ahead</span><span>Ready when you arrive</span><span>Quality ingredients</span>
+      <span>Fresh broth daily</span><span>Order ahead</span><span>Ready when you arrive</span><span>Quality ingredients</span>
+    </div>
+  </div>
+
+  <!-- ============ FEATURED ============ -->
+  <section class="section band">
+    <div class="feature" data-mo="tray">
+      <div class="shot"><picture>
+        <source type="image/webp" srcset="assets/g-spread-480.webp 480w, assets/g-spread-960.webp 960w" sizes="(min-width:1024px) 50vw, 100vw">
+        <img src="assets/g-spread.jpg" alt="A bánh mì, a bowl of phở and a grilled beef rice bowl laid out together with sauces, herbs and chopsticks." width="1024" height="1024" loading="lazy" decoding="async">
+      </picture></div>
+      <div class="feature-copy">
+        <div>
+          <span class="tag">Counter service</span>
+          <h2 class="display">Order ahead,<br>walk straight out</h2>
+          <p>Order on your phone and we get it ready the moment it comes in, so it is bagged and waiting by the time you reach the counter. No line, no ticket number, no standing around.</p>
+          <div class="cta">
+            <a href="menu.html" class="btn btn-fill">See the menu</a>
+            <a href="https://me-kitchen.square.site/" class="btn" target="_blank" rel="noopener">Order online</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ STORY ============ -->
+  <section class="section dark band">
+    <div class="feature flip" data-mo="clear">
+      <div class="shot"><picture>
+        <source type="image/webp" srcset="assets/bowl-beef-800.webp 800w, assets/bowl-beef.webp 1600w" sizes="(min-width:1024px) 50vw, 100vw">
+        <img src="assets/bowl-beef.jpg" alt="A grilled beef rice bowl with cabbage slaw, pickled carrot and cucumber, on a wooden table." width="1600" height="905" loading="lazy" decoding="async">
+      </picture></div>
+      <div class="feature-copy">
+        <div>
+          <h2 class="display">Eat well<br>on the run</h2>
+          <p>We started Mê Kitchen because the Vietnamese food we grew up loving usually asks for an hour nobody has. Everything here is made fresh every day: phở, bánh mì, rice bowls, spring rolls and Vietnamese coffee, all with quality ingredients. Same food, done properly, handed over fast enough to eat on the run.</p>
+          <div class="cta">
+            <a href="story.html" class="btn btn-fill">Our story</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ GALLERY (the reference's catering slot) ============ -->
+  <!-- Photographs only, by request: no heading, no caption, no CTA. The alt
+       text stays — it is not rendered, and the tiles are content, not decoration. -->
+  <section class="section dark gallery-band" aria-labelledby="gallery-h">
+    <h2 class="sr" id="gallery-h">Photos</h2>
+    <div class="gallery" data-mo="plates">
+      <figure><picture><source type="image/webp" srcset="assets/g-spread-480.webp 480w, assets/g-spread-960.webp 960w" sizes="33vw"><img src="assets/g-spread.jpg" alt="A bánh mì, a bowl of phở and a grilled beef rice bowl laid out together with sauces, herbs and chopsticks." width="1024" height="1024" loading="lazy" decoding="async"></picture></figure>
+      <figure><picture><source type="image/webp" srcset="assets/g-rice-bowl-480.webp 480w, assets/g-rice-bowl-960.webp 960w" sizes="33vw"><img src="assets/g-rice-bowl.jpg" alt="A grilled beef rice bowl with cabbage slaw, pickled carrot and a pot of green sauce." width="1024" height="1024" loading="lazy" decoding="async"></picture></figure>
+      <figure><picture><source type="image/webp" srcset="assets/g-banh-mi-480.webp 480w, assets/g-banh-mi-960.webp 960w" sizes="33vw"><img src="assets/g-banh-mi.jpg" alt="A bánh mì on a metal tray beside a dish of cucumber, pickled carrot, cilantro and jalapeño." width="1024" height="1024" loading="lazy" decoding="async"></picture></figure>
+      <figure><picture><source type="image/webp" srcset="assets/g-pho-480.webp 480w, assets/g-pho-960.webp 960w" sizes="33vw"><img src="assets/g-pho.jpg" alt="A bowl of phở with rare beef and green onion, with Thai basil and bean sprouts on the side." width="1024" height="1024" loading="lazy" decoding="async"></picture></figure>
+      <figure><picture><source type="image/webp" srcset="assets/g-poster-480.webp 480w, assets/g-poster-960.webp 960w" sizes="33vw"><img src="assets/g-poster.jpg" alt="A bowl of phở on the counter beneath a Mê Kitchen poster reading Phở Brings People Together." width="1024" height="1024" loading="lazy" decoding="async"></picture></figure>
+      <figure><picture><source type="image/webp" srcset="assets/g-pho-table-480.webp 480w, assets/g-pho-table-960.webp 960w" sizes="33vw"><img src="assets/g-pho-table.jpg" alt="A bowl of phở on a table with chopsticks, lime and chili, and herbs on a steel tray." width="1024" height="1024" loading="lazy" decoding="async"></picture></figure>
+    </div>
+  </section>
+
+  <!-- ============ GET IN TOUCH ============ -->
+  <!-- Light section: cream ground, green type. The inputs were always styled
+       for a light ground, so they need no dark-mode variant here. -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="reach rv">
+        <div>
+          <h2 class="display">Get in touch</h2>
+          <p class="sub">However your visit went, we want to hear about it. It is the quickest way we get better. Ask about a large order, tell us what you thought, or talk to us about <a href="careers.html">joining the team</a>. Every message comes straight to us, and we read all of them.</p>
+          <ul class="picks">
+            <li><b>Email</b><span><a href="mailto:mekitchen.wa@gmail.com">mekitchen.wa@gmail.com</a></span></li>
+            <li><b>Phone</b><span><a href="tel:+12066568878">206-656-8878</a></span></li>
+            <li><b>Address</b><span>4213 University Wy NE, Seattle, WA 98105</span></li>
+            <li><b>Hours</b><span>11am&ndash;9pm Mon&ndash;Sat, closed Sunday</span></li>
+          </ul>
+        </div>
+        <!-- Netlify detects this form when the site is deployed and stores every
+             submission. Two things are set here and one is NOT:
+               subject   sets the notification email's subject line.
+               email     Netlify uses a field with this exact name as the
+                         Reply-To, so hitting reply goes back to the sender.
+             The DESTINATION ADDRESS CANNOT BE SET IN HTML. It is a dashboard
+             setting: Netlify > Site configuration > Forms > Form notifications
+             > Add notification > Email notification. Until someone adds
+             mekitchen.wa@gmail.com there, submissions are captured but nobody
+             is emailed about them. -->
+        <form name="contact" action="/?sent=1" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contact">
+          <input type="hidden" name="subject" value="New Mê Kitchen website inquiry">
+          <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
+          <div class="field"><label for="c-name">Your name</label><input id="c-name" name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email" required></div>
+          <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" name="message" required></textarea></div>
+          <button type="submit" class="btn">Send it</button>
+        </form>
+        <p class="form-sent" id="contactSent" role="status" aria-live="polite" hidden>
+          Thank you. We&rsquo;ve got your message and will get back to you soon.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+
+    <!-- row 1: brand column, then three columns of real destinations only -->
+    <div class="foot" data-mo="rule">
+      <div class="foot-brand">
+        <img src="assets/logo-mark.png" alt="Mê Kitchen" width="908" height="200">
+        <div class="foot-social">
+          <a href="https://www.instagram.com/mekitchen.wa/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4.2"/>
+              <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a href="https://www.tiktok.com/@mekitchen.wa" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M16.6 5.82c-.9-.86-1.46-2-1.6-3.32h-3.02v13.2c0 1.5-1.22 2.72-2.72 2.72a2.72 2.72 0 0 1 0-5.44c.28 0 .56.04.82.12V9.9a5.75 5.75 0 0 0-.82-.06 5.75 5.75 0 1 0 5.75 5.75V8.9a8.6 8.6 0 0 0 4.6 1.34V7.2a5.6 5.6 0 0 1-3.01-1.38z"/>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/people/Me-Kitchen/61593475710473/" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="-96 0 512 512" fill="currentColor" aria-hidden="true">
+              <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/>
+            </svg>
+          </a>
+        </div>
+        <p>Vietnamese cooking, made fresh daily: phở, bánh mì and rice bowls, quick enough to eat on the run.</p>
+        <address class="foot-addr">
+          <b>Seattle, Washington</b>
+          4213 University Wy NE<br>
+          Seattle, WA 98105<br>
+          11am&ndash;9pm Mon&ndash;Sat
+        </address>
+      </div>
+
+      <div class="foot-col">
+        <h2>Eat</h2>
+        <a href="menu.html#pho">Phở</a>
+        <a href="menu.html#banh-mi">Bánh mì</a>
+        <a href="menu.html#rice-bowls">Rice bowls</a>
+        <a href="menu.html">Full menu</a>
+      </div>
+
+      <div class="foot-col">
+        <h2>Company</h2>
+        <a href="story.html">Our story</a>
+        <a href="careers.html">Careers</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="foot-col">
+        <h2>Find us</h2>
+        <button type="button" class="foot-directions-trigger" data-open-directions aria-haspopup="dialog">Directions</button>
+        <button type="button" class="foot-directions-trigger" data-open-email aria-haspopup="dialog">Email us</button>
+        <a href="https://me-kitchen.square.site/" target="_blank" rel="noopener">Order online</a>
+      </div>
+    </div>
+
+
+    <div class="foot-band" data-mo="rule">
+      <div>
+        <h2>Never miss a deal</h2>
+        <p>Be first to hear about specials, new dishes and one-time offers. No spam, and you can leave whenever you like.</p>
+      </div>
+      <div class="foot-news">
+        <a href="https://squareup.com/customer-programs/enroll/wWZxq9nuvBBA?utm_medium=copied-link&amp;utm_source=online" class="btn foot-solid" target="_blank" rel="noopener">Join the loyalty list</a>
+      </div>
+    </div>
+
+    <div class="legal" data-mo="rule">
+      <span>© <span id="yr"></span> Mê Kitchen. All rights reserved.</span>
+      <span><a href="mailto:mekitchen.wa@gmail.com">mekitchen.wa@gmail.com</a></span>
+      <span>Seattle, WA</span>
+      <span><a href="privacy.html">Privacy policy</a></span>
+    </div>
+  </div>
+</footer>
+<div class="modal-overlay" id="directionsModal" role="dialog" aria-modal="true" aria-labelledby="directionsTitle">
+  <div class="modal-card">
+    <button type="button" class="modal-close" data-close-directions aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <h2 id="directionsTitle">Get directions</h2>
+    <p class="modal-sub">Choose an app to open the route.</p>
+    <div class="modal-options">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=4213+University+Wy+NE%2C+Seattle%2C+WA+98105" target="_blank" rel="noopener" class="modal-option">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>
+        <span>Google Maps</span>
+      </a>
+      <a href="https://maps.apple.com/?q=Me+Kitchen&amp;address=4213+University+Wy+NE%2C+Seattle%2C+WA+98105" target="_blank" rel="noopener" class="modal-option">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>
+        <span>Apple Maps</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="emailModal" role="dialog" aria-modal="true" aria-labelledby="emailTitle">
+  <div class="modal-card">
+    <button type="button" class="modal-close" data-close-email aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <h2 id="emailTitle">Email us</h2>
+    <p class="modal-sub">Copy our address and drop us a line.</p>
+    <p class="modal-email" id="emailAddr">mekitchen.wa@gmail.com</p>
+    <button type="button" class="modal-option modal-copy" data-copy-email>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>
+      <span>Copy email</span>
+    </button>
   </div>
 </div>
 
 
+<div class="bar" id="bar">
+  <div class="bar-fields">
+    <!-- Filled by script from the regular schedule, so Sunday reads "Closed"
+         on its own and nobody has to edit this by hand each morning. -->
+    <div class="bar-field">
+      <span class="lbl">Pickup hours today</span>
+      <span class="val" id="todayHours">11am&ndash;9pm</span>
+    </div>
+  </div>
+  <a href="tel:+12066568878" class="btn btn-fill bar-call">Call</a>
+  <a href="https://me-kitchen.square.site/" class="btn btn-inv" target="_blank" rel="noopener">Order online</a>
+</div>
 
-<footer>
-  <p class="meta">Mê Kitchen · Seattle, WA · <a href="privacy.html">Privacy policy</a></p>
-  <nav class="social" aria-label="Social media">
-    <a href="https://www.instagram.com/mekitchen.wa/" target="_blank" rel="noopener" aria-label="Instagram">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-        <rect x="3" y="3" width="18" height="18" rx="5"/>
-        <circle cx="12" cy="12" r="4.2"/>
-        <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/>
-      </svg>
-    </a>
-    <a href="https://www.tiktok.com/@mekitchen.wa" target="_blank" rel="noopener" aria-label="TikTok">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M16.6 5.82c-.9-.86-1.46-2-1.6-3.32h-3.02v13.2c0 1.5-1.22 2.72-2.72 2.72a2.72 2.72 0 0 1 0-5.44c.28 0 .56.04.82.12V9.9a5.75 5.75 0 0 0-.82-.06 5.75 5.75 0 1 0 5.75 5.75V8.9a8.6 8.6 0 0 0 4.6 1.34V7.2a5.6 5.6 0 0 1-3.01-1.38z"/>
-      </svg>
-    </a>
-    <a href="https://www.facebook.com/people/Me-Kitchen/61593475710473/" target="_blank" rel="noopener" aria-label="Facebook">
-      <svg viewBox="-96 0 512 512" fill="currentColor" aria-hidden="true">
-        <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/>
-      </svg>
-    </a>
-  </nav>
-  <button class="dot" id="dot" aria-label="Staff preview access"><span></span></button>
-  <form class="gate" id="gate" autocomplete="off">
-    <label class="sr" for="pw">Preview password</label>
-    <input type="password" id="pw" placeholder="Password" autocomplete="off">
-    <button type="submit">Enter</button>
-  </form>
-  <p class="msg" id="msg" role="status"></p>
-</footer>
-
-<script src="assets/js/holding.js?v=902db1554e"></script>
-
-<script src="assets/js/analytics.js?v=6aa35cd01e"></script>
+<script src="assets/js/home.js?v=fd6075adde"></script>
+<script src="assets/js/footer.js?v=c05a55e448"></script>
+<script src="assets/js/analytics.js?v=a4edaad81f"></script>
 </body>
 </html>

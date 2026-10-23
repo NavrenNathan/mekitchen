@@ -59,7 +59,7 @@ Even padding matters here: an earlier version had 8px above the wordmark and
 14px below, which looked fine in the nav but read as visibly lopsided on the
 intro curtain, where the mark is centred between two lines of text.
 
-Used for the nav and footer on both pages and on the holding page. The
+Used for the nav and footer on every page. The
 intro curtain uses the stacked `logo-main.png` instead. Dark green on transparent, so it keeps the
 `brightness(0) invert(1)` filter over dark grounds.
 

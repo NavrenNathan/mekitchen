@@ -52,15 +52,23 @@
 # --- Redirects ---------------------------------------------------------
 # The main site used to live at /site.html; it is now /home.html. Anything
 # already shared with the old path still lands on the right page.
-# The main site lives at /home again, with the coming-soon page at the root.
-# /site.html is a legacy path from an earlier rename.
-#
-# NOTE: there is deliberately NO "/home.html -> /" rule here. That existed
-# while the main site was at the root, and leaving it in place now would
-# bounce every visitor off the real site and back onto the holding page.
+# The main site lives at the root (index.html). The coming-soon holding page
+# and its password gate were retired on 22 Oct 2026. Until then the main site
+# was at /home, so anything shared or bookmarked with /home still lands on
+# the home page. /site.html is a legacy path from an earlier rename.
+[[redirects]]
+  from = "/home"
+  to = "/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/home.html"
+  to = "/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/site.html"
-  to = "/home"
+  to = "/"
   status = 301
   force = true
 

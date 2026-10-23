@@ -12,7 +12,7 @@ The name Mê comes from a Vietnamese word for when you really love something: wh
 
 ## Pages
 
-- [Home](https://me-kitchen.com/home): what Mê Kitchen serves, how ordering ahead works, photos, and a contact form
+- [Home](https://me-kitchen.com/): what Mê Kitchen serves, how ordering ahead works, photos, and a contact form
 - [Menu](https://me-kitchen.com/menu): every dish with its description and price, matching the Square ordering site
 - [Our story](https://me-kitchen.com/story): how Mê Kitchen started, why it's in the U District, and what the name means
 - [Careers](https://me-kitchen.com/careers): job application form with resume upload

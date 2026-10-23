@@ -30,7 +30,7 @@ const pending = [];
 const htmlFiles = readdirSync(ROOT).filter((f) => f.endsWith('.html')).sort();
 
 // Pages that exist but are deliberately not part of the indexable site.
-const NON_INDEXABLE = new Set(['404.html', 'index.html']);
+const NON_INDEXABLE = new Set(['404.html']);
 
 /**
  * Placeholders that are known-outstanding and consciously accepted for now.

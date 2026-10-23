@@ -19,7 +19,7 @@
      click_directions    a map app in the Directions popup  (map: google|apple)
      click_loyalty       any Join the loyalty list button
      click_social        Instagram / TikTok / Facebook       (network: …)
-     form_sent           a form went through  (form: contact|careers|opening_news) */
+     form_sent           a form went through  (form: contact|careers) */
 (function(){
   'use strict';
 
@@ -66,7 +66,7 @@
     }
   }, true);
 
-  /* the form scripts announce a successful send (see home.js, careers.js, holding.js) */
+  /* the form scripts announce a successful send (see home.js, careers.js) */
   document.addEventListener('mk:form-sent', function(e){
     send('form_sent', { form: (e.detail && e.detail.form) || 'unknown' });
   });

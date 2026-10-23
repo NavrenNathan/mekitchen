@@ -43,11 +43,11 @@ const EXCLUDE = new Set(['404.html']);
  * noindex tag is treated as an error — that is the accident this guard exists
  * to catch, since a stray noindex silently removes a page from search.
  *
- * ON LAUNCH DAY: when the coming-soon page is retired and the real site moves
- * back to the root, delete the index.html entry so the root is protected again.
+ * The coming-soon holding page was retired on 22 Oct 2026 and the main site
+ * moved to the root, so index.html is no longer listed: a noindex on the home
+ * page is now an error.
  */
 const INTENTIONAL_NOINDEX = {
-  'index.html':   'coming-soon holding page with the preview gate',
   'careers.html': 'placeholder filler, revisit before launch',
 };
 
