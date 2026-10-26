@@ -156,7 +156,7 @@ Skipped for now, at your request.
 9. Any old URLs or listings pointing at me-kitchen.com (4.14).
 10. Google account access for Search Console and Google Business Profile (4.15, 5.1).
 11. Claim Apple Maps, Bing Places and Yelp listings; say whether Mê Kitchen shares owners with Mama's Viet Kitchen and who controls mamasvietkitchen.com (4.14, 5.4); confirm which profile attributes are true (dine-in, seating, accessibility, payment).
-12. Vegetarian items to confirm (labels were removed because Square doesn't mark any), the Egg Bánh Mì's fillings, and whether "twenty-minute lunch" is accurate (9.4).
+12. Vegetarian items to confirm (labels were removed because Square doesn't mark any), ~~the Egg Bánh Mì's fillings~~ (now on Square, added 26 Oct), and whether "twenty-minute lunch" is accurate (9.4).
 13. Whether `netlify-token.txt` on the Desktop is a live token; if so, revoke it (3.4).
 14. **Google Analytics:** ~~measurement ID~~ received (G-1602TH6QRB). In GA4 Admin: set data retention to 14 months, leave Google signals off, mark `click_order_online`, `click_phone` and `form_sent` as Key events, and link Search Console once it's verified (10.1, 10.2, 10.4).
 15. An uptime monitor account (UptimeRobot or similar) and who should get the alerts (10.3).

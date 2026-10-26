@@ -110,7 +110,8 @@ The full launch steps, and everything still outstanding, are tracked in
 ## Content status
 
 - No `{{…}}` placeholders remain on any page.
-- The menu matches the Square ordering site (rebuilt 18–19 October 2026).
+- The menu matches the Square ordering site (rebuilt 18–19 October 2026,
+  updated 26 October 2026 to 17 items).
   When the menu changes on Square, change `menu.html` to match.
 - Every photo slot has a real photo.
 - Claims checked with the owner and corrected: the broth is "made fresh

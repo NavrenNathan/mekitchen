@@ -53,9 +53,9 @@
      tile, so these are written separately. */
   var BLURB = {
     'pho':'Rice noodles in broth with fresh herbs, bean sprouts and lime. Beef, or a vegetable broth with tofu.',
-    'banh-mi':'Vietnamese baguette with daikon and carrot pickles, cucumber and jalape\u00f1o. Lemongrass pork, five-spice chicken or egg.',
-    'rice-bowls':'Lemongrass pork over broken rice, with fresh salad, pickles, cucumber and cilantro crema.',
-    'sides-drinks':'Spring rolls, egg rolls and popcorn chicken to start. Sugarcane juice, Vietnamese coffee, Thai tea and matcha to drink.'
+    'banh-mi':'Vietnamese baguette with daikon and carrot pickles, cucumber and jalape\u00f1o. Lemongrass pork, five-spice chicken, garlic tofu or egg.',
+    'rice-bowls':'Lemongrass pork, five-spice chicken or garlic tofu over broken rice, with lettuce, pickles, cucumber and cilantro crema.',
+    'sides-drinks':'Spring rolls, egg rolls and popcorn chicken to start. Sugarcane juice, salted coffee, Thai tea and matcha to drink.'
   };
 
   /* The photograph behind each tile. These point at shots we already have
@@ -66,18 +66,18 @@
     'pho':'assets/g-pho.jpg',
     'banh-mi':'assets/g-banh-mi.jpg',
     'rice-bowls':'assets/g-rice-bowl.jpg',
-    'sides-drinks':'assets/g-spread.jpg'
+    'sides-drinks':'assets/g-sugarcane.jpg'
   };
   var SHOT = {
     'pho':'Ph\u1edf bowl, overhead',
     'banh-mi':'B\u00e1nh m\u00ec, close',
     'rice-bowls':'Rice bowl, overhead',
-    'sides-drinks':'Appetizers and drinks'
+    'sides-drinks':'Sugarcane juice'
   };
 
   MENU.forEach(function(c,i){
     var b=document.createElement('button');
-    b.type='button'; b.className='cat no-photo';
+    b.type='button'; b.className='cat no-photo'; b.dataset.sec=c.id;
     /* the tiles sit at the top of the page, so their photos load straight away
        (no lazy-loading), as small WebP copies with the JPEG as fallback */
     var ph=PHOTO[c.id], webp=ph?ph.replace(/\.jpg$/,''):null;
