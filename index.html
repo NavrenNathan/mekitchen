@@ -700,12 +700,12 @@ html.fx .rv:not(.in){opacity:0;translate:0 22px}
 }
 
 /* ---------- scroll motion ----------
-   One curve (--ease), and each section enters its own way rather than every
-   block doing the same fade-up: the hero's dish names rise through their own
-   lines, the two feature photos slide open from their outer edges, the gallery plates are set down one after another, contact simply
-   rises, and the footer's rules draw across. Hidden starting states exist
-   only under html.fx, which the script adds once it is ready to reveal them,
-   so no-JS and reduced-motion visitors always get the finished page. */
+   One curve (--ease) and one simple idea below the hero: words and gallery
+   tiles fade in and lift a short way, and photos come into focus. The hero's
+   dish names still rise through their own lines on load; the footer does not
+   animate. Hidden starting states exist only under html.fx, which the script
+   adds once it is ready to reveal them, so no-JS and reduced-motion visitors
+   always get the finished page. */
 
 /* hero entrance — once per load; waits for the curtain when it plays */
 .hero h1 .ln{display:block;clip-path:inset(-.45em -.25em -.08em -.25em)}
@@ -729,59 +729,28 @@ html.mm .chips{animation:mo-fade .8s var(--ease) backwards;animation-delay:calc(
 }
 @keyframes mo-sink{to{translate:0 12%}}
 
-/* shared copy stagger for the two feature bands */
-html.fx [data-mo] .feature-copy > div > *{transition:opacity .7s var(--ease),translate .7s var(--ease),clip-path .9s var(--ease)}
-html.fx [data-mo] .feature-copy > div > :nth-child(1){transition-delay:.2s}
-html.fx [data-mo] .feature-copy > div > :nth-child(2){transition-delay:.28s}
-html.fx [data-mo] .feature-copy > div > :nth-child(3){transition-delay:.36s}
-html.fx [data-mo] .feature-copy > div > :nth-child(4){transition-delay:.44s}
+/* Words and gallery tiles: fade in and lift a short way, in reading order */
+html.fx [data-mo] .feature-copy > div > *,html.fx [data-mo=plates] figure{transition:opacity .8s var(--ease),translate .8s var(--ease)}
+html.fx [data-mo]:not(.in) .feature-copy > div > *,html.fx [data-mo=plates]:not(.in) figure{opacity:0;translate:0 28px}
+html.fx [data-mo] .feature-copy > div > :nth-child(1){transition-delay:.15s}
+html.fx [data-mo] .feature-copy > div > :nth-child(2){transition-delay:.23s}
+html.fx [data-mo] .feature-copy > div > :nth-child(3){transition-delay:.31s}
+html.fx [data-mo] .feature-copy > div > :nth-child(4){transition-delay:.39s}
+html.fx [data-mo=plates] figure:nth-child(3n+2){transition-delay:.1s}
+html.fx [data-mo=plates] figure:nth-child(3n){transition-delay:.2s}
 
-/* Order ahead: the photo is handed over from its outer edge */
-html.fx [data-mo=tray] .shot{clip-path:inset(0 0 0 0);transition:clip-path 1s var(--ease)}
-html.fx [data-mo=tray] .shot img{scale:1;transition:scale 1.3s var(--ease)}
-html.fx [data-mo=tray]:not(.in) .shot{clip-path:inset(0 100% 0 0)}
-html.fx [data-mo=tray]:not(.in) .shot img{scale:1.08}
-html.fx [data-mo=tray]:not(.in) .feature-copy > div > *{opacity:0;translate:0 16px}
+/* Photos: start soft and dim and come into focus, like a camera finding the
+   dish. The gallery's photos focus as their tiles rise, with the same delay. */
+html.fx [data-mo] .shot img,html.fx [data-mo=plates] img{
+  transition:filter 1.1s var(--ease),opacity 1.1s var(--ease),scale 1.4s var(--ease),transform .9s var(--ease)}
+html.fx [data-mo]:not(.in) .shot img,html.fx [data-mo=plates]:not(.in) img{filter:blur(14px);opacity:.3;scale:1.05}
+html.fx [data-mo=plates] figure:nth-child(3n+2) img{transition-delay:.1s}
+html.fx [data-mo=plates] figure:nth-child(3n) img{transition-delay:.2s}
 
-/* Eat well: the photo is handed over the same way as Order ahead's — from
-   its own outer edge, which on desktop is the right; the heading wipes up */
-html.fx [data-mo=clear] .shot{clip-path:inset(0 0 0 0);transition:clip-path 1s var(--ease)}
-html.fx [data-mo=clear] .shot img{scale:1;transition:scale 1.3s var(--ease)}
-html.fx [data-mo=clear]:not(.in) .shot{clip-path:inset(0 100% 0 0)}
-html.fx [data-mo=clear]:not(.in) .shot img{scale:1.08}
-@media(min-width:1024px){html.fx [data-mo=clear]:not(.in) .shot{clip-path:inset(0 0 0 100%)}}
-html.fx [data-mo=clear] h2{clip-path:inset(-.45em -.25em -.1em -.25em)}
-html.fx [data-mo=clear]:not(.in) h2{clip-path:inset(100% -.25em -.1em -.25em);translate:0 18px}
-html.fx [data-mo=clear]:not(.in) .feature-copy > div > :not(h2){opacity:0}
-
-/* Gallery: plates are set down on the pass, row by row */
-html.fx [data-mo=plates] figure{transition:opacity .7s var(--ease),translate .8s var(--ease),scale .8s var(--ease)}
-html.fx [data-mo=plates]:not(.in) figure{opacity:0;translate:0 -14px;scale:1.02}
-html.fx [data-mo=plates] figure:nth-child(2){transition-delay:.08s}
-html.fx [data-mo=plates] figure:nth-child(3){transition-delay:.16s}
-html.fx [data-mo=plates] figure:nth-child(4){transition-delay:.14s}
-html.fx [data-mo=plates] figure:nth-child(5){transition-delay:.22s}
-html.fx [data-mo=plates] figure:nth-child(6){transition-delay:.3s}
-
-/* Footer: the closing beat — each rule draws across, then its row lands */
-.foot,.foot-band,.legal{position:relative}
-html.fx footer [data-mo=rule]{border-top-color:transparent}
-html.fx footer [data-mo=rule]::before{
-  content:'';position:absolute;top:-1px;left:0;right:0;height:1px;background:#33502f;
-  transform-origin:left center;scale:0 1;transition:scale .9s var(--ease);
-}
-html.fx footer [data-mo=rule].in::before{scale:1 1}
-html.fx footer [data-mo=rule] > *{transition:opacity .6s var(--ease),translate .6s var(--ease)}
-html.fx footer [data-mo=rule]:not(.in) > *{opacity:0;translate:0 -10px}
-html.fx footer [data-mo=rule] > :nth-child(1){transition-delay:.15s}
-html.fx footer [data-mo=rule] > :nth-child(2){transition-delay:.21s}
-html.fx footer [data-mo=rule] > :nth-child(3){transition-delay:.27s}
-html.fx footer [data-mo=rule] > :nth-child(4){transition-delay:.33s}
-
-/* phones: shorter travel, no blur (it is costly on mobile GPUs) */
+/* phones: shorter lift, and no blur (it is costly on mobile GPUs) */
 @media(max-width:767px){
-  html.fx [data-mo=tray]:not(.in) .feature-copy > div > *{translate:0 8px}
-  html.fx [data-mo=plates]:not(.in) figure{translate:0 -8px}
+  html.fx [data-mo]:not(.in) .feature-copy > div > *,html.fx [data-mo=plates]:not(.in) figure{translate:0 16px}
+  html.fx [data-mo]:not(.in) .shot img,html.fx [data-mo=plates]:not(.in) img{filter:none}
 }
 /* skip link: off-screen until a keyboard user tabs to it */
 .skip{position:absolute;left:12px;top:-100px;z-index:1000;padding:.7rem 1.1rem;border-radius:10px;
