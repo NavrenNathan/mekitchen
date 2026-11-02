@@ -160,6 +160,21 @@ a{color:inherit;text-decoration:none}
 .item h3{font-family:var(--display);font-weight:700;font-size:1.0625rem;text-transform:uppercase;letter-spacing:-.005em;margin:0}
 .item .price{font-family:var(--display);font-weight:700;font-size:1.0625rem;flex:none}
 .item p{color:var(--dim);margin:.4rem 0 0;max-width:54ch;font-size:.9375rem}
+/* a dish's choices (Beef Phở's proteins): in the list here, and in the dish
+   pop-up, which menu.js builds from this same markup */
+.opts{margin-top:.8rem}
+.dish-opts{margin-top:1.15rem;padding-top:1.1rem;border-top:1px solid var(--line)}
+.opts h4,.dish-opts h4{font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.14em;text-transform:uppercase;margin:0 0 .65rem}
+.opts ul,.dish-opts ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
+.opts li,.dish-opts li{border:1px solid var(--line-strong);border-radius:999px;padding:.4rem .95rem;font-size:.9375rem;background:var(--paper);color:var(--ink);
+  position:relative;isolation:isolate;overflow:hidden;transition:color .2s,border-color .2s}
+/* the same green fill that sweeps across .btn-fill buttons */
+.opts li::before,.dish-opts li::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--ink);
+  transform:scaleX(0);transform-origin:center;transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+.opts li:hover,.dish-opts li:hover{color:var(--paper);border-color:var(--ink)}
+.opts li:hover::before,.dish-opts li:hover::before{transform:scaleX(1)}
+@media(prefers-reduced-motion:reduce){.opts li::before,.dish-opts li::before{transition:none}}
+.rows .row-opt{margin-top:.35rem;font-family:var(--display);font-weight:700;font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
 .veg{
   display:inline-block;font-size:.5625rem;font-weight:600;letter-spacing:.14em;
   text-transform:uppercase;padding:.25rem .55rem;border-radius:999px;
@@ -419,9 +434,6 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 .cat-bg{position:relative;min-height:100%}
 .cat-bg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
 .cat:hover .cat-bg img{transform:scale(1.05)}
-/* the sugarcane cup sits a little below the middle of its tall photo, so the
-   wide phone crop is moved down to keep the whole cup in frame */
-.cat[data-sec="sides-drinks"] .cat-bg img{object-position:50% 58%}
 /* the block around these is green with cream type, but the tiles are cream
    cards, so their contents have to be set back to ink or the headings
    inherit cream and all but vanish */
@@ -545,6 +557,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
         <article class="item" id="beef-pho">
           <div class="item-top"><h3>Beef Phở</h3><span class="price">$15.00</span></div>
           <p>Aromatic broth with rice noodles, white onion, green onion and cilantro, garnished with basil, bean sprouts and lime.</p>
+          <div class="opts"><h4>Select up to three proteins</h4><ul><li>Steak</li><li>Brisket</li><li>Meatballs</li></ul></div>
         </article>
         <article class="item" id="veggie-pho">
           <div class="item-top"><h3>Veggie Phở</h3><span class="price">$15.00</span></div>
@@ -832,7 +845,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
           {
             "@type": "MenuItem",
             "name": "Beef Phở",
-            "description": "Aromatic broth with rice noodles, white onion, green onion and cilantro, garnished with basil, bean sprouts and lime.",
+            "description": "Aromatic broth with rice noodles, white onion, green onion and cilantro, garnished with basil, bean sprouts and lime. Select up to three proteins: steak, brisket and meatballs.",
             "offers": {
               "@type": "Offer",
               "price": "15.00",
@@ -1045,7 +1058,7 @@ footer{background:var(--ink);color:var(--paper);padding:clamp(3rem,6vw,4.5rem) 0
 <script src="assets/js/site.js?v=ea58444b25"></script>
 <script src="assets/js/footer.js?v=c05a55e448"></script>
 
-<script src="assets/js/menu.js?v=9122d609e2"></script>
+<script src="assets/js/menu.js?v=152286528f"></script>
 <script src="assets/js/analytics.js?v=a4edaad81f"></script>
 </body>
 </html>

@@ -35,10 +35,12 @@
     Array.prototype.forEach.call(sec.querySelectorAll('.item'),function(a){
       var h3=a.querySelector('h3'), veg=!!a.querySelector('.veg');
       var name=h3?h3.textContent.replace(/vegetarian/i,'').trim():'';
-      var priceEl=a.querySelector('.price'), p=a.querySelector('p');
+      var priceEl=a.querySelector('.price'), p=a.querySelector('p'), o=a.querySelector('.opts');
       c.items.push({el:a,name:name,veg:veg,
         price:priceEl?priceEl.innerHTML.trim():'',
-        desc:p?p.textContent.trim():''});
+        desc:p?p.textContent.trim():'',
+        opts:o?{label:o.querySelector('h4').textContent.trim(),
+                list:Array.prototype.map.call(o.querySelectorAll('li'),function(li){ return li.textContent.trim(); })}:null});
     });
     if(c.items.length) MENU.push(c);
   });
@@ -66,18 +68,18 @@
     'pho':'assets/g-pho.jpg',
     'banh-mi':'assets/g-banh-mi.jpg',
     'rice-bowls':'assets/g-rice-bowl.jpg',
-    'sides-drinks':'assets/g-sugarcane.jpg'
+    'sides-drinks':'assets/g-spread.jpg'
   };
   var SHOT = {
     'pho':'Ph\u1edf bowl, overhead',
     'banh-mi':'B\u00e1nh m\u00ec, close',
     'rice-bowls':'Rice bowl, overhead',
-    'sides-drinks':'Sugarcane juice'
+    'sides-drinks':'Appetizers and drinks'
   };
 
   MENU.forEach(function(c,i){
     var b=document.createElement('button');
-    b.type='button'; b.className='cat no-photo'; b.dataset.sec=c.id;
+    b.type='button'; b.className='cat no-photo';
     /* the tiles sit at the top of the page, so their photos load straight away
        (no lazy-loading), as small WebP copies with the JPEG as fallback */
     var ph=PHOTO[c.id], webp=ph?ph.replace(/\.jpg$/,''):null;
@@ -136,7 +138,8 @@
     var h='<p class="sheet-lede">'+c.lede+'</p><div class="rows">';
     c.items.forEach(function(it,ix){
       h+='<button type="button" class="row" data-ix="'+ix+'"><span class="row-main"><h3>'+it.name+
-         (it.veg?'<span class="veg">Vegetarian</span>':'')+'</h3><p>'+it.desc+'</p></span>'+
+         (it.veg?'<span class="veg">Vegetarian</span>':'')+'</h3><p>'+it.desc+'</p>'+
+         (it.opts?'<p class="row-opt">'+it.opts.label+'</p>':'')+'</span>'+
          '<span class="price">'+it.price+'</span></button>';
     });
     body.innerHTML=h+'</div>';
@@ -154,7 +157,9 @@
     if(c.items.length>1) h+='<button type="button" class="back">← '+c.name+'</button>';
     h+='<div class="dish"><div class="dish-top"><h3>'+it.name+
        (it.veg?'<span class="veg">Vegetarian</span>':'')+'</h3><span class="price">'+it.price+'</span></div>'+
-       '<p class="dish-desc">'+it.desc+'</p></div>';
+       '<p class="dish-desc">'+it.desc+'</p>'+
+       (it.opts?'<div class="dish-opts"><h4>'+it.opts.label+'</h4><ul><li>'+it.opts.list.join('</li><li>')+'</li></ul></div>':'')+
+       '</div>';
     body.innerHTML=h;
     var back=body.querySelector('.back');
     if(back) back.addEventListener('click',function(){ openCat(c); });
