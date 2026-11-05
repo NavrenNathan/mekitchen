@@ -57,7 +57,7 @@
     'pho':'Rice noodles in broth with fresh herbs, bean sprouts and lime. Beef, or a vegetable broth with tofu.',
     'banh-mi':'Vietnamese baguette with daikon and carrot pickles, cucumber and jalape\u00f1o. Lemongrass pork, five-spice chicken, garlic tofu or egg.',
     'rice-bowls':'Lemongrass pork, five-spice chicken or garlic tofu over broken rice, with lettuce, pickles, cucumber and cilantro crema.',
-    'sides-drinks':'Shrimp or tofu spring rolls to start. Sugarcane juice, salted coffee, Thai tea and matcha to drink.'
+    'sides-drinks':'Shrimp or tofu spring rolls to start. Sugarcane juice, salted coffee and Thai tea to drink.'
   };
 
   /* The photograph behind each tile. These point at shots we already have
